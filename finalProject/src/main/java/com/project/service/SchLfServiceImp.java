@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.project.dao.SchLfDao;
 
 @Service
-public class SchLfServiceImp {
+public class SchLfServiceImp implements SchLfService{
 
 	@Autowired
 	private SchLfDao schLfDao;
