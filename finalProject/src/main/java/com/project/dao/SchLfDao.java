@@ -1,5 +1,7 @@
 package com.project.dao;
 
-public interface SchLfDao {
+import java.util.List;
 
+public interface SchLfDao {
+	public List<String> selectByAttnd();
 }

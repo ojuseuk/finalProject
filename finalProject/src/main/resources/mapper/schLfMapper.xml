@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="schLfMapper">
+
+	<resultMap id="ResultOfAttnd" type="String">
+		<result property="prntPhone" column="PRNT_PHONE" />
+	</resultMap>
 	
+	<select id="phoneByAttnd" resultMap="ResultOfAttnd" >
+		<!-- SELECT PRNT_PHONE FROM TB_STDT LEFT OUTER JOIN TB_ATTND ON TB_STDT.STDT_NO = TB_ATTND.STDT_NO WHERE TB_ATTND.ATTND_TP IS NULL -->
+		SELECT PRNT_PHONE FROM TB_STDT
+	</select>	
 </mapper>

@@ -1,5 +1,7 @@
 package com.project.service;
 
-public interface SchLfService {
+import java.util.List;
 
+public interface SchLfService {
+	public List<String> selectByAttnd();
 }
