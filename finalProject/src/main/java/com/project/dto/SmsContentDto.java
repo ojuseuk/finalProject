@@ -1,14 +1,15 @@
 package com.project.dto;
 
-public class SmsTestDto {
+public class SmsContentDto {
 	private String content;
+	private String phone;
 	
-	public SmsTestDto() {
-	}
+	public SmsContentDto() {}
 
-	public SmsTestDto(String content) {
+	public SmsContentDto(String content, String phone) {
 		super();
 		this.content = content;
+		this.phone = phone;
 	}
 
 	public String getContent() {
@@ -19,14 +20,22 @@ public class SmsTestDto {
 		this.content = content;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("SmsTestDto [content=");
+		builder.append("SmsContentDto [content=");
 		builder.append(content);
+		builder.append(", phone=");
+		builder.append(phone);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 }

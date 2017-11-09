@@ -2,12 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="schLfMapper">
 
-	<resultMap id="ResultOfAttnd" type="String">
-		<result property="prntPhone" column="PRNT_PHONE" />
+	<resultMap id="ResultOfAttnd" type="STDTDto">
+		<result property="prntPhone" column="PRNT_PHONE"/>
+		<result property="nm" column="NM"/>
 	</resultMap>
 	
-	<select id="phoneByAttnd" resultMap="ResultOfAttnd" >
-		<!-- SELECT PRNT_PHONE FROM TB_STDT LEFT OUTER JOIN TB_ATTND ON TB_STDT.STDT_NO = TB_ATTND.STDT_NO WHERE TB_ATTND.ATTND_TP IS NULL -->
-		SELECT PRNT_PHONE FROM TB_STDT
+	<select id="phoneByAttnd" resultMap="ResultOfAttnd">
+		SELECT NM, PRNT_PHONE 
+		FROM TB_STDT JOIN TB_USR 
+		ON TB_STDT.ID = TB_USR.ID 
+		LEFT OUTER JOIN TB_ATTND 
+		ON TB_STDT.STDT_NO = TB_ATTND.STDT_NO
+		WHERE TB_ATTND.ATTND_TP IS NULL
+	</select>
+	
+	<select id="phoneBySTDT" resultType="String">
+		SELECT PHONE FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID
 	</select>	
 </mapper>
