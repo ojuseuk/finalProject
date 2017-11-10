@@ -11,9 +11,7 @@ public class CRSDto {
 	private String crsIntro;
 	private String sbjtNm;
 	
-	public CRSDto() {
-		// TODO Auto-generated constructor stub
-	}
+	public CRSDto() {}
 
 	public CRSDto(String crsId, String crsNm, int prd, String stdtclssttn, int dayClssTm, String crsTp, String crsIntro,
 			String sbjtNm) {

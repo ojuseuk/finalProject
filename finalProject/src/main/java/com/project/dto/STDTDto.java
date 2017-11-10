@@ -7,18 +7,20 @@ public class STDTDto {
 	private int retryCnt;
 	private String mjrTp;
 	private String prntPhone;
+	private String nm;
 	
 	public STDTDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public STDTDto(String stdtNo, String id, int retryCnt, String mjrTp, String prntPhone) {
+	public STDTDto(String stdtNo, String id, int retryCnt, String mjrTp, String prntPhone, String nm) {
 		super();
 		this.stdtNo = stdtNo;
 		this.id = id;
 		this.retryCnt = retryCnt;
 		this.mjrTp = mjrTp;
 		this.prntPhone = prntPhone;
+		this.nm = nm;
 	}
 
 	public String getStdtNo() {
@@ -60,6 +62,14 @@ public class STDTDto {
 	public void setPrntPhone(String prntPhone) {
 		this.prntPhone = prntPhone;
 	}
+	
+	public String getNm() {
+		return nm;
+	}
+
+	public void setNm(String nm) {
+		this.nm = nm;
+	}
 
 	@Override
 	public String toString() {
@@ -74,10 +84,9 @@ public class STDTDto {
 		builder.append(mjrTp);
 		builder.append(", prntPhone=");
 		builder.append(prntPhone);
+		builder.append(", nm=");
+		builder.append(nm);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-
 }

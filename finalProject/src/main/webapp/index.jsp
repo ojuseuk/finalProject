@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${clssList}
+	<form action="${pageContext.request.contextPath}/stdt">
+<!-- 		<input type="text" name="test1"> -->
+<!-- 		<input type="text" name="test2"> -->
+		<input type="submit" value="테스트">
+	</form>
 </body>
 </html>

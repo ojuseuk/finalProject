@@ -2,4 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="stdtMgMapper">
 	
+	<resultMap id="ResultOfAttnd" type="STDTDto">
+		<result property="prntPhone" column="PRNT_PHONE"/>
+		<result property="nm" column="NM"/>
+	</resultMap>
+	
+	<select id="phoneByAttnd" resultMap="ResultOfAttnd">
+		SELECT NM, PRNT_PHONE 
+		FROM TB_STDT JOIN TB_USR 
+		ON TB_STDT.ID = TB_USR.ID 
+		LEFT OUTER JOIN TB_ATTND 
+		ON TB_STDT.STDT_NO = TB_ATTND.STDT_NO
+		WHERE TB_ATTND.ATTND_TP IS NULL
+	</select>
+	
+	<select id="phoneBySTDT" resultType="String">
+		SELECT PHONE FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID
+	</select>
+	
+	<resultMap type="CRSDto" id="ResultOfCrs">
+		<result property="crsId" column="CRS_ID"/>
+		<result property="crsNm" column="CRS_NM"/>
+		<result property="prd" column="PRD"/>
+		<result property="stdtclssttn" column="STDTCLSSTTN"/>
+		<result property="dayClssTm" column="DAY_CLSS_TM"/>
+		<result property="crsTp" column="CRS_INTRO"/>
+		<result property="crsIntro" column="SBJT_NM"/>
+		<result property="sbjtNm" column="CRS_TP"/>
+	</resultMap>
+	
+	<select id="selectByCrs" resultMap="ResultOfCrs">
+		SELECT * FROM TB_CRS
+	</select>
+	
+	<resultMap type="CLSSDto" id="ResultOfClss">
+		<result property="clssId" column="CLSS_ID"/>
+		<result property="crsId" column="CRS_ID"/>
+		<result property="clssNm" column="CLSS_NM"/>
+		<result property="strtDt" column="STRT_DT"/>
+		<result property="endDt" column="END_DT"/>
+		<result property="strtTm" column="STRT_TM"/>
+		<result property="endTm" column="END_TM"/>
+		<result property="capa" column="CAPA"/>
+		<result property="clssroom" column="CLSSROOM"/>
+	</resultMap>
+	
+	<select id="selectByClss" parameterType="String" resultMap="ResultOfClss">
+		SELECT * FROM TB_CLSS WHERE CRS_ID = #{crsId}
+	</select>
 </mapper>
