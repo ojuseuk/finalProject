@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="crsMgMapper">
+
+	<resultMap type="CRSDto" id="CourseResult">
+		<result property="crsId" column="CRS_ID"/>
+		<result property="crsNm" column="CRS_NM"/>
+		<result property="prd" column="PRD"/>
+		<result property="stdtclssttn" column="STDTCLSSTTN"/>
+		<result property="dayClssTm" column="DAY_CLSS_TM"/>
+		<result property="crsIntro" column="CRS_INTRO"/>
+		<result property="sbjtNm" column="SBJT_NM"/>
+		<result property="crsTp" column="CRS_TP"/>
+	</resultMap>
+
+	<insert id="courseInsert" parameterType="CRSDto">
+		INSERT INTO TB_CRS
+		VALUES(#{crsId}, #{crsNm}, #{prd}, #{stdtclssttn}, #{dayClssTm}, #{crsIntro}, #{sbjtNm}, #{crsTp})
+	</insert>
 	
+	<select id="courseSelectAll" resultMap="CourseResult">
+		SELECT * FROM TB_CRS ORDER BY CRS_ID DESC 
+	</select>
 </mapper>

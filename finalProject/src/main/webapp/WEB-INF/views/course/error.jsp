@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>에러 페이지</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/test">
-		<input type="text" name="test1">
-		<input type="text" name="test2">
-		<input type="submit" value="테스트">
-	</form>
+	오류가 발생했습니다.
 </body>
 </html>
