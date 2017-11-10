@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,11 +11,11 @@
 		var f = window.document.writeForm;
 		console.log(f.content.value.length);
 		if (f.content.value == "") {
-			alert("¹®ÀÚ³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+			alert("ë¬¸ìë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.");
 			return false;
 		}
 		if (f.content.value.length > 80) {
-			alert("80byte¸¦ ÃÊ°úÇÒ ¼ö ¾ø½À´Ï´Ù.");
+			alert("80byteë¥¼ ì´ˆê³¼í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 			return false;
 		}
 		return true;
@@ -27,12 +27,12 @@
 <table align="center" cellpadding="5" cellspacing="2" width="600" border="1">
     <tr>
         <td width="1220" height="20" colspan="2" bgcolor="#336699">
-            <p align="center"><font color="white" size="3"><b>¹®ÀÚ¹ß¼Û</b></font></p>
+            <p align="center"><font color="white" size="3"><b>ë¬¸ìë°œì†¡</b></font></p>
         </td>
     </tr>
     <tr>
         <td width="150" height="20">
-            <p align="right"><b><span style="font-size:9pt;">°øÁö»çÇ×</span></b></p>
+            <p align="right"><b><span style="font-size:9pt;">ê³µì§€ì‚¬í•­</span></b></p>
         </td>
         <td width="450" height="20"><b><span style="font-size:9pt;">
 		<textarea name="content" cols="50" rows="10" maxlength="80"></textarea></span></b></td>
@@ -42,9 +42,9 @@
             <p align="right"><b><span style="font-size:9pt;">&nbsp;</span></b></p>
         </td>
         <td width="450" height="20"><b><span style="font-size:9pt;">
-        <input type=submit value=°øÁö»çÇ×Àü¼Û>
-        <input type=reset value=´Ù½Ã¾²±â>
-   		<input type="button" name="command" value="Áö°¢¾È³»" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
+        <input type=submit value=ê³µì§€ì‚¬í•­ì „ì†¡>
+        <input type=reset value=ë‹¤ì‹œì“°ê¸°>
+   		<input type="button" name="command" value="ì§€ê°ì•ˆë‚´" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
    	 </span></b></td>
     </tr>
 </table>
