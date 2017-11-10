@@ -6,6 +6,7 @@ public class TCHRASSNDto {
 	private String clssId;
 	private String chrg;
 	private String slr;
+	private String nm;			// d이름
 	
 	public TCHRASSNDto() {
 		// TODO Auto-generated constructor stub
@@ -51,6 +52,14 @@ public class TCHRASSNDto {
 		this.slr = slr;
 	}
 
+	public String getNm() {
+		return nm;
+	}
+
+	public void setNm(String nm) {
+		this.nm = nm;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -62,9 +71,11 @@ public class TCHRASSNDto {
 		builder.append(chrg);
 		builder.append(", slr=");
 		builder.append(slr);
+		builder.append(", nm=");
+		builder.append(nm);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 	
 }
