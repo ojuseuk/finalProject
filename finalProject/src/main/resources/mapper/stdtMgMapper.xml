@@ -38,7 +38,7 @@
 	<resultMap type="CLSSDto" id="ResultOfClss">
 		<result property="clssId" column="CLSS_ID"/>
 		<result property="crsId" column="CRS_ID"/>
-		<result property="classNm" column="CLSS_NM"/>
+		<result property="clssNm" column="CLSS_NM"/>
 		<result property="strtDt" column="STRT_DT"/>
 		<result property="endDt" column="END_DT"/>
 		<result property="strtTm" column="STRT_TM"/>
@@ -47,7 +47,7 @@
 		<result property="clssroom" column="CLSSROOM"/>
 	</resultMap>
 	
-	<select id="selectByClss">
-		SELECT * FROM TB_CLSS WHERE CRS_ID = ${crsId}
+	<select id="selectByClss" parameterType="String" resultMap="ResultOfClss">
+		SELECT * FROM TB_CLSS WHERE CRS_ID = #{crsId}
 	</select>
 </mapper>

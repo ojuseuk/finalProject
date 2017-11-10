@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import java.util.HashMap;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.project.dto.CLSSDto;
 import com.project.dto.STDTDto;
 import com.project.dto.SmsContentDto;
 import com.project.dto.SmsDto;
@@ -98,9 +102,16 @@ public class StdtMgController {
 	}
 	
 	@RequestMapping("/clss")
-	public String selectByClss(@RequestParam("crsId") String crsId, Model model){
-		JSONArray jsonArr = (JSONArray) stdtMgService.selectByClss(crsId);
-		model.addAttribute("clssList", jsonArr);
-		return "test/StdtView";
+	public @ResponseBody List<CLSSDto> selectByClss(@RequestParam("crsId") String crsId){
+		System.out.println(crsId);
+//		ModelAndView mav = new ModelAndView();
+		List<CLSSDto> list = stdtMgService.selectByClss(crsId);
+//		net.sf.json.JSONArray jsonArr = net.sf.json.JSONArray.fromObject(list);
+//		net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
+//		jsonObject.toJSONArray(jsonArr);
+//		mav.addObject("clssArr", jsonArr);
+//		mav.addObject("clssList", list);
+//		mav.setViewName("test/StdtView");
+		return list;
 	}
 }

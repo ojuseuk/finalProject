@@ -8,8 +8,8 @@
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/stdt">
-		<input type="text" name="test1">
-		<input type="text" name="test2">
+<!-- 		<input type="text" name="test1"> -->
+<!-- 		<input type="text" name="test2"> -->
 		<input type="submit" value="테스트">
 	</form>
 </body>

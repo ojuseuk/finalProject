@@ -2,16 +2,15 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <c:if test="${not empty crsList}" >
-   <select name="crs" id="crsBox" onchange="reqCrs(this.value)">
+   <select name="crs" id="crsBox" onchange="reqCrs(this.value,'${root}')">
       <c:forEach items="${crsList}" var="data">
          <option value="${data.crsId}">${data.crsNm}</option>
       </c:forEach>
    </select>
 </c:if>
 <select id="clss">
-  <option value="volvo"></option>
 </select>
 <form>
 	<input type="text" name="name" value="">
@@ -97,29 +96,62 @@
 <!-- </table> -->
 <!-- <hr> -->
 
-	<script type="text/javascript" src="httpRequest.js"></script>
-	
 	<script type="text/javascript">
+		
 		var data;
-	
-		function reqCrs(crsId) {
-			console.log(crsId)
-			sendRequest("clss", "crs=" + crsId, clssView, "POST");
-		}
-	
-		function clssView() {
-			if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-				var clssTag= "";
-				var index;
-	
-				data = httpRequest.responseText.trim();
-				data = JSON.parse(data);
-	
-				for (i = 0; i < data.length; i++) {
-					clssTag += '<option value="' + i + '">' + data[i].clssNm + '</option>';
+		var clssTag = "";
+		var xhttp = new XMLHttpRequest();
+		function reqCrs(crsId, root) {
+			xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					var clssData = xhttp.responseText;
+					clssData = JSON.parse(clssData);
+					console.log(clssData);
+					for (i = 0; i < clssData.length; i++) {
+						clssTag += '<option value="' + i + '">'	+ clssData[i].clssNm + '</option>';
+					}
+					document.getElementById("clss").innerHTML = clssTag;
 				}
-	
-				document.getElementById("clss").innerHTML = clssTag;
 			}
+			xhttp.open("GET", root + "/clss?crsId=" + crsId, true);
+			xhttp.send();
 		}
-		</script>
+
+		// 		function clssView(crsId, root) {
+		// 			console.log(1);
+		// 			var xhttp = new XMLHttpRequest();
+		//             xhttp.onreadystatechange = function() {
+		//                if (xhttp.readyState == 4 && xhttp.status == 200) {
+		//                   var clssData = xhttp.responseText;
+		//                   clssData=JSON.parse(clssData);
+		//                   console.log(clssData);
+		//                   for (i = 0; i < clssData.length; i++) {
+		//   					clssTag += '<option value="' + i + '">' + data[i].clssNm + '</option>';
+		//   				}
+		//   				document.getElementById("clss").innerHTML = clssTag;
+		//                }
+		//             }
+		// 		}
+	</script>
+<!-- 		function searchGroup(){ -->
+<!-- 	         var groupName = document.getElementById("groupNameInput").value; -->
+<!-- 	         if(groupName==''){ -->
+<!-- 	            alert("검색어를 입력해주세요"); -->
+<!-- 	         } else { -->
+<!-- 	            var xhttp = new XMLHttpRequest(); -->
+<!-- 	            xhttp.onreadystatechange = function() { -->
+<!-- 	               if (this.readyState == 4 && this.status == 200) { -->
+<!-- 	                  var resData = this.responseText; -->
+<!-- 	                  resData=JSON.parse(resData); -->
+<!-- 	                  console.log(resData); -->
+<!-- 	                  newGroupList(resData,groupName); -->
+	                  
+<!-- 	               } -->
+<!-- 	            } -->
+<!-- 	            xhttp.open("POST", "searchGroup.do?groupName="+groupName, true); -->
+<!-- 	            xhttp.send();  -->
+<!-- 	         } -->
+
+<!-- 	      } -->
+		
+		
