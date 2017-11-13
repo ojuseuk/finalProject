@@ -30,7 +30,6 @@
 		<result property="crsIntro" column="SBJT_NM"/>
 		<result property="sbjtNm" column="CRS_TP"/>
 	</resultMap>
-	
 	<select id="selectByCrs" resultMap="ResultOfCrs">
 		SELECT * FROM TB_CRS
 	</select>
@@ -50,4 +49,77 @@
 	<select id="selectByClss" parameterType="String" resultMap="ResultOfClss">
 		SELECT * FROM TB_CLSS WHERE CRS_ID = #{crsId}
 	</select>
+	
+	<resultMap type="STDTInfoDto" id="ResultOfStdt">
+		<result property="id" column="ID"/>
+		<result property="nm" column="NM"/>
+		<result property="phone" column="PHONE"/>
+		<result property="addr" column="ADDR"/>
+		<result property="email" column="EMAIL"/>
+		<result property="stdtNo" column="STDT_NO"/>
+		<result property="mjrTp" column="MJR_TP"/>
+		<result property="retryCnt" column="RETRY_CNT"/>
+		<result property="prntPhone" column="PRNT_PHONE"/>
+		<result property="paidDt" column="PAID_DT"/>
+		<result property="repaidDt" column="REPAID_DT"/>
+		<result property="clssNm" column="CLSS_NM"/>
+	</resultMap>
+
+	<select id="selectByStdtClss" parameterType="String" resultMap="ResultOfStdt">
+		SELECT TB_USR.ID, TB_USR.NM, TB_USR.PHONE, TB_USR.ADDR, TB_USR.EMAIL, 
+		TB_STDT.STDT_NO,TB_STDT.MJR_TP, TB_STDT.RETRY_CNT, TB_STDT.PRNT_PHONE, 
+		TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM
+		FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID 
+		JOIN TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
+		JOIN TB_CLSS ON TB_STDTCLSS.CLSS_ID = TB_CLSS.CLSS_ID 
+		WHERE TB_CLSS.CLSS_NM = #{clssNm}
+	</select>
+	
+	<select id="selectStdtNo" resultType="String">
+		SELECT * FROM (SELECT * FROM TB_STDT ORDER BY STDT_NO DESC) WHERE ROWNUM = 1
+	</select>
+	
+	<select id="selectAllOfStdt" resultMap="ResultOfStdt">
+		SELECT TB_USR.ID, TB_USR.NM, TB_USR.PHONE, TB_USR.ADDR, TB_USR.EMAIL, 
+		TB_STDT.STDT_NO,TB_STDT.MJR_TP, TB_STDT.RETRY_CNT, TB_STDT.PRNT_PHONE, 
+		TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM
+		FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID
+		JOIN TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
+		JOIN TB_CLSS ON TB_STDTCLSS.CLSS_ID = TB_CLSS.CLSS_ID
+	</select>
+	
+	<select id="selectByStdtInfo" parameterType="String" resultMap="ResultOfStdt">
+		SELECT TB_USR.ID, TB_USR.NM, TB_USR.PHONE, TB_USR.ADDR, TB_USR.EMAIL, 
+		TB_STDT.STDT_NO,TB_STDT.MJR_TP, TB_STDT.RETRY_CNT, TB_STDT.PRNT_PHONE, 
+		TB_STDTCLSS.CLSS_ID, TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM
+		FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID 
+		JOIN TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
+		JOIN TB_CLSS ON TB_STDTCLSS.CLSS_ID = TB_CLSS.CLSS_ID 
+		WHERE TB_STDT.STDT_NO = #{stdtNo}
+	</select>
+	
+	<select id="selectByNmAndClssNm" parameterType="String" resultMap="ResultOfStdt">
+		SELECT TB_USR.ID, TB_USR.NM, TB_USR.PHONE, TB_USR.ADDR, TB_USR.EMAIL, 
+		TB_STDT.STDT_NO,TB_STDT.MJR_TP, TB_STDT.RETRY_CNT, TB_STDT.PRNT_PHONE, 
+		TB_STDTCLSS.CLSS_ID, TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM
+		FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID 
+		JOIN TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
+		JOIN TB_CLSS ON TB_STDTCLSS.CLSS_ID = TB_CLSS.CLSS_ID 
+		WHERE TB_USR.NM = #{nm} AND TB_CLSS.CLSS_NM = #{clssNm}
+	</select>
+	
+	<select id="selectStdtByCrs" parameterType="String" resultMap="ResultOfStdt">
+		SELECT TB_USR.ID, TB_USR.NM, TB_USR.PHONE, TB_USR.ADDR, TB_USR.EMAIL, 
+		TB_STDT.STDT_NO,TB_STDT.MJR_TP, TB_STDT.RETRY_CNT, TB_STDT.PRNT_PHONE,
+		TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM, TB_CRS.CRS_NM
+		FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID
+		JOIN TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
+		JOIN TB_CLSS ON TB_STDTCLSS.CLSS_ID = TB_CLSS.CLSS_ID
+		JOIN TB_CRS ON TB_CLSS.CRS_ID = TB_CRS.CRS_ID
+		WHERE TB_CRS.CRS_ID = #{crsId}
+	</select>
+	<update id="updateStdtClss">
+		UPDATE TB_STDTCLSS SET CLSS_ID=#{clssId} WHERE STDT_NO=#{stdtNo}
+	</update>
+	
 </mapper>

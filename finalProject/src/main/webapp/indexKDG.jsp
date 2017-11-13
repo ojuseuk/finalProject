@@ -8,9 +8,8 @@
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/stdt">
-<!-- 		<input type="text" name="test1"> -->
-<!-- 		<input type="text" name="test2"> -->
-		<input type="submit" value="테스트">
+		<input type="submit" value="수강생조회">
 	</form>
+		<input type="button" value="수강생등록" onclick="location.href='${pageContext.request.contextPath}/selectStdtNo'">
 </body>
 </html>

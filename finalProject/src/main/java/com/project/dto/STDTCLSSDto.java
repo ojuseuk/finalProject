@@ -3,20 +3,18 @@ package com.project.dto;
 public class STDTCLSSDto {
 
 	private String clssId;
-	private String id;
-	private String slr;
-	private String retiredDt;
+	private String stdtNo;
+	private String repaidDt;
+	private String paidDt;
 	
-	public STDTCLSSDto() {
-		// TODO Auto-generated constructor stub
-	}
+	public STDTCLSSDto() {}
 
-	public STDTCLSSDto(String clssId, String id, String slr, String retiredDt) {
+	public STDTCLSSDto(String clssId, String stdtNo, String repaidDt, String paidDt) {
 		super();
 		this.clssId = clssId;
-		this.id = id;
-		this.slr = slr;
-		this.retiredDt = retiredDt;
+		this.stdtNo = stdtNo;
+		this.repaidDt = repaidDt;
+		this.paidDt = paidDt;
 	}
 
 	public String getClssId() {
@@ -27,28 +25,28 @@ public class STDTCLSSDto {
 		this.clssId = clssId;
 	}
 
-	public String getId() {
-		return id;
+	public String getStdtNo() {
+		return stdtNo;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setStdtNo(String stdtNo) {
+		this.stdtNo = stdtNo;
 	}
 
-	public String getSlr() {
-		return slr;
+	public String getRepaidDt() {
+		return repaidDt;
 	}
 
-	public void setSlr(String slr) {
-		this.slr = slr;
+	public void setRepaidDt(String repaidDt) {
+		this.repaidDt = repaidDt;
 	}
 
-	public String getRetiredDt() {
-		return retiredDt;
+	public String getPaidDt() {
+		return paidDt;
 	}
 
-	public void setRetiredDt(String retiredDt) {
-		this.retiredDt = retiredDt;
+	public void setPaidDt(String paidDt) {
+		this.paidDt = paidDt;
 	}
 
 	@Override
@@ -56,14 +54,13 @@ public class STDTCLSSDto {
 		StringBuilder builder = new StringBuilder();
 		builder.append("STDTCLSSDto [clssId=");
 		builder.append(clssId);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append(", slr=");
-		builder.append(slr);
-		builder.append(", retiredDt=");
-		builder.append(retiredDt);
+		builder.append(", stdtNo=");
+		builder.append(stdtNo);
+		builder.append(", repaidDt=");
+		builder.append(repaidDt);
+		builder.append(", paidDt=");
+		builder.append(paidDt);
 		builder.append("]");
 		return builder.toString();
 	}
-	
 }
