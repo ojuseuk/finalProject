@@ -11,8 +11,10 @@ public interface SaleMgDao {
 
 	void insert(SALEDto saleDto);
 	int saleNo(SALEDto saleDto);
-	List<TCHRDto> selectTchr();
-	List<TCHRASSNDto> selectTchrassn();
+	List<Map<String, String>> selectTchr();
+	List<Map<String, String>> selectTchrassn();
 	List<SALEDto> mgSaleList(Map<String, String> map);
+	void ltfeeInsert(List<TCHRDto> list);
+	int ltfeeInsertTest(TCHRDto tchrDto);
 
 }

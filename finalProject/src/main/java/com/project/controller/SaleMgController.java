@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dto.SALEDto;
@@ -77,13 +79,13 @@ public class SaleMgController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("controller saleMgLtfee");
 
-		Map<List<TCHRDto>, List<TCHRASSNDto>> map = saleMgService.selectLtfee();
-		Set<List<TCHRDto>> set = map.keySet();
+		Map<List<Map<String, String>>, List<Map<String, String>>> map = saleMgService.selectLtfee();
+		Set<List<Map<String, String>>> set = map.keySet();
 
-		List<TCHRDto> listTchr = null;
-		List<TCHRASSNDto> listSsn = null;
+		List<Map<String, String>> listTchr = null;
+		List<Map<String, String>> listSsn = null;
 		System.out.println("controller 성공 이후");
-		for (List<TCHRDto> list : set) {
+		for (List<Map<String, String>> list : set) {
 			listTchr = list;
 			listSsn = map.get(list);
 			System.out.println(listTchr);
@@ -119,18 +121,20 @@ public class SaleMgController {
 	 * @Method 설명 : 매출 리스트를 가져오기 위한 메소드 return type : void
 	 */
 	@RequestMapping("/mgSale")
-	public ModelAndView saleMgmgSale(@RequestParam("date1") String date1, @RequestParam("date2") String date2) {
+	public @ResponseBody List<SALEDto> saleMgmgSale(@RequestParam("date1") String date1, @RequestParam("date2") String date2) {
 
 		System.out.println("controller saleMgMgSale");
 		System.out.println(date1);
 		System.out.println(date2);
 
-		ModelAndView mav = new ModelAndView();
+//		ModelAndView mav = new ModelAndView();
 		List<SALEDto> list = saleMgService.mgSaleList(date1, date2);
-		mav.addObject("list", list);
-		mav.setViewName("saleMg/saleList");
+		JSONArray jsonArray = JSONArray.fromObject(list);
+//		mav.addObject("json", jsonArray);
+//		mav.addObject("list", list);
+//		mav.setViewName("saleMg/saleList");
 
-		return mav;
+		return list;
 
 	}
 
@@ -157,5 +161,27 @@ public class SaleMgController {
 
 		return mav;
 
+	}
+	
+	@RequestMapping("/ltfeeInsert")
+	public ModelAndView saleMgltfeeInsert(@RequestParam(value="tchrId", required=true) List<String> tchrId, 
+	@RequestParam(value="tchrSlr", required=true) List<String> tchrSlr, @RequestParam(value="tchrNm", required=true) List<String> tchrNm, 
+	@RequestParam(value="ssnId", required=true) List<String> ssnId, @RequestParam(value="ssnSlr", required=true) List<String> ssnSlr,
+	@RequestParam(value="ssnNm", required=true) List<String> ssnNm) {
+		System.out.println("service saleMgltfeeInsert");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println(tchrId);
+		System.out.println(tchrSlr);
+		System.out.println(ssnId);
+		System.out.println(ssnSlr);
+		List<TCHRDto> list = saleMgService.ltfeeInsert(tchrId, tchrSlr, ssnId, ssnSlr, tchrNm, ssnNm);
+		mav.addObject("list", list);
+		mav.setViewName("saleMg/ltfeeConfirm");
+		
+		return mav;
+		
+		
 	}
 }

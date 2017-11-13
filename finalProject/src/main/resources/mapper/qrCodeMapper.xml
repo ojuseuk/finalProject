@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qrCodeMapper">
+	
+	<select id="qrCodeSelect" parameterType="hashmap" resultType="hashmap"> 
+		SELECT STDTCLSS.STDT_NO stdtNo, CLSS.STRT_TM strtTm, CLSS.END_TM endTm
+			FROM TB_STDT STDT, TB_USR USR, TB_STDTCLSS STDTCLSS, TB_CLSS CLSS
+				WHERE STDT.ID = USR.ID AND STDTCLSS.STDT_NO = STDT.STDT_NO
+				AND CLSS.CLSS_ID = STDTCLSS.CLSS_ID AND PHONE = #{phone}
+		AND CLSS.CLSS_ID = #{clss}
+	</select>
+	
+	<insert id="qrCodeInsert" parameterType="aTTNDDto">
+		INSERT INTO TB_ATTND VALUES(#{dt}, #{tm}, #{attndTp}, #{clssId}, #{stdtNo})
+	</insert>
+</mapper>
