@@ -8,14 +8,13 @@ public class USRDto {
 	private String phone;
 	private String addr;
 	private String email;
-	private String usrTp;
-	private String pws;
+	
 	
 	public USRDto() {
-		// TODO Auto-generated constructor stub
+		
 	}
-
-	public USRDto(String id, String pw, String nm, String phone, String addr, String email, String usrTp, String pws) {
+	
+	public USRDto(String id, String pw, String nm, String phone, String addr, String email) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -23,9 +22,10 @@ public class USRDto {
 		this.phone = phone;
 		this.addr = addr;
 		this.email = email;
-		this.usrTp = usrTp;
-		this.pws = pws;
 	}
+
+
+
 
 	public String getId() {
 		return id;
@@ -75,21 +75,6 @@ public class USRDto {
 		this.email = email;
 	}
 
-	public String getUsrTp() {
-		return usrTp;
-	}
-
-	public void setUsrTp(String usrTp) {
-		this.usrTp = usrTp;
-	}
-
-	public String getPws() {
-		return pws;
-	}
-
-	public void setPws(String pws) {
-		this.pws = pws;
-	}
 
 	@Override
 	public String toString() {
@@ -106,10 +91,7 @@ public class USRDto {
 		builder.append(addr);
 		builder.append(", email=");
 		builder.append(email);
-		builder.append(", usrTp=");
-		builder.append(usrTp);
-		builder.append(", pws=");
-		builder.append(pws);
+		
 		builder.append("]");
 		return builder.toString();
 	}

@@ -22,6 +22,7 @@ public class Https
 	 * postRequest (POST)
 	 * @param StringBuffer : data 
 	 * @param String : image
+	 * 
 	 */
 	public JSONObject postRequest(String url_string, HashMap<String, String> params) {
 		JSONObject obj = new JSONObject();
