@@ -1,6 +1,8 @@
 package util;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,5 +33,18 @@ public class StringConvert {
 		}
 		System.out.println(nm);
 		return nm;
+	}
+	
+	public static List<String> convertToList(Map<String, Object> map){
+		List<String> list = new ArrayList<>();
+		Set<String> keySet = map.keySet();
+		Iterator<String> keyIterator = keySet.iterator();
+		while(keyIterator.hasNext()){
+			String key = keyIterator.next();
+			String stdt = map.get(key).toString();
+			list.add(stdt);
+		}
+		System.out.println(list);
+		return list;
 	}
 }

@@ -6,9 +6,7 @@ public class CDDto {
 	private String cdId;
 	private String cdNm;
 	
-	public CDDto() {
-		// TODO Auto-generated constructor stub
-	}
+	public CDDto() {}
 
 	public CDDto(String cdTp, String cdId, String cdNm) {
 		super();

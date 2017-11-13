@@ -8,6 +8,7 @@ public class TCHRDto {
 	private String sbjtChrg;
 	private String tchrIntro;
 	private String nm;			// 이름
+	private int result;
 	
 	public TCHRDto() {
 		// TODO Auto-generated constructor stub
@@ -69,6 +70,16 @@ public class TCHRDto {
 	public void setNm(String nm) {
 		this.nm = nm;
 	}
+	
+	
+
+	public int getResult() {
+		return result;
+	}
+
+	public void setResult(int result) {
+		this.result = result;
+	}
 
 	@Override
 	public String toString() {
@@ -85,10 +96,10 @@ public class TCHRDto {
 		builder.append(tchrIntro);
 		builder.append(", nm=");
 		builder.append(nm);
+		builder.append(", result=");
+		builder.append(result);
 		builder.append("]");
 		return builder.toString();
 	}
 
-	
-	
 }

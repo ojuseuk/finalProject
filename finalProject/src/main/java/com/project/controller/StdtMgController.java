@@ -1,7 +1,6 @@
 package com.project.controller;
 
 import java.util.HashMap;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dto.CLSSDto;
+import com.project.dto.STDTCLSSDto;
 import com.project.dto.STDTDto;
+import com.project.dto.STDTInfoDto;
 import com.project.dto.SmsContentDto;
 import com.project.dto.SmsDto;
 import com.project.service.StdtMgService;
@@ -91,27 +91,109 @@ public class StdtMgController {
 	 * @Method Name : selectByCrs
 	 * @작성일	    : 2017. 11. 9. 
 	 * @작성자	    : 김동근
-	 * @Method 설명	: 과정 셀렉트 박스 출력
+	 * @Method 설명	: 과정 셀렉트 박스 출력, 전체 수강생 조회
 	 * return type  : String
 	 * @return
 	 */
 	@RequestMapping("/stdt")
 	public String selectByCrs(Model model){
 		model.addAttribute("crsList", stdtMgService.selectByCrs());
-		return "test/StdtView";
+		model.addAttribute("stdtAllList", stdtMgService.selectAllByStdt());
+		return "stdtMg/StdtView";
 	}
 	
+	/**
+	 * @Method Name : selectByClss
+	 * @작성일	    : 2017. 11. 10. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 강좌 셀렉트 박스 출력
+	 * return type  : List<CLSSDto>
+	 * @param crsId
+	 * @return
+	 */
 	@RequestMapping("/clss")
 	public @ResponseBody List<CLSSDto> selectByClss(@RequestParam("crsId") String crsId){
+		return stdtMgService.selectByClss(crsId);
+	}
+	
+	/**
+	 * @Method Name : selectStdtByClss
+	 * @작성일	    : 2017. 11. 11. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 강좌별 수강생 조회
+	 * return type  : List<STDTListDto>
+	 * @param clssNm
+	 * @return
+	 */
+	@RequestMapping("/stdtList")
+	public @ResponseBody List<STDTInfoDto> selectStdtByClss(@RequestParam("crsId") String crsId, @RequestParam("clssNm") String clssNm){
 		System.out.println(crsId);
-//		ModelAndView mav = new ModelAndView();
-		List<CLSSDto> list = stdtMgService.selectByClss(crsId);
-//		net.sf.json.JSONArray jsonArr = net.sf.json.JSONArray.fromObject(list);
-//		net.sf.json.JSONObject jsonObject = new net.sf.json.JSONObject();
-//		jsonObject.toJSONArray(jsonArr);
-//		mav.addObject("clssArr", jsonArr);
-//		mav.addObject("clssList", list);
-//		mav.setViewName("test/StdtView");
-		return list;
+		System.out.println(clssNm);
+//		if(clssNm.equals("선 택")){
+//			return stdtMgService.selectStdtByCrs(crsId);
+//		}
+		return stdtMgService.selectByStdtList(clssNm);
+	}
+	
+	/**
+	 * @Method Name : selectStdtInfo
+	 * @작성일	    : 2017. 11. 12. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 수강생의 정보 조회
+	 * return type  : List<STDTListDto>
+	 * @param stdtNo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/stdtInfo")
+	public @ResponseBody List<STDTInfoDto> selectStdtInfo(@RequestParam("stdtNo") String stdtNo, Model model){
+		model.addAttribute("info", stdtMgService.selectStdtInfo(stdtNo));
+		return stdtMgService.selectStdtInfo(stdtNo);
+	}
+	
+	/**
+	 * @Method Name : selectStdtNo
+	 * @작성일	    : 2017. 11. 12. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 수강생 등록 시 가장 마지막 수강생 번호 출력
+	 * return type  : String
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/selectStdtNo")
+	public String selectStdtNo(Model model){
+		model.addAttribute("stdtNo", stdtMgService.selectStdtNo());
+		return "stdtMg/writeStdt";
+	}
+	
+	/**
+	 * @Method Name : updateToStdt
+	 * @작성일	    : 2017. 11. 13. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 수강생의 반 정보 변경
+	 * return type  : String
+	 * @param stdtInfo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/updateStdt")
+	public String updateToStdt(STDTCLSSDto stdtInfo, Model model){
+		stdtMgService.updateStdtClss(stdtInfo);
+		model.addAttribute("crsList", stdtMgService.selectByCrs());
+		model.addAttribute("stdtAllList", stdtMgService.selectAllByStdt());
+		return "stdtMg/StdtView";
+	}
+	
+	@RequestMapping("/selectStdtNm")
+	public @ResponseBody List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo, Model model){
+		if(stdtInfo.getClssNm().equals("선 택") && stdtInfo.getNm().equals("")){
+			model.addAttribute("info", stdtMgService.selectAllByStdt());
+			return stdtMgService.selectAllByStdt();
+		} else if(stdtInfo.getNm().equals("")){
+			model.addAttribute("info", stdtMgService.selectByStdtList(stdtInfo.getClssNm()));
+			return stdtMgService.selectByStdtList(stdtInfo.getClssNm());
+		}
+		model.addAttribute("info", stdtMgService.selectByNm(stdtInfo));
+		return stdtMgService.selectByNm(stdtInfo);
 	}
 }
