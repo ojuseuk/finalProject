@@ -5,14 +5,14 @@
 
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <c:if test="${not empty crsList}" >
-   <select name="crs" id="crsBox" onchange="reqCrs(this.value,'${root}')">
-   	  <option>선 택</option>
+   <select name="crs" id="crs" onchange="reqCrsList(this.value,'${root}')">
+   	  <option value="선 택">선 택</option>
       <c:forEach items="${crsList}" var="data">
          <option value="${data.crsId}">${data.crsNm}</option>
       </c:forEach>
    </select>
 </c:if>
-<select id="clss" onchange="reqClss(this.value, '${root}')">
+<select id="clss" onchange="reqClssList(this.value, '${root}')">
 	<option>선 택</option>
 </select>
 <input id="searchNm" type="text" name="name" value="">
@@ -64,10 +64,9 @@
 	var data;
 	var clssData;
 	var clssTag;
-	var crsId;
 	var xhttp = new XMLHttpRequest();
-	function reqCrs(crsId, root) {
-		this.crsId = crsId;
+	function reqCrsList(crsId, root) {
+		stdtListCrs(crsId, root);
 		xhttp.onreadystatechange = function() {
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
 				clssTag = '<option>선 택</option>';
@@ -84,7 +83,43 @@
 		xhttp.send();
 	}
 	
-	function reqClss(clssNm, root) {
+	function stdtListCrs(crsId, root) {
+		var xhttp2 = new XMLHttpRequest();
+		xhttp2.onreadystatechange = function() {
+			if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+				var clssData5 = xhttp2.responseText;
+				clssData5 = JSON.parse(clssData5);
+				clssTag = '<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">'
+						+ '<tr><td></td><td><p align="center"><b><span style="font-size: 12pt;">수강생 목록</span></b></p></td><td></td>	</tr>'
+						+ '<tr><td bgcolor="#336699"><p align="center"><font color="white"><b><span style="font-size:12pt;">번 호</span></b></font></p>'
+						+ '</td><td bgcolor="#336699"><p align="center"><font color="white"><b><span style="font-size:12pt;">이 름</span></b></font></p>'
+						+ '</td><td bgcolor="#336699"><p align="center"><font color="white"><b><span style="font-size:12pt;">학 과</span></b></font></p>'
+						+ '</td></tr>';
+			}
+			if (clssData5 == "") {
+				clssTag += '<tr><td colspan="5"><p align="center"><b><span style="font-size:12pt;">등록된수강생이 없습니다.</span></b></p></td></tr>';
+				document.getElementById("stdtList").innerHTML = clssTag;
+				document.getElementById("stdtInfo").innerHTML = "";
+			} else {
+				for (i = 0; i < clssData5.length; i++) {
+					clssTag += '<tr><td bgcolor=""><p align="center"><span style="font-size:12pt;">'
+							+ clssData5[i].stdtNo
+							+ '</span></p></td><td bgcolor=""><p align="center"><span style="font-size:12pt;">'
+							+ '<a href= "javascript:reqStdtInfo(\'' + clssData5[i].stdtNo + '\',\'' + root + '\');">'
+							+ clssData5[i].nm
+							+ '</a></span></p></td><td bgcolor=""><p align="center"><span style="font-size:12pt;">'
+							+ clssData5[i].mjrTp + '</span></p></td></tr>';
+				}
+				clssTag += '</table>';
+				document.getElementById("stdtList").innerHTML = clssTag;
+			}
+		}
+		xhttp2.open("GET", root + "/stdtListCrs?crsId=" + crsId,	true);
+		xhttp2.send();
+	}
+	
+	function reqClssList(clssNm, root) {
+		var crsId = document.getElementById("crs").value;
 		xhttp.onreadystatechange = function() {
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
 				var clssData2 = xhttp.responseText;
@@ -114,7 +149,7 @@
 				document.getElementById("stdtList").innerHTML = clssTag;
 			}
 		}
-		xhttp.open("GET", root + "/stdtList?crsId=" + crsId + "clssNm=" + clssNm,	true);
+		xhttp.open("GET", root + "/stdtList?clssNm=" + clssNm + "&crsId=" + crsId, true);
 		xhttp.send();
 	}
 
@@ -184,7 +219,6 @@
 				clssTag = "";
 				var clssData4 = xhttp.responseText;
 				clssData4 = JSON.parse(clssData4);
-				console.log(clssData4);
 				clssTag = '<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">'
 						+ '<tr><td></td><td><p align="center"><b><span style="font-size: 12pt;">수강생 목록</span></b></p></td><td></td>	</tr>'
 						+ '<tr><td bgcolor="#336699"><p align="center"><font color="white"><b><span style="font-size:12pt;">번 호</span></b></font></p>'
@@ -207,6 +241,7 @@
 					}
 					clssTag += '</table>';
 					document.getElementById("stdtList").innerHTML = clssTag;
+					document.getElementById("stdtInfo").innerHTML = "";
 				}
 			}
 			xhttp.open("GET", root + "/selectStdtNm?nm=" + stdtNm + "&clssNm=" + clssNm, true);

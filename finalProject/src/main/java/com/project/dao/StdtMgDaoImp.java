@@ -65,8 +65,15 @@ public class StdtMgDaoImp implements StdtMgDao {
 	}
 
 	@Override
-	public List<STDTInfoDto> selectByNm(STDTInfoDto stdtInfo) {
-		return sqlSession.selectList("stdtMgMapper.selectByNmAndClssNm", stdtInfo);
+	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) {
+		System.out.println(1);
+		return sqlSession.selectList("stdtMgMapper.selectStdtNm", stdtInfo);
+	}
+	
+	@Override
+	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo) {
+		System.out.println(2);
+		return sqlSession.selectList("stdtMgMapper.selectClssStdtNm", stdtInfo);
 	}
 
 	@Override

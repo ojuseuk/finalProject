@@ -117,6 +117,23 @@ public class StdtMgController {
 	}
 	
 	/**
+	 * @Method Name : selectStdtByCrs
+	 * @작성일	    : 2017. 11. 13. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 과정별 수강생 조회
+	 * return type  : List<STDTInfoDto>
+	 * @param crsId
+	 * @return
+	 */
+	@RequestMapping("/stdtListCrs")
+	public @ResponseBody List<STDTInfoDto> selectStdtByCrs(@RequestParam("crsId") String crsId){
+		if(crsId.equals("선 택")){
+			return stdtMgService.selectAllByStdt();
+		}
+		return stdtMgService.selectStdtByCrs(crsId);
+	}
+	
+	/**
 	 * @Method Name : selectStdtByClss
 	 * @작성일	    : 2017. 11. 11. 
 	 * @작성자	    : 김동근
@@ -126,13 +143,11 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("/stdtList")
-	public @ResponseBody List<STDTInfoDto> selectStdtByClss(@RequestParam("crsId") String crsId, @RequestParam("clssNm") String clssNm){
-		System.out.println(crsId);
-		System.out.println(clssNm);
-//		if(clssNm.equals("선 택")){
-//			return stdtMgService.selectStdtByCrs(crsId);
-//		}
-		return stdtMgService.selectByStdtList(clssNm);
+	public @ResponseBody List<STDTInfoDto> selectStdtByClss(STDTInfoDto stdtInfo){
+		if(stdtInfo.getClssNm().equals("선 택")){
+			return stdtMgService.selectStdtByCrs(stdtInfo.getCrsId());
+		}
+		return stdtMgService.selectByStdtList(stdtInfo.getClssNm());
 	}
 	
 	/**
@@ -184,6 +199,17 @@ public class StdtMgController {
 		return "stdtMg/StdtView";
 	}
 	
+	
+	/**
+	 * @Method Name : selectByStdtNm
+	 * @작성일	    : 2017. 11. 13. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 이름으로 수강생 검색
+	 * return type  : List<STDTInfoDto>
+	 * @param stdtInfo
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/selectStdtNm")
 	public @ResponseBody List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo, Model model){
 		if(stdtInfo.getClssNm().equals("선 택") && stdtInfo.getNm().equals("")){
@@ -192,8 +218,12 @@ public class StdtMgController {
 		} else if(stdtInfo.getNm().equals("")){
 			model.addAttribute("info", stdtMgService.selectByStdtList(stdtInfo.getClssNm()));
 			return stdtMgService.selectByStdtList(stdtInfo.getClssNm());
+		} else if(stdtInfo.getClssNm().equals("선 택") && !stdtInfo.getNm().equals("")){
+			model.addAttribute("info", stdtMgService.selectByStdtNm(stdtInfo));
+			return stdtMgService.selectByStdtNm(stdtInfo);
+		} else {
+			model.addAttribute("info", stdtMgService.selectByClssStdtNm(stdtInfo));
+			return stdtMgService.selectByClssStdtNm(stdtInfo);
 		}
-		model.addAttribute("info", stdtMgService.selectByNm(stdtInfo));
-		return stdtMgService.selectByNm(stdtInfo);
 	}
 }

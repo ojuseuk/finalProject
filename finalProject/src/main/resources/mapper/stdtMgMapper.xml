@@ -63,6 +63,7 @@
 		<result property="paidDt" column="PAID_DT"/>
 		<result property="repaidDt" column="REPAID_DT"/>
 		<result property="clssNm" column="CLSS_NM"/>
+		<result property="crsId" column="CRS_ID"/>
 	</resultMap>
 
 	<select id="selectByStdtClss" parameterType="String" resultMap="ResultOfStdt">
@@ -98,7 +99,17 @@
 		WHERE TB_STDT.STDT_NO = #{stdtNo}
 	</select>
 	
-	<select id="selectByNmAndClssNm" parameterType="String" resultMap="ResultOfStdt">
+	<select id="selectStdtNm" parameterType="String" resultMap="ResultOfStdt">
+		SELECT TB_USR.ID, TB_USR.NM, TB_USR.PHONE, TB_USR.ADDR, TB_USR.EMAIL, 
+		TB_STDT.STDT_NO, TB_STDT.MJR_TP, TB_STDT.RETRY_CNT, TB_STDT.PRNT_PHONE, 
+		TB_STDTCLSS.CLSS_ID, TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM
+		FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID 
+		JOIN TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
+		JOIN TB_CLSS ON TB_STDTCLSS.CLSS_ID = TB_CLSS.CLSS_ID 
+		WHERE TB_USR.NM = #{nm} 
+	</select>
+	
+	<select id="selectClssStdtNm" parameterType="String" resultMap="ResultOfStdt">
 		SELECT TB_USR.ID, TB_USR.NM, TB_USR.PHONE, TB_USR.ADDR, TB_USR.EMAIL, 
 		TB_STDT.STDT_NO,TB_STDT.MJR_TP, TB_STDT.RETRY_CNT, TB_STDT.PRNT_PHONE, 
 		TB_STDTCLSS.CLSS_ID, TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM
@@ -111,7 +122,7 @@
 	<select id="selectStdtByCrs" parameterType="String" resultMap="ResultOfStdt">
 		SELECT TB_USR.ID, TB_USR.NM, TB_USR.PHONE, TB_USR.ADDR, TB_USR.EMAIL, 
 		TB_STDT.STDT_NO,TB_STDT.MJR_TP, TB_STDT.RETRY_CNT, TB_STDT.PRNT_PHONE,
-		TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM, TB_CRS.CRS_NM
+		TB_STDTCLSS.PAID_DT, TB_STDTCLSS.REPAID_DT, TB_CLSS.CLSS_NM, TB_CRS.CRS_ID
 		FROM TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID
 		JOIN TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
 		JOIN TB_CLSS ON TB_STDTCLSS.CLSS_ID = TB_CLSS.CLSS_ID
