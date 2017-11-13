@@ -14,6 +14,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/styles/**" location="/styles/" />
+	<resources mapping="/imgs/**" location="/imgs/" />
+	
 	<!-- 단순하게 url과 view 매핑하는 설정 -->
 	<view-controller path="/index" view-name="index" />
 	
