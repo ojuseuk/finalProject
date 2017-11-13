@@ -6,20 +6,20 @@ public class TCHRDto {
 	private String id;
 	private String slr;
 	private String sbjtChrg;
-	private String thcrIntro;
+	private String tchrIntro;
 	private String nm;			// 이름
 	
 	public TCHRDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TCHRDto(String tchrNo, String id, String slr, String sbjtChrg, String thcrIntro) {
+	public TCHRDto(String tchrNo, String id, String slr, String sbjtChrg, String tchrIntro) {
 		super();
 		this.tchrNo = tchrNo;
 		this.id = id;
 		this.slr = slr;
 		this.sbjtChrg = sbjtChrg;
-		this.thcrIntro = thcrIntro;
+		this.tchrIntro = tchrIntro;
 	}
 
 	public String getTchrNo() {
@@ -54,12 +54,12 @@ public class TCHRDto {
 		this.sbjtChrg = sbjtChrg;
 	}
 
-	public String getThcrIntro() {
-		return thcrIntro;
+	public String getTchrIntro() {
+		return tchrIntro;
 	}
 
-	public void setThcrIntro(String thcrIntro) {
-		this.thcrIntro = thcrIntro;
+	public void setTchrIntro(String tchrIntro) {
+		this.tchrIntro = tchrIntro;
 	}
 
 	public String getNm() {
@@ -82,7 +82,7 @@ public class TCHRDto {
 		builder.append(", sbjtChrg=");
 		builder.append(sbjtChrg);
 		builder.append(", thcrIntro=");
-		builder.append(thcrIntro);
+		builder.append(tchrIntro);
 		builder.append(", nm=");
 		builder.append(nm);
 		builder.append("]");

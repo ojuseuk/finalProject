@@ -11,7 +11,7 @@
 <body>
 	<button onclick="location.href='${pageContext.request.contextPath}/course'">과정 등록</button>
 	<button onclick="location.href='${pageContext.request.contextPath}/courseList.do'">과정 목록</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/course'">강좌 개설</button>
+	<button onclick="location.href='${pageContext.request.contextPath}/mgClss'">강좌 개설</button>
 	<button onclick="location.href='${pageContext.request.contextPath}/course'">반 배치</button>
 	
 	<br><hr><br>
@@ -26,12 +26,22 @@
 				</tr>
 				<tr>
 					<td>과목 :</td>
-					<td><select name="sbjtNm" id="sbjtNm">
+  					<td>
+						<!--
+						<select name="sbjtNm" id="sbjtNm">
 							<option value="국어">국어</option>
 							<option value="영어">영어</option>
 							<option value="수학">수학</option>
 							<option value="과학">과학</option>
-					</select></td>
+						</select>
+						-->
+						<select name="sbjtNm" id="sbjtNm">
+							<option value="">과목 선택</option>
+							<c:forEach items="${requestScope.sbjtList}" var="data">
+								<option value=${data.sbjtNm}>${data.sbjtNm}</option>
+							</c:forEach>
+						</select>
+					</td>
 				</tr>  
 				<tr>
 					<td>과정명 :</td>

@@ -21,4 +21,49 @@
 	<select id="courseSelectAll" resultMap="CourseResult">
 		SELECT * FROM TB_CRS ORDER BY CRS_ID DESC 
 	</select>
+	
+	<resultMap type="CLSSDto" id="ClssResult">
+		<result property="clssId" column="CLSS_ID"/>
+		<result property="crsId" column="CRS_ID"/>
+		<result property="clssNm" column="CLSS_NM"/>
+		<result property="strtDt" column="STRT_DT"/>
+		<result property="endDt" column="END_DT"/>
+		<result property="strtTm" column="STRT_TM"/>
+		<result property="endTm" column="END_TM"/>
+		<result property="capa" column="CAPA"/>
+		<result property="clssroom" column="CLSSROOM"/>
+		<result property="sbjtNm" column="SBJT_NM"/>
+		<result property="crsNm" column="CRS_NM"/>
+	</resultMap>
+	
+	<insert id="clssInsert">
+		INSERT INTO TB_CLSS
+		VALUES(#{clssId}, #{crsId}, #{clssNm}, #{strtDt}, #{endDt}, #{strtTm}, #{endTm}, #{capa}, #{clssroom})
+	</insert>
+	
+	<select id="clssSelectAll" resultMap="ClssResult">
+		SELECT CLSS_ID, 
+				CL.CRS_ID AS CRS_ID, 
+				CLSS_NM, 
+				STRT_DT,
+				END_DT,
+				STRT_TM,
+				END_TM,
+				CAPA,
+				CLSSROOM,
+				SBJT_NM,
+				CRS_NM
+		FROM   TB_CRS CR INNER JOIN TB_CLSS CL 
+		    ON CR.CRS_ID = CL.CRS_ID
+		ORDER BY CLSS_ID DESC 
+	</select>
+	
+	<resultMap type="SBJTDto" id="sbjtResult">
+		<result property="sbjtNm" column="SBJT_NM"/>
+		<result property="weight" column="WEIGHT"/>
+	</resultMap>
+	
+	<select id="sbjtSelectAll" resultMap="sbjtResult">
+		SELECT * FROM TB_SBJT 
+	</select>
 </mapper>

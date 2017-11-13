@@ -6,6 +6,7 @@ public class EMPDto {
 	private String id;
 	private String slr;
 	private String retiredDt;
+	private String nm;
 	
 	public EMPDto() {
 		// TODO Auto-generated constructor stub
@@ -17,6 +18,15 @@ public class EMPDto {
 		this.id = id;
 		this.slr = slr;
 		this.retiredDt = retiredDt;
+	}
+
+	public EMPDto(String empNo, String id, String slr, String retiredDt, String nm) {
+		super();
+		this.empNo = empNo;
+		this.id = id;
+		this.slr = slr;
+		this.retiredDt = retiredDt;
+		this.nm = nm;
 	}
 
 	public String getEmpNo() {
@@ -51,6 +61,14 @@ public class EMPDto {
 		this.retiredDt = retiredDt;
 	}
 
+	public String getNm() {
+		return nm;
+	}
+
+	public void setNm(String nm) {
+		this.nm = nm;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -62,9 +80,13 @@ public class EMPDto {
 		builder.append(slr);
 		builder.append(", retiredDt=");
 		builder.append(retiredDt);
+		builder.append(", nm=");
+		builder.append(nm);
 		builder.append("]");
 		return builder.toString();
 	}
+
+
 	
 	
 }

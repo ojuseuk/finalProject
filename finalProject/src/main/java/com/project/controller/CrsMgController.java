@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
 import com.project.service.CrsMgService;
 
@@ -21,15 +22,48 @@ public class CrsMgController {
 		this.crsMgService = service;
 	}
 	
-	@RequestMapping("/course")
-//	public String courseView() {
-//		return "course/mgCourse";
-//	}
+	@RequestMapping("/mgClss")
+	public String clssView(Model data) {
+		String url = "error";
+		try {
+			data.addAttribute("list", crsMgService.clssSelectAll());
+			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
+			data.addAttribute("courseList", crsMgService.selectAll());
+			url = "course/mgClss";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return url;
+	}
 	
+	@RequestMapping("/clssInsert.do")
+	public String clssInsert(CLSSDto clss, Model data) {
+		String url = "error";
+		System.out.println("controller : " + clss); 		// @@@
+		clss.setStrtDt(clss.getStrtDt().replace("-", "")); 
+		clss.setEndDt(clss.getEndDt().replace("-", "")); 
+		clss.setStrtTm(clss.getStrtTm().replace(":", "") + "00"); 
+		clss.setEndTm(clss.getEndTm().replace(":", "") + "00"); 
+		System.out.println(clss); 								// @@@
+		try {
+			crsMgService.clssInsert(clss);
+			data.addAttribute("list", crsMgService.clssSelectAll());
+			url ="course/mgClss";  	
+//			url ="redirect:course/mgCourse";  	// 비동기 처리 시
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("OK");
+		return url;
+	}
+	
+	@RequestMapping("/course")
 	public String courseView(Model data) {
 		String url = "course/error";
 		try {
 			data.addAttribute("list", crsMgService.selectAll());
+			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
 			url = "course/mgCourse";
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -44,8 +78,6 @@ public class CrsMgController {
 		try {
 			crsMgService.courseInsert(crs);
 			data.addAttribute("list", crsMgService.selectAll());
-			System.out.println("inser 후 select");
-			System.out.println(data);
 			url ="course/mgCourse";  	
 //			url ="redirect:course/mgCourse";  	// 비동기 처리 시
 

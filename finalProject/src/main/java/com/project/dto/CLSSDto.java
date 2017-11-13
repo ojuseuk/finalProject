@@ -11,6 +11,8 @@ public class CLSSDto {
 	private String endTm;
 	private int capa;
 	private String clssroom;
+	private String sbjtNm;		// 이후 CRSDto의 멤버들
+	private String crsNm;
 	
 	public CLSSDto() {
 		// TODO Auto-generated constructor stub
@@ -28,6 +30,23 @@ public class CLSSDto {
 		this.endTm = endTm;
 		this.capa = capa;
 		this.clssroom = clssroom;
+	}
+	
+	
+	public CLSSDto(String clssId, String crsId, String clssNm, String strtDt, String endDt, String strtTm, String endTm,
+			int capa, String clssroom, String sbjtNm, String crsNm) {
+		super();
+		this.clssId = clssId;
+		this.crsId = crsId;
+		this.clssNm = clssNm;
+		this.strtDt = strtDt;
+		this.endDt = endDt;
+		this.strtTm = strtTm;
+		this.endTm = endTm;
+		this.capa = capa;
+		this.clssroom = clssroom;
+		this.sbjtNm = sbjtNm;
+		this.crsNm = crsNm;
 	}
 
 	public String getClssId() {
@@ -102,6 +121,22 @@ public class CLSSDto {
 		this.clssroom = clssroom;
 	}
 
+	public String getSbjtNm() {
+		return sbjtNm;
+	}
+
+	public void setSbjtNm(String sbjtNm) {
+		this.sbjtNm = sbjtNm;
+	}
+
+	public String getCrsNm() {
+		return crsNm;
+	}
+
+	public void setCrsNm(String crsNm) {
+		this.crsNm = crsNm;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -123,9 +158,15 @@ public class CLSSDto {
 		builder.append(capa);
 		builder.append(", clssroom=");
 		builder.append(clssroom);
+		builder.append(", sbjtNm=");
+		builder.append(sbjtNm);
+		builder.append(", crsNm=");
+		builder.append(crsNm);
 		builder.append("]");
 		return builder.toString();
 	}
+
+	
 	
 	
 	

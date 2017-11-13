@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="homePMapper">
+<mapper namespace="empMgMapper">
+
+	<resultMap type="EMPDto" id="empResult">
+		<result property="empNo" column="EMP_NO"/>
+		<result property="id" column="ID"/>
+		<result property="slr" column="SLR"/>
+		<result property="retiredDt" column="RETIRED_DT"/>
+	</resultMap>
 	
+	<select id="empSelectAll" resultMap="empResult">
+		SELECT EMP_NO,
+			   NM,
+			   RETIRED_DT
+		FROM   TB_EMP EMP INNER JOIN TB_USR USR
+		  ON   EMP.ID = USR.ID
+		WHERE USR_TP = 'staff'
+		ORDER BY EMP_NO DESC
+	
+	</select>
+	
+	<insert id="empInsert" parameterType="EMPDto">
+		INSERT INTO TB_EMP(EMP_NO, ID, SLR)
+		VALUES(#{empNo}, #{id}, #{slr})
+	</insert>
+	
+	<insert id="tchrInsert" parameterType="tCHRDto">
+		INSERT INTO TB_TCHR(TCHR_NO, ID, SLR, SBJT_CHRG, TCHR_INTRO)
+		VALUES(#{tchrNo}, #{id}, #{slr}, #{sbjtChrg}, #{tchrIntro})
+	</insert>	
+		
+	<resultMap type="USRDto" id="usrResult">
+		<result property="id" column="ID"/>
+		<result property="pw" column="PW"/>
+		<result property="nm" column="NM"/>
+		<result property="phone" column="PHONE"/>
+		<result property="addr" column="ADDR"/>
+		<result property="email" column="EMAIL"/>
+		<result property="usrTp" column="USR_TP"/>
+		<result property="pws" column="PWS"/>
+	</resultMap>
+	
+	<select id="usrSelectOne" resultMap="usrResult">
+		SELECT * FROM TB_USR
+		WHERE ID = #{id}
+	</select>
+	
+	<resultMap type="TCHRDto" id="tchrResult">
+		<result property="tchrNo" column="TCHR_NO"/>
+		<result property="id" column="ID"/>
+		<result property="slr" column="SLR"/>
+		<result property="sbjtChrg" column="SBJT_CHRG"/>
+		<result property="thcrIntro" column="THCR_INTRO"/>
+		<result property="nm" column="NM"/>
+	</resultMap>
+	
+	<select id="tchrSelectAll" resultMap="tchrResult">
+		SELECT TCHR_NO,
+			   SBJT_CHRG,
+			   NM
+		FROM   TB_TCHR TCHR INNER JOIN TB_USR USR
+		  ON   TCHR.ID = USR.ID
+		WHERE USR_TP = 'tchr'
+		ORDER BY TCHR_NO DESC
+	</select>	
+	
+	<update id="usrUpdateToStaff" parameterType="String">
+		UPDATE TB_USR
+		   SET USR_TP = 'staff'
+		 WHERE ID = #{id}
+	</update>
+	
+	<update id="usrUpdateToTchr" parameterType="String">
+		UPDATE TB_USR
+		   SET USR_TP = 'tchr'
+		 WHERE ID = #{id}
+	</update>
+
 </mapper>

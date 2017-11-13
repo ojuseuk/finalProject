@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
 
 @Repository
@@ -31,6 +32,27 @@ public class CrsMgDaoImp implements CrsMgDao {
 		return list;
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List clssSelectAll() {
+		List list = sqlSession.selectList("crsMgMapper.clssSelectAll");
+		return list;
+	}
+
+	@Override
+	public void clssInsert(CLSSDto clss) throws SQLException {
+		// TODO Auto-generated method stub
+		int num = 0;
+		System.out.println("DAO : " + clss); 		// @@@
+		num = sqlSession.insert("crsMgMapper.clssInsert", clss);
+	}
+
+	@Override
+	public List sbjtSelectAll() {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("crsMgMapper.sbjtSelectAll");
+		return list;
 	}
 	
 }

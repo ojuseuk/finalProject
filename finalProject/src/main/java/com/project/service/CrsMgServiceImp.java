@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.dao.CrsMgDao;
+import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
 
 @Service
@@ -33,6 +34,25 @@ public class CrsMgServiceImp implements CrsMgService {
 		// TODO Auto-generated method stub
 		return crsMgDao.courseSelectAll();
 		 
+	}
+
+	@Override
+	public List clssSelectAll() throws SQLException {
+		// TODO Auto-generated method stub
+		return crsMgDao.clssSelectAll();
+	}
+
+	@Override
+	public void clssInsert(CLSSDto clss) throws SQLException {
+		// TODO Auto-generated method stub
+		crsMgDao.clssInsert(clss);
+		
+	}
+
+	@Override
+	public List sbjtSelectAll() throws SQLException {
+		// TODO Auto-generated method stub
+		return crsMgDao.sbjtSelectAll();
 	}
 	
 }
