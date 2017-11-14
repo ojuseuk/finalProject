@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="schLfMapper">
+
+	<resultMap type="SBJTDto" id="ResultOfSBJT">
+		<result property="sbjtNm" column="SBJT_NM"/>
+		<result property="weight" column="weight"/>
+	</resultMap>
+	<select id="selectSbjt" resultMap="ResultOfSBJT">
+		SELECT * FROM TB_SBJT
+	</select>
 	
+	<resultMap type="CRSDto" id="ResultOfCRS">
+		<result property="crsId" column="CRS_ID"/>
+		<result property="crsNm" column="CRS_NM"/>
+		<result property="prd" column="PRD"/>
+		<result property="stdtclssttn" column="STDTCLSSTTN"/>
+		<result property="dayClssTm" column="DAY_CLSS_TM"/>
+		<result property="crsTp" column="CRS_TP"/>
+		<result property="crsIntro" column="CRS_INTRO"/>
+		<result property="sbjtNm" column="SBJT_NM"/>
+	</resultMap>
+	<select id="selectCrs" resultMap="ResultOfCRS">
+		SELECT * FROM TB_CRS
+	</select>
+	<select id="selectCrsPerSbjt" resultMap="ResultOfCRS">
+		SELECT * FROM TB_CRS WHERE SBJT_NM = #{sbjtNm}
+	</select>
+	
+	<resultMap type="ClssInfoDto" id="ResultOfClss">
+		<result property="nm" column="NM"/>
+		<result property="sbjtChrg" column="SBJT_CHRG"/>
+		<result property="tchrIntro" column="TCHR_INTRO"/>
+		<result property="tchrPt" column="TCHR_PT"/>
+		<result property="clssNm" column="CLSS_NM"/>
+		<result property="strtDt" column="STRT_DT"/>
+		<result property="endDt" column="END_DT"/>
+		<result property="strtTm" column="STRT_TM"/>
+		<result property="endTm" column="END_TM"/>
+		<result property="capa" column="CAPA"/>
+		<result property="clssroom" column="CLSSROOM"/>
+		<result property="crsIntro" column="CRS_INTRO"/>
+		<result property="crsNm" column="CRS_NM"/>
+	</resultMap>
+	<select id="selectClssPerCrs" resultMap="ResultOfClss">
+		SELECT TB_USR.NM, TB_TCHR.SBJT_CHRG, TB_TCHR.TCHR_INTRO, TB_TCHR.TCHR_PT,
+		TB_CLSS.CLSS_NM, TB_CLSS.STRT_DT, TB_CLSS.END_DT, TB_CLSS.STRT_TM,
+		TB_CLSS.END_TM, TB_CLSS.CAPA, TB_CLSS.CLSSROOM, TB_CRS.CRS_INTRO, TB_CRS.CRS_NM
+		FROM TB_USR JOIN TB_TCHR ON TB_USR.ID = TB_TCHR.ID
+		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHR.TCHR_NO
+		JOIN TB_CLSS ON TB_TCHRASSN.CLSS_ID = TB_CLSS.CLSS_ID
+		JOIN TB_CRS ON TB_CLSS.CRS_ID = TB_CRS.CRS_ID
+		WHERE TB_CRS.CRS_ID = #{crsId}
+	</select>
 </mapper>

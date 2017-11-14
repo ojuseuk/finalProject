@@ -63,6 +63,7 @@
 		<result property="paidDt" column="PAID_DT"/>
 		<result property="repaidDt" column="REPAID_DT"/>
 		<result property="clssNm" column="CLSS_NM"/>
+		<result property="clssId" column="CLSS_ID"/>
 		<result property="crsId" column="CRS_ID"/>
 	</resultMap>
 

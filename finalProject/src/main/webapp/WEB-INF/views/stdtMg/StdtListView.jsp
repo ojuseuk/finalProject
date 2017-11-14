@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<!-- *학생 중복 출력 수정, 업데이트 시 종합반만 변경 가능하게 수정, 중복코드 정리, 변수 정리, 스크롤 -->
+
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <c:if test="${not empty crsList}" >
    <select name="crs" id="crs" onchange="reqCrsList(this.value,'${root}')">
@@ -17,8 +19,9 @@
 </select>
 <input id="searchNm" type="text" name="name" value="">
 <input type="button" value="검색" onclick="searchNm('${root}')">
+<div style="width:50%; height:200px; overflow:auto;"> 
 <table id="stdtList" border="0" cellpadding="5" cellspacing="2"
-	width="50%" bordercolordark="white" bordercolorlight="black">
+	width="100%" bordercolordark="white" bordercolorlight="black">
 	<tr>
 		<td></td>
 		<td><p align="center">
@@ -57,6 +60,7 @@
 		</tr>
 	</c:forEach>
 </table>
+</div>
 <div id="stdtInfo" style="font-size:12pt;">
 </div>
 
@@ -79,7 +83,7 @@
 				document.getElementById("stdtInfo").innerHTML = "";
 			}
 		}
-		xhttp.open("GET", root + "/clss?crsId=" + crsId, true);
+		xhttp.open("POST", root + "/clssList?crsId=" + crsId, true);
 		xhttp.send();
 	}
 	
@@ -97,7 +101,7 @@
 						+ '</td></tr>';
 			}
 			if (clssData5 == "") {
-				clssTag += '<tr><td colspan="5"><p align="center"><b><span style="font-size:12pt;">등록된수강생이 없습니다.</span></b></p></td></tr>';
+				clssTag += '<tr><td colspan="5"><p align="center"><b><span style="font-size:12pt;">등록된 수강생이 없습니다.</span></b></p></td></tr>';
 				document.getElementById("stdtList").innerHTML = clssTag;
 				document.getElementById("stdtInfo").innerHTML = "";
 			} else {
@@ -114,7 +118,7 @@
 				document.getElementById("stdtList").innerHTML = clssTag;
 			}
 		}
-		xhttp2.open("GET", root + "/stdtListCrs?crsId=" + crsId,	true);
+		xhttp2.open("POST", root + "/stdtListCrs?crsId=" + crsId,	true);
 		xhttp2.send();
 	}
 	
@@ -149,34 +153,39 @@
 				document.getElementById("stdtList").innerHTML = clssTag;
 			}
 		}
-		xhttp.open("GET", root + "/stdtList?clssNm=" + clssNm + "&crsId=" + crsId, true);
+		xhttp.open("POST", root + "/stdtList?clssNm=" + clssNm + "&crsId=" + crsId, true);
 		xhttp.send();
 	}
 
+	
 	function reqStdtInfo(stdtNo, root) {
 		xhttp.onreadystatechange = function() {
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
 				clssData3 = xhttp.responseText;
 				clssData3 = JSON.parse(clssData3);
-				for (i = 0; i < clssData3.length; i++) {
-					clssTag = '<h3>' + clssData3[i].id + '<br>'
-							+ clssData3[i].stdtNo + '<br>' 
-							+ clssData3[i].nm + '<br>' 
-							+ clssData3[i].addr + '<br>'
-							+ clssData3[i].phone + '<br>' 
-							+ clssData3[i].prntPhone + '<br>' 
-							+ clssData3[i].email + '<br>'
-							+ clssData3[i].clssNm + '<br>'
-							+ clssData3[i].mjrTp + '<br>' 
-							+ clssData3[i].retryCnt	+ '<br>' 
-							+ clssData3[i].paidDt + '<br>'
-							+ clssData3[i].repaidDt + '</h3>' + '<br>'
-							+ '<input type="button" value="정보변경" onclick="updateStdt(\'' + stdtNo + '\',\'' + root + '\');">';
+				var i = 0;
+				var j = 1;
+				clssTag = clssData3[i].id + '<br>'
+						+ clssData3[i].stdtNo + '<br>' 
+						+ clssData3[i].nm + '<br>' 
+						+ clssData3[i].addr + '<br>'
+						+ clssData3[i].phone + '<br>' 
+						+ clssData3[i].prntPhone + '<br>' 
+						+ clssData3[i].email + '<br>'
+						+ clssData3[i].clssNm + '<br>'
+				if(clssData3.length > 1){
+					clssTag += clssData3[i + j].clssNm + '<br>'
+					j++;
 				}
+				clssTag += clssData3[i].mjrTp + '<br>' 
+						+ clssData3[i].retryCnt	+ '<br>' 
+						+ clssData3[i].paidDt + '<br>'
+						+ clssData3[i].repaidDt + '<br>'
+						+ '<input type="button" value="정보변경" onclick="updateStdt(\'' + stdtNo + '\',\'' + root + '\');">';
 			}
 			document.getElementById("stdtInfo").innerHTML = clssTag;
 		}
-		xhttp.open("GET", root + "/stdtInfo?stdtNo=" + stdtNo, true);
+		xhttp.open("POST", root + "/stdtInfo?stdtNo=" + stdtNo, true);
 		xhttp.send();
 	}
 	
@@ -186,30 +195,34 @@
 				clssData3 = xhttp.responseText;
 				clssData3 = JSON.parse(clssData3);
 				clssTag = '<form action="'+ root + '/updateStdt">';
-				for (i = 0; i < clssData3.length; i++) {
-					clssTag += clssData3[i].id + '<br>'
-							+ clssData3[i].stdtNo + '<br>' 
-							+ '<input type="hidden" name="stdtNo" value="'+ clssData3[i].stdtNo + '">'
-							+ clssData3[i].nm + '<br>'
-							+ clssData3[i].addr + '<br>'
-							+ clssData3[i].phone + '<br>' 
-							+ clssData3[i].prntPhone + '<br>'
-							+ clssData3[i].email + '<br>'
-							+ '<input type="text" name="clssId" value="' + clssData3[i].clssId + '">' + '<br>'
-							+ clssData3[i].clssNm + '<br>' 
-							+ clssData3[i].mjrTp + '<br>' 
-							+ clssData3[i].retryCnt + '<br>'
-							+ clssData3[i].paidDt + '<br>'
-							+ clssData3[i].repaidDt + '</h3>' + '<br>'
-							+ '<input type="submit" value="저장">' 
+				var i = 0;
+				var j = 1;
+				clssTag += clssData3[i].id + '<br>'
+						+ clssData3[i].stdtNo + '<br>' 
+						+ '<input type="hidden" name="stdtNo" value="'+ clssData3[i].stdtNo + '">'
+						+ clssData3[i].nm + '<br>'
+						+ clssData3[i].addr + '<br>'
+						+ clssData3[i].phone + '<br>' 
+						+ clssData3[i].prntPhone + '<br>'
+						+ clssData3[i].email + '<br>'
+						+ '<input type="text" name="clssId" value="' + clssData3[i].clssId + '">' + '<br>'
+						+ clssData3[i].clssNm + '<br>'
+				if(clssData3.length > 1){
+					clssTag += clssData3[i + j].clssNm + '<br>'
+					j++;
 				}
-					clssTag +='</form>';
+				clssTag += clssData3[i].mjrTp + '<br>' 
+						+ clssData3[i].retryCnt + '<br>'
+						+ clssData3[i].paidDt + '<br>'
+						+ clssData3[i].repaidDt + '</h3>' + '<br>'
+						+ '<input type="submit" value="저장">' 
+						+ '</form>';
+				}
+				document.getElementById("stdtInfo").innerHTML = clssTag;
 			}
-			document.getElementById("stdtInfo").innerHTML = clssTag;
+			xhttp.open("POST", root + "/stdtInfo?stdtNo=" + stdtNo, true);
+			xhttp.send();
 		}
-		xhttp.open("GET", root + "/stdtInfo?stdtNo=" + stdtNo, true);
-		xhttp.send();
-	}
 	
 	function searchNm(root) {
 		var stdtNm = document.getElementById("searchNm").value;
@@ -219,6 +232,7 @@
 				clssTag = "";
 				var clssData4 = xhttp.responseText;
 				clssData4 = JSON.parse(clssData4);
+				console.log(clssData4);
 				clssTag = '<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">'
 						+ '<tr><td></td><td><p align="center"><b><span style="font-size: 12pt;">수강생 목록</span></b></p></td><td></td>	</tr>'
 						+ '<tr><td bgcolor="#336699"><p align="center"><font color="white"><b><span style="font-size:12pt;">번 호</span></b></font></p>'
@@ -241,12 +255,12 @@
 					}
 					clssTag += '</table>';
 					document.getElementById("stdtList").innerHTML = clssTag;
-					document.getElementById("stdtInfo").innerHTML = "";
 				}
 			}
-			xhttp.open("GET", root + "/selectStdtNm?nm=" + stdtNm + "&clssNm=" + clssNm, true);
+			xhttp.open("POST", root + "/selectStdtNm?nm=" + stdtNm + "&clssNm=" + clssNm, true);
 			xhttp.send();
 		}
+	
 </script>
 
 
