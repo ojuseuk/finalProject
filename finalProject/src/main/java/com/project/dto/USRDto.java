@@ -8,13 +8,16 @@ public class USRDto {
 	private String phone;
 	private String addr;
 	private String email;
+	private String usrTp;
+	private String pws;
 	
 	
 	public USRDto() {
-		
+		// TODO Auto-generated constructor stub
 	}
-	
-	public USRDto(String id, String pw, String nm, String phone, String addr, String email) {
+
+
+	public USRDto(String id, String pw, String nm, String phone, String addr, String email, String usrTp, String pws) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -22,57 +25,88 @@ public class USRDto {
 		this.phone = phone;
 		this.addr = addr;
 		this.email = email;
+		this.usrTp = usrTp;
+		this.pws = pws;
 	}
-
-
 
 
 	public String getId() {
 		return id;
 	}
 
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 
 	public String getPw() {
 		return pw;
 	}
 
+
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
+
 
 	public String getNm() {
 		return nm;
 	}
 
+
 	public void setNm(String nm) {
 		this.nm = nm;
 	}
+
 
 	public String getPhone() {
 		return phone;
 	}
 
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 
 	public String getAddr() {
 		return addr;
 	}
 
+
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	public String getUsrTp() {
+		return usrTp;
+	}
+
+
+	public void setUsrTp(String usrTp) {
+		this.usrTp = usrTp;
+	}
+
+
+	public String getPws() {
+		return pws;
+	}
+
+
+	public void setPws(String pws) {
+		this.pws = pws;
 	}
 
 
@@ -91,10 +125,14 @@ public class USRDto {
 		builder.append(addr);
 		builder.append(", email=");
 		builder.append(email);
-		
+		builder.append(", usrTp=");
+		builder.append(usrTp);
+		builder.append(", pws=");
+		builder.append(pws);
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 	
 	

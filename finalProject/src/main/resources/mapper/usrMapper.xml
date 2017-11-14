@@ -9,11 +9,17 @@
 		<result property="phone" column="PHONE"/>
 		<result property="addr" column="ADDR"/>
 		<result property="email" column="EMAIL"/>
+		<result property="usrTp" column="USR_TP"/>
+		<result property="pws" column="PWS"/>
 	</resultMap>
 
 	<insert id="userInsert" parameterType="USRDto">
 		INSERT INTO TB_USR
-		VALUES(#{id}, #{pw}, #{nm}, #{phone}, #{addr}, #{email})
+		VALUES(#{id}, #{pw}, #{nm}, #{phone}, #{addr}, #{email},0,0)
 	</insert>
+	
+	<select id="userLogin" parameterType="hashmap" resultType="hashmap">
+		SELECT * FROM TB_USR WHERE id=#{id} and pw=#{pw}
+	</select>
 	
 </mapper>
