@@ -21,7 +21,7 @@
 			<table>
 				<tr>
 					<td>과목명 :</td>
-					<td><select name="sbjtNm" id="sbjtNm">
+					<td><select name="sbjtNm" id="sbjtNm" required onchange="crsSelect('${pageContext.request.contextPath}', this.value)">
 							<option value="">과목 선택</option>
 							<c:forEach items="${requestScope.sbjtList}" var="data">
 								<option value=${data.sbjtNm}>${data.sbjtNm}</option>
@@ -31,10 +31,10 @@
 				<tr>
 					<td>과정명 :</td>
 					<td><select name="crsId" id="crsId">
-							<option value="">과정 선택</option>
+<%-- 							<option value="">과정 선택</option>
 							<c:forEach items="${requestScope.courseList}" var="data">
 								<option value=${data.crsId}>${data.crsNm}</option>
-							</c:forEach>
+							</c:forEach> --%>
 						</select></td>
 				</tr>
 				<tr>
@@ -68,6 +68,27 @@
  		<input type="submit" value="강좌 개설"> 
 		<input type="button"  onclick="javascript:history.back()" value="개설 취소" >
 	</form>
+	
+	<script type="text/javascript">
+		var xhttp = new XMLHttpRequest();
+		var data;
+		function crsSelect(root, sbjtNm){
+			xhttp.onreadystatechange = function(){
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					data = xhttp.responseText;
+					data = JSON.parse(data);
+					var tag = '<option>과정 선택</option>';
+					for (var i = 0; i < data.length; i++) {
+						tag += '<option value="' + data[i].crsId + '">' + data[i].crsNm + '</option>';
+					}
+					
+					document.getElementById("crsId").innerHTML = tag;
+				}
+			}
+			xhttp.open("GET", root + "/crsSelectBySbjtNm?sbjtNm=" + sbjtNm, true);
+			xhttp.send();
+		}
+	</script>
 	
 	<!-- 리스트 미리 출력 -->
 	<div id="viewCourseList" style="position:absolute; top:50px; left:600px; width:700px; height:200px; display:inline-block;">

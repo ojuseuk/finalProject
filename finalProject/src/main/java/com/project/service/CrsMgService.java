@@ -18,6 +18,8 @@ public interface CrsMgService {
 	public void clssInsert(CLSSDto clss) throws SQLException;
 
 	public List sbjtSelectAll() throws SQLException;
+
+	public List crsSelectBySbjtNm(String sbjtNm);
 	
 	
 

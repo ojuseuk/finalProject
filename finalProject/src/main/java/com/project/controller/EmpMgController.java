@@ -79,7 +79,6 @@ public class EmpMgController {
 		String url = "error";
 		try {
 			data.addAttribute("list", empMgService.empSelectAll());
-//			data.addAttribute("usrList", homepService.sbjtSelectAll());
 			url = "emp/mgEmp";
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,6 +96,7 @@ public class EmpMgController {
 		try {
 			empMgService.empInsert(emp);
 			data.addAttribute("list", empMgService.empSelectAll());
+			data.addAttribute("resultMsg", "직원 정보가 정상적으로 등록되었습니다.");
 			url ="emp/mgEmp";  	
 
 		} catch (SQLException e) {
@@ -116,6 +116,7 @@ public class EmpMgController {
 		try {
 			empMgService.empUpdate(emp);
 			data.addAttribute("list", empMgService.empSelectAll());
+			data.addAttribute("resultMsg", "직원 정보가 정상적으로 수정되었습니다.");
 			url ="emp/mgEmp";  	
 			
 		} catch (SQLException e) {
@@ -132,7 +133,10 @@ public class EmpMgController {
 		try {
 			empMgService.tchrUpdate(tchr);
 			data.addAttribute("list", empMgService.tchrSelectAll());
-			url ="emp/mgTchr";  	
+			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
+			data.addAttribute("resultMsg", "강사 정보가 정상적으로 수정되었습니다.");
+			
+			url ="tchr/mgTchr";  	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -168,6 +172,7 @@ public class EmpMgController {
 			empMgService.tchrInsert(tchr);
 			data.addAttribute("list", empMgService.tchrSelectAll());
 			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
+			data.addAttribute("resultMsg", "강사 정보가 정상적으로 등록되었습니다.");
 			url ="tchr/mgTchr";  	
 			
 		} catch (SQLException e) {

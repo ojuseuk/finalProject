@@ -13,6 +13,13 @@
 		<result property="crsTp" column="CRS_TP"/>
 	</resultMap>
 
+	<select id="crsSelectBySbjtNm" parameterType="String" resultMap="CourseResult">
+		SELECT CRS_ID,
+			CRS_NM
+		FROM 	TB_CRS
+		WHERE SBJT_NM = #{sbjtNm}	
+	</select>
+
 	<insert id="courseInsert" parameterType="CRSDto">
 		<if test="prd == 0 and sbjtNm == null">
 			INSERT INTO TB_CRS(CRS_ID, CRS_NM, STDTCLSSTTN, DAY_CLSS_TM, CRS_INTRO, CRS_TP) 

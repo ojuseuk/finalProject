@@ -13,7 +13,7 @@
 	<button onclick="location.href='${pageContext.request.contextPath}/mgTchr">강사 관리</button>
 	
 	<br><hr><br>
- 	<form action="tchrInsert.do">
+ 	<form action="tchrInsert.do" id="frmTchr">
 		<fieldset style="width: 40%">
 			<legend>사용자 정보</legend>
 			<table>
@@ -77,8 +77,10 @@
 
 		<input type="reset" value="화면 초기화"> 
 		<input type="submit" value="강사 등록"> 
-		<input type="button" value="수정 내용 저장" onclick="tchrUpdate('${pageContext.request.contextPath}', '${data.tchrNo}')">
+		<input type="button" value="수정 내용 저장" onclick="tchrUpdate()">
 		<input type="button" onclick="javascript:history.back()" value="이전 화면으로">
+		
+ 		<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
 	</form>
 	
 	<script type="text/javascript">
@@ -86,37 +88,14 @@
 		var xhttp2 = new XMLHttpRequest();
 		var xhttp3 = new XMLHttpRequest();
 		var data;
-		
+		resultMsg = document.getElementById("resultMsg").value;
+		if(resultMsg != ""){
+			alert(resultMsg);
+		}
 		/* 강사번호로 TB_TCHR 업데이트 */
-		function tchrUpdate(root, tchrNo){
-			xhttp.onreadystatechange = function(){
-				if (xhttp.readyState == 4 && xhttp.status == 200) {
-					data = xhttp.responseText;
-					data = JSON.parse(data);
-					
-					document.getElementById("tchrNo").value = data.tchrNo;
-					document.getElementById("sbjtChrg").value = data.sbjtChrg;
-					document.getElementById("tchrIntro").value = data.tchrIntro;
-				}
-			}
-			tchrNo = document.getElementById("tchrNo").value;
-			sbjtChrg = document.getElementById("sbjtChrg").value;
-			tchrIntro = document.getElementById("tchrIntro").value;
-			
-			
-			var params = "tchrNo=" + tchrNo + "&";
-			params += "sbjtChrg=" + sbjtChrg + "&";
-			params += "tchrIntro=" + tchrIntro ;
-
-			alert(tchrNo + " " + sbjtChrg + " " + tchrIntro); 		
-			alert(params);	
-			xhttp.open("POST", root + "/tchrUpdate", true);
-			/* post 사용시에 필수로필요한 Content-Type */
-			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			
-			/* spring-security를 사용할 경우 해아할 setRequestHeader */
-			/* xhttp.setRequestHeader(header, token); */
-			xhttp.send(params);
+		function tchrUpdate(){
+			document.getElementById("frmTchr").action = "${pageContext.request.contextPath}/tchrUpdate";
+			document.getElementById("frmTchr").submit();
 		}
 		
 		/* 강사번호로 TB_TCHR 검색 */

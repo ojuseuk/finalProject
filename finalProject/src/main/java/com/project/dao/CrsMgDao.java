@@ -17,4 +17,6 @@ public interface CrsMgDao {
 	
 	List sbjtSelectAll();
 
+	List crsSelectBySbjtNm(String sbjtNm);
+
 }

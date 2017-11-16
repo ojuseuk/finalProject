@@ -54,5 +54,11 @@ public class CrsMgServiceImp implements CrsMgService {
 		// TODO Auto-generated method stub
 		return crsMgDao.sbjtSelectAll();
 	}
+
+	@Override
+	public List crsSelectBySbjtNm(String sbjtNm) {
+		// TODO Auto-generated method stub
+		return crsMgDao.crsSelectBySbjtNm(sbjtNm);
+	}
 	
 }

@@ -53,5 +53,11 @@ public class CrsMgDaoImp implements CrsMgDao {
 		List list = sqlSession.selectList("crsMgMapper.sbjtSelectAll");
 		return list;
 	}
+
+	@Override
+	public List crsSelectBySbjtNm(String sbjtNm) {
+		// TODO Auto-generated method stub
+		List list = sqlSession.selectList("crsMgMapper.crsSelectBySbjtNm", sbjtNm);
+		return list;	}
 	
 }

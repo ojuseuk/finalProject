@@ -19,7 +19,7 @@
 	<br>
 	<hr>
 	<br>
-	<form action="empInsert">
+	<form action="empInsert" id="frmEmp" name="frmEmp">
 		<fieldset style="width: 40%">
 			<legend>사용자 정보</legend>
 			<table>
@@ -63,7 +63,12 @@
 		<br> 
 		<input type="reset" value="화면 초기화"> 
 		<input type="submit" value="직원 등록"> 
-		<input type="button" value="수정 내용 저장" onclick="empUpdate('${pageContext.request.contextPath}', '${data.empNo}')">
+		
+		<!-- 동기 방식 -->
+		<input type="button" value="수정 내용 저장" onclick="empUpdate()">
+		<%-- 비동기 처리 시
+ 			<input type="button" value="수정 내용 저장" onclick="empUpdate('${pageContext.request.contextPath}', '${data.empNo}')"> 
+ 		--%>
 		<input type="button" onclick="javascript:history.back()" value="이전 화면으로">
 	</form>
 
@@ -76,6 +81,15 @@
 		var header = document.getElementById('_csrf_header').getAttribute('content');
 		var xhttp = new XMLHttpRequest();
 		var data;
+		
+		/* 사원번호로 TB_EMP 업데이트 - 동기 방식*/
+		function empUpdate(){
+			document.getElementById("frmEmp").action = "${pageContext.request.contextPath}/empUpdate";
+			document.getElementById("frmEmp").submit();
+		}
+		
+
+ 
 		
 		/* 직원 퇴사 처리 : 퇴사일자 업데이트 */
 		function empRetire(root, empNo){
@@ -146,40 +160,7 @@
 			xhttp.send();
 		}
 		
-		/* 사원번호로 TB_EMP 업데이트 */
-		function empUpdate(root, empNo){
-			xhttp.onreadystatechange = function(){
-				if (xhttp.readyState == 4 && xhttp.status == 200) {
-					data = xhttp.responseText;
-					data = JSON.parse(data);
-					
-					document.getElementById("empNo").value = data.empNo;
-					document.getElementById("id").value = data.id;
-					document.getElementById("nm").value = data.nm;
-					document.getElementById("slr").value = data.slr;
-					document.getElementById("retiredDt").value = data.retiredDt;
-				}
-			}
-			empNo = document.getElementById("empNo").value;
-			id = document.getElementById("id").value;
-			nm = document.getElementById("nm").value;
-			slr = document.getElementById("slr").value;
-			
-			
-			var params = "empNo=" + empNo + "&";
-			params += "id=" + id + "&";
-			params += "nm=" + nm + "&";
-			params += "slr=" + slr;
-			alert(empNo + id + nm + slr); 		
-			alert(params);	
-			xhttp.open("POST", root + "/empUpdate", true);
-			/* post 사용시에 필수로필요한 Content-Type */
-			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			
-			/* spring-security를 사용할 경우 해아할 setRequestHeader */
-			/* xhttp.setRequestHeader(header, token); */
-			xhttp.send(params);
-		}
+
 	</script>
 
 

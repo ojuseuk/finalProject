@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
+import com.project.dto.USRDto;
 import com.project.service.CrsMgService;
 
 @Controller
@@ -20,6 +23,13 @@ public class CrsMgController {
 	
 	public void setService(CrsMgService service) {
 		this.crsMgService = service;
+	}
+	
+	
+	@RequestMapping("/crsSelectBySbjtNm")
+	public @ResponseBody List<CRSDto> crsSelectBySbjtNm(@RequestParam("sbjtNm") String sbjtNm) {
+		System.out.println("Cotroller : " + sbjtNm);
+		return crsMgService.crsSelectBySbjtNm(sbjtNm);
 	}
 	
 	@RequestMapping("/mgClss")
