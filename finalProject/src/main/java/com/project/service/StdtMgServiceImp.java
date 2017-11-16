@@ -63,8 +63,13 @@ public class StdtMgServiceImp implements StdtMgService {
 	}
 
 	@Override
-	public List<STDTInfoDto> selectByNm(STDTInfoDto stdtInfo) {
-		return stdtMgDao.selectByNm(stdtInfo);
+	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) {
+		return stdtMgDao.selectByStdtNm(stdtInfo);
+	}
+	
+	@Override
+	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo) {
+		return stdtMgDao.selectByClssStdtNm(stdtInfo);
 	}
 
 	@Override

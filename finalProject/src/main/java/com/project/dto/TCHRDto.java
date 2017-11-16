@@ -12,9 +12,8 @@ public class TCHRDto {
 	private String empNo;
 	private String tchrPt;
 	
-	public TCHRDto() {
-		// TODO Auto-generated constructor stub
-	}
+	
+	public TCHRDto() {}
 
 	public TCHRDto(String tchrNo, String sbjtChrg, String tchrIntro) {
 		super();
@@ -24,14 +23,12 @@ public class TCHRDto {
 	}
 
 	public TCHRDto(String tchrNo, String id, String slr, String sbjtChrg, String tchrIntro) {
-		super();
 		this.tchrNo = tchrNo;
 		this.id = id;
 		this.slr = slr;
 		this.sbjtChrg = sbjtChrg;
 		this.tchrIntro = tchrIntro;
 	}
-	
 	
 
 	public TCHRDto(String tchrNo, String id, String slr, String sbjtChrg, String tchrIntro, String nm, int result,
@@ -45,6 +42,8 @@ public class TCHRDto {
 		this.nm = nm;
 		this.result = result;
 		this.empNo = empNo;
+		this.nm = nm;
+		this.result = result;
 		this.tchrPt = tchrPt;
 	}
 
@@ -95,8 +94,6 @@ public class TCHRDto {
 	public void setNm(String nm) {
 		this.nm = nm;
 	}
-	
-	
 
 	public int getResult() {
 		return result;
@@ -123,6 +120,7 @@ public class TCHRDto {
 		this.tchrPt = tchrPt;
 	}
 
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -148,8 +146,5 @@ public class TCHRDto {
 		return builder.toString();
 	}
 
-
-
-	
 
 }

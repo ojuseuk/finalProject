@@ -19,7 +19,8 @@ public interface StdtMgService {
 	public List<STDTInfoDto> selectAllByStdt();
 	public List<STDTInfoDto> selectStdtInfo(String stdtNo);
 	public void updateStdtClss(STDTCLSSDto stdtInfo);
-	public List<STDTInfoDto> selectByNm(STDTInfoDto stdtInfo);
+	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo);
+	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo);
 	public List<STDTInfoDto> selectStdtByCrs(String crsId);
 	
 }

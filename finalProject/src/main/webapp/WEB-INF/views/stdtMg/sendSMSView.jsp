@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>문자 발송</title>
 </head>
 <script type="text/javascript">
 	function checkValid() {

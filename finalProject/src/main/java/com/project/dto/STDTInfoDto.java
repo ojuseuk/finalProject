@@ -15,11 +15,13 @@ public class STDTInfoDto {
 	private String clssId;;
 	private String paidDt;
 	private String repaidDt;
+	private String crsId;
 	
 	public STDTInfoDto() {}
 
 	public STDTInfoDto(String id, String nm, String phone, String addr, String email, String stdtNo, int retryCnt,
-			String mjrTp, String prntPhone, String clssNm, String clssId, String paidDt, String repaidDt) {
+			String mjrTp, String prntPhone, String clssNm, String clssId, String paidDt, String repaidDt,
+			String crsId) {
 		super();
 		this.id = id;
 		this.nm = nm;
@@ -34,6 +36,7 @@ public class STDTInfoDto {
 		this.clssId = clssId;
 		this.paidDt = paidDt;
 		this.repaidDt = repaidDt;
+		this.crsId = crsId;
 	}
 
 	public String getId() {
@@ -140,10 +143,18 @@ public class STDTInfoDto {
 		this.repaidDt = repaidDt;
 	}
 
+	public String getCrsId() {
+		return crsId;
+	}
+
+	public void setCrsId(String crsId) {
+		this.crsId = crsId;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("STDTListDto [id=");
+		builder.append("STDTInfoDto [id=");
 		builder.append(id);
 		builder.append(", nm=");
 		builder.append(nm);
@@ -169,6 +180,8 @@ public class STDTInfoDto {
 		builder.append(paidDt);
 		builder.append(", repaidDt=");
 		builder.append(repaidDt);
+		builder.append(", crsId=");
+		builder.append(crsId);
 		builder.append("]");
 		return builder.toString();
 	}

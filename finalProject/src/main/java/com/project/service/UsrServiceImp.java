@@ -1,14 +1,12 @@
 package com.project.service;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.dao.CrsMgDao;
 import com.project.dao.UsrDao;
-import com.project.dto.CRSDto;
 import com.project.dto.USRDto;
 
 @Service
@@ -28,7 +26,11 @@ public class UsrServiceImp implements UsrService {
 		usrDao.userInsert(usr);
 		
 	}
-
 	
+	@Override
+	public HashMap<String, Object> userLogin(HashMap<String, Object> map) throws SQLException{
+		System.out.println("service : " + map); 
+		return usrDao.userLogin(map);
+	}
 	
 }

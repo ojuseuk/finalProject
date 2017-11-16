@@ -101,7 +101,7 @@ span.psw {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 85%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -190,21 +190,21 @@ span.psw {
     <div class="col-sm-4">
       <div class="panel panel-primary">
         <div class="panel-heading">특강정보</div>
-        <div class="panel-body"><img src="./imgs/img/kor.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="./imgs/img/kor.png" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">국어강사</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
         <div class="panel-heading">특강정보</div>
-        <div class="panel-body"><img src="./imgs/img/eng.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="./imgs/img/eng.png" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">영어강사</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-success">
         <div class="panel-heading">특강정보</div>
-        <div class="panel-body"><img src="./imgs/img/math.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="./imgs/img/math.png" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">수학강사</div>
       </div>
     </div>
@@ -216,7 +216,7 @@ span.psw {
     <div class="col-sm-4">
       <div class="panel panel-primary">
         <div class="panel-heading">특강정보</div>
-        <div class="panel-body"><img src="./imgs/img/kor2.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="./imgs/img/kor12.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">국어강사</div>
       </div>
     </div>
@@ -230,7 +230,7 @@ span.psw {
     <div class="col-sm-4"> 
       <div class="panel panel-primary">
         <div class="panel-heading">특강정보</div>
-        <div class="panel-body"><img src="./imgs/img/math2.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="./imgs/img/math2.png" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">수학강사</div>
       </div>
     </div>
@@ -240,24 +240,25 @@ span.psw {
 <!-- 로그인 -->
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="${pageContext.request.contextPath}/userInsert.do" method="post">
+  <form class="modal-content animate" action="${pageContext.request.contextPath}/userLogin.do" method="post">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
 
     <div class="container">
       <label><b>아이디</b></label>
-      <input type="hidden" name="command" value="login">
+      <input type="hidden" name="command" value="userLogin">
       <input type="text" placeholder="아이디" name="id" required>
 
       <label><b>비밀번호</b></label>
-      <input type="password" placeholder="비밀번호" name="password" required>
-        
+      <input type="password" placeholder="비밀번호" name="pw" required><br>
+      <%-- <div id="div_memberCheck" style="font-weight: bold;color:red;">${login_errMsg }</div>  --%>
       <button type="submit">로그인</button>
       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">취소</button>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
+      
       
       
     </div>
@@ -268,7 +269,7 @@ span.psw {
 <!-- 회원가입 -->
 <div id="id02" class="modal">
   <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
-  <form class="modal-content animate" action="${pageContext.request.contextPath}/userInsert.do">
+  <form class="modal-content animate" action="${pageContext.request.contextPath}/userInsert.do" method="post">
     <div class="container">
       <label><b>아이디</b></label>
       <input type="hidden" name="command" value="join">
