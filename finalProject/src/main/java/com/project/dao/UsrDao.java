@@ -9,5 +9,9 @@ public interface UsrDao {
 	void userInsert(USRDto usr) throws SQLException;
 	HashMap<String,Object> userLogin(HashMap<String,Object> map) throws SQLException;
 	USRDto findId(HashMap<String, Object> map)throws SQLException;
+	USRDto findPwd(HashMap<String, Object> map)throws SQLException;
+	USRDto idCheck(String id)throws SQLException;
+	USRDto pwdCheck(HashMap<String, String> map)throws SQLException;
+	
 	
 }

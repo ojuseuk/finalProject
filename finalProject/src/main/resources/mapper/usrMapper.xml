@@ -33,6 +33,17 @@
 		select * from TB_USR
 		where nm=#{nm} and email=#{email} and phone=#{phone}
 	</select>
+	
+	<!-- id pw check -->
+	
+	<select id="idCheck" parameterType="String" resultType="USRDto">
+		select * from TB_USR where id=#{value}
+	</select>
+	
+	<select id="pwdCheck" parameterType="map" resultType="USRDto">
+		select * from TB_USR where id=#{id} and email=#{email} and phone=#{phone}
+	</select>
+	
 </mapper>
 
 

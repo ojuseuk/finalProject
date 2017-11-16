@@ -36,11 +36,29 @@ public class UsrServiceImp implements UsrService {
 	//아이디, 비밀번호 찾기
 	@Override
 	public USRDto findId(HashMap<String, Object> map) throws SQLException {
-		System.out.println("findId : " + map); 
+		System.out.println("servicefindId : " + map); 
 		return usrDao.findId(map);
 	}
 	
-	
+	@Override
+	public USRDto findPwd(HashMap<String, Object> map) throws SQLException {
+		System.out.println("servicefindPwd : " + map);
+		return usrDao.findPwd(map);
+	}
 	//------------------------
 	
+	//idChect pwdCheck
+	@Override
+	public USRDto idCheck(String id) throws SQLException{
+		System.out.println("serviceidCheck : " + id);
+		return usrDao.idCheck(id);
+	}
+	@Override
+	public USRDto pwdCheck(HashMap<String, String> map) throws SQLException{
+		System.out.println("servicepwdCheck : " + map);
+		return usrDao.pwdCheck(map);
+	}
+	
+	
+	//--------------------
 }

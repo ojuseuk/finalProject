@@ -8,8 +8,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.USRDto;
 import com.project.service.UsrService;
@@ -73,8 +75,7 @@ public class UsrController {
 		
 		}else {
 			//나중에 수정
-			model.addAttribute("login_errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
-			
+			model.addAttribute("login_errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");		
 		}
 		return url;
 		}
@@ -108,11 +109,43 @@ public class UsrController {
 		return json.toString();
 	}//end findId
 	
+	//비밀번호 찾기
+	@RequestMapping("/findPwd")
+	@ResponseBody
+	public String findPwd(String id,String email,String phone) throws SQLException{
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("email", email);
+		map.put("phone", phone);
+		JSONObject json=new JSONObject();
+		USRDto usrdto=usrService.findPwd(map);
+		
+		if(usrdto != null){
+			json.put("pwdCheck", usrdto.getPw());
+		}else{
+			json.put("pwdCheck", false);
+		}
+		return json.toString();
+	}
 	
 	
+	//idcheck
+	@RequestMapping("/idCheck/{id}")
+	@ResponseBody
+	public String idCheck(@PathVariable("id")String id) throws SQLException{
+		JSONObject json=new JSONObject();
+		USRDto usrdto=usrService.idCheck(id);
+		
+		if(usrdto != null){
+			json.put("idCheck", true);
+		}else{
+			json.put("idCheck", false);
+		}
+		return json.toString();
+	}//end idcheck
 	
 	
-	}//end controller 
+}//end controller 
 
 
 
