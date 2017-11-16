@@ -62,14 +62,6 @@ button:hover {
     background-color: #5c8a8a;
 }
 
-/* Extra styles for the cancel button */
-.idpwbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #5c8a8a;
-}
-
-
 /* Center the image and position the close button */
 .imgcontainer {
     text-align: center;
@@ -111,7 +103,7 @@ span.psw {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 85%; /* Could be more or less, depending on screen size */
+    width: 80%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -178,24 +170,20 @@ span.psw {
       <a class="navbar-brand" href="#">Logo</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <c:if test="${id != null }">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="${root}/viewRegist">수강신청</a></li>
-        <li><a href="#">성적확인</a></li>
-        <li><a href="#">출결확인</a></li>
-        <li><a href="">수강과정확인</a></li>
+        <li><a href="${root}/tchrBs/qzView">문제 생성</a></li>
+        <li><a href="${root}/tchrBs/attnd">출석 확인</a></li>
+        <li><a href="${root}/saleMg/manager">매출 관리</a></li>
+        <li><a href="${root}/tchrBs/srcIn">성적 입력</a></li>
+        <li><a href="${root}/tchrBs/stSearch">학생 성적 확인</a></li>
+        <li><a href="#">시험 출제</a></li>
       </ul>
-      </c:if>
       <ul class="nav navbar-nav navbar-right">
-        <c:if test="${id == null }">
-        <li><a href="javascript:void(0)" onclick="document.getElementById('id01').style.display='block'"><span class="glyphicon glyphicon-education"></span> 로그인</a></li>
-        <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-        </c:if>
-        <c:if test="${id != null }">
-       	<li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'"><span class="glyphicon glyphicon-user"></span>회원정보${id}</a></li>
+        <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'"><span class="glyphicon glyphicon-user"></span>회원정보${tchr}</a></li>
         <li><a href="<c:url value='/logout'/>"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" ><span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
-        </c:if>
+       
+       
       </ul>
     </div>
   </div>
@@ -253,68 +241,10 @@ span.psw {
   </div>
 </div><br><br>
 
-<!-- 로그인 -->
-<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="${root}/userLogin.do" method="post">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-    </div>
-
-    <div class="container">
-      <label><b>아이디</b></label>
-      <input type="hidden" name="command" value="userLogin">
-      <input type="text" placeholder="아이디" name="id" required>
-
-      <label><b>비밀번호</b></label>
-      <input type="password" placeholder="비밀번호" name="pw" required><br>
-      <%-- <div id="div_Check" style="font-weight: bold;color:red;">${login_errMsg }</div>  --%>
-      <button type="submit">로그인</button>
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">취소</button>
-      <button type="button" class="idpwbtn" onclick="location.href='<c:url value="/idpwfind"/>'">아이디/비밀번호 찾기</button>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      
-      
-      
-    </div>
-  </form>
-</div>
 
 
-<!-- 회원가입 -->
-<div id="id02" class="modal">
-  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
-  <form class="modal-content animate" action="${root}/userInsert.do" method="post">
-    <div class="container">
-      <label><b>아이디</b></label>
-      <input type="hidden" name="command" value="join">
-      <input type="text" placeholder="아이디" name="id" required>
+<!-- 회원정보 -->
 
-      <label><b>비밀번호</b></label>
-      <input type="password" placeholder="비밀번호" name="pw" required>
-      
-      <label><b>이름</b></label>
-      <input type="text" placeholder="이름" name="nm" required>
-      
-      <label><b>전화</b></label>
-      <input type="text" placeholder="전화" name="phone" required>
-      
-      <label><b>주소</b></label>
-      <input type="text" placeholder="주소" name="addr" required>
-      
-        <label><b>이메일</b></label>
-      <input type="text" placeholder="이메일" name="email" required>
-      
-    
-      <div class="clearfix">
-        <button type="submit" class="signupbtn" style="width: 80%;">회원가입</button>
-        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn" style="width: 19%;">취소</button>
-      </div>
-    </div>
-  </form>
-</div>
 
 
 <footer class="container-fluid text-center">

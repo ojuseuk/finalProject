@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <c:set var="root" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -171,14 +172,15 @@ span.psw {
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">수강신청</a></li>
-        <li><a href="#">개인정보변경</a></li>
-        <li><a href="#">성적확인</a></li>
-        <li><a href="#">출결확인</a></li>
-        <li><a href="#">수강과정확인</a></li>
+        <li><a href="${root}/mgTchr">강사 관리</a></li>
+        <li><a href="${root}/stdtAllList">학생 관리</a></li>
+        <li><a href="${root}/saleMg/manager">매출 관리</a></li>
+        <li><a href="${root}/course">과정 관리</a></li>
+        <li><a href="${root}/testSMS">문자 발송</a></li>
+        <li><a href="${root}/emp">직원 관리</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'"><span class="glyphicon glyphicon-user"></span>회원정보</a></li>
+        <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'"><span class="glyphicon glyphicon-user"></span>회원정보${staff}</a></li>
         <li><a href="<c:url value='/logout'/>"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" ><span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
        
        

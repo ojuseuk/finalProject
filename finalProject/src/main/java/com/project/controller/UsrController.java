@@ -47,22 +47,36 @@ public class UsrController {
 	}
 	
 	@RequestMapping(value="/userLogin.do",method=RequestMethod.POST)
-	public String userLogin(String id,String pw,HttpSession session,Model model) throws SQLException{
+	public String userLogin(String id,String pw,HttpSession session, Model model) throws SQLException{
 		HashMap<String,Object> map=new HashMap<String,Object>();
 		map.put("id",id);
 		map.put("pw",pw);
 		
-		
 		HashMap<String, Object> map1=usrService.userLogin(map);
+		System.out.println(map1);
+		String url = "";
+		if(map1.get("USR_TP").equals("staff")) {
+			session.setAttribute("staff", id);
+			url ="user/main_staff";
+		}else if(map1.get("USR_TP").equals("st")) {
+			session.setAttribute("id", id);
+			url = "redirect:/main.jsp";
+		}else if(map1.get("USR_TP").equals("tchr")) {
+			session.setAttribute("tchr", id);
+			url = "user/main_tchr";
+		}else {
+			session.setAttribute("id", id);
+			url = "redirect:/main.jsp";
+		}
 		
-
 		if(map1!=null) {
-			return "user/main2";
-			}else {
-				model.addAttribute("login_errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
-				session.setAttribute("id", id);
-				return "redirect:/";
-			}
+		
+		}else {
+			//나중에 수정
+			model.addAttribute("login_errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			
+		}
+		return url;
 		}
 	
 	@RequestMapping(value="logout")
