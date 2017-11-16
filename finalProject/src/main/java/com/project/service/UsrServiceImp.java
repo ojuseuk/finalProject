@@ -33,4 +33,14 @@ public class UsrServiceImp implements UsrService {
 		return usrDao.userLogin(map);
 	}
 	
+	//아이디, 비밀번호 찾기
+	@Override
+	public USRDto findId(HashMap<String, Object> map) throws SQLException {
+		System.out.println("findId : " + map); 
+		return usrDao.findId(map);
+	}
+	
+	
+	//------------------------
+	
 }

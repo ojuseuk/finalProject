@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.dto.USRDto;
 import com.project.service.UsrService;
 
+import net.sf.json.JSONObject;
+
+
 @Controller
 public class UsrController {
 
@@ -68,10 +71,34 @@ public class UsrController {
 		return "user/logoutPro";
 	}
 	
-	
-	
-	
+	//아이디 비밀번호 
+	@RequestMapping(value="idpwfind")
+	public String idpwfind(HttpSession session) {
+		return "user/idpwfind";
 	}
+	
+	//아이디 찾기 
+	@RequestMapping(value="findId")
+	public String findId(String nm, String phone) throws SQLException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("nm", nm);
+		map.put("phone", phone);
+		JSONObject json = new JSONObject();
+		USRDto usrdto=usrService.findId(map);
+		
+		if(usrdto != null) {
+			json.put("idCheck", usrdto.getId());
+		}else {
+			json.put("idCheck", false);
+		}
+		return json.toString();
+	}//end findId
+	
+	
+	
+	
+	
+	}//end controller 
 
 
 

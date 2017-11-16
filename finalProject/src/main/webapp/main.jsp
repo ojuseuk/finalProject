@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,6 +60,14 @@ button:hover {
     padding: 10px 18px;
     background-color: #5c8a8a;
 }
+
+/* Extra styles for the cancel button */
+.idpwbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #5c8a8a;
+}
+
 
 /* Center the image and position the close button */
 .imgcontainer {
@@ -252,9 +261,10 @@ span.psw {
 
       <label><b>비밀번호</b></label>
       <input type="password" placeholder="비밀번호" name="pw" required><br>
-      <%-- <div id="div_memberCheck" style="font-weight: bold;color:red;">${login_errMsg }</div>  --%>
+      <%-- <div id="div_Check" style="font-weight: bold;color:red;">${login_errMsg }</div>  --%>
       <button type="submit">로그인</button>
       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">취소</button>
+      <button type="button" class="idpwbtn" onclick="location.href='<c:url value="/idpwfind"/>'">아이디/비밀번호 찾기</button>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">

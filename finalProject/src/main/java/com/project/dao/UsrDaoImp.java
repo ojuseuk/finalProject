@@ -29,5 +29,17 @@ public class UsrDaoImp implements UsrDao {
 		System.out.println("DAO:" + map);
 		return sqlSession.selectOne("usrMapper.userLogin",map);
 	}
+	
+	//아이디, 비밀번호 찾기 
+	@Override
+	public USRDto findId(HashMap<String, Object> map){
+		System.out.println("DAOfindId:" + map);
+		return sqlSession.selectOne("usrMapper.findId",map);
+	}
+	
+	
 
 }
+
+
+
