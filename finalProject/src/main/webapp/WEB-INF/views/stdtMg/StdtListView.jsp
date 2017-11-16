@@ -19,7 +19,7 @@
 </select>
 <input id="searchNm" type="text" name="name" value="">
 <input type="button" value="검색" onclick="searchNm('${root}')">
-<div style="width:50%; height:200px; overflow:auto;"> 
+<div style="width:50%; height:500px; overflow:auto;"> 
 <table id="stdtList" border="0" cellpadding="5" cellspacing="2"
 	width="100%" bordercolordark="white" bordercolorlight="black">
 	<tr>

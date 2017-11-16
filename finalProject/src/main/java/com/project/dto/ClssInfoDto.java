@@ -14,11 +14,22 @@ public class ClssInfoDto {
 	private String clssroom;
 	private String crsIntro;
 	private String crsNm;
+	private String stdtclssttn;
 	
 	public ClssInfoDto() {}
+	
+	public ClssInfoDto(String nm, String clssNm, String strtDt, String endDt, String stdtclssttn) {
+		super();
+		this.nm = nm;
+		this.clssNm = clssNm;
+		this.strtDt = strtDt;
+		this.endDt = endDt;
+		this.stdtclssttn = stdtclssttn;
+	}
 
 	public ClssInfoDto(String nm, String sbjtChrg, String tchrIntro, String tchrPt, String clssNm, String strtDt,
-			String endDt, String strtTm, String endTm, int capa, String clssroom, String crsIntro, String crsNm) {
+			String endDt, String strtTm, String endTm, int capa, String clssroom, String crsIntro, String crsNm,
+			String stdtclssttn) {
 		super();
 		this.nm = nm;
 		this.sbjtChrg = sbjtChrg;
@@ -33,9 +44,8 @@ public class ClssInfoDto {
 		this.clssroom = clssroom;
 		this.crsIntro = crsIntro;
 		this.crsNm = crsNm;
+		this.stdtclssttn = stdtclssttn;
 	}
-
-
 
 	public String getNm() {
 		return nm;
@@ -132,13 +142,21 @@ public class ClssInfoDto {
 	public void setCrsIntro(String crsIntro) {
 		this.crsIntro = crsIntro;
 	}
-	
+
 	public String getCrsNm() {
 		return crsNm;
 	}
 
 	public void setCrsNm(String crsNm) {
 		this.crsNm = crsNm;
+	}
+
+	public String getStdtclssttn() {
+		return stdtclssttn;
+	}
+
+	public void setStdtclssttn(String stdtclssttn) {
+		this.stdtclssttn = stdtclssttn;
 	}
 
 	@Override
@@ -170,8 +188,9 @@ public class ClssInfoDto {
 		builder.append(crsIntro);
 		builder.append(", crsNm=");
 		builder.append(crsNm);
+		builder.append(", stdtclssttn=");
+		builder.append(stdtclssttn);
 		builder.append("]");
 		return builder.toString();
 	}
-
 }
