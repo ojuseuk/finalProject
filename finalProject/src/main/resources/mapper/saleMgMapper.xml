@@ -36,6 +36,7 @@
 			FROM TB_SALE
 				WHERE (YEAR >= #{year1} AND MONTH >=#{month1} AND DAY>=#{day1}) 
 				AND (YEAR <= #{year2} AND MONTH <=#{month2} AND DAY<=#{day2})
+				ORDER BY DAY
 		]]>
 	</select>
 

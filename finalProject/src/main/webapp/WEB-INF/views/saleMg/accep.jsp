@@ -22,12 +22,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>비용 항목</td>
-					<td>
-						<input type="text" name="costItem">
-					</td>
-				</tr>
-				<tr>
 					<td>수강 금액</td>
 					<td>
 						<input type="text" name="amount">

@@ -4,28 +4,28 @@ public class TTLQZDto {
 
 	private int id;
 	private String sbjtNm;
-	private String tchrNm;
+	private String tchrNo;
 	private String tpcNm;
 	private String content;
 	private String degree;
 	private String answer;
-	private String imgfle;
+	private String imgfile;
 	
 	public TTLQZDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TTLQZDto(int id, String sbjtNm, String tchrNm, String tpcNm, String content, String degree, String answer,
-			String imgfle) {
+	public TTLQZDto(int id, String sbjtNm, String tchrNo, String tpcNm, String content, String degree, String answer,
+			String imgfile) {
 		super();
 		this.id = id;
 		this.sbjtNm = sbjtNm;
-		this.tchrNm = tchrNm;
+		this.tchrNo = tchrNo;
 		this.tpcNm = tpcNm;
 		this.content = content;
 		this.degree = degree;
 		this.answer = answer;
-		this.imgfle = imgfle;
+		this.imgfile = imgfile;
 	}
 
 	public int getId() {
@@ -44,12 +44,12 @@ public class TTLQZDto {
 		this.sbjtNm = sbjtNm;
 	}
 
-	public String getTchrNm() {
-		return tchrNm;
+	public String getTchrNo() {
+		return tchrNo;
 	}
 
-	public void setTchrNm(String tchrNm) {
-		this.tchrNm = tchrNm;
+	public void setTchrNo(String tchrNo) {
+		this.tchrNo = tchrNo;
 	}
 
 	public String getTpcNm() {
@@ -84,12 +84,12 @@ public class TTLQZDto {
 		this.answer = answer;
 	}
 
-	public String getImgfle() {
-		return imgfle;
+	public String getImgfile() {
+		return imgfile;
 	}
 
-	public void setImgfle(String imgfle) {
-		this.imgfle = imgfle;
+	public void setImgfile(String imgfile) {
+		this.imgfile = imgfile;
 	}
 
 	@Override
@@ -99,8 +99,8 @@ public class TTLQZDto {
 		builder.append(id);
 		builder.append(", sbjtNm=");
 		builder.append(sbjtNm);
-		builder.append(", tchrNm=");
-		builder.append(tchrNm);
+		builder.append(", tchrNo=");
+		builder.append(tchrNo);
 		builder.append(", tpcNm=");
 		builder.append(tpcNm);
 		builder.append(", content=");
@@ -109,12 +109,11 @@ public class TTLQZDto {
 		builder.append(degree);
 		builder.append(", answer=");
 		builder.append(answer);
-		builder.append(", imgfle=");
-		builder.append(imgfle);
+		builder.append(", imgfile=");
+		builder.append(imgfile);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 	
 }

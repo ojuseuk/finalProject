@@ -2,4 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tchrBsMapper">
 	
+	<select id="tchrBsTcp" resultType="tPCDto">
+		SELECT TPC_NM tpcNm, SBJT_NM sbjtNm FROM TB_TPC
+	</select>
+	
+	<select id="tchrBsTchr" resultType="tCHRDto">
+		SELECT TCHR_NO tchrNo, ID id, SLR slr,  SBJT_CHRG sbjtChrg, TCHR_INTRO tchrIntro
+			FROM TB_TCHR
+	</select>
+	
+	<insert id="qzInsert" parameterType="tTLQZDto">
+		INSERT INTO TB_TTLQZ(ID, SBJT_NM, TCHR_NO, TPC_NM, CONTENT, DEGREE, ANSWER) VALUES(seq_ttlqz.NEXTVAL, #{sbjtNm}, #{tchrNo}, #{tpcNm}, #{content}, #{degree}, #{answer})
+	</insert>
+	
+	<select id="attnd" parameterType="string" resultType="map">
+		SELECT clssid, attndtp, dt, tchrno
+			from tchrbs_attnd where tchrno=#{id}
+	</select>
+	
+	<select id="attndClss" parameterType="string" resultType="map">
+		SELECT NM, CLSSID, DT, ATTNDTP, STDTDT, ENDDT, STDTNO
+			FROM ATTND_CLSS WHERE CLSSID = #{clssId}
+	</select>
+	
+	<select id="srcExmTp" resultType="map">
+		SELECT EXAM_ID, EXAM_TITLE FROM TB_EXAM_TP
+	</select>
+ 
+	<select id="srcSbjt" resultType="map">
+		SELECT SBJT_NM FROM TB_SBJT
+	</select>
+	
+	<select id="srcStdt" resultType="map">
+		SELECT USR.NM, STDT.STDT_NO
+			FROM TB_STDT STDT, TB_USR USR
+			WHERE STDT.ID = USR.ID
+	</select>
+	
+	<insert id="srcInsert" parameterType="sCRDto">
+		INSERT INTO TB_SCR VALUES(#{qzId}, #{stdtNo}, #{sbjtNm}, #{score})
+	</insert>
+	
+	<select id="stSearch" parameterType="String" resultType="String">
+		SELECT CLSS.CLSS_ID
+			FROM TB_TCHR TCHR, TB_TCHRASSN ASSN, TB_CLSS CLSS
+				WHERE TCHR.TCHR_NO = ASSN.TCHR_NO AND ASSN.CLSS_ID = CLSS.CLSS_ID
+				AND TCHR.TCHR_NO = #{id}
+	</select>
+	
+	<select id="stClssSearch" parameterType="String" resultType="map">
+	SELECT STDT.STDT_NO stdtNo, SCR.QZ_ID qzId, TP.EXAM_TITLE examTitle, USR.NM nm, SCR.SCORE score, SCR.SBJT_NM sbjtNm
+		FROM TB_STDTCLSS CLSS, TB_STDT STDT, TB_SCR SCR, TB_USR USR, TB_EXAM_TP TP
+			WHERE CLSS.STDT_NO = STDT.STDT_NO AND STDT.ID = USR.ID
+			AND STDT.STDT_NO = SCR.STDT_NO AND SCR.QZ_ID = TP.EXAM_ID
+			AND CLSS.CLSS_ID = #{clssId}
+	</select>
+	
+	
 </mapper>

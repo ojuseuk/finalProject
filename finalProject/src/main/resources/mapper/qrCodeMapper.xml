@@ -11,6 +11,16 @@
 	</select>
 	
 	<insert id="qrCodeInsert" parameterType="aTTNDDto">
-		INSERT INTO TB_ATTND VALUES(#{dt}, #{tm}, #{attndTp}, #{clssId}, #{stdtNo})
+	<![CDATA[
+			MERGE INTO TB_ATTND A
+    	USING  (SELECT STRT_DT, END_DT FROM TB_CLSS
+            WHERE CLSS_ID = #{clssId}) C
+    		ON (#{dt} < C.STRT_DT OR #{dt} > C.END_DT)
+  			WHEN NOT MATCHED THEN
+    		INSERT (DT, TM, ATTND_TP, CLSS_ID, STDT_NO) 
+        	VALUES (#{dt}, #{tm}, #{attndTp}, #{clssId}, #{stdtNo})
+     ]]>
 	</insert>
+	
+	
 </mapper>

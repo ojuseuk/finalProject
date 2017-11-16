@@ -34,7 +34,8 @@ public class SaleMgController {
 	 * @Method Name : accep
 	 * @작성일 : 2017. 11. 8.
 	 * @작성자 : 오주석
-	 * @Method 설명 : return type : String
+	 * @Method 설명 : 
+	 * return type : String
 	 * @return
 	 */
 	@RequestMapping("/accep")
@@ -50,20 +51,20 @@ public class SaleMgController {
 	 * @Method Name : saleMgInsert
 	 * @작성일 : 2017. 11. 8.
 	 * @작성자 : 오주석
-	 * @Method 설명 : return type : void
+	 * @Method 설명 : 
+	 * return type : void
 	 * @param session
 	 * @param date
 	 * @param amount
 	 * @param costItem
 	 */
 	@RequestMapping("/saleMgInsert")
-	public void saleMgInsert(HttpSession session, @RequestParam("date") String date, @RequestParam("amount") int amount,
-			@RequestParam("costItem") String costItem) {
+	public void saleMgInsert(HttpSession session, @RequestParam("date") String date, @RequestParam("amount") int amount) {
 
 		System.out.println("controller saleMgInsert");
 		String adminId = (String) session.getAttribute("adminId");
 
-		saleMgService.insert(date, amount, costItem);
+		saleMgService.insert(date, amount);
 
 	}
 
@@ -71,7 +72,8 @@ public class SaleMgController {
 	 * @Method Name : saleMgLtfee
 	 * @작성일 : 2017. 11. 9.
 	 * @작성자 : 오주석
-	 * @Method 설명 : return type : void
+	 * @Method 설명 : 
+	 * return type : void
 	 */
 	@RequestMapping("/ltfee")
 	public ModelAndView saleMgLtfee() {
@@ -91,7 +93,8 @@ public class SaleMgController {
 			System.out.println(listTchr);
 			System.out.println(listSsn);
 		}
-
+		
+		
 		mav.addObject("listTchr", listTchr);
 		mav.addObject("listSsn", listSsn);
 		mav.setViewName("/saleMg/ltfee");
@@ -103,7 +106,8 @@ public class SaleMgController {
 	 * @Method Name : saleMgManager
 	 * @작성일 : 2017. 11. 9.
 	 * @작성자 : 오주석
-	 * @Method 설명 : return type : String
+	 * @Method 설명 :
+	 *  return type : String
 	 * @return
 	 */
 	@RequestMapping("/manager")
@@ -127,42 +131,12 @@ public class SaleMgController {
 		System.out.println(date1);
 		System.out.println(date2);
 
-//		ModelAndView mav = new ModelAndView();
 		List<SALEDto> list = saleMgService.mgSaleList(date1, date2);
-		JSONArray jsonArray = JSONArray.fromObject(list);
-//		mav.addObject("json", jsonArray);
-//		mav.addObject("list", list);
-//		mav.setViewName("saleMg/saleList");
 
 		return list;
 
 	}
 
-	@RequestMapping("/mgSale2")
-	public ModelAndView saleMgmgSale() {
-
-		System.out.println("controller saleMgMgSale");
-		String date1 = "2017-11-10";
-		String date2 = "2017-11-20";
-		System.out.println(date1);
-		System.out.println(date2);
-
-		ModelAndView mav = new ModelAndView();
-		List<SALEDto> list = saleMgService.mgSaleList(date1, date2);
-
-		JSONArray jsonArray = JSONArray.fromObject(list);
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.toJSONArray(jsonArray);
-		mav.addObject("json", jsonArray);
-		mav.addObject("object", jsonObject);
-		mav.addObject("list", list);
-		// mav.setViewName("saleMg/saleList");
-		mav.setViewName("saleMg/kendoTest");
-
-		return mav;
-
-	}
-	
 	@RequestMapping("/ltfeeInsert")
 	public ModelAndView saleMgltfeeInsert(@RequestParam(value="tchrId", required=true) List<String> tchrId, 
 	@RequestParam(value="tchrSlr", required=true) List<String> tchrSlr, @RequestParam(value="tchrNm", required=true) List<String> tchrNm, 
@@ -172,10 +146,6 @@ public class SaleMgController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		System.out.println(tchrId);
-		System.out.println(tchrSlr);
-		System.out.println(ssnId);
-		System.out.println(ssnSlr);
 		List<TCHRDto> list = saleMgService.ltfeeInsert(tchrId, tchrSlr, ssnId, ssnSlr, tchrNm, ssnNm);
 		mav.addObject("list", list);
 		mav.setViewName("saleMg/ltfeeConfirm");

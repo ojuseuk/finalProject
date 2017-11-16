@@ -31,14 +31,12 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @param costItem
 	 */
 	@Override
-	public void insert(String date, int amount, String costItem) {
+	public void insert(String date, int amount) {
 		// TODO Auto-generated method stub
 		System.out.println("Service insert");
 		String[] ymd = date.split("-");
 		
-		System.out.println(ymd[0]);
-		System.out.println(ymd[1]);
-		System.out.println(ymd[2]);
+		final String costItem="수강료 납부";
 		SALEDto saleDto = new SALEDto(Integer.valueOf(ymd[0]), Integer.valueOf(ymd[1]), Integer.valueOf(ymd[2]), costItem, amount);
 		saleDto.setNo(saleMgDao.saleNo(saleDto)+1);
 		System.out.println("------------------");
@@ -153,6 +151,7 @@ public class SaleMgServiceImp implements SaleMgService {
 		
 		return list;
 	}
+	
 }
 
 
