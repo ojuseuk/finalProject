@@ -29,6 +29,13 @@ public class EMPDto {
 		this.nm = nm;
 	}
 
+	public EMPDto(String empNo, String id, String slr) {
+		super();
+		this.empNo = empNo;
+		this.id = id;
+		this.slr = slr;
+	}
+
 	public String getEmpNo() {
 		return empNo;
 	}

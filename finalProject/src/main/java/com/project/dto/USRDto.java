@@ -8,7 +8,8 @@ public class USRDto {
 	private String phone;
 	private String addr;
 	private String email;
-	
+	private String usrTp;
+	private String pws;
 	
 	public USRDto() {
 		
@@ -26,6 +27,18 @@ public class USRDto {
 
 
 
+
+	public USRDto(String id, String pw, String nm, String phone, String addr, String email, String usrTp, String pws) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.nm = nm;
+		this.phone = phone;
+		this.addr = addr;
+		this.email = email;
+		this.usrTp = usrTp;
+		this.pws = pws;
+	}
 
 	public String getId() {
 		return id;
@@ -76,6 +89,22 @@ public class USRDto {
 	}
 
 
+	public String getUsrTp() {
+		return usrTp;
+	}
+
+	public void setUsrTp(String usrTp) {
+		this.usrTp = usrTp;
+	}
+
+	public String getPws() {
+		return pws;
+	}
+
+	public void setPws(String pws) {
+		this.pws = pws;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -91,10 +120,14 @@ public class USRDto {
 		builder.append(addr);
 		builder.append(", email=");
 		builder.append(email);
-		
+		builder.append(", usrTp=");
+		builder.append(usrTp);
+		builder.append(", pws=");
+		builder.append(pws);
 		builder.append("]");
 		return builder.toString();
 	}
+
 	
 	
 	

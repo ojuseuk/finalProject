@@ -27,7 +27,6 @@ public class CrsMgDaoImp implements CrsMgDao {
 	@Override
 	public List courseSelectAll() {
 		List list = sqlSession.selectList("crsMgMapper.courseSelectAll");
-		System.out.println(list); 		// @@@
 		
 		return list;
 		// TODO Auto-generated method stub

@@ -8,10 +8,19 @@ public class TCHRDto {
 	private String sbjtChrg;
 	private String tchrIntro;
 	private String nm;			// 이름
-	private int result;
+	private int result;			// 급여 지급 여부
+	private String empNo;
+	private String tchrPt;
 	
 	public TCHRDto() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public TCHRDto(String tchrNo, String sbjtChrg, String tchrIntro) {
+		super();
+		this.tchrNo = tchrNo;
+		this.sbjtChrg = sbjtChrg;
+		this.tchrIntro = tchrIntro;
 	}
 
 	public TCHRDto(String tchrNo, String id, String slr, String sbjtChrg, String tchrIntro) {
@@ -21,6 +30,22 @@ public class TCHRDto {
 		this.slr = slr;
 		this.sbjtChrg = sbjtChrg;
 		this.tchrIntro = tchrIntro;
+	}
+	
+	
+
+	public TCHRDto(String tchrNo, String id, String slr, String sbjtChrg, String tchrIntro, String nm, int result,
+			String empNo, String tchrPt) {
+		super();
+		this.tchrNo = tchrNo;
+		this.id = id;
+		this.slr = slr;
+		this.sbjtChrg = sbjtChrg;
+		this.tchrIntro = tchrIntro;
+		this.nm = nm;
+		this.result = result;
+		this.empNo = empNo;
+		this.tchrPt = tchrPt;
 	}
 
 	public String getTchrNo() {
@@ -80,6 +105,23 @@ public class TCHRDto {
 	public void setResult(int result) {
 		this.result = result;
 	}
+ 
+	
+	public String getEmpNo() {
+		return empNo;
+	}
+
+	public void setEmpNo(String empNo) {
+		this.empNo = empNo;
+	}
+
+	public String getTchrPt() {
+		return tchrPt;
+	}
+
+	public void setTchrPt(String tchrPt) {
+		this.tchrPt = tchrPt;
+	}
 
 	@Override
 	public String toString() {
@@ -92,14 +134,22 @@ public class TCHRDto {
 		builder.append(slr);
 		builder.append(", sbjtChrg=");
 		builder.append(sbjtChrg);
-		builder.append(", thcrIntro=");
+		builder.append(", tchrIntro=");
 		builder.append(tchrIntro);
 		builder.append(", nm=");
 		builder.append(nm);
 		builder.append(", result=");
 		builder.append(result);
+		builder.append(", empNo=");
+		builder.append(empNo);
+		builder.append(", tchrPt=");
+		builder.append(tchrPt);
 		builder.append("]");
 		return builder.toString();
 	}
+
+
+
+	
 
 }

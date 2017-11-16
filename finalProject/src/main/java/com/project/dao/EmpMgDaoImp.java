@@ -19,8 +19,6 @@ public class EmpMgDaoImp implements EmpMgDao {
 	@Override
 	public List empSelectAll() {
 		List list = sqlSession.selectList("empMgMapper.empSelectAll");
-		System.out.println(list); 		// @@@
-		
 		return list;
 	}
 
@@ -32,16 +30,23 @@ public class EmpMgDaoImp implements EmpMgDao {
 	}
 
 	@Override
-	public EMPDto empSelect(String id) {
+	public EMPDto empSelect(String empNo) {
 		// TODO Auto-generated method stub
-		EMPDto emp = sqlSession.selectOne("empMgMapper.empSelectOne");
+		EMPDto emp = sqlSession.selectOne("empMgMapper.empSelectOne", empNo);
 		return emp;
 	}
 
 	@Override
+	public EMPDto empSelectById(String id) {
+		// TODO Auto-generated method stub
+		EMPDto emp =  sqlSession.selectOne("empMgMapper.empSelectById",id);
+		return emp;
+	}
+	
+	@Override
 	public USRDto usrSelect(String id) {
 		// TODO Auto-generated method stub
-		USRDto usr =  sqlSession.selectOne("empMgMapper.usrSelectOne");
+		USRDto usr =  sqlSession.selectOne("empMgMapper.usrSelectOne",id);
 		return usr;
 	}
 
@@ -54,7 +59,6 @@ public class EmpMgDaoImp implements EmpMgDao {
 	@Override
 	public void tchrInsert(TCHRDto tchr) {
 		int num = 0;
-		System.out.println(tchr);
 		num = sqlSession.insert("empMgMapper.tchrInsert", tchr);
 	}
 
@@ -71,5 +75,39 @@ public class EmpMgDaoImp implements EmpMgDao {
 		sqlSession.update("empMgMapper.usrUpdateToStaff", id);
 		
 	}
+
+	@Override
+	public int empUpdate(EMPDto emp) {
+		// TODO Auto-generated method stub
+		System.out.println("DAO Update : " + emp);
+		return sqlSession.update("empMgMapper.empUpdate", emp);
+	}
+
+	@Override
+	public int empRetire(EMPDto emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("empMgMapper.empRetire", emp);
+	}
+
+	@Override
+	public TCHRDto tchrSelectById(String id) {
+		// TODO Auto-generated method stub
+		TCHRDto tchr =  sqlSession.selectOne("empMgMapper.tchrSelectById",id);
+		return tchr;
+	}
+
+	@Override
+	public TCHRDto tchrSelect(String tchrNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("empMgMapper.tchrSelect",tchrNo);
+	}
+
+	@Override
+	public int tchrUpdate(TCHRDto tchr) {
+		// TODO Auto-generated method stub
+		System.out.println("DAO update 전 : " + tchr);
+		return sqlSession.update("empMgMapper.tchrUpdate", tchr);
+	}
+
 	
 }

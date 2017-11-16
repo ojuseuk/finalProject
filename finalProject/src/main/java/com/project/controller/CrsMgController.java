@@ -36,7 +36,7 @@ public class CrsMgController {
 		return url;
 	}
 	
-	@RequestMapping("/clssInsert.do")
+	@RequestMapping("/clssInsert")
 	public String clssInsert(CLSSDto clss, Model data) {
 		String url = "error";
 		System.out.println("controller : " + clss); 		// @@@
@@ -71,13 +71,14 @@ public class CrsMgController {
 		return url;
 	}
 	
-	@RequestMapping("/courseInsert.do")
+	@RequestMapping("/courseInsert")
 	public String courseInsert(CRSDto crs, Model data) {
 		String url = "course/error";
 		System.out.println("controller : " + crs); 		// @@@
 		try {
 			crsMgService.courseInsert(crs);
 			data.addAttribute("list", crsMgService.selectAll());
+			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
 			url ="course/mgCourse";  	
 //			url ="redirect:course/mgCourse";  	// 비동기 처리 시
 
@@ -88,7 +89,7 @@ public class CrsMgController {
 		return url;
 	}
 	
-	@RequestMapping("courseList.do")
+	@RequestMapping("/courseList")
 	public String courseList(Model data) {
 		String url = "course/error";
 		try {

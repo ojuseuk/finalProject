@@ -24,4 +24,16 @@ public interface EmpMgDao {
 
 	void usrUpdateToStaff(String id);
 
+	int empUpdate(EMPDto emp);
+
+	int empRetire(EMPDto emp);
+
+	EMPDto empSelectById(String id);
+
+	TCHRDto tchrSelectById(String id);
+
+	TCHRDto tchrSelect(String tchrNo);
+
+	int tchrUpdate(TCHRDto tchr);
+
 }

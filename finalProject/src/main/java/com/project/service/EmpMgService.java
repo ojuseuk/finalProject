@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.project.dto.EMPDto;
 import com.project.dto.TCHRDto;
+import com.project.dto.USRDto;
 
 public interface EmpMgService {
 
@@ -14,7 +15,17 @@ public interface EmpMgService {
 
 	public List tchrSelectAll() throws SQLException;
 
-	public void tchrInsert(TCHRDto tchr);
+	public void tchrInsert(TCHRDto tchr) throws SQLException;
+
+	public EMPDto empSelect(String empNo);
+
+	public int empUpdate(EMPDto emp);
+
+	public int empRetire(EMPDto emp);
+
+	public TCHRDto tchrSelect(String tchrNo);
+
+	public int tchrUpdate(TCHRDto tchr);
 
 
 }

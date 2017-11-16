@@ -7,6 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>과정 관리</title>
+<style>
+p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+</style>
 </head>
 <body>
 	<button onclick="location.href='${pageContext.request.contextPath}/course'">과정 등록</button>
@@ -15,11 +21,18 @@
 	<button onclick="location.href='${pageContext.request.contextPath}/course'">반 배치</button>
 	
 	<br><hr><br>
- 	<form action="courseInsert.do">
+ 	<form action="courseInsert">
 <!-- 	<form> -->
 		<fieldset style="width: 40%">
-			<legend>특강 과정 등록</legend>
+			<legend>교육 과정</legend>
 			<table>
+				<tr>
+					<td>구분 :</td>
+					<td>
+						<input type="radio" name="crsTp" id="crsTp" value="종합" onclick="crsTpRadio('종합')"/> 종합
+						<input type="radio" name="crsTp" id="crsTp" value="특강" onclick="crsTpRadio('특강')"/> 특강
+					</td>
+				</tr>
 				<tr>
 					<td>과정 ID :</td>
 					<td><input type="text" name="crsId" id="crsId"/></td>
@@ -66,13 +79,11 @@
 				</tr>
 			</table>
 		</fieldset><br><br>
-<%-- 		<button onclick="listCourse('${pageContext.request.contextPath}')">과정 등록</button>  비동기 적용시 --%>
  		<input type="submit" value="과정 등록"> 
-		<input type="hidden" name="crsTp" id="crsTp" value="특강">
 		<input type="button"  onclick="javascript:history.back()" value="등록 취소" >
 	</form>
 	
-	<!-- 리스트 미리 출력 -->
+	<!-- 리스트 출력 -->
 	<div id="viewCourseList" style="position:absolute; top:50px; left:600px; width:700px; height:200px; display:inline-block;">
 			
 		<!-- cellpadding="5" cellspacing="2"  -->
@@ -121,7 +132,6 @@
 				        <td bgcolor="">
 							<p><span style="font-size:9pt;">${data.stdtclssttn}</a></span></p>
 				        </td>
-		
 				    </tr>
 			</c:forEach>
 		</table>	
@@ -130,34 +140,21 @@
 	
 	
 	<script type="text/javascript">
-		var httpRequest = null;
-		var params = "";
-		function listCourse(root){
-  			params +=  "crsId=" + document.getElementById("crsId").value + "&";
-			params +=  "sbjtNm=" + document.getElementById("sbjtNm").value + "&";
-			params +=  "crsNm=" + document.getElementById("crsNm").value + "&";
-			params +=  "prd=" + document.getElementById("prd").value + "&";
-			params +=  "dayClssTm=" + document.getElementById("dayClssTm").value + "&";
-			params +=  "stdtclssttn=" + document.getElementById("stdtclssttn").value + "&";
-			params +=  "crsIntro=" + document.getElementById("crsIntro").value + "&";
-			params +=  "crsTp=" + document.getElementById("crsTp").value; 
-
-			httpRequest = new XMLHttpRequest();
-			httpRequest.onreadystatechange = viewCourseList1;
-			httpRequest.open("POST", root+"/courseInsert.do", true);
-			httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			httpRequest.send(params);
-		}
-	
-		function viewCourseList1(){
-// 			alert(3);
-// 			alert("httpRequest.readyState: " + httpRequest.readyState);
-// 			alert("httpRequest.status:" + httpRequest.status);
-			if(httpRequest.readyState == 4 && httpRequest.status == 200){
-				alert(2);
-//  				alert(httpRequest.responseText);
-    			document.getElementById("viewCourseList").innerHTML = httpRequest.responseText;
+		function crsTpRadio(crsTp){
+			if(crsTp == "종합"){
+ 				document.getElementById("sbjtNm").hidden = true;
+				document.getElementById("sbjtNm").disabled = true;
+ 				document.getElementById("prd").hidden = true;
+ 				document.getElementById("prd").disabled = true;
+ 			}
+			if(crsTp == "특강"){
+				/* document.getElementById("sbjtNm").disabled = "disabled"; */
+				document.getElementById("sbjtNm").hidden = false;
+				document.getElementById("sbjtNm").disabled = false;
+				document.getElementById("prd").hidden = false;
+ 				document.getElementById("prd").disabled = false;
 			}
+				
 		}
 	</script>
 	
