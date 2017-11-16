@@ -95,6 +95,8 @@ public class UsrController {
 	//아이디 찾기 
 	@RequestMapping(value="findId")
 	public String findId(String nm, String phone) throws SQLException {
+		System.out.println("controller nm : " + nm); 
+		System.out.println("controller phone : " + phone); 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("nm", nm);
 		map.put("phone", phone);

@@ -54,7 +54,7 @@
 	$(document).ready(function(){
 		$("#btn_idok").click(function(){
 			$.ajax({
-				url:'/findId',
+				url:'findId',
 				data:{"nm":$("#nm").val(),"phone":$("#phone").val()},
 				dataType:'json',
 				success:function(data){
@@ -69,7 +69,7 @@
 		});
 		$("#btn_pwdok").click(function(){
 			$.ajax({
-				url:'/findPwd',
+				url:'findPwd',
 				data:{"id":$("#id").val(),"email":$("#email").val(),"phone":$("#phone").val()},
 				dataType:'json',
 				success:function(data){
