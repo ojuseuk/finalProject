@@ -76,4 +76,14 @@ public class StdtMgServiceImp implements StdtMgService {
 	public List<STDTInfoDto> selectStdtByCrs(String crsId) {
 		return stdtMgDao.selectStdtByCrs(crsId);
 	}
+	
+	@Override
+	public String selectStdtId(String id) {
+		return stdtMgDao.selectStdtId(id);
+	}
+
+	@Override
+	public int insertStdt(STDTDto dto) {
+		return stdtMgDao.insertStdt(dto);
+	}
 }

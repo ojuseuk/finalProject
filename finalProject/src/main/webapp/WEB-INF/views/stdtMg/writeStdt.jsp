@@ -8,11 +8,14 @@
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/insertStdt">
-		아이디<input type="text" name="id"><br>
-		수강생번호<input type="text" name="stdtNo" value="${stdtNo}">(+1)<br>
-		학과<input type="text" name="mjrTp"><br>
-		대입응시회수<input type="text" name="retryCnt"><br>
-		부모님 연락처<input type="text" name="prntPhone">
+		<table>
+			아이디<input type="text" name="id"><br>
+			수강생번호<input type="text" name="stdtNo" value="${stdtNo}">(+1)<br>
+			학과<input type="text" name="mjrTp"><br>
+			대입응시회수<input type="text" name="retryCnt"><br>
+			부모님 연락처<input type="text" name="prntPhone">
+		
+		</table>
 	</form>
 </body>
 </html>

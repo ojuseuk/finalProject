@@ -89,17 +89,56 @@
 	</table>
 </div>
 <div>
+	<form name="reqapplyClss" action="${root}/applyClss" method="POST">
 	<p align="right">
-	<input id="saveClss" type="submit" value="강좌담기" align="right">
-	<input id="applyClss" type="submit" value="수강신청" align="right">
+		<input type="hidden" name="clssList" value="">
+		<input id="saveClss" type="button" value="강좌담기">
+		<input id="appClss" type="button" value="수강신청" onclick="sendClssList('${root}')">
 	</p>
+	</form>
 </div>
 <div id="modal"></div>
-
+<div id="as"></div>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
 	var clssData;
+	var clssInfoObj;
 	var xhttp = new XMLHttpRequest();
+	
+	function deleClss(root){
+		$(document).on("click", "#delCheck", function(){
+			$(".appClssList input:checked").each(function(){
+				console.log($(this).parent().children("#delCheck").val);
+			});
+		});
+	}
+	
+	function sendClssList(root){
+		var clssArr = new Array();
+		for (i = 0; i < sessionStorage.length; i++) {
+			clssArr[i] = sessionStorage.getItem(sessionStorage.key(i));
+// 			clssArr[i] = JSON.parse(clssArr[i]);
+// 			console.log(clssArr[i]);
+		}
+// 		document.reqapplyClss.clssList.value = clssArr;
+		console.log(clssArr);
+// 		console.log(clssInfoObj);
+// 		console.log(JSON.stringify(clssArr));
+// 		document.reqapplyClss.submit();
+		$.post({
+			url : root + "/applyClss",
+			data : JSON.stringify(clssArr),
+			contentType : "application/json; charset=UTF-8",
+			success : function(clssArr){
+				console.log("suc");
+				document.getElementById("as").innerHTML = clssArr;
+			},
+			error : function(){
+				console.log("fail");
+			}
+		});
+	}
+	
 	function reqCrsList(sbjtNm, root){
 		var sbjtData;
 		var sbjtTag = "";
@@ -186,7 +225,6 @@
 						+ '<td bgcolor="#336699"><p align="center"><font color="white"><b>강사명</b></font></p></td>'
 						+ '<td bgcolor="#336699"><p align="center"><font color="white"><b>모집인원</b></font></p></td>'
 						+ '<td bgcolor="#336699"><p align="center"><font color="white"><b>상세정보</b></font></p></td></tr>';
-// 						'<form action="' + root + '/applyClss' + '" method="POST">'
 
 				crsInfoTag = '<table id="InfoCrs" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black"><tr>'
 					       + '<div width="100%" align="center"><td><p><b>과정 소개</b></p></td></div></tr>'
@@ -203,13 +241,12 @@
 							   + clssData[i].crsIntro
 						       + '</p></td>';
 					clssTag += '<tr><td><p align="center">'
-							+ '<div>'
 							+ '<input id="clssNm" type="checkbox" name="clssNm'+i+'" value="' + clssData[i].clssNm + '">'
+							+ '<input id="clssId" type="hidden" name="clssId'+i+'" value="' + clssData[i].clssId + '">'
 							+ '<input id="nm" type="hidden" name="nm'+i+'" value="' + clssData[i].nm + '">'
 							+ '<input id="strtDt" type="hidden" name="strtDt'+i+'" value="' + clssData[i].strtDt + '">'
 							+ '<input id="endDt" type="hidden" name="endDt'+i+'" value="' + clssData[i].endDt + '">'
 							+ '<input id="stdtclssttn" type="hidden" name="stdtclssttn'+i+'" value="' + clssData[i].stdtclssttn + '">'
-							+ '</div>'
 							+ clssData[i].clssNm
 							+ '</p></td><td><p align="center">'
 							+ clssData[i].nm
@@ -234,7 +271,6 @@
 						  +'</p></div></div></div>';
 				}
 				clssTag += '</table>';
-// 				        </form>
 				crsInfoTag += '</table>';
 				document.getElementById("clssList").innerHTML = clssTag;
 				document.getElementById("crsInfo").innerHTML = crsInfoTag;
@@ -245,36 +281,32 @@
 		xhttp.send();
 	}
 	
-	var clssInfoObj;
-	$(document).ready(function(){
-		$("#saveClss").on("click", function(){
+	
+	$(document).on("click", "#clssNm", function(){
 			var clssInfoStr = new Array();
-			if ( $(".checking input:checked").size() == 0){
-				alert("1개 이상 체크해주세요");	
-				return;
-			} else if( $(".checking input:checked").size() > 0){
 				$(".checking input:checked").each(function() {
-					clssInfoObj = {
-							clssNm : $(this).parent().children("#clssNm").val(),
-							nm : $(this).parent().children("#nm").val(),
-							strtDt : $(this).parent().children("#strtDt").val(),
-							endDt : $(this).parent().children("#endDt").val(),
-							stdtclssttn : $(this).parent().children("#stdtclssttn").val()
-					};
-					clssInfoStr.push(JSON.stringify(clssInfoObj));
-					sessionStorage.setItem($(this).parent().children("#clssNm").val(), clssInfoStr);
-// 					param += "clssNm=" + $(this).parent().children("#clssNm").val();
-// 					param += "&nm=" + $(this).parent().children("#nm").val();
-// 					param += "&strtDt=" + $(this).parent().children("#strtDt").val();
-// 					param += "&endDt=" + $(this).parent().children("#endDt").val();
-// 					param += "&stdtclssttn=" + $(this).parent().children("#stdtclssttn").val() +",";
+					var i = 0;
+					if(i%2==0){
+						clssInfoObj = {
+								clssNm : $(this).parent().children("#clssNm").val(),
+								clssId : $(this).parent().children("#clssId").val(),
+								nm : $(this).parent().children("#nm").val(),
+								strtDt : $(this).parent().children("#strtDt").val(),
+								endDt : $(this).parent().children("#endDt").val(),
+								stdtclssttn : $(this).parent().children("#stdtclssttn").val()
+						};
+						clssInfoStr.push(JSON.stringify(clssInfoObj));
+					}
 				
 				});
-				console.log(clssInfoObj);
-				console.log(clssInfoStr);
-			} 
-		});
+				
+				$("#saveClss").on("click", function(){
+						sessionStorage.setItem($("#clssNm").parent().children("#clssId").val(), clssInfoStr);
+						alert("강좌가 담겼습니다.");
+				});
 	});
+	
+
+	
 </script>
-<%--  onclick="location.href='${root}/applyClss'" --%>
 

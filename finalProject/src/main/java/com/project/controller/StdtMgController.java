@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.CLSSDto;
 import com.project.dto.STDTCLSSDto;
+import com.project.dto.STDTDto;
 import com.project.dto.STDTInfoDto;
 import com.project.dto.SmsContentDto;
 import com.project.service.StdtMgService;
@@ -47,7 +48,7 @@ public class StdtMgController {
 	 * @Method Name : selectByCrs
 	 * @작성일	    : 2017. 11. 9. 
 	 * @작성자	    : 김동근
-	 * @Method 설명	: 과정 셀렉트 박스 출력, 전체 수강생 조회
+	 * @Method 설명	: 과정 셀렉트 박스 출력, 전체 수강생 조회, 가장 마지막 학생번호 조회
 	 * return type  : String
 	 * @return
 	 */
@@ -55,6 +56,7 @@ public class StdtMgController {
 	public String selectByCrs(Model model){
 		model.addAttribute("crsList", stdtMgService.selectByCrs());
 		model.addAttribute("stdtAllList", stdtMgService.selectAllByStdt());
+		model.addAttribute("stdtNo", stdtMgService.selectStdtNo());
 		return "stdtMg/StdtListView";
 	}
 	
@@ -123,21 +125,6 @@ public class StdtMgController {
 	}
 	
 	/**
-	 * @Method Name : selectStdtNo
-	 * @작성일	    : 2017. 11. 12. 
-	 * @작성자	    : 김동근
-	 * @Method 설명	: 수강생 등록 시 가장 마지막 수강생 번호 출력
-	 * return type  : String
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/selectStdtNo")
-	public String selectStdtNo(Model model){
-		model.addAttribute("stdtNo", stdtMgService.selectStdtNo());
-		return "stdtMg/writeStdt";
-	}
-	
-	/**
 	 * @Method Name : updateToStdt
 	 * @작성일	    : 2017. 11. 13. 
 	 * @작성자	    : 김동근
@@ -152,7 +139,7 @@ public class StdtMgController {
 		stdtMgService.updateStdtClss(stdtInfo);
 		model.addAttribute("crsList", stdtMgService.selectByCrs());
 		model.addAttribute("stdtAllList", stdtMgService.selectAllByStdt());
-		return "stdtMg/StdtView";
+		return "stdtMg/StdtListView";
 	}
 	
 	
@@ -160,7 +147,7 @@ public class StdtMgController {
 	 * @Method Name : selectByStdtNm
 	 * @작성일	    : 2017. 11. 13. 
 	 * @작성자	    : 김동근
-	 * @Method 설명	: 이름으로 수강생 검색(clssNm"선택"을 clssId 변경 고민중)
+	 * @Method 설명	: 이름으로 수강생 검색(clssNm"선택"을 clssId 변경 )
 	 * return type  : List<STDTInfoDto>
 	 * @param stdtInfo
 	 * @param model
@@ -181,5 +168,28 @@ public class StdtMgController {
 			model.addAttribute("info", stdtMgService.selectByClssStdtNm(stdtInfo));
 			return stdtMgService.selectByClssStdtNm(stdtInfo);
 		}
+	}
+	
+	/**
+	 * @Method Name : selectStdtId
+	 * @작성일	    : 2017. 11. 19. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 수강생 등록시 ID 조회
+	 * return type  : String
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/selectStdtId")
+	public @ResponseBody String selectStdtId(@RequestParam("id") String id){
+		return stdtMgService.selectStdtId(id);
+	}
+	
+	@RequestMapping("/insertStdt")
+	public String insertStdt(STDTDto dto, STDTCLSSDto dto1, Model model){
+		System.out.println(dto);
+		System.out.println(dto1);
+//		stdtMgService.insertStdt(dto);
+		return "redirect:/stdtAllList";
 	}
 }

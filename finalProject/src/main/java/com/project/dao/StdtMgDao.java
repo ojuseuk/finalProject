@@ -22,4 +22,6 @@ public interface StdtMgDao {
 	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo);
 	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo);
 	public List<STDTInfoDto> selectStdtByCrs(String crsId);
+	public String selectStdtId(String id);
+	public int insertStdt(STDTDto dto);
 }

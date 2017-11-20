@@ -6,6 +6,7 @@ public class ClssInfoDto {
 	private String tchrIntro;
 	private String tchrPt;
 	private String clssNm;
+	private String clssId;
 	private String strtDt;
 	private String endDt;
 	private String strtTm;
@@ -15,6 +16,7 @@ public class ClssInfoDto {
 	private String crsIntro;
 	private String crsNm;
 	private String stdtclssttn;
+	private String paidDt;
 	
 	public ClssInfoDto() {}
 	
@@ -27,15 +29,16 @@ public class ClssInfoDto {
 		this.stdtclssttn = stdtclssttn;
 	}
 
-	public ClssInfoDto(String nm, String sbjtChrg, String tchrIntro, String tchrPt, String clssNm, String strtDt,
-			String endDt, String strtTm, String endTm, int capa, String clssroom, String crsIntro, String crsNm,
-			String stdtclssttn) {
+	public ClssInfoDto(String nm, String sbjtChrg, String tchrIntro, String tchrPt, String clssNm, String clssId,
+			String strtDt, String endDt, String strtTm, String endTm, int capa, String clssroom, String crsIntro,
+			String crsNm, String stdtclssttn, String paidDt) {
 		super();
 		this.nm = nm;
 		this.sbjtChrg = sbjtChrg;
 		this.tchrIntro = tchrIntro;
 		this.tchrPt = tchrPt;
 		this.clssNm = clssNm;
+		this.clssId = clssId;
 		this.strtDt = strtDt;
 		this.endDt = endDt;
 		this.strtTm = strtTm;
@@ -45,6 +48,7 @@ public class ClssInfoDto {
 		this.crsIntro = crsIntro;
 		this.crsNm = crsNm;
 		this.stdtclssttn = stdtclssttn;
+		this.paidDt = paidDt;
 	}
 
 	public String getNm() {
@@ -85,6 +89,14 @@ public class ClssInfoDto {
 
 	public void setClssNm(String clssNm) {
 		this.clssNm = clssNm;
+	}
+
+	public String getClssId() {
+		return clssId;
+	}
+
+	public void setClssId(String clssId) {
+		this.clssId = clssId;
 	}
 
 	public String getStrtDt() {
@@ -159,6 +171,14 @@ public class ClssInfoDto {
 		this.stdtclssttn = stdtclssttn;
 	}
 
+	public String getPaidDt() {
+		return paidDt;
+	}
+
+	public void setPaidDt(String paidDt) {
+		this.paidDt = paidDt;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -172,6 +192,8 @@ public class ClssInfoDto {
 		builder.append(tchrPt);
 		builder.append(", clssNm=");
 		builder.append(clssNm);
+		builder.append(", clssId=");
+		builder.append(clssId);
 		builder.append(", strtDt=");
 		builder.append(strtDt);
 		builder.append(", endDt=");
@@ -190,7 +212,10 @@ public class ClssInfoDto {
 		builder.append(crsNm);
 		builder.append(", stdtclssttn=");
 		builder.append(stdtclssttn);
+		builder.append(", paidDt=");
+		builder.append(paidDt);
 		builder.append("]");
 		return builder.toString();
 	}
+
 }

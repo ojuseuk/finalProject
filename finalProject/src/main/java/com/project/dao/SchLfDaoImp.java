@@ -7,8 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.dto.ATTNDDto;
 import com.project.dto.CRSDto;
 import com.project.dto.ClssInfoDto;
+import com.project.dto.DateDto;
 import com.project.dto.SBJTDto;
 import com.project.dto.STDTDto;
 
@@ -37,5 +39,17 @@ public class SchLfDaoImp implements SchLfDao{
 	public List<ClssInfoDto> selectClssPerCrs(String crsId) {
 		return sqlSession.selectList("schLfMapper.selectClssPerCrs", crsId);
 	}
+
+	@Override
+	public List<ClssInfoDto> selectMyClss(String id) {
+		return sqlSession.selectList("schLfMapper.selectMyClss", id);
+	}
+
+	@Override
+	public List<Map<String, String>> selectMyAttnd(DateDto dto) {
+		System.out.println(sqlSession.selectList("schLfMapper.myAttnd", dto));
+		return sqlSession.selectList("schLfMapper.myAttnd", dto);
+	}
+
 	
 }

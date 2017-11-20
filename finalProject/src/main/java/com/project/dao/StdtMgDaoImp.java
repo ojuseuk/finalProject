@@ -56,7 +56,7 @@ public class StdtMgDaoImp implements StdtMgDao {
 
 	@Override
 	public List<STDTInfoDto> selectStdtInfo(String stdtNo) {
-		return sqlSession.selectList("stdtMgMapper.selectByStdtInfo", stdtNo);
+		return sqlSession.selectList("stdtMgMapper.selectStdtInfo", stdtNo);
 	}
 
 	@Override
@@ -77,5 +77,15 @@ public class StdtMgDaoImp implements StdtMgDao {
 	@Override
 	public List<STDTInfoDto> selectStdtByCrs(String crsId) {
 		return sqlSession.selectList("stdtMgMapper.selectStdtByCrs", crsId);
+	}
+	
+	@Override
+	public String selectStdtId(String id) {
+		return sqlSession.selectOne("stdtMgMapper.selectStdtId", id);
+	}
+
+	@Override
+	public int insertStdt(STDTDto dto) {
+		return sqlSession.insert("stdtMgMapper.insertStdt", dto);
 	}
 }
