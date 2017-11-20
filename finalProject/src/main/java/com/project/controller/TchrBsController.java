@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dto.EXAMTPDto;
+import com.project.dto.SBJTDto;
 import com.project.dto.SCRDto;
 import com.project.dto.TCHRDto;
 import com.project.dto.TPCDto;
@@ -62,7 +65,7 @@ public class TchrBsController {
 	}
 	
 	/**
-	 * @Method Name : qzInsert
+	 * @Method Name : ttlqzInsert
 	 * @작성일	    : 2017. 11. 15. 
 	 * @작성자	    : 
 	 * @Method 설명	:
@@ -70,17 +73,18 @@ public class TchrBsController {
 	 * @param ttlqzDto
 	 * @return
 	 */
-	@RequestMapping("/qzInsert")
-	public ModelAndView qzInsert(TTLQZDto ttlqzDto) {
+	@RequestMapping("/ttlqzInsert")
+	public String ttlqzInsert(TTLQZDto ttlqzDto, HttpSession session) {
 		
-		System.out.println("controller qzInsert");
+		
+		System.out.println("controller ttlqzInsert");
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println(ttlqzDto);
 		
-		tchrBsService.qzInsert(ttlqzDto);
+		tchrBsService.ttlqzInsert(ttlqzDto);
 		
-		return mav;
+		return "tchrBs/ttlqzView";
 	}
 	
 	/**
@@ -172,7 +176,7 @@ public class TchrBsController {
 	 */
 	@RequestMapping("/srcInsert")
 	public void srcInsert(SCRDto scrDto) {
-	
+		
 		System.out.println("controller srcInsert");
 		System.out.println(scrDto);
 		
@@ -223,4 +227,110 @@ public class TchrBsController {
 		
 		return list;
 	}
+	
+	/**
+	 * @Method Name : qzSelectView
+	 * @작성일	    : 2017. 11. 17. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : ModelAndView
+	 * @return
+	 */
+	@RequestMapping("/qzSelectView")
+	public ModelAndView qzSelectView() {
+		
+		ModelAndView mav = new ModelAndView();
+		System.out.println("controller qzSelectView");
+		Map<List<SBJTDto>, List<EXAMTPDto>> map = tchrBsService.qzSelectView();
+		
+		Set<List<SBJTDto>> key = map.keySet();
+		List<SBJTDto> listTchr = null;
+		List<EXAMTPDto> listExam = null;
+		for (List<SBJTDto> list : key) {
+			listTchr = list;
+			listExam = map.get(list);
+		}
+		
+		JSONArray jsonTchr = JSONArray.fromObject(listTchr);
+		JSONArray jsonExam = JSONArray.fromObject(listExam);
+		mav.addObject("jsonTchr", jsonTchr);
+		mav.addObject("jsonExam", jsonExam);
+		mav.setViewName("tchrBs/qzSelectView");
+		
+		return mav;
+		
+	}
+	
+	/**
+	 * @Method Name : qzSelect
+	 * @작성일	    : 2017. 11. 18. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : List<Map<String,String>>
+	 * @param sbjtNm
+	 * @return
+	 */
+	@RequestMapping("/qzSelect")
+	public @ResponseBody List<Map<String, Object>> qzSelect(@RequestParam String sbjtNm) {
+		
+		System.out.println("controller qzSelect");
+		List<Map<String, Object>> list = tchrBsService.qzSelect(sbjtNm);
+//		System.out.println(list);
+		
+		return list;
+	}
+	
+	/**
+	 * @Method Name : qzUpdateView
+	 * @작성일	    : 2017. 11. 18. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : ModelAndView
+	 * @return
+	 */
+	@RequestMapping("/qzUpdateView")
+	public ModelAndView qzUpdateView() {
+		System.out.println("controller qzUpdateView");
+		
+		ModelAndView mav = new ModelAndView();
+		List<TTLQZDto> list = tchrBsService.qzUpdateView();
+		
+		mav.addObject("list", list);
+		mav.setViewName("tchrBs/qzUpdateView");
+		
+		return mav;
+		
+	}
+	
+	/**
+	 * @Method Name : qzUpdateSearch
+	 * @작성일	    : 2017. 11. 18. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : ModelAndView
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("qzUpdateSearch")
+	public ModelAndView qzUpdateSearch(@RequestParam int id) {
+		System.out.println(id);
+		ModelAndView mav = new ModelAndView();
+		TTLQZDto ttlqzDto = tchrBsService.qzUpdateSearch(id);
+		mav.addObject("ttlqzDto", ttlqzDto);
+		mav.setViewName("tchrBs/qzUpdateSearch");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/qzInsert")
+	public void qzInsert(@RequestParam(value="id", required=true) List<Integer> id, @RequestParam("examId") String examId) {
+		
+		System.out.println("controller qzInsert");
+		System.out.println(examId);
+		System.out.println(id);
+		System.out.println(id.size());
+		tchrBsService.qzInsert(examId, id);
+		
+	}
+	
 }

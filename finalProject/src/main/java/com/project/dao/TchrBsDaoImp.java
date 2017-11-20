@@ -7,6 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.dto.EXAMTPDto;
+import com.project.dto.QZDto;
+import com.project.dto.SBJTDto;
 import com.project.dto.SCRDto;
 import com.project.dto.TCHRDto;
 import com.project.dto.TPCDto;
@@ -59,12 +62,12 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public int qzInsert(TTLQZDto ttlqzDto) {
+	public int ttlqzInsert(TTLQZDto ttlqzDto) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("dao qzInsert");
+		System.out.println("dao ttlqzInsert");
 		
-		return sqlSession.insert("tchrBsMapper.qzInsert", ttlqzDto);
+		return sqlSession.insert("tchrBsMapper.ttlqzInsert", ttlqzDto);
 		
 	}
 
@@ -202,6 +205,94 @@ public class TchrBsDaoImp implements TchrBsDao {
 		
 		List<Map<String, Object>> list = sqlSession.selectList("tchrBsMapper.stClssSearch", clssId);
 		return list;
+	}
+
+	/**
+	 * @Method Name : qzSelectView
+	 * @작성일	    : 2017. 11. 18. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @return
+	 */
+	@Override
+	public List<SBJTDto> qzSelectView() {
+		// TODO Auto-generated method stub
+		System.out.println("dao qzSelectView");
+		return sqlSession.selectList("tchrBsMapper.qzSelectView");
+	}
+
+	/**
+	 * @Method Name : qzSelect
+	 * @작성일	    : 2017. 11. 18. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @param sbjtNm
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> qzSelect(String sbjtNm) {
+		// TODO Auto-generated method stub
+		System.out.println("dao qzSelect");
+		return sqlSession.selectList("tchrBsMapper.qzSelect", sbjtNm);
+	}
+
+	/**
+	 * @Method Name : qzUpdateView
+	 * @작성일	    : 2017. 11. 18. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @return
+	 */
+	@Override
+	public List<TTLQZDto> qzUpdateView() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("tchrBsMapper.qzUpdateView");
+	}
+
+	/**
+	 * @Method Name : qzUpdateSearch
+	 * @작성일	    : 2017. 11. 18. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public TTLQZDto qzUpdateSearch(int id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("tchrBsMapper.qzUpdateSearch", id);
+	}
+
+	/**
+	 * @Method Name : qzExamSelect
+	 * @작성일	    : 2017. 11. 18. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @return
+	 */
+	@Override
+	public List<EXAMTPDto> qzExamSelect() {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.selectList("tchrBsMapper.qzExamSelect");
+		
+	}
+
+	/**
+	 * @Method Name : qzInsert
+	 * @작성일	    : 2017. 11. 20. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @param list
+	 */
+	@Override
+	public void qzInsert(List<QZDto> list) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("dao qzInsert");
+		System.out.println(list.get(0).getExamId());
+		int a = sqlSession.insert("tchrBsMapper.qzInsert", list);
+		System.out.println(a);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.dao.TchrBsDao;
+import com.project.dto.EXAMTPDto;
+import com.project.dto.QZDto;
+import com.project.dto.SBJTDto;
 import com.project.dto.SCRDto;
 import com.project.dto.TCHRDto;
 import com.project.dto.TPCDto;
@@ -55,12 +59,12 @@ public class TchrBsServiceImp implements TchrBsService {
 	 * @return
 	 */
 	@Override
-	public int qzInsert(TTLQZDto ttlqzDto) {
+	public int ttlqzInsert(TTLQZDto ttlqzDto) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service qzInsert");
 		
-		int num = tchrBsDao.qzInsert(ttlqzDto);
+		int num = tchrBsDao.ttlqzInsert(ttlqzDto);
 		
 		return num;
 		
@@ -180,6 +184,57 @@ public class TchrBsServiceImp implements TchrBsService {
 		System.out.println(list);
 		
 		return list;
+	}
+
+	@Override
+	public Map<List<SBJTDto>, List<EXAMTPDto>> qzSelectView() {
+		// TODO Auto-generated method stub
+		
+		System.out.println("service qzSelectView");
+		List<SBJTDto> listTchr = tchrBsDao.qzSelectView();
+		List<EXAMTPDto> listExam = tchrBsDao.qzExamSelect();
+		
+		Map<List<SBJTDto>, List<EXAMTPDto>> map = new HashMap<>();
+		map.put(listTchr, listExam);
+		
+		return map;
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> qzSelect(String sbjtNm) {
+		// TODO Auto-generated method stub
+		System.out.println("servicde qzSelect");
+		
+		return tchrBsDao.qzSelect(sbjtNm);
+		
+	}
+
+	@Override
+	public List<TTLQZDto> qzUpdateView() {
+		// TODO Auto-generated method stub
+		return tchrBsDao.qzUpdateView();
+	}
+
+	@Override
+	public TTLQZDto qzUpdateSearch(int id) {
+		// TODO Auto-generated method stub
+		
+		return tchrBsDao.qzUpdateSearch(id);
+	}
+
+	@Override
+	public void qzInsert(String examId, List<Integer> id) {
+		// TODO Auto-generated method stub
+		
+		System.out.println(id.size());
+		List<QZDto> list = new ArrayList<>();
+		for(int i=0;i<id.size();i++) {
+			list.add(new QZDto(examId, id.get(i), (i+1), 10));
+		}
+		
+		tchrBsDao.qzInsert(list);
+		
 	}
 	
 }

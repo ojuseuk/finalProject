@@ -6,7 +6,9 @@ public class TTLQZDto {
 	private String sbjtNm;
 	private String tchrNo;
 	private String tpcNm;
+	private String title;
 	private String content;
+	private String solution;
 	private String degree;
 	private String answer;
 	private String imgfile;
@@ -15,14 +17,16 @@ public class TTLQZDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TTLQZDto(int id, String sbjtNm, String tchrNo, String tpcNm, String content, String degree, String answer,
-			String imgfile) {
+	public TTLQZDto(int id, String sbjtNm, String tchrNo, String tpcNm, String title, String content, String solution,
+			String degree, String answer, String imgfile) {
 		super();
 		this.id = id;
 		this.sbjtNm = sbjtNm;
 		this.tchrNo = tchrNo;
 		this.tpcNm = tpcNm;
+		this.title = title;
 		this.content = content;
+		this.solution = solution;
 		this.degree = degree;
 		this.answer = answer;
 		this.imgfile = imgfile;
@@ -92,6 +96,22 @@ public class TTLQZDto {
 		this.imgfile = imgfile;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getSolution() {
+		return solution;
+	}
+
+	public void setSolution(String solution) {
+		this.solution = solution;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -103,8 +123,12 @@ public class TTLQZDto {
 		builder.append(tchrNo);
 		builder.append(", tpcNm=");
 		builder.append(tpcNm);
+		builder.append(", title=");
+		builder.append(title);
 		builder.append(", content=");
 		builder.append(content);
+		builder.append(", solution=");
+		builder.append(solution);
 		builder.append(", degree=");
 		builder.append(degree);
 		builder.append(", answer=");
@@ -115,5 +139,4 @@ public class TTLQZDto {
 		return builder.toString();
 	}
 
-	
 }
