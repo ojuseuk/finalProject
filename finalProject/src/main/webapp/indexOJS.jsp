@@ -21,6 +21,8 @@
 	<a href="${root}/tchrBs/attnd">출석 확인</a>
 	<a href="${root}/tchrBs/srcIn">성적 입력</a>
 	<a href="${root}/tchrBs/stSearch">학생 조회</a>
+	<a href="${root}/tchrBs/qzSelectView">문제 출제</a>
+	<a href="${root}/tchrBs/qzUpdateView">문제 수정</a>
 </body>
 </html>
 

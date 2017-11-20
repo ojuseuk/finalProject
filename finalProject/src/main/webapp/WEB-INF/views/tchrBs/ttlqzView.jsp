@@ -14,7 +14,7 @@
 	<div class="w3-container">
 		<h2>문제 생성</h2>
 
-		<form action="${root}/tchrBs/qzInsert">
+		<form action="${root}/tchrBs/ttlqzInsert">
 			<table class="w3-table w3-bordered">
 				<tr>
 					<td>과목명</td>
@@ -43,8 +43,16 @@
 					</td>
 				</tr>
 				<tr>
+					<td>문제 제목</td>
+					<td><textarea rows="3" cols="50" name="title"></textarea></td>
+				</tr>
+				<tr>
 					<td>문제 내용</td>
 					<td><textarea rows="10" cols="50" name="content"></textarea></td>
+				</tr>
+				<tr>
+					<td>문제 답(골라야 함)</td>
+					<td><textarea rows="10" cols="50" name="solution"></textarea></td>
 				</tr>
 				<tr>
 					<td>문제 난이도</td>
@@ -58,7 +66,7 @@
 				</tr>
 				<tr>
 					<td>문제 정답</td>
-					<td><textarea rows="5" cols="20" name="answer"></textarea></td>
+					<td><input type="text" name="answer"></td>
 				</tr>
 				<tr>
 					<td>첨부 파일</td>

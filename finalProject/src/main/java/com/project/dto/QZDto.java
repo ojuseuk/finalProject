@@ -2,7 +2,7 @@ package com.project.dto;
 
 public class QZDto {
 
-	private String exam_id;
+	private String examId;
 	private int id;
 	private int questNo;
 	private int questWgt;
@@ -11,20 +11,20 @@ public class QZDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public QZDto(String exam_id, int id, int questNo, int questWgt) {
+	public QZDto(String examId, int id, int questNo, int questWgt) {
 		super();
-		this.exam_id = exam_id;
+		this.examId = examId;
 		this.id = id;
 		this.questNo = questNo;
 		this.questWgt = questWgt;
 	}
 
-	public String getExam_id() {
-		return exam_id;
+	public String getExamId() {
+		return examId;
 	}
 
-	public void setExam_id(String exam_id) {
-		this.exam_id = exam_id;
+	public void setExamId(String examId) {
+		this.examId = examId;
 	}
 
 	public int getId() {
@@ -54,8 +54,8 @@ public class QZDto {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("QZDto [exam_id=");
-		builder.append(exam_id);
+		builder.append("QZDto [examId=");
+		builder.append(examId);
 		builder.append(", id=");
 		builder.append(id);
 		builder.append(", questNo=");
@@ -65,6 +65,5 @@ public class QZDto {
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 }

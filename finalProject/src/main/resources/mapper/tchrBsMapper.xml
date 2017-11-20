@@ -11,8 +11,8 @@
 			FROM TB_TCHR
 	</select>
 	
-	<insert id="qzInsert" parameterType="tTLQZDto">
-		INSERT INTO TB_TTLQZ(ID, SBJT_NM, TCHR_NO, TPC_NM, CONTENT, DEGREE, ANSWER) VALUES(seq_ttlqz.NEXTVAL, #{sbjtNm}, #{tchrNo}, #{tpcNm}, #{content}, #{degree}, #{answer})
+	<insert id="ttlqzInsert" parameterType="tTLQZDto">
+		INSERT INTO TB_TTLQZ(ID, SBJT_NM, TCHR_NO, TPC_NM, CONTENT, DEGREE, ANSWER, TITLE, SOLUTION) VALUES(seq_ttlqz.NEXTVAL, #{sbjtNm}, #{tchrNo}, #{tpcNm}, #{content}, #{degree}, #{answer}, #{title}, #{solution})
 	</insert>
 	
 	<select id="attnd" parameterType="string" resultType="map">
@@ -58,5 +58,43 @@
 			AND CLSS.CLSS_ID = #{clssId}
 	</select>
 	
+	<select id="qzSelectView" resultType="sBJTDto">
+		SELECT SBJT_NM sbjtNm FROM TB_SBJT
+	</select>
+	
+	<select id="qzSelect" parameterType="string" resultType="map">
+		<![CDATA[
+		SELECT A.* FROM
+		(
+			SELECT TTLQZ.ID ID, SBJT.SBJT_NM SBJTNM, TPC.TPC_NM TPCNM,TTLQZ.TITLE TITLE, TTLQZ.CONTENT, TTLQZ.SOLUTION, TTLQZ.ANSWER ANSWER, TTLQZ.IMG_FILE IMGFILE
+				FROM TB_SBJT SBJT, TB_TPC TPC, TB_TTLQZ TTLQZ
+					WHERE SBJT.SBJT_NM = TPC.SBJT_NM AND SBJT.SBJT_NM = TTLQZ.SBJT_NM
+					AND TPC.TPC_NM = TTLQZ.TPC_NM AND SBJT.SBJT_NM = #{sbjtNm}
+					ORDER BY DBMS_RANDOM.VALUE
+		)A WHERE ROWNUM <= 10
+		]]>
+	</select>
+	
+	<select id="qzUpdateView" resultType="tTLQZDto">
+		SELECT id, SBJT_NM sbjtNm, TCHR_NO tchrNo, TPC_NM tpcNm, title, content, solution, degree, answer, IMG_FILE imgFile
+		FROM TB_TTLQZ
+	</select>
+	
+	<select id="qzUpdateSearch" parameterType="int" resultType="tTLQZDto">
+		SELECT id, SBJT_NM sbjtNm, TCHR_NO tchrNo, TPC_NM tpcNm, title, content, solution, degree, answer, IMG_FILE imgFile
+		FROM TB_TTLQZ WHERE ID = #{id}
+	</select>
+	
+	<select id="qzExamSelect" resultType="eXAMTPDto">
+		SELECT EXAM_ID examId, EXAM_TITLE examTitle FROM TB_EXAM_TP
+	</select>
+	
+	<insert id="qzInsert" parameterType="list">
+		INSERT ALL
+		<foreach collection="list" item="qz">
+			INTO TB_QZ VALUES(#{qz.examId}, #{qz.id}, #{qz.questNo}, #{qz.questWgt})
+		</foreach>
+		SELECT * FROM DUAL
+	</insert>
 	
 </mapper>
