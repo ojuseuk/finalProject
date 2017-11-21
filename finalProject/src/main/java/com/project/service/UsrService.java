@@ -23,5 +23,8 @@ public interface UsrService {
 	
 	//pwdCheck
 	public USRDto pwdCheck(HashMap<String, String> map) throws SQLException;
+	
+	//after id check change pwd
+	public int new_change_pwd(HashMap<String, Object> map) throws SQLException;
 		
 }

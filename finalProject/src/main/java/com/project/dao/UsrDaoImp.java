@@ -55,6 +55,13 @@ public class UsrDaoImp implements UsrDao {
 		return sqlSession.selectOne("usrMapper.pwdCheck",map);
 	}
 	////////////////////////////
+	
+	//after id check change pwd
+	@Override
+	public int new_change_pwd(HashMap<String, Object> map){
+		System.out.println("DAOnew_change_pwd:" + map);
+		return sqlSession.update("usrMapper.changePwdNew",map);
+	}
 
 }
 

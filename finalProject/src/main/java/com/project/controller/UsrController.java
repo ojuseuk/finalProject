@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.USRDto;
@@ -38,7 +39,7 @@ public class UsrController {
 			usrService.userInsert(usr);
 			System.out.println("insert");
 			System.out.println(data);
-			url ="user/main2";  	
+			url ="redirect:/main.jsp";  	
 
 
 		} catch (SQLException e) {
@@ -80,21 +81,22 @@ public class UsrController {
 		return url;
 		}
 	
+	//logout
 	@RequestMapping(value="logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "user/logoutPro";
 	}
 	
-	//아이디 비밀번호 
+	//go idpwfind.jsp
 	@RequestMapping(value="idpwfind")
 	public String idpwfind(HttpSession session) {
 		return "user/idpwfind";
 	}
 	
-	//아이디 찾기 
-	@RequestMapping(value="findId")
-	public String findId(String nm, String phone) throws SQLException {
+	//find id
+	@RequestMapping(value="/findId")
+	public @ResponseBody String findId(@RequestParam("nm") String nm, @RequestParam("phone") String phone) throws SQLException {
 		System.out.println("controller nm : " + nm); 
 		System.out.println("controller phone : " + phone); 
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -108,36 +110,65 @@ public class UsrController {
 		}else {
 			json.put("idCheck", false);
 		}
+		String data1=json.toString();
+		System.out.println(data1);
+		
 		return json.toString();
 	}//end findId
 	
-	//비밀번호 찾기
+	
+	
+	//find password 
 	@RequestMapping("/findPwd")
 	@ResponseBody
-	public String findPwd(String id,String email,String phone) throws SQLException{
+	public String findPwd(String id,String email) throws SQLException{
+		System.out.println("controller id : " + id);
+		System.out.println("controller email : " + email);
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("email", email);
-		map.put("phone", phone);
 		JSONObject json=new JSONObject();
 		USRDto usrdto=usrService.findPwd(map);
-		
+			
 		if(usrdto != null){
 			json.put("pwdCheck", usrdto.getPw());
 		}else{
 			json.put("pwdCheck", false);
 		}
+		String data2=json.toString();
+		System.out.println(data2);
 		return json.toString();
+		}
+		
+	//goto the changepwd_new jsp
+	@RequestMapping("changePwdNew")
+	public String changePwdNew(String id,Model model){
+		System.out.println("changePwdNewcontroller id : " + id);
+		model.addAttribute("id",id);
+		return "/user/changePwdNew";
 	}
 	
-	
-	//idcheck
+	//after id check change pwd : new-password->pw
+	@RequestMapping("new_change_password")
+	public String new_change_password(String id,String pw) throws SQLException{
+		System.out.println("new_change_passwordcontroller id : " + id);
+		System.out.println("new_change_passwordcontroller pw : " + pw);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		System.out.println("아이디,비밀번호:"+id+","+pw);
+		map.put("id", id);
+		map.put("pw", pw);//수정
+		usrService.new_change_pwd(map);
+			
+		return "redirect:/main.jsp";
+	}
+ 
+	//idCheck : same id check
 	@RequestMapping("/idCheck/{id}")
 	@ResponseBody
 	public String idCheck(@PathVariable("id")String id) throws SQLException{
 		JSONObject json=new JSONObject();
 		USRDto usrdto=usrService.idCheck(id);
-		
+			
 		if(usrdto != null){
 			json.put("idCheck", true);
 		}else{
@@ -145,7 +176,13 @@ public class UsrController {
 		}
 		return json.toString();
 	}//end idcheck
-	
+		
+	//go delUser.jsp
+		@RequestMapping(value="delUser")
+		public String delUser(HttpSession session) {
+			return "user/delUser";
+		}
+		
 	
 }//end controller 
 

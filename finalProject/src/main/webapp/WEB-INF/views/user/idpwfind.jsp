@@ -49,43 +49,7 @@
 }
 
 </style>
-<script src="./js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#btn_idok").click(function(){
-			$.ajax({
-				url:'findId',
-				data:{"nm":$("#nm").val(),"phone":$("#phone").val()},
-				dataType:'json',
-				success:function(data){
-					if(data.idCheck==false){
-						$("#span_findId_result").css("color","red").html("해당 정보를 조회할 수 없습니다.");
-					}else{
-						var length=data.idCheck.length;
-						$("#span_findId_result").css("color","green").html("회원님의 아이디는 "+data.idCheck.substr(0,(length-3))+"*** 입니다.");
-					}
-				}
-			});
-		});
-		$("#btn_pwdok").click(function(){
-			$.ajax({
-				url:'findPwd',
-				data:{"id":$("#id").val(),"email":$("#email").val(),"phone":$("#phone").val()},
-				dataType:'json',
-				success:function(data){
-					if(data.pwdCheck==false){
-						$("#span_findPwd_result").css("color","red").html("해당 정보를 조회할 수 없습니다.");
-					}else{
-						$("#span_findPwd_result").css("color","green").html("해당 정보가 정상적으로 조회되었습니다.<br>");
-						$("#span_findPwd_result").append("<a href='/user/changepwd_new?id="+$("#id").val()+"' style='font-size:18px;font-weight:bold;'>새 비밀번호 등록하러 가기</a>");
-					}
-				}
-			})
-		});
-	});
-</script>
-
-
+<script src="${root}/js/jquery.min.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -101,7 +65,8 @@
 		<div id="findId_insert" style="margin-left:100px;">
 			<input type="text" id="nm" class="form-control" placeholder="이름을 입력해주세요." style="height:34px;width:200px;"><br>
 			<input type="text" id="phone" class="form-control" placeholder="전화번호를 입력해주세요." style="height:34px;width:200px;"><br>
-			<input type="button" id="btn_idok" class="btn btn-primary" value="확인" style="width:200px;"><br>
+			<input type="button" id="btn_idok" class="btn btn-primary" value="확인" style="width:200px;">
+			<input type="hidden" value="${root}" id="root"><br>
 			<br>
 			<br>
 		</div>
@@ -110,8 +75,6 @@
 			</span>
 		</div>
 	</div>
-
-
 
 	<div id="findPwd">
 		<h2>비밀번호 찾기</h2>
@@ -124,7 +87,6 @@
 		<div id="findPwd_insert" style="margin-left:100px;">
 			<input type="text" id="id" class="form-control" placeholder="아이디를 입력해주세요." style="height:34px;width:200px;"><br>
 			<input type="text" id="email" class="form-control" placeholder="이메일을 입력해주세요." style="height:34px;width:200px;"><br>
-			<input type="text" id="phone" class="form-control" placeholder="전화번호를 입력해주세요." style="height:34px;width:200px;"><br>
 			<input type="button" id="btn_pwdok" class="btn btn-primary" value="확인" style="width:200px;"><br>
 			<br>
 		</div>
@@ -132,8 +94,47 @@
 			<span id="span_findPwd_result"></span>
 		</div>
 	</div>
+	
 </div>
+	<script type="text/javascript">
+	var root = $("#root").val();
+	alert(root);
+	var urlRoot = root+"/findId";
+	$(document).ready(function(){
+		$('#btn_idok').on("click", function(){
+			$.ajax({
+				url: urlRoot,
+				data:{"nm":$("#nm").val(),"phone":$("#phone").val()},
+				dataType:'json',
+				success:function(data){
+					alert("왜 안되");
+					if(data.idCheck==false){
+						$("#span_findId_result").css("color","red").html("해당 정보를 조회할 수 없습니다.");
+					}else{
+						var length=data.idCheck.length;
+						$("#span_findId_result").css("color","green").html("회원님의 아이디는 "+data.idCheck.substr(0,(length-3))+"*** 입니다.");
+					}
+				}
+			});
+		});
 		
+ 		$("#btn_pwdok").click(function(){
+			$.ajax({
+				url:'findPwd',
+				data:{"id":$("#id").val(),"email":$("#email").val()},
+				dataType:'json',
+				success:function(data){
+					if(data.pwdCheck==false){
+						$("#span_findPwd_result").css("color","red").html("해당 정보를 조회할 수 없습니다.");
+					}else{
+						$("#span_findPwd_result").css("color","green").html("해당 정보가 정상적으로 조회되었습니다.<br>");
+						$("#span_findPwd_result").append("<a href='changePwdNew?id="+$("#id").val()+"' style='font-size:18px;font-weight:bold;'>새 비밀번호 등록하러 가기</a>");
+					}
+				}
+			})
+		});
+	});
+</script>
 		
 </body>
 </html>

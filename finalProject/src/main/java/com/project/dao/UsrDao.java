@@ -12,6 +12,7 @@ public interface UsrDao {
 	USRDto findPwd(HashMap<String, Object> map)throws SQLException;
 	USRDto idCheck(String id)throws SQLException;
 	USRDto pwdCheck(HashMap<String, String> map)throws SQLException;
-	
+	//after id check change pwd
+	int new_change_pwd(HashMap<String, Object> map)throws SQLException;
 	
 }
