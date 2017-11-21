@@ -3,8 +3,8 @@
 <%
 	session.setAttribute("adminId", "adminOjs");
  %>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <c:set var="root" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,6 +23,8 @@
 	<a href="${root}/tchrBs/stSearch">학생 조회</a>
 	<a href="${root}/tchrBs/qzSelectView">문제 출제</a>
 	<a href="${root}/tchrBs/qzUpdateView">문제 수정</a>
+	<a href="${root}/homeP/qnaInsertView">댓글 게시판 삽입</a>
+	<a href="${root}/homeP/qnaSelectView">댓글 게시판 목록</a>
 </body>
 </html>
 

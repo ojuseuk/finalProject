@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="crsMgMapper">
+<mapper namespace="homePMapper">
 	
+	<select id="qnaCnt" resultType="qNADto">
+		SELECT MAX(GP_NUM) FROM TB_QNA
+	</select>
+	
+	<update id="qnaSeqNum" parameterType="qNADto">
+		<![CDATA[
+		UPDATE TB_QNA SET SEQ_NUM = SEQ_NUM+1 WHERE GP_NUM = ${gpNum} AND SEQ_NUM > #{seqNum}
+		]]>
+	</update>
+	
+	<insert id="qnaInsert" parameterType="qNADto">
+		INSERT INTO TB_QNA VALUES (seq_qna.NEXTVAL, 'test', #{title}, #{content}, #{dt}, #{gpNum}, #{seqLv}, #{seqNum})
+	</insert>
+	
+	<select id="qnaSelectView" resultType="qNADto">
+		SELECT no, id, title, content, dt, GP_NUM gpNum, SEQ_LV seqLv, SEQ_NUM seqNum
+		FROM TB_QNA
+	</select>
 </mapper>

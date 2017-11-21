@@ -7,20 +7,24 @@ public class QNADto {
 	private String title;
 	private String content;
 	private String dt;
-	private int prntNo;
+	private int gpNum;
+	private int seqLv;
+	private int seqNum;
 	
 	public QNADto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public QNADto(int no, String id, String title, String content, String dt, int prntNo) {
+	public QNADto(int no, String id, String title, String content, String dt, int gpNum, int seqLv, int seqNum) {
 		super();
 		this.no = no;
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.dt = dt;
-		this.prntNo = prntNo;
+		this.gpNum = gpNum;
+		this.seqLv = seqLv;
+		this.seqNum = seqNum;
 	}
 
 	public int getNo() {
@@ -63,12 +67,28 @@ public class QNADto {
 		this.dt = dt;
 	}
 
-	public int getPrntNo() {
-		return prntNo;
+	public int getGpNum() {
+		return gpNum;
 	}
 
-	public void setPrntNo(int prntNo) {
-		this.prntNo = prntNo;
+	public void setGpNum(int gpNum) {
+		this.gpNum = gpNum;
+	}
+
+	public int getSeqLv() {
+		return seqLv;
+	}
+
+	public void setSeqLv(int seqLv) {
+		this.seqLv = seqLv;
+	}
+
+	public int getSeqNum() {
+		return seqNum;
+	}
+
+	public void setSeqNum(int seqNum) {
+		this.seqNum = seqNum;
 	}
 
 	@Override
@@ -84,12 +104,14 @@ public class QNADto {
 		builder.append(content);
 		builder.append(", dt=");
 		builder.append(dt);
-		builder.append(", prntNo=");
-		builder.append(prntNo);
+		builder.append(", gpNum=");
+		builder.append(gpNum);
+		builder.append(", seqLv=");
+		builder.append(seqLv);
+		builder.append(", seqNum=");
+		builder.append(seqNum);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 	
 }

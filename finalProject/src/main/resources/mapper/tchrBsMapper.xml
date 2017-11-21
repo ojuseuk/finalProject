@@ -40,7 +40,7 @@
 	</select>
 	
 	<insert id="srcInsert" parameterType="sCRDto">
-		INSERT INTO TB_SCR VALUES(#{qzId}, #{stdtNo}, #{sbjtNm}, #{score})
+		INSERT INTO TB_SCR VALUES(#{examId}, #{stdtNo}, #{sbjtNm}, #{score})
 	</insert>
 	
 	<select id="stSearch" parameterType="String" resultType="String">
@@ -51,10 +51,10 @@
 	</select>
 	
 	<select id="stClssSearch" parameterType="String" resultType="map">
-	SELECT STDT.STDT_NO stdtNo, SCR.QZ_ID qzId, TP.EXAM_TITLE examTitle, USR.NM nm, SCR.SCORE score, SCR.SBJT_NM sbjtNm
+	SELECT STDT.STDT_NO stdtNo, SCR.EXAM_ID examId, TP.EXAM_TITLE examTitle, USR.NM nm, SCR.SCORE score, SCR.SBJT_NM sbjtNm
 		FROM TB_STDTCLSS CLSS, TB_STDT STDT, TB_SCR SCR, TB_USR USR, TB_EXAM_TP TP
 			WHERE CLSS.STDT_NO = STDT.STDT_NO AND STDT.ID = USR.ID
-			AND STDT.STDT_NO = SCR.STDT_NO AND SCR.QZ_ID = TP.EXAM_ID
+			AND STDT.STDT_NO = SCR.STDT_NO AND SCR.EXAM_ID = TP.EXAM_ID
 			AND CLSS.CLSS_ID = #{clssId}
 	</select>
 	
