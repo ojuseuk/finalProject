@@ -49,6 +49,10 @@
 		update TB_USR set pw=#{pw} where id=#{id}
 	</update>
 	
+	<!-- delete user -->
+	<!-- <delete id="delUser" >
+		delete from TB_USR where id=#{id} and pw=#{pw}
+	</delete> -->
 	
 </mapper>
 

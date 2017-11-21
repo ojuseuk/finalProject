@@ -149,15 +149,15 @@ public class UsrController {
 	}
 	
 	//after id check change pwd : new-password->pw
-	@RequestMapping("new_change_password")
-	public String new_change_password(String id,String pw) throws SQLException{
-		System.out.println("new_change_passwordcontroller id : " + id);
-		System.out.println("new_change_passwordcontroller pw : " + pw);
+	@RequestMapping("afChangePwdNew")
+	public String changePwdNew(String id,String pw) throws SQLException{
+		System.out.println("afchangePwdNewcontroller id : " + id);
+		System.out.println("afchangePwdNewcontroller pw : " + pw);
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		System.out.println("아이디,비밀번호:"+id+","+pw);
 		map.put("id", id);
 		map.put("pw", pw);//수정
-		usrService.new_change_pwd(map);
+		usrService.changePwdNew(map);
 			
 		return "redirect:/main.jsp";
 	}
@@ -178,11 +178,29 @@ public class UsrController {
 	}//end idcheck
 		
 	//go delUser.jsp
-		@RequestMapping(value="delUser")
-		public String delUser(HttpSession session) {
-			return "user/delUser";
+	@RequestMapping(value="delUser")
+	public String delUser(HttpSession session) {
+		return "user/delUser";
+	}
+	//delete user
+	/*@RequestMapping(value="/del")
+	public @ResponseBody String delUser(@RequestParam("pw") String pw) throws SQLException {
+		System.out.println("delUsercontroller pw : " + pw); 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pw", pw);
+		JSONObject json = new JSONObject();
+		USRDto usrdto=usrService.delUser(map);
+			
+		if(usrdto != null) {
+			json.put("delCheck", usrdto.getPw());
+		}else {
+			json.put("delCheck", false);
 		}
-		
+		String data1=json.toString();
+		System.out.println(data1);
+			
+		return json.toString();
+		}*///end delete user	
 	
 }//end controller 
 

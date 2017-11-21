@@ -25,6 +25,8 @@ public interface UsrService {
 	public USRDto pwdCheck(HashMap<String, String> map) throws SQLException;
 	
 	//after id check change pwd
-	public int new_change_pwd(HashMap<String, Object> map) throws SQLException;
+	public int changePwdNew(HashMap<String, Object> map) throws SQLException;
+	//delete user
+/*	public USRDto delUser(HashMap<String, Object> map)throws SQLException;*/
 		
 }

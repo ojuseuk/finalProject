@@ -13,6 +13,8 @@ public interface UsrDao {
 	USRDto idCheck(String id)throws SQLException;
 	USRDto pwdCheck(HashMap<String, String> map)throws SQLException;
 	//after id check change pwd
-	int new_change_pwd(HashMap<String, Object> map)throws SQLException;
-	
+	int changePwdNew(HashMap<String, Object> map)throws SQLException;
+	//delete user
+/*	USRDto delUser(HashMap<String, Object> map)throws SQLException;
+	*/
 }

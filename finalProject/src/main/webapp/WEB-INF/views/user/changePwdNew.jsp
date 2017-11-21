@@ -95,7 +95,7 @@
 		<span style="font-size:12px;font-weight:bold; color: #353535;">본인확인이 완료되었습니다.<br>
 			새 비밀번호를 입력해주세요.</span><br>
 		<div id="upload_request_div" style="margin-left:100px;">
-			<form method="post" action="new_change_password">
+			<form method="post" action="afChangePwdNew">
 				<input type="text" id="id" name="id" value="${id}" class="form-control" style="width:200px;" readonly="readonly"><br>
 				<input type="password" id="pw" name="pw" placeholder="새 비밀번호 입력" class="form-control" style="width:200px;">
 				<span class="check_error"></span><br>

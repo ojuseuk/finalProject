@@ -64,9 +64,16 @@ public class UsrServiceImp implements UsrService {
 	
 	//after id check change pwd
 	@Override
-	public int new_change_pwd(HashMap<String, Object> map) throws SQLException{
-		System.out.println("servicenew_change_pwd : " + map);
-		return usrDao.new_change_pwd(map);
+	public int changePwdNew(HashMap<String, Object> map) throws SQLException{
+		System.out.println("servicechangePwdNew : " + map);
+		return usrDao.changePwdNew(map);
 	}
+	
+	
+	//delete user
+	/*public USRDto delUser(HashMap<String, Object> map)throws SQLException{
+		System.out.println("servicedelUser : " + map);
+		return usrDao.delUser(map);
+	}*/
 	
 }
