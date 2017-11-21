@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="root" value="${pageContext.request.contextPath}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<title>나의수강목록</title>
 <c:if test="${not empty requestScope.list}">
 	<table id="myClssList" border="0" cellpadding="5" cellspacing="2"
 		width="100%" bordercolordark="white" bordercolorlight="black">

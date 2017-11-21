@@ -11,6 +11,7 @@ import com.project.dto.CRSDto;
 import com.project.dto.ClssInfoDto;
 import com.project.dto.DateDto;
 import com.project.dto.SBJTDto;
+import com.project.dto.SCRDto;
 
 @Service
 public class SchLfServiceImp implements SchLfService{
@@ -46,6 +47,11 @@ public class SchLfServiceImp implements SchLfService{
 	@Override
 	public List<Map<String, String>> selectMyAttnd(DateDto dto) {
 		return schLfDao.selectMyAttnd(dto);
+	}
+
+	@Override
+	public List<SCRDto> selectMyScr(String id) {
+		return schLfDao.selectMyScr(id);
 	}
 
 	

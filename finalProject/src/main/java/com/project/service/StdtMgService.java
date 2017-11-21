@@ -24,4 +24,6 @@ public interface StdtMgService {
 	public List<STDTInfoDto> selectStdtByCrs(String crsId);
 	public String selectStdtId(String id);
 	public int insertStdt(STDTDto dto);
+	public int insertStdtClss(STDTCLSSDto dto);
+	
 }

@@ -2,29 +2,39 @@ package com.project.dto;
 
 public class SCRDto {
 
-	private String qzId;
+	private String examId;
 	private String stdtNo;
 	private String sbjtNm;
 	private int score;
+	private String examTitle;
 	
 	public SCRDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SCRDto(String qzId, String stdtNo, String sbjtNm, int score) {
+	public SCRDto(String examId, String stdtNo, String sbjtNm, int score) {
 		super();
-		this.qzId = qzId;
+		this.examId = examId;
 		this.stdtNo = stdtNo;
 		this.sbjtNm = sbjtNm;
 		this.score = score;
 	}
 
-	public String getQzId() {
-		return qzId;
+	public SCRDto(String examId, String stdtNo, String sbjtNm, int score, String examTitle) {
+		super();
+		this.examId = examId;
+		this.stdtNo = stdtNo;
+		this.sbjtNm = sbjtNm;
+		this.score = score;
+		this.examTitle = examTitle;
 	}
 
-	public void setQzId(String qzId) {
-		this.qzId = qzId;
+	public String getExamId() {
+		return examId;
+	}
+
+	public void setExamId(String examId) {
+		this.examId = examId;
 	}
 
 	public String getStdtNo() {
@@ -51,22 +61,29 @@ public class SCRDto {
 		this.score = score;
 	}
 
+	public String getExamTitle() {
+		return examTitle;
+	}
+
+	public void setExamTitle(String examTitle) {
+		this.examTitle = examTitle;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("SCRDto [qzId=");
-		builder.append(qzId);
+		builder.append("SCRDto [examId=");
+		builder.append(examId);
 		builder.append(", stdtNo=");
 		builder.append(stdtNo);
 		builder.append(", sbjtNm=");
 		builder.append(sbjtNm);
 		builder.append(", score=");
 		builder.append(score);
+		builder.append(", examTitle=");
+		builder.append(examTitle);
 		builder.append("]");
 		return builder.toString();
 	}
-
-	
-	
 }
 

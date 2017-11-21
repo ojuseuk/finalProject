@@ -2,11 +2,11 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- *학생 중복 출력 수정, 업데이트 시 종합반만 변경 가능하게 수정, 중복코드 정리, 변수 정리, 스크롤 -->
-
+<title>학생정보</title>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<div><p align="center">
+<div>
 	<c:if test="${not empty crsList}">
 		<select name="crs" id="crs"
 			onchange="reqCrsList(this.value,'${root}')">
@@ -21,73 +21,9 @@
 		</select> 
 	<input id="searchNm" type="text" name="name" value=""> 
 	<input type="button" value="검색" onclick="searchNm('${root}')">
-</p></div>
-
-<div style="width: 25%; height: 600px; float: left;">
-	<form action="${root}/insertStdt">
-		<table id="inStdt" border="0" cellpadding="5" cellspacing="2" width="100%"
-			bordercolordark="white" bordercolorlight="black">
-			<tr>
-				<td></td>
-				<td><p align="left">
-					<b>수강생 등록</b>
-				</p></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td bgcolor="#336699"><font color="white"><b>아이디</b></font></td>
-				<td><input id="stdtId" type="text" name="id" value="" placeholder="ID검색"><input id="selectId" type="button" value="조회"></td>
-			</tr>
-			<tr>
-				<td bgcolor="#336699"><font color="white"><b>수강생번호</b></font></td>
-				<td><input type="text" name="stdtNo" value="${stdtNo}">(+1)</b></font></td>
-			</tr>
-			<tr>
-				<td bgcolor="#336699"><font color="white"><b>학과</b></font></td>
-				<td><select id="mjrTp" name="mjrTp">
-					<option value="mj001">문과</option>
-					<option value="mj002">이과</option>
-					<option value="mj003">예체능</option>
-				</select>
-				<input type="hidden" name="mjrTp">
-				</td>
-			</tr>
-			<tr>
-				<td bgcolor="#336699"><font color="white"><b>강좌</b></font></td>
-				<td><select id="geClss" name="clssId">
-					<option value="clss5">종합반A</option>
-					<option value="clss2">종합반B</option>
-					<option value="clss6">종합반C</option>
-				</select>
-				<input type="hidden" name="mjrTp">
-				</td>
-			</tr>
-			<tr>
-				<td bgcolor="#336699"><font color="white"><b>대입응시회수</b></font></td>
-				<td><input type="number" name="retryCnt"></td>
-			</tr>
-			<tr>
-				<td bgcolor="#336699"><font color="white"><b>부모님 연락처</b></font></td>
-				<td><input type="text" name="prntPhone"></td>
-			</tr>
-			<tr>
-				<td bgcolor="#336699"><font color="white"><b>등록일</b></font></td>
-				<td><input type="date" name="paidDt" id="regDate"></td>
-			</tr>
-			<tr>
-				<td bgcolor="#336699"><font color="white"><b>환불일</b></font></td>
-				<td><input type="date" name="date" id="retDate"></td>
-			</tr>
-			<tr>
-				<td><p align="center">
-						<input type="submit" value="저장"> <input type="reset" value="리셋">
-				</p></td>
-			</tr>
-		</table>
-	</form>
 </div>
 
-<div style="width: 33%; height: 500px; overflow: auto; float: left;">
+<div style="width:50%; height:400px; overflow:auto; float:left;">
 	<table id="stdtList" border="0" cellpadding="5" cellspacing="2"
 		width="100%" bordercolordark="white" bordercolorlight="black">
 		<tr>
@@ -133,6 +69,67 @@
 			</tr>
 		</c:forEach>
 	</table>
+</div>
+<div style="width:50%; height:400px; overflow:auto; float:left;">
+	<form action="${root}/insertStdt">
+		<table id="inStdt" border="0" cellpadding="5" cellspacing="2" width="100%"
+			bordercolordark="white" bordercolorlight="black">
+			<tr>
+				<td></td>
+				<td><p align="left">
+					<b>수강생 등록</b>
+				</p></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td bgcolor="#336699"><font color="white"><b>아이디</b></font></td>
+				<td><input id="stdtId" type="text" name="id" value="" placeholder="ID검색"><input id="selectId" type="button" value="조회"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#336699"><font color="white"><b>수강생번호</b></font></td>
+				<td><input type="text" name="stdtNo" value="${stdtNo}"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#336699"><font color="white"><b>학과</b></font></td>
+				<td><select id="mjrTp" name="mjrTp">
+					<option value="mj001">문 과</option>
+					<option value="mj002">이 과</option>
+					<option value="mj003">예체능</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#336699"><font color="white"><b>강좌</b></font></td>
+				<td><select id="geClss" name="clssId">
+					<option value="clss5">종합반A</option>
+					<option value="clss2">종합반B</option>
+					<option value="clss6">종합반C</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#336699"><font color="white"><b>대입응시회수</b></font></td>
+				<td><input type="number" name="retryCnt"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#336699"><font color="white"><b>부모님 연락처</b></font></td>
+				<td><input type="text" name="prntPhone"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#336699"><font color="white"><b>등록일</b></font></td>
+				<td><input type="date" name="paidDt" id="regDate"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#336699"><font color="white"><b>환불일</b></font></td>
+				<td><input type="date" name="repaidDt" id="retDate"></td>
+			</tr>
+			<tr>
+				<td><p align="center">
+						<input type="submit" value="저장"> <input type="reset" value="리셋">
+				</p></td>
+			</tr>
+		</table>
+	</form>
 </div>
 
 <div id="stdtInfo" style="font-size: 12pt;"></div>
@@ -265,22 +262,38 @@
 				clssData3 = JSON.parse(clssData3);
 				var i = 0;
 				var j = 1;
-				clssTag = clssData3[i].id + '<br>'
-						+ clssData3[i].stdtNo + '<br>' 
-						+ clssData3[i].nm + '<br>' 
-						+ clssData3[i].addr + '<br>'
-						+ clssData3[i].phone + '<br>' 
-						+ clssData3[i].prntPhone + '<br>' 
-						+ clssData3[i].email + '<br>'
-						+ clssData3[i].clssNm + '<br>'
+				clssTag = '<div style="width:100%">'
+						+ '<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">'
+						+ '<tr><td bgcolor="#336699"><font color="white"><b>아이디</b></font></td><td>' 
+						+ clssData3[i].id + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>수강생번호</b></font></td><td>'
+						+ clssData3[i].stdtNo + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>이름</b></font></td><td>'
+						+ clssData3[i].nm + '</td>' 
+						+ '<td bgcolor="#336699"><font color="white"><b>주소</b></font></td><td>'
+						+ clssData3[i].addr + '</td>'
+						+ '<tr><td bgcolor="#336699"><font color="white"><b>핸드폰번호</b></font></td><td>'
+						+ clssData3[i].phone + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>부모님번호</b></font></td><td>'
+						+ clssData3[i].prntPhone + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>이메일</b></font></td><td>'
+						+ clssData3[i].email + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>수강강좌</b></font></td><td>'
+						+ clssData3[i].clssNm 
 				if(clssData3.length > 1){
-					clssTag += clssData3[i + j].clssNm + '<br>'
+					clssTag += ',' + clssData3[i + j].clssNm + '</td>'
 				}
-				clssTag += clssData3[i].mjrTp + '<br>' 
-						+ clssData3[i].retryCnt	+ '<br>' 
-						+ clssData3[i].paidDt + '<br>'
-						+ clssData3[i].repaidDt + '<br>'
-						+ '<input type="button" value="정보변경" onclick="updateStdt(\'' + stdtNo + '\',\'' + root + '\');">';
+				clssTag += '</td>' 
+						+ '<tr><td bgcolor="#336699"><font color="white"><b>학과</b></font></td><td>'
+						+ clssData3[i].mjrTp + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>대입응시횟수</b></font></td><td>'
+						+ clssData3[i].retryCnt + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>등록일</b></font></td><td>'
+						+ clssData3[i].paidDt + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>환불일</b></font></td><td>'
+						+ clssData3[i].repaidDt + '</td></tr>'
+						+ '</table><input type="button" value="정보변경" onclick="updateStdt(\'' + stdtNo + '\',\'' + root + '\');">'
+						+ '</div>';
 			}
 			document.getElementById("stdtInfo").innerHTML = clssTag;
 		}
@@ -297,25 +310,40 @@
 				clssTag = '<form action="'+ root + '/updateStdt">';
 				var i = 0;
 				var j = 1;
-				clssTag += clssData3[i].id + '<br>'
-						+ clssData3[i].stdtNo + '<br>' 
+				clssTag += '<div style="width:100%">'
+						+ '<table align="center" border="0" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black">'
+						+ '<tr><td bgcolor="#336699"><font color="white"><b>아이디</b></font></td><td>' 
+						+ clssData3[i].id + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>수강생번호</b></font></td><td>'
+						+ clssData3[i].stdtNo + '</td>'
 						+ '<input type="hidden" name="stdtNo" value="'+ clssData3[i].stdtNo + '">'
-						+ clssData3[i].nm + '<br>'
-						+ clssData3[i].addr + '<br>'
-						+ clssData3[i].phone + '<br>' 
-						+ clssData3[i].prntPhone + '<br>'
-						+ clssData3[i].email + '<br>'
-						+ '<input type="text" name="clssId" value="' + clssData3[i].clssId + '">' + '<br>'
-						+ clssData3[i].clssNm + '<br>'
+						+ '<td bgcolor="#336699"><font color="white"><b>이름</b></font></td><td>'
+						+ clssData3[i].nm + '</td>' 
+						+ '<td bgcolor="#336699"><font color="white"><b>주소</b></font></td><td>'
+						+ clssData3[i].addr + '</td>'
+						+ '<tr><td bgcolor="#336699"><font color="white"><b>핸드폰번호</b></font></td><td>'
+						+ clssData3[i].phone + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>부모님번호</b></font></td><td>'
+						+ clssData3[i].prntPhone + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>이메일</b></font></td><td>'
+						+ clssData3[i].email + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>수강강좌</b></font></td><td>'
+						+ clssData3[i].clssNm 
+						+ '<input type="text" name="clssId" size="5%" value="' + clssData3[i].clssId + '"><br>'
 				if(clssData3.length > 1){
-					clssTag += '<input type="text" name="clssId" value="' + clssData3[i + j].clssId + '">' + '<br>'
-							+ clssData3[i + j].clssNm + '<br>'
+					clssTag += clssData3[i + j].clssNm + '<input type="text" name="clssId" size="5%" value="' 
+							+ clssData3[i + j].clssId + '"></td>'
 				}
-				clssTag += clssData3[i].mjrTp + '<br>' 
-						+ clssData3[i].retryCnt + '<br>'
-						+ clssData3[i].paidDt + '<br>'
-						+ clssData3[i].repaidDt + '</h3>' + '<br>'
-						+ '<input type="submit" value="저장">' 
+				clssTag += '</td>' 
+						+ '<tr><td bgcolor="#336699"><font color="white"><b>학과</b></font></td><td>'
+						+ clssData3[i].mjrTp + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>대입응시횟수</b></font></td><td>'
+						+ clssData3[i].retryCnt + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>등록일</b></font></td><td>'
+						+ clssData3[i].paidDt + '</td>'
+						+ '<td bgcolor="#336699"><font color="white"><b>환불일</b></font></td><td>'
+						+ clssData3[i].repaidDt + '</td></tr>'
+						+ '</table><input type="submit" value="저장">' 
 						+ '</form>';
 				}
 				document.getElementById("stdtInfo").innerHTML = clssTag;

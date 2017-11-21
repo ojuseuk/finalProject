@@ -88,4 +88,9 @@ public class StdtMgDaoImp implements StdtMgDao {
 	public int insertStdt(STDTDto dto) {
 		return sqlSession.insert("stdtMgMapper.insertStdt", dto);
 	}
+	
+	@Override
+	public int insertStdtClss(STDTCLSSDto dto) {
+		return sqlSession.insert("stdtMgMapper.insertStdtClss", dto);
+	}
 }

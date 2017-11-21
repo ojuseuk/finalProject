@@ -8,6 +8,7 @@ import com.project.dto.CRSDto;
 import com.project.dto.ClssInfoDto;
 import com.project.dto.DateDto;
 import com.project.dto.SBJTDto;
+import com.project.dto.SCRDto;
 
 public interface SchLfService {
 	public List<SBJTDto> selectBySbjt();
@@ -16,5 +17,5 @@ public interface SchLfService {
 	public List<ClssInfoDto> selectClssPerCrs(String crsId);
 	public List<ClssInfoDto> selectMyClss(String id);
 	public List<Map<String, String>> selectMyAttnd(DateDto dto);
-	
+	public List<SCRDto> selectMyScr(String id);
 }

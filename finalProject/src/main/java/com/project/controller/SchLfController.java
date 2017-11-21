@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.dto.CRSDto;
 import com.project.dto.ClssInfoDto;
 import com.project.dto.DateDto;
+import com.project.dto.SCRDto;
 import com.project.service.SchLfService;
 
 import net.sf.json.JSONArray;
@@ -125,11 +126,16 @@ public class SchLfController {
 		return "schLf/myClssView";
 	}
 	
-	@RequestMapping("myScr")
-	public String selectMyScr(){
-		return null;
-	}
-	
+	/**
+	 * @Method Name : selectMyAttnd
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 나의 출결현황 조회
+	 * return type  : ModelAndView
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("myAttnd")
 	public ModelAndView selectMyAttnd(HttpSession session, Model model){
 		System.out.println(session.getAttribute("id").toString());
@@ -140,8 +146,6 @@ public class SchLfController {
 		String month = formatter2.format(currentTime);
 		String statDt = date + "01";
 		String endDt = "";
-		System.out.println(date);
-		System.out.println(month);
 		
 		if(month.equals("1")){
 			endDt = date + "31";
@@ -178,6 +182,27 @@ public class SchLfController {
 		mav.addObject("list", list);
 		mav.addObject("json", json);
 		mav.setViewName("schLf/myAttndView");
+		return mav;
+	}
+	
+	/**
+	 * @Method Name : selectMyScr
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 나의 성적 조회
+	 * return type  : String
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/myScr")
+	public ModelAndView selectMyScr(HttpSession session, Model model){
+		ModelAndView mav = new ModelAndView();
+		List<SCRDto> list = schLfService.selectMyScr(session.getAttribute("id").toString());
+		JSONArray json = JSONArray.fromObject(list);
+		mav.addObject("scrList", list);
+		mav.addObject("json", json);
+		mav.setViewName("schLf/myScrView");
 		return mav;
 	}
 }

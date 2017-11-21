@@ -86,4 +86,9 @@ public class StdtMgServiceImp implements StdtMgService {
 	public int insertStdt(STDTDto dto) {
 		return stdtMgDao.insertStdt(dto);
 	}
+
+	@Override
+	public int insertStdtClss(STDTCLSSDto dto) {
+		return stdtMgDao.insertStdtClss(dto);
+	}
 }

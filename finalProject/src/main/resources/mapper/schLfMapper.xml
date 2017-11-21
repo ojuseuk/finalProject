@@ -76,4 +76,18 @@
 		WHERE ID = #{id} AND DT BETWEEN #{strtDt} AND #{endDt}
 		ORDER BY DT
 	</select>
+	<resultMap type="SCRDto" id="ResultOfMyScr">
+		<result property="examId" column="EXAM_ID"/>
+		<result property="stdtNo" column="STDT_NO"/>
+		<result property="sbjtNm" column="SBJT_NM"/>
+		<result property="score" column="SCORE"/>
+		<result property="examTitle" column="EXAM_TITLE"/>
+	</resultMap>
+	<select id="myScr" resultMap="ResultOfMyScr" parameterType="String">
+		SELECT TB_STDT.STDT_NO, TB_EXAM_TP.EXAM_TITLE, TB_SCR.SBJT_NM, TB_SCR.SCORE, TB_SCR.EXAM_ID
+		FROM TB_STDT
+		JOIN TB_SCR ON TB_STDT.STDT_NO = TB_SCR.STDT_NO
+		JOIN TB_EXAM_TP ON TB_SCR.EXAM_ID = TB_EXAM_TP.EXAM_ID
+		WHERE ID = #{id}
+	</select>
 </mapper>

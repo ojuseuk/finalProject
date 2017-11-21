@@ -12,6 +12,7 @@ import com.project.dto.CRSDto;
 import com.project.dto.ClssInfoDto;
 import com.project.dto.DateDto;
 import com.project.dto.SBJTDto;
+import com.project.dto.SCRDto;
 import com.project.dto.STDTDto;
 
 @Repository
@@ -51,5 +52,8 @@ public class SchLfDaoImp implements SchLfDao{
 		return sqlSession.selectList("schLfMapper.myAttnd", dto);
 	}
 
-	
+	@Override
+	public List<SCRDto> selectMyScr(String id) {
+		return sqlSession.selectList("schLfMapper.myScr", id);
+	}
 }

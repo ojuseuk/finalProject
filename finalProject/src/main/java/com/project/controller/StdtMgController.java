@@ -54,9 +54,14 @@ public class StdtMgController {
 	 */
 	@RequestMapping("/stdtAllList")
 	public String selectByCrs(Model model){
+		String stdtNo = stdtMgService.selectStdtNo();
+		String no = stdtNo.substring(1);
+		int num = Integer.parseInt(no);
+		no = Integer.toString(++num);
+		stdtNo = stdtNo.substring(0, 1) + no;
 		model.addAttribute("crsList", stdtMgService.selectByCrs());
 		model.addAttribute("stdtAllList", stdtMgService.selectAllByStdt());
-		model.addAttribute("stdtNo", stdtMgService.selectStdtNo());
+		model.addAttribute("stdtNo", stdtNo);
 		return "stdtMg/StdtListView";
 	}
 	
@@ -128,7 +133,7 @@ public class StdtMgController {
 	 * @Method Name : updateToStdt
 	 * @작성일	    : 2017. 11. 13. 
 	 * @작성자	    : 김동근
-	 * @Method 설명	: 수강생의 반 정보 변경
+	 * @Method 설명	: 수강생의 반 정보 변경, 부모님 연락처 변경?
 	 * return type  : String
 	 * @param stdtInfo
 	 * @param model
@@ -185,11 +190,23 @@ public class StdtMgController {
 		return stdtMgService.selectStdtId(id);
 	}
 	
+	/**
+	 * @Method Name : insertStdt
+	 * @작성일	    : 2017. 11. 20. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 종합반 수강생 등록
+	 * return type  : String
+	 * @param stdtDto
+	 * @param stdtClssDto
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/insertStdt")
-	public String insertStdt(STDTDto dto, STDTCLSSDto dto1, Model model){
-		System.out.println(dto);
-		System.out.println(dto1);
-//		stdtMgService.insertStdt(dto);
+	public String insertStdt(STDTDto stdtDto, STDTCLSSDto stdtClssDto, Model model){
+		String date = stdtClssDto.getPaidDt().replace("-", "");
+		stdtClssDto.setPaidDt(date);
+		stdtMgService.insertStdt(stdtDto);
+		stdtMgService.insertStdtClss(stdtClssDto);
 		return "redirect:/stdtAllList";
 	}
 }
