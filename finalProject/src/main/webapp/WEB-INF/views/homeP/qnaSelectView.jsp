@@ -7,86 +7,126 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+td.details-control {
+	background: url('../imgs/grid/plus.JPG') no-repeat center center;
+	cursor: pointer;
+}
+
+tr.shown td.details-control {
+	background: url('../imgs/grid/minus.JPG') no-repeat center center;
+}
+</style>
 </head>
+<!-- dataTable 기본 css -->
 <link rel="stylesheet"
 	href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet"
 	href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<!-- select : true 사용하기 위한 css -->
+<link rel="stylesheet"
+	href="${root}/styles/vendor/css/dataTables.min.css" />
+<link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
+
+<!-- jquery사용을 위한 js -->
 <script src="${root}/js/jquery.min.js"></script>
+<!-- dataTable 기본 js -->
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+<!-- datatable select 사용을 위한 js -->
+<script src="${root}/js/vendor/datatables/select.min.js"></script>
 <body>
-
-	<div class="w3-container">
-		<h2>게시판 목록</h2>
-		<input type="hidden" value='${requestScope.json}' id="json">
-
-		<div style="width: 100%;">
-			<div id="demo" class="card mb-3" align="left"
-				style="float: left; width: 50%">
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="w3-table w3-bordered" id="dataTable">
-							<thead>
-								<tr>
-									<th>게시판 번호</th>
-									<th>게시판 제목</th>
-									<th>작성자</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div>
-				</div>
+<input type="hidden" value='${requestScope.json}' id="json">
+<input type="hidden" value='${root}' id="root">
+<input type="hidden" value="${requestScope.result }" id="result">
+<h2>게시판 목록</h2>
+	
+	
+<div class="container-fluid">
+	<div id="demo" class="card mb-3">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered" id="dataTable">
+					<thead>
+						<tr>
+							<th>게시판 번호</th>
+							<th>게시판 제목</th>
+							<th>작성자</th>
+							<th>작성 날짜</th>
+							<th>상세 보기</th>
+							<th>수정 하기</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
 			</div>
 		</div>
+		<div>
+			<button onclick="location.href='${root}/homeP/qnaInsertView?no=0'">게시글 생성</button>
+		</div>
 	</div>
-
+</div>
+	<button onclick="location.href=www.naver.com">링크</button>
 	<script type="text/javascript">
 		var json = $('#json').val()
 		json = JSON.parse(json);
-
 		console.log(json);
+		var root = $('#root').val();
+		var result = $('#result').val();
+		alert(result);
 
 		function format(d) {
-			// `d` is the original data object for the row
-			return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'
-					+ '<tr>'
-					+ '<td>Full name:</td>'
-					+ '<td>'
-					+ d.name
-					+ '</td>'
-					+ '</tr>'
-					+ '<tr>'
-					+ '<td>Extension number:</td>'
-					+ '<td>'
-					+ d.extn
-					+ '</td>'
-					+ '</tr>'
-					+ '<tr>'
-					+ '<td>Extra info:</td>'
-					+ '<td>And any further details here (images etc)...</td>'
-					+ '</tr>' + '</table>';
+			return '게시글 내용 : ' + d.content + '<br>'
+					+ '<button onclick="location.href=\'' + root
+					+ '/homeP/qnaInsertView?no=' + d.no + '&gpNum=' + d.gpNum
+					+ '&seqNum=' + d.seqNum + '&seqLv=' + d.seqLv
+					+ '\'">댓글 달기</button>';
 		}
 
 		var table = $('#dataTable').DataTable({
-			"scrollY" : 250,
-			"scrollCollapse" : true,
-			data : json,
-			columns : [ {
+			"processing" : true,
+			"ordering" : false,
+			"select" : {
+				style : 'single'
+			},
+			"data" : json,
+			"columns" : [ {
+				"data" : "no"/* ,
+				"width" : "5%" */
+			}, {
+				"data" : "title",
+				/* "width" : "30%", */
+				"render" : function(data, type, row, meta) {
+					var str = "";
+					if(row.seqLv > 0){
+						for (var i = 0; i < row.seqLv; i++) {
+							str += "&nbsp&nbsp&nbsp";
+						}
+						str+="└>";
+					}
+					return str + data + '(' + row.seqLv + ')';
+
+				}
+			}, {
+				"data" : "id"/* ,
+				"width" : "15%" */
+			}, {
+				"data" : "dt"/* ,
+				"width" : "15%" */
+			}, {
 				"className" : 'details-control',
+				"width" : "10%",
 				"orderable" : false,
 				"data" : null,
 				"defaultContent" : ''
-			}, {
-				"data" : "no"
-			}, {
-				"data" : "title"
-			}, {
-				"data" : "id"
-			} ],
-			"order" : [ [ 1, 'asc' ] ]
+			},{
+				"data" : null,
+				"render" : function(data, row, type, meta){
+					
+					return '<button onclick="location.href=\''+root+'/homeP/qnaUpdateView?no='+data.no+'\'">수정 하기</button>';
+				}
+			} ]
 		});
 
 		$('#dataTable tbody').on('click', 'td.details-control', function() {
@@ -102,9 +142,8 @@
 				row.child(format(row.data())).show();
 				tr.addClass('shown');
 			}
+
 		});
 	</script>
-
-
 </body>
 </html>

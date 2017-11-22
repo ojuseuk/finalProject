@@ -137,6 +137,20 @@ public class SaleMgController {
 
 	}
 
+	/**
+	 * @Method Name : saleMgltfeeInsert
+	 * @작성일	    : 2017. 11. 12. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : ModelAndView
+	 * @param tchrId
+	 * @param tchrSlr
+	 * @param tchrNm
+	 * @param ssnId
+	 * @param ssnSlr
+	 * @param ssnNm
+	 * @return
+	 */
 	@RequestMapping("/ltfeeInsert")
 	public ModelAndView saleMgltfeeInsert(@RequestParam(value="tchrId", required=true) List<String> tchrId, 
 	@RequestParam(value="tchrSlr", required=true) List<String> tchrSlr, @RequestParam(value="tchrNm", required=true) List<String> tchrNm, 

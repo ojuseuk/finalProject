@@ -61,13 +61,59 @@ public class HomePServiceImp implements HomePService {
 		
 	}
 
+	/**
+	 * @Method Name : qnaSelectView
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @return
+	 */
 	@Override
 	public List<QNADto> qnaSelectView() {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service qnaSelectView");
+		
+		System.out.println(homePDao.qnaSelectView());
+		
 		return homePDao.qnaSelectView();
 		
+	}
+
+	/**
+	 * @Method Name : qnaUpdateView
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @param no
+	 */
+	@Override
+	public QNADto qnaUpdateView(int no) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("service qnaUpdateView");
+		return homePDao.qnaUpdateView(no);
+		
+		
+	}
+
+	/**
+	 * @Method Name : qnaUpdate
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @param qnaDto
+	 * @return
+	 */
+	@Override
+	public int qnaUpdate(QNADto qnaDto) {
+		// TODO Auto-generated method stub
+		System.out.println("service qnaUpdate");
+		
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		qnaDto.setDt(dateFormat.format(date));
+		return homePDao.qnaUpdate(qnaDto);
 	}
 	
 }
