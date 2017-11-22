@@ -6,10 +6,11 @@
 <link rel="stylesheet" href="${root}/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="${root}/styles/kendo.default.min.css" />
 <link rel="stylesheet" href="${root}/styles/kendo.default.mobile.min.css" />
-<link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <html>
 <title>나의 성적</title>
+<jsp:include page="../../../top.jsp"/>
 	<div id="chart"></div>
 	<div id="examTp">
 		<select id="examTpList" onchange="scrBySbjt(this.value,'${root}')"></select>
@@ -215,4 +216,6 @@
 		}
 	}
 </script>
+<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
+<jsp:include page="../../../footer.jsp"/>
 </html>

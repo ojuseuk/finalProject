@@ -7,6 +7,7 @@
 <title>에러 페이지</title>
 </head>
 <body>
+<jsp:include page="../../../top.jsp"/>
 	오류가 발생했습니다.
 </body>
 </html>

@@ -1,12 +1,12 @@
 package com.project.dao;
 
 import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.dto.EMPDto;
+import com.project.dto.TCHRASSNDto;
 import com.project.dto.TCHRDto;
 import com.project.dto.USRDto;
 
@@ -107,6 +107,34 @@ public class EmpMgDaoImp implements EmpMgDao {
 		// TODO Auto-generated method stub
 		System.out.println("DAO update 전 : " + tchr);
 		return sqlSession.update("empMgMapper.tchrUpdate", tchr);
+	}
+
+	@Override
+	public List tchrSelectBySbjtNm(String sbjtNm) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("empMgMapper.tchrSelectBySbjtNm", sbjtNm);
+	}
+
+	@Override
+	public String assnTchr(TCHRASSNDto tchrAssn) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		String resultMsg = "";
+		result = sqlSession.insert("empMgMapper.assnTchr", tchrAssn);
+		System.out.println("assnTchr 실행결과 : " + result); 	// @@@  1 행 insert/update 시 1 리턴 
+		if(result > 0) {
+			resultMsg = "강사 배정 작업이 정상적으로 수행되었습니다.";
+		} else {
+			resultMsg = "강사 배정 작업에 실패하였습니다.";
+		}
+		System.out.println(resultMsg); // @@@ 
+		return resultMsg;
+	}
+
+	@Override
+	public TCHRASSNDto tchrAssnSelect(String clssId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("empMgMapper.tchrAssnSelect", clssId);
 	}
 
 	

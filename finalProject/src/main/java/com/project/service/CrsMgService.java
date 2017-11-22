@@ -20,6 +20,10 @@ public interface CrsMgService {
 	public List sbjtSelectAll() throws SQLException;
 
 	public List crsSelectBySbjtNm(String sbjtNm);
+
+	public CLSSDto clssSelect(String clssId);
+
+	public List clssSelectByCourse(String crsId);
 	
 	
 

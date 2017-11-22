@@ -10,10 +10,14 @@
 </head>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
-
+	
 	<div class="w3-container">
 		<h2>댓글 게시판</h2>
 		<form action="${root}/homeP/qnaInsert">
+			<input type="hidden" value="${requestScope.qnaDto.no}" name="no">
+			<input type="hidden" value="${requestScope.qnaDto.gpNum}" name="gpNum">
+			<input type="hidden" value="${requestScope.qnaDto.seqLv}" name="seqLv">
+			<input type="hidden" value="${requestScope.qnaDto.seqNum}" name="seqNum">
 			<table class="w3-table w3-bordered">
 				<tr>
 					<td>제목 입력</td>

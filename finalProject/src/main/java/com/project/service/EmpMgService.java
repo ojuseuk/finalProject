@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.project.dto.EMPDto;
+import com.project.dto.TCHRASSNDto;
 import com.project.dto.TCHRDto;
-import com.project.dto.USRDto;
 
 public interface EmpMgService {
 
@@ -26,6 +26,12 @@ public interface EmpMgService {
 	public TCHRDto tchrSelect(String tchrNo);
 
 	public int tchrUpdate(TCHRDto tchr);
+
+	public List tchrSelectBySbjtNm(String sbjtNm);
+
+	public String assnTchr(TCHRASSNDto tchrAssn);
+
+	public TCHRASSNDto tchrAssnSelect(String clssId);
 
 
 }

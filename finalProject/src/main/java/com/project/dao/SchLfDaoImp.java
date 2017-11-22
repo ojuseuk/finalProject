@@ -27,12 +27,12 @@ public class SchLfDaoImp implements SchLfDao{
 	}
 
 	@Override
-	public List<CRSDto> selectByCrs() {
+	public List<ClssInfoDto> selectByCrs() {
 		return sqlSession.selectList("schLfMapper.selectCrs");
 	}
 
 	@Override
-	public List<CRSDto> selectCrsPerSbjt(String sbjtNm) {
+	public List<ClssInfoDto> selectCrsPerSbjt(String sbjtNm) {
 		return sqlSession.selectList("schLfMapper.selectCrsPerSbjt", sbjtNm);
 	}
 

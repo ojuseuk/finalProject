@@ -3,6 +3,7 @@ package com.project.dao;
 import java.util.List;
 
 import com.project.dto.EMPDto;
+import com.project.dto.TCHRASSNDto;
 import com.project.dto.TCHRDto;
 import com.project.dto.USRDto;
 
@@ -35,5 +36,11 @@ public interface EmpMgDao {
 	TCHRDto tchrSelect(String tchrNo);
 
 	int tchrUpdate(TCHRDto tchr);
+
+	List tchrSelectBySbjtNm(String sbjtNm);
+
+	String assnTchr(TCHRASSNDto tchrAssn);
+
+	TCHRASSNDto tchrAssnSelect(String clssId);
 
 }

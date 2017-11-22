@@ -54,6 +54,42 @@
 		VALUES(#{clssId}, #{crsId}, #{clssNm}, #{strtDt}, #{endDt}, #{strtTm}, #{endTm}, #{capa}, #{clssroom})
 	</insert>
 	
+	<select id="clssSelectByCourse" resultMap="ClssResult">
+		SELECT CLSS_ID, 
+				CL.CRS_ID AS CRS_ID, 
+				CLSS_NM, 
+				STRT_DT,
+				END_DT,
+				STRT_TM,
+				END_TM,
+				CAPA,
+				CLSSROOM,
+				SBJT_NM,
+				CRS_NM
+		FROM   TB_CRS CR INNER JOIN TB_CLSS CL 
+		    ON CR.CRS_ID = CL.CRS_ID
+		WHERE CL.CRS_ID = #{crsId}
+		ORDER BY CLSS_ID DESC 
+	</select>
+	
+	<select id="clssSelect" resultMap="ClssResult">
+		SELECT CLSS_ID, 
+				CL.CRS_ID AS CRS_ID, 
+				CLSS_NM, 
+				STRT_DT,
+				END_DT,
+				STRT_TM,
+				END_TM,
+				CAPA,
+				CLSSROOM,
+				SBJT_NM,
+				CRS_NM
+		FROM   TB_CRS CR INNER JOIN TB_CLSS CL 
+		    ON CR.CRS_ID = CL.CRS_ID
+		WHERE CLSS_ID = #{clssId}
+		ORDER BY CLSS_ID DESC 
+	</select>
+	
 	<select id="clssSelectAll" resultMap="ClssResult">
 		SELECT CLSS_ID, 
 				CL.CRS_ID AS CRS_ID, 

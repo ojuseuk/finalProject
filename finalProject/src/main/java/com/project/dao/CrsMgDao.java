@@ -19,4 +19,8 @@ public interface CrsMgDao {
 
 	List crsSelectBySbjtNm(String sbjtNm);
 
+	CLSSDto clssSelect(String clssId);
+
+	List clssSelectByCourse(String crsId);
+
 }

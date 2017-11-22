@@ -10,6 +10,8 @@ public interface HomePDao {
 	int qnaCnt();
 	int qnaSeqNum(QNADto qnaDto);
 	List<QNADto> qnaSelectView();
+	QNADto qnaUpdateView(int no);
+	int qnaUpdate(QNADto qnaDto);
 
 
 }

@@ -7,15 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/font-awesome/font-awesome.min.css" /> --%>
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/css/sb-admin.css" /> --%>
+
 <link rel="stylesheet" href="${root}/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="${root}/styles/kendo.default.min.css" />
 <link rel="stylesheet" href="${root}/styles/kendo.default.mobile.min.css" />
 
 <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
-<%-- <link rel="stylesheet" href="${root}/styles/vendor/font-awesome/font-awesome.min.css" /> --%>
-<%-- <link rel="stylesheet" href="${root}/styles/vendor/css/sb-admin.css" /> --%>
-
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/kendo.all.min.js"></script>
 </head>
@@ -156,14 +156,9 @@
 							console.log(d);
 
 							if ((d + 1) < saleList.length) {
-								if (saleList[d].year == saleList[d + 1].year
-										&& saleList[d].month == saleList[d + 1].month
-										&& saleList[d].day == saleList[d + 1].day) {
-									console.log("test1:  " + saleList[d].amount
-											+ "-" + saleList[d].day);
-									console.log("test2:  "
-											+ saleList[d + 1].amount + "-"
-											+ saleList[d + 1].day);
+								if (saleList[d].year == saleList[d + 1].year && saleList[d].month == saleList[d + 1].month && saleList[d].day == saleList[d + 1].day) {
+									console.log("test1:  " + saleList[d].amount + "-" + saleList[d].day);
+									console.log("test2:  " + saleList[d + 1].amount + "-" + saleList[d + 1].day);
 									amountD += saleList[d].amount;
 								} else {
 									amountD += saleList[d].amount;
@@ -197,6 +192,7 @@
 						};
 
 						day = day.unique();
+						
 						for (var f = 0; f < amount.length; f++) {
 							console.log(amount[f]);
 						}
@@ -218,6 +214,7 @@
 								type : "square"
 							}
 						} ];
+						
 						function createChart() {
 							$("#chart").kendoChart({
 								title : {

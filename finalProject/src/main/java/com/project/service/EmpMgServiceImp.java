@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.project.dao.EmpMgDao;
 import com.project.dto.EMPDto;
+import com.project.dto.TCHRASSNDto;
 import com.project.dto.TCHRDto;
+
+import util.DateTimeUtil;
 
 @Service
 public class EmpMgServiceImp implements EmpMgService {
@@ -35,6 +38,7 @@ public class EmpMgServiceImp implements EmpMgService {
 	@Override
 	public void tchrInsert(TCHRDto tchr) throws SQLException {
 		EMPDto emp = null;
+		System.out.println("service 강사의 사번 : " + tchr.getEmpNo());
 		emp = empSelect(tchr.getEmpNo());
 		if(emp == null) {					// DB에 emp가 존재하지 않는 경우
 			emp = new EMPDto(tchr.getEmpNo(), tchr.getId(), tchr.getSlr());
@@ -49,7 +53,7 @@ public class EmpMgServiceImp implements EmpMgService {
 		EMPDto emp = empMgDao.empSelect(empNo);
 		if(emp != null) {
 			if(emp.getRetiredDt() != null) {
-				emp.setRetiredDt(emp.getRetiredDt().substring(0, 4) + "-" + emp.getRetiredDt().substring(4, 6) + "-" + emp.getRetiredDt().substring(6, 8));
+				emp.setRetiredDt(DateTimeUtil.dateForm(emp.getRetiredDt()));
 			}
 		}
 		return emp;
@@ -68,13 +72,28 @@ public class EmpMgServiceImp implements EmpMgService {
 
 	@Override
 	public TCHRDto tchrSelect(String tchrNo) {
-		// TODO Auto-generated method stub
 		return empMgDao.tchrSelect(tchrNo);
 	}
 
 	@Override
 	public int tchrUpdate(TCHRDto tchr) {
-		// TODO Auto-generated method stub
 		return empMgDao.tchrUpdate(tchr);
+	}
+
+	@Override
+	public List tchrSelectBySbjtNm(String sbjtNm) {
+		return empMgDao.tchrSelectBySbjtNm(sbjtNm);
+	}
+
+	@Override
+	public String assnTchr(TCHRASSNDto tchrAssn) {
+		return empMgDao.assnTchr(tchrAssn);
+		
+	}
+
+	@Override
+	public TCHRASSNDto tchrAssnSelect(String clssId) {
+		// TODO Auto-generated method stub
+		return empMgDao.tchrAssnSelect(clssId);
 	}
 }

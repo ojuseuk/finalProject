@@ -44,13 +44,13 @@ public class SaleMgServiceImp implements SaleMgService {
 	}
 
 
-		/**
-		 * @Method Name  : insert
-		 * @작성일       : 2017. 11. 8. 
-		 * @작성자 		 : 
-		 * @Method 설명  :
-		 * @return
-		 */
+	/**
+	 * @Method Name : selectLtfee
+	 * @작성일	    : 2017. 11. 9. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @return
+	 */
 	@Override
 	public Map<List<Map<String, String>>, List<Map<String, String>>> selectLtfee() {
 		// TODO Auto-generated method stub
@@ -68,15 +68,16 @@ public class SaleMgServiceImp implements SaleMgService {
 	}
 
 
-		/**
-		 * @Method Name  : insert
-		 * @작성일       : 2017. 11. 8. 
-		 * @작성자 		 : 
-		 * @Method 설명  :
-		 * @param date1
-		 * @param date2
-		 * @return
-		 */
+
+	/**
+	 * @Method Name : mgSaleList
+	 * @작성일	    : 2017. 11. 9. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
 	@Override
 	public List<SALEDto> mgSaleList(String date1, String date2) {
 		// TODO Auto-generated method stub
@@ -101,16 +102,16 @@ public class SaleMgServiceImp implements SaleMgService {
 
 
 		
-		/**
-		 * @Method Name : ltfeeInsert
-		 * @작성일	    : 2017. 11. 12. 
-		 * @작성자 		 : 
-		 * @Method 설명  :
-		 * @param tchrId
-		 * @param tchrSlr
-		 * @param ssnId
-		 * @param ssnSlr
-		 */
+	/**
+	 * @Method Name : ltfeeInsert
+	 * @작성일	    : 2017. 11. 12. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @param tchrId
+	 * @param tchrSlr
+	 * @param ssnId
+	 * @param ssnSlr
+	 */
 	@Override
 	public List<TCHRDto> ltfeeInsert(List<String> tchrId, List<String> tchrSlr, List<String> ssnId, List<String> ssnSlr, List<String> tchrNm, List<String> ssnNm) {
 		// TODO Auto-generated method stub
@@ -150,6 +151,19 @@ public class SaleMgServiceImp implements SaleMgService {
 //		saleMgDao.ltfeeInsert(list);
 		
 		return list;
+	}
+
+
+	@Override
+	public List<SALEDto> mgSaleList2(int year, int month) {
+		// TODO Auto-generated method stub
+		System.out.println("service mgSaleList2");
+		
+		SALEDto saleDto = new SALEDto();
+		saleDto.setYear(year);
+		saleDto.setMonth(month);
+		
+		return saleMgDao.mgSaleList2(saleDto);
 	}
 	
 }

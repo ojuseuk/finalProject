@@ -2,34 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="saleMgMapper">
 
-	
+
 	<insert id="saleInsert" parameterType="sALEDto">
-		INSERT INTO TB_SALE VALUES(#{year}, #{month}, #{day}, #{costItem}, #{no}, #{amount})
+		INSERT INTO TB_SALE
+		VALUES(#{year}, #{month}, #{day}, #{costItem}, #{no}, #{amount})
 	</insert>
-	
+
 	<select id="saleSelectNo" parameterType="sALEDto" resultType="int">
 		SELECT COUNT(NO)
-			FROM TB_SALE
-			WHERE YEAR = #{year} AND MONTH = #{month} AND DAY = #{day} AND COST_ITEM = #{costItem}
+		FROM TB_SALE
+		WHERE YEAR = #{year} AND MONTH = #{month} AND DAY = #{day} AND COST_ITEM =
+		#{costItem}
 	</select>
 
-	
+
 	<select id="selectTchrassn" resultType="map">
-		SELECT SSN.TCHR_NO tchrNo, SSN.SLR slr, TCHR.ID id, USR.NM nm
-			FROM TB_TCHRASSN SSN, TB_CLSS CLS, TB_TCHR TCHR, TB_USR USR
-				WHERE SSN.CLSS_ID = CLS.CLSS_ID
-					AND TCHR.TCHR_NO = SSN.TCHR_NO
-					AND USR.ID = TCHR.ID
-					AND END_DT > SYSDATE AND SSN.SLR IS NOT NULL
+		SELECT SSN.TCHR_NO
+		tchrNo, SSN.SLR slr, TCHR.ID id, USR.NM nm
+		FROM TB_TCHRASSN SSN, TB_CLSS CLS, TB_TCHR TCHR, TB_USR USR
+		WHERE SSN.CLSS_ID = CLS.CLSS_ID
+		AND TCHR.TCHR_NO = SSN.TCHR_NO
+		AND USR.ID = TCHR.ID
+		AND END_DT > SYSDATE AND SSN.SLR IS NOT NULL
 	</select>
-	
+
 	<select id="selectTchr" resultType="map">
-		SELECT TCHR.TCHR_NO tchrNo, TCHR.ID id, SLR slr, NM nm
-			FROM TB_TCHR TCHR, TB_USR USR
-			WHERE SLR IS NOT NULL
-                and TCHR.ID = USR.ID
+		SELECT TCHR.TCHR_NO tchrNo,
+		TCHR.ID id, SLR slr, NM nm
+		FROM TB_TCHR TCHR, TB_USR USR
+		WHERE SLR IS NOT NULL
+		and TCHR.ID = USR.ID
 	</select>
-	
+
 	<select id="mgSaleLsit" parameterType="map" resultType="sALEDto">
 		<![CDATA[
 		SELECT YEAR year, MONTH month, DAY day, COST_ITEM costItem, NO no, AMOUNT amount 
@@ -40,15 +44,11 @@
 		]]>
 	</select>
 
-<!-- 	<select id="mgSaleLsit" parameterType="map" resultType="sALEDto">
-		<![CDATA[
-		SELECT year year, month month, day day, sum(amount) amount
-			FROM tb_sale
-			WHERE (YEAR >= 2017 AND MONTH >=11 AND DAY>=9) AND (YEAR <= 2017 AND MONTH <=11 AND DAY<=20)
-			group by day, month, year
-		]]>
-	</select>	 -->
-	
+	<!-- <select id="mgSaleLsit" parameterType="map" resultType="sALEDto"> <![CDATA[ 
+		SELECT year year, month month, day day, sum(amount) amount FROM tb_sale WHERE 
+		(YEAR >= 2017 AND MONTH >=11 AND DAY>=9) AND (YEAR <= 2017 AND MONTH <=11 
+		AND DAY<=20) group by day, month, year ]]> </select> -->
+
 	<select id="ltfeeInsert" statementType="CALLABLE" parameterType="list">
 		
      	<![CDATA[{ call proc_pay_hist
@@ -58,10 +58,11 @@
      		#{tchr.result, mode=OUT, jdbcType=NUMERIC}
      		)
      	}]]>
-		
+
 	</select>
-		
-	<select id="ltfeeInsertTest" statementType="CALLABLE" parameterType="tCHRDto">
+
+	<select id="ltfeeInsertTest" statementType="CALLABLE"
+		parameterType="tCHRDto">
 		
      	<![CDATA[{ call proc_pay_hist
      		(
@@ -70,8 +71,23 @@
      		#{result, mode=OUT, jdbcType=NUMERIC}
      		)
      	}]]>
-		
+
 	</select>
-	
-	
+
+	<select id="mgSaleList2" parameterType="sALEDto" resultType="sALEDto">
+		SELECT YEAR year, MONTH month, DAY day, COST_ITEM costItem, NO no,
+		AMOUNT amount FROM TB_SALE
+		<choose>
+			<when test="month == 0 AND day == 0">
+				WHERE YEAR = #{year} ORDER BY MONTH
+			</when>
+			<when test="day == 0">
+				WHERE YEAR = #{year} AND MONTH = #{month} ORDER BY DAY
+			</when>
+			<otherwise>
+				WHERE YEAR = #{year} AND MONTH = #{month} AND DAY = #{day} ORDER BY NO
+			</otherwise>
+		</choose>
+
+	</select>
 </mapper>

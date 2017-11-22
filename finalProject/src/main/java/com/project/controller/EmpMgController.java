@@ -1,9 +1,14 @@
 package com.project.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,15 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.dao.EmpMgDao;
-import com.project.dto.CLSSDto;
 import com.project.dto.EMPDto;
+import com.project.dto.TCHRASSNDto;
 import com.project.dto.TCHRDto;
 import com.project.dto.USRDto;
 import com.project.service.CrsMgService;
 import com.project.service.EmpMgService;
+
+import util.DateTimeUtil;
 
 @Controller
 public class EmpMgController {
@@ -56,6 +64,12 @@ public class EmpMgController {
 		return empMgDao.empSelectById(id);
 	}
 	
+	@RequestMapping("/tchrSelectBySbjtNm")
+	public @ResponseBody List<TCHRDto> tchrSelectBySbjtNm(@RequestParam("sbjtNm") String sbjtNm) {
+		System.out.println("tchrSelectBySbjtNm : Controller : " + sbjtNm);
+		return empMgService.tchrSelectBySbjtNm(sbjtNm);
+	}
+	
 	@RequestMapping("/tchrSearchById")
 	public @ResponseBody TCHRDto tchrSelectById(@RequestParam("id") String id) {
 		return empMgDao.tchrSelectById(id);
@@ -72,6 +86,12 @@ public class EmpMgController {
 		TCHRDto tchr = empMgService.tchrSelect(tchrNo);
 		System.out.println(tchr);
 		return tchr;
+	}
+	
+	@RequestMapping("/tchrAssnSelect")
+	public @ResponseBody TCHRASSNDto tchrAssnSelect(@RequestParam("clssId") String clssId) {
+		System.out.println("강사 배정 조회 : Controller " + clssId);
+		return empMgService.tchrAssnSelect(clssId);
 	}
 	
 	@RequestMapping("/emp")
@@ -117,6 +137,13 @@ public class EmpMgController {
 			empMgService.empUpdate(emp);
 			data.addAttribute("list", empMgService.empSelectAll());
 			data.addAttribute("resultMsg", "직원 정보가 정상적으로 수정되었습니다.");
+			// 날짜처럼 보이기 위해 '-' 삽입
+			if(emp != null) {
+				if(!emp.getRetiredDt().equals("")) {
+					emp.setRetiredDt(DateTimeUtil.dateForm(emp.getRetiredDt()));
+				}
+			}
+			data.addAttribute("emp", emp); // @@@		20171120
 			url ="emp/mgEmp";  	
 			
 		} catch (SQLException e) {
@@ -165,10 +192,52 @@ public class EmpMgController {
 		return url;
 	}
 	
-	@RequestMapping("/tchrInsert.do")
-	public String tchrInsert(TCHRDto tchr, Model data) {
+	
+	@RequestMapping(value="/assgnTchr", method=RequestMethod.POST, produces = "application/json; charset=utf8")
+	public @ResponseBody String assgnTchr(TCHRASSNDto tchrAssn) {
+		System.out.println("강사 배정 : controller : tchrAssn : " + tchrAssn);
+		System.out.println(empMgService.assnTchr(tchrAssn));
+		return empMgService.assnTchr(tchrAssn);
+	}
+	
+	@RequestMapping(value="/tchrInsert.do", method=RequestMethod.POST)
+		public String tchrInsert(TCHRDto tchr, Model data, HttpSession session, @RequestParam("imgFile") MultipartFile imgFile) throws IllegalStateException, IOException {
 		String url = "error";
+		
+// file upload 시작
+		if(!imgFile.isEmpty()) {
+			String path = session.getServletContext().getRealPath("/") + "imgs\\img\\";
+			
+			
+			System.out.println("imgFile.getOriginalFilename() : " + imgFile.getOriginalFilename()); 
+			System.out.println("imgFile.getName() : " + imgFile.getName()); 
+			System.out.println("imgFile.getContentType() : " + imgFile.getContentType()); 
+			
+			String ext[] = imgFile.getOriginalFilename().split("\\.");
+			
+			System.out.println("tchr.getTchrNo().length() : " + tchr.getTchrNo().length()); 		// @@@
+			
+//			파일명을 "강사번호.확장자"로 변경
+			System.out.println("ext[0] : " + ext[0]); 		// @@@
+			System.out.println("ext[1] : " + ext[1]); 		// @@@
+			
+			File file = new File(path + tchr.getTchrNo() + "." + ext[1]);
+			
+			imgFile.transferTo(file);
+			
+			System.out.println("file.getName() : " + file.getName()); 
+			System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
+			
+			tchr.setTchrPt(file.getName());
+			
+			System.out.println("■path:::" + path);
+
+
+		}
+// file upload 끝
+		
 		try {
+			System.out.println("controller : " + tchr);
 			empMgService.tchrInsert(tchr);
 			data.addAttribute("list", empMgService.tchrSelectAll());
 			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
@@ -178,9 +247,10 @@ public class EmpMgController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("OK");
+		System.out.println("Controller : Insert OK");
+		
+		 
 		return url;
 	}
-	
-	
+
 } // end of class

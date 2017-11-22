@@ -29,11 +29,15 @@ public class HomePController {
 	 * @return
 	 */
 	@RequestMapping("/qnaInsertView")
-	public String qnaInsertView() {
+	public ModelAndView qnaInsertView(QNADto qnaDto) {
 		
+		System.out.println(qnaDto);
 		System.out.println("controller QNAInsertView");
-
-		return "homeP/qnaInsertView";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("qnaDto", qnaDto);
+		mav.setViewName("homeP/qnaInsertView");
+		
+		return mav;
 		
 	}
 	
@@ -48,11 +52,19 @@ public class HomePController {
 	public void qnaInsert(QNADto qnaDto) {
 		
 		System.out.println("controller QNAInsert");
-		
+		System.out.println(qnaDto);
 		homePService.qnaInsert(qnaDto);
 		
 	}
 	
+	/**
+	 * @Method Name : qnaSelectView
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : ModelAndView
+	 * @return
+	 */
 	@RequestMapping("/qnaSelectView")
 	public ModelAndView qnaSelectView() {
 		
@@ -68,11 +80,51 @@ public class HomePController {
 		
 		return mav;
 	}
+
+	/**
+	 * @Method Name : qnaUpdateView
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : ModelAndView
+	 * @param no
+	 * @return
+	 */
+	@RequestMapping("/qnaUpdateView")
+	public ModelAndView qnaUpdateView(@RequestParam("no") int no) {
+		
+		System.out.println("controller qnaUpdateView");
+		System.out.println(no);
+		ModelAndView mav = new ModelAndView();
+		QNADto qnaDto = homePService.qnaUpdateView(no);
+		System.out.println(qnaDto);
+		
+		mav.addObject("qnaDto", qnaDto);
+		mav.setViewName("homeP/qnaUpdateView");
+		
+		return mav;
+	}
 	
-	public void qnaRead() {
+	/**
+	 * @Method Name : qnaUpdate
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : ModelAndView
+	 * @param qnaDto
+	 * @return
+	 */
+	@RequestMapping("/qnaUpdate")
+	public ModelAndView qnaUpdate(QNADto qnaDto) {
 		
-		System.out.println("controller qnaRead");
+		ModelAndView mav = new ModelAndView();
+		System.out.println("controller qnaUpdate");
 		
-//		homePService.qnaRead();
+		int result = homePService.qnaUpdate(qnaDto);
+		System.out.println(result);
+		mav.addObject("result", result);
+		mav.setViewName("forward:/homeP/qnaSelectView");
+		
+		return mav;
 	}
 }

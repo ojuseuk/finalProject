@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="homePMapper">
 	
-	<select id="qnaCnt" resultType="qNADto">
+	<select id="qnaCnt" resultType="object">
 		SELECT MAX(GP_NUM) FROM TB_QNA
 	</select>
 	
@@ -18,6 +18,16 @@
 	
 	<select id="qnaSelectView" resultType="qNADto">
 		SELECT no, id, title, content, dt, GP_NUM gpNum, SEQ_LV seqLv, SEQ_NUM seqNum
-		FROM TB_QNA
+		FROM TB_QNA ORDER BY GP_NUM DESC, SEQ_NUM ASC
 	</select>
+	
+	<select id="qnaUpdateView" parameterType="int" resultType="qNADto">
+		SELECT no, id, title, content, dt, GP_NUM gpNum, SEQ_LV seqLv, SEQ_NUM seqNum
+		FROM TB_QNA WHERE NO = #{no}
+	</select> 
+	
+	<update id="qnaUpdate" parameterType="qNADto">
+		UPDATE TB_QNA SET TITLE = #{title}, CONTENT = #{content}, DT=#{dt} WHERE NO = #{no}
+	</update>
+	
 </mapper>

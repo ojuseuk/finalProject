@@ -26,14 +26,14 @@ public class HomePDaoImp implements HomePDao {
 	public int qnaCnt() {
 		// TODO Auto-generated method stub
 		int max = 0;
-		QNADto qnaDto = sqlSession.selectOne("homePMapper.qnaCnt");
-		System.out.println(qnaDto);
-		if(qnaDto == null) {
+		Object object = sqlSession.selectOne("homePMapper.qnaCnt");
+		System.out.println("object: " + object);
+		if(object == null) {
 			max = 1;
 		}else {
-			max = qnaDto.getGpNum() +1;
+			max = Integer.parseInt(object.toString()) +1;
 		}
-		
+		System.out.println("dao :" + max);
 		return max;
 	}
 
@@ -51,6 +51,20 @@ public class HomePDaoImp implements HomePDao {
 		
 		return sqlSession.selectList("homePMapper.qnaSelectView");
 		
+	}
+
+	@Override
+	public QNADto qnaUpdateView(int no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("homePMapper.qnaUpdateView", no);
+	}
+
+	@Override
+	public int qnaUpdate(QNADto qnaDto) {
+		// TODO Auto-generated method stub
+		System.out.println("dao qnaUpdate");
+		
+		return sqlSession.update("homePMapper.qnaUpdate", qnaDto);
 	}
 	
 }
