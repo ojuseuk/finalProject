@@ -67,6 +67,7 @@ tr.shown td.details-control {
 		</div>
 	</div>
 </div>
+
 	<button onclick="location.href=www.naver.com">링크</button>
 	<script type="text/javascript">
 		var json = $('#json').val()
@@ -92,8 +93,11 @@ tr.shown td.details-control {
 			},
 			"data" : json,
 			"columns" : [ {
-				"data" : "no"/* ,
-				"width" : "5%" */
+				"data" : "no",
+				"render" :function(data, type, row, meta){
+// 					console.log(row.title);
+					return '<div align="right">'+data+'</div>';
+				}
 			}, {
 				"data" : "title",
 				/* "width" : "30%", */
@@ -132,7 +136,7 @@ tr.shown td.details-control {
 		$('#dataTable tbody').on('click', 'td.details-control', function() {
 			var tr = $(this).closest('tr');
 			var row = table.row(tr);
-
+			
 			if (row.child.isShown()) {
 				// This row is already open - close it
 				row.child.hide();

@@ -132,4 +132,13 @@ public class SaleMgDaoImp implements SaleMgDao {
 		return tchrDto.getResult();
 	}
 
+	@Override
+	public List<SALEDto> mgSaleList2(SALEDto saleDto) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("dao mgSaleList2");
+		System.out.println(saleDto);
+		return sqlSession.selectList("saleMgMapper.mgSaleList2", saleDto);
+	}
+
 }

@@ -81,9 +81,7 @@
 		clssId = clssId.unique();
 
 		for (var i = 0; i < clssId.length; i++) {
-			$("#clss option:eq(0)").after(
-					"<option value='" + clssId[i] + "'>" + clssId[i]
-							+ "</option>");
+			$("#clss option:eq(0)").after("<option value='" + clssId[i] + "'>" + clssId[i] + "</option>");
 		}
 
 		function dateParse(str) {
@@ -95,9 +93,7 @@
 
 		function pad(n, width) {
 			n = n + '';
-			return n.length >= width ? n : new Array(width - n.length + 1)
-					.join('0')
-					+ n;
+			return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
 		}
 
 		function clssSearch(root) {

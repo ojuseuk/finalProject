@@ -322,6 +322,15 @@ public class TchrBsController {
 		return mav;
 	}
 	
+	/**
+	 * @Method Name : qzInsert
+	 * @작성일	    : 2017. 11. 21. 
+	 * @작성자	    : 
+	 * @Method 설명	:
+	 * return type  : void
+	 * @param id
+	 * @param examId
+	 */
 	@RequestMapping("/qzInsert")
 	public void qzInsert(@RequestParam(value="id", required=true) List<Integer> id, @RequestParam("examId") String examId) {
 		

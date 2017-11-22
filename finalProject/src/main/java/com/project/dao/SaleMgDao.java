@@ -16,5 +16,6 @@ public interface SaleMgDao {
 	List<SALEDto> mgSaleList(Map<String, String> map);
 	void ltfeeInsert(List<TCHRDto> list);
 	int ltfeeInsertTest(TCHRDto tchrDto);
+	List<SALEDto> mgSaleList2(SALEDto saleDto);
 
 }

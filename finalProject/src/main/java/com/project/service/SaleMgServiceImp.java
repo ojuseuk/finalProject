@@ -152,6 +152,19 @@ public class SaleMgServiceImp implements SaleMgService {
 		
 		return list;
 	}
+
+
+	@Override
+	public List<SALEDto> mgSaleList2(int year, int month) {
+		// TODO Auto-generated method stub
+		System.out.println("service mgSaleList2");
+		
+		SALEDto saleDto = new SALEDto();
+		saleDto.setYear(year);
+		saleDto.setMonth(month);
+		
+		return saleMgDao.mgSaleList2(saleDto);
+	}
 	
 }
 

@@ -7,24 +7,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<%-- <link rel="stylesheet" href="${root}/styles/vendor/font-awesome/font-awesome.min.css" /> --%>
-<%-- <link rel="stylesheet" href="${root}/styles/vendor/css/sb-admin.css" /> --%>
-
 <link rel="stylesheet" href="${root}/styles/kendo.common.min.css" />
 <link rel="stylesheet" href="${root}/styles/kendo.default.min.css" />
-<link rel="stylesheet" href="${root}/styles/kendo.default.mobile.min.css" />
+<link rel="stylesheet"
+	href="${root}/styles/kendo.default.mobile.min.css" />
 
-<link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<link rel="stylesheet"
+	href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/kendo.all.min.js"></script>
+<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
 </head>
 <body>
-	<div>
-		<input type="date" name="date1" id="date1" onblur="date2Min()">
-		~ <input type="date" name="date2" id="date2" onblur="date1Max()">
-		<button onclick="saleMg('${root}')" id="searchSale">조회</button>
-	</div>
+	<select id="year" onchange="yearSale()" name="month">
+		<option value="선택">선택</option>
+	</select>
+	<button onclick="saleYear('${root}', 'y')">년 매출</button>
+	<select id="month" name="month" onchange="monthSale()">
+		<option value="선택" id="default">선택</option>
+	</select>
+	<button onclick="saleYear('${root}', 'm')">월 매출</button>
+	<input type="date" id="day" name="day">
+	<button onclick="saleYear('${root}', 'd')">일 매출</button>
+	
 	<div style="width: 100%;">
 		<div id="demo" class="card mb-3" align="left"
 			style="float: left; width: 50%">
@@ -63,9 +71,9 @@
 		</div>
 		<div style="float: right; width: 50%" id="example">
 			<div class="demo-section k-content wide">
-			<div id="chart"></div>
+				<div id="chart"></div>
 			</div>
-			<div class="box wide" style="display: none;" id="abc">
+			<div class="box wide" style="display: none;" id="chartList">
 				<div class="box-col">
 					<h4>API Functions</h4>
 					<ul class="options">
@@ -89,41 +97,77 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<script type="text/javascript">
-		var editor;
-		function date2Min() {
-			$('#date2').attr("min", $('#date1').val());
+		let date = new Date(); // 현재 일자
+		let year = date.getFullYear(); // 현재 년도
+
+		for (var i = year - 10; i <= year; i++) {
+			$("#year option:eq(0)").after(
+					"<option value='"+i+"'>" + i + "</option>");
 		}
 
-		function date1Max() {
-			$('#date1').attr("max", $('#date2').val());
+		function yearSale() {
+			$("select[id='month'] option").not("[id='default']").remove();
+
+			for (var i = 1; i <= 12; i++) {
+				$('#month option:eq(0)').after(
+						"<option value='"+i+"'>" + i + "</option>");
+			}
+
 		}
 
-		function saleMg(root) {
-			var date1 = $('#date1').val();
-			var date2 = $('#date2').val();
+		function monthSale() {
+			let year = $('#year').val(); // 년도
+			let month = $('#month').val(); // 월
+			let day = (new Date(year, month, 0)).getDate(); //y,m 기준으로 그달 마지막 day
+			string.Format("{0:D2}", day);
+			let max = year + "-" + month + "-" + day;
+			let min = year + "-" + month + "-" + "01";
+			alert(min);
+			alert(max);
+			$('#day').attr("min", min);
+			$('#day').attr("max", max);
+
+		}
+
+		function saleYear(root, d) {
+			//day 값 빼오는 중.....................
+			let y = $('#year').val();		// 년도
+			let m = $('#month').val();		// 월
+			let d = $('#day').val();		// 일
+			let amount = new Array();
+			let month = new Array();
+			let amountD = 0;
 			
-			$('#abc').css("display", "block");
-			$('#dataDefault').remove();
-			$('#dataTable').dataTable().fnDestroy();
+			alert(d);
+			if(m == "선택"){
+				m = 0;
+			}
+			if(d == "선택"){
+				d = 0;
+			}
+			let param = "year="+y+"&month="+m+"&day="+d;
+			alert(param);
+			
+			if (d == "y" && y == "선택") {
+				alert("년도를 선택해 주세요.");
+			}else if (d == "m" && m == 0){
+				alert("달을 선택해 주세요.")
+			}else {
 
-			if (date1 == "" || date2 == "") {
-				alert("날짜를 선택해 주세요");
-			} else {
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						saleList = this.responseText;
-						console.log(saleList);
+				$('#chartList').css("display", "block");
+				$.ajax({
+					type : "GET",
+					url : root + "/saleMg/mgSale",
+					data : param,
+					success : function(data) {
+						console.log(data);
 
-						saleList = JSON.parse(saleList);
-
-						console.log(saleList);
 						$('#dataTable').DataTable({
 							"scrollY" : 250,
 							"scrollCollapse" : true,
-							data : saleList,
+							data : data,
 							columns : [ {
 								"data" : "no",
 								//아래 링크 걸어서 사용 아니면 onclick
@@ -144,39 +188,25 @@
 								"data" : "amount"
 							} ]
 						});
-						
-						var amount = new Array();
-						var day = new Array();
-						var year = new Array();
-						var month = new Array();
-						var amountD = 0;
-						var e = 0;
-
-						for (var d = 0; d < saleList.length; d++) {
-							console.log(d);
-
-							if ((d + 1) < saleList.length) {
-								if (saleList[d].year == saleList[d + 1].year && saleList[d].month == saleList[d + 1].month && saleList[d].day == saleList[d + 1].day) {
-									console.log("test1:  " + saleList[d].amount + "-" + saleList[d].day);
-									console.log("test2:  " + saleList[d + 1].amount + "-" + saleList[d + 1].day);
-									amountD += saleList[d].amount;
+	
+						for (var i = 0; i < data.length; i++) {
+	
+							if ((i + 1) < data.length) {
+								if (data[i].month == data[i + 1].month) {
+									amountD += data[i].amount;
 								} else {
-									amountD += saleList[d].amount;
+									amountD += data[i].amount;
 									amount.push(amountD);
-									console.log("test3:  " + amountD);
 									amountD = 0;
 								}
+	
 							} else {
-								amountD += saleList[d].amount;
+								amountD += data[i].amount;
 								amount.push(amountD);
-								console.log("test4: " + amountD);
 							}
-							year.push(saleList[d].year);
-							month.push(saleList[d].month);
-							day.push(saleList[d].day);
-						}
-
-						// 배열 중복값 제거
+							month.push(data[i].month);
+						}//end of for
+	
 						Array.prototype.unique = function() {
 							var a = {};
 							for (var i = 0; i < this.length; i++) {
@@ -190,25 +220,13 @@
 							}
 							return this;
 						};
-
-						day = day.unique();
-						
-						for (var f = 0; f < amount.length; f++) {
-							console.log(amount[f]);
-						}
-
-						for (var f = 0; f < amount.length; f++) {
-							console.log("a" + amount[f]);
-						}
-
-						for (var f = 0; f < day.length; f++) {
-							console.log("a" + day[f]);
-						}
-
+	
+						month = month.unique();
+	
 						var series = [ {
-							name : "일일 매출",
+							name : "월별 매출",
 							data : amount,
-
+	
 							// Line chart marker type
 							markers : {
 								type : "square"
@@ -235,7 +253,7 @@
 								},
 								seriesColors: ["#108D25"],
 								categoryAxis : {
-									categories : day,
+									categories : month,
 									majorGridLines : {
 										visible : false
 									}
@@ -245,45 +263,36 @@
 									format : "{0}"
 								}
 							});
-						}
-
-						$(document).ready(function() {
-							createChart();
-							$(document).bind("kendo:skinChange", createChart);
-							$(".options").bind("change", refresh);
-						});
-
-						function refresh() {
-							var chart = $("#chart").data("kendoChart"), type = $(
-									"input[name=seriesType]:checked").val(), stack = $(
-									"#stack").prop("checked");
-
-							for (var i = 0, length = series.length; i < length; i++) {
-								series[i].stack = stack;
-								series[i].type = type;
-							}
-							;
-
-							chart.setOptions({
-								series : series
+						}//end of createChart
+	
+							$(document).ready(function() {
+								createChart();
+								$(document).bind("kendo:skinChange", createChart);
+								$(".options").bind("change", refresh);
 							});
-						}
+	
+							function refresh() {
+								var chart = $("#chart").data("kendoChart"), type = $(
+										"input[name=seriesType]:checked").val(), stack = $(
+										"#stack").prop("checked");
+		
+								for (var i = 0, length = series.length; i < length; i++) {
+									series[i].stack = stack;
+									series[i].type = type;
+								}// end of for
+	
+								chart.setOptions({
+									series : series
+								});
+							}//end of refresh
 
-					}
+					}//end of success
 
-				};
-				xhttp.open("GET", root + "/saleMg/mgSale?date1=" + date1
-						+ "&date2=" + date2, true);
-				xhttp.send();
-			}
-		}
+				});
+
+			}// end of if
+
+		}//end of saleYear
 	</script>
-
-	<%-- <script src="${root}/js/vendor/bootstrap/bootstrap.bundle.min.js"></script> --%>
-	<%-- <script src="${root}/js/vendor/jquery-easing/jquery.easing.min.js"></script> --%>
-	<!-- table(grid) -->
-	<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
-	<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
-
 </body>
 </html>
