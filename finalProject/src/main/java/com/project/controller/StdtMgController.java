@@ -6,16 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dto.CLSSDto;
+import com.project.dto.SCRDto;
 import com.project.dto.STDTCLSSDto;
 import com.project.dto.STDTDto;
 import com.project.dto.STDTInfoDto;
 import com.project.dto.SmsContentDto;
 import com.project.service.StdtMgService;
 
+import net.sf.json.JSONArray;
 import util.SMS;
 
 @Controller
@@ -52,17 +56,22 @@ public class StdtMgController {
 	 * return type  : String
 	 * @return
 	 */
-	@RequestMapping("/stdtAllList")
-	public String selectByCrs(Model model){
+	@RequestMapping("stdtAllList")
+	public ModelAndView selectByCrs(Model model){
 		String stdtNo = stdtMgService.selectStdtNo();
 		String no = stdtNo.substring(1);
 		int num = Integer.parseInt(no);
 		no = Integer.toString(++num);
 		stdtNo = stdtNo.substring(0, 1) + no;
-		model.addAttribute("crsList", stdtMgService.selectByCrs());
-		model.addAttribute("stdtAllList", stdtMgService.selectAllByStdt());
-		model.addAttribute("stdtNo", stdtNo);
-		return "stdtMg/StdtListView";
+		List<STDTInfoDto> list = stdtMgService.selectAllByStdt();
+		ModelAndView mav = new ModelAndView();
+		JSONArray json = JSONArray.fromObject(list);
+		mav.addObject("stdtAllList", list);
+		mav.addObject("crsList", stdtMgService.selectByCrs());
+		mav.addObject("json", json);
+		mav.addObject("stdtNo", stdtNo);
+		mav.setViewName("stdtMg/StdtListView");
+		return mav;
 	}
 	
 	/**
@@ -124,9 +133,13 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("/stdtInfo")
-	public @ResponseBody List<STDTInfoDto> selectStdtInfo(@RequestParam("stdtNo") String stdtNo, Model model){
-		model.addAttribute("info", stdtMgService.selectStdtInfo(stdtNo));
-		return stdtMgService.selectStdtInfo(stdtNo);
+	public @ResponseBody ModelAndView selectStdtInfo(@RequestParam("stdtNo") String stdtNo, Model model){
+		ModelAndView mav = new ModelAndView();
+		List<STDTInfoDto> list = stdtMgService.selectStdtInfo(stdtNo);
+		JSONArray json = JSONArray.fromObject(list);
+		mav.addObject("json", json);
+		mav.setViewName("stdtMg/updateStdt");
+		return mav;
 	}
 	
 	/**

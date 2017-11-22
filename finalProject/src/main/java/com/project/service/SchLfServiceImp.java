@@ -25,12 +25,12 @@ public class SchLfServiceImp implements SchLfService{
 	}
 
 	@Override
-	public List<CRSDto> selectByCrs() {
+	public List<ClssInfoDto> selectByCrs() {
 		return schLfDao.selectByCrs();
 	}
 
 	@Override
-	public List<CRSDto> selectCrsPerSbjt(String sbjtNm) {
+	public List<ClssInfoDto> selectCrsPerSbjt(String sbjtNm) {
 		return schLfDao.selectCrsPerSbjt(sbjtNm);
 	}
 
