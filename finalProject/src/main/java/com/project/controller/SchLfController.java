@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,6 @@ import com.project.dto.ClssInfoDto;
 import com.project.dto.DateDto;
 import com.project.dto.SCRDto;
 import com.project.service.SchLfService;
-
 import net.sf.json.JSONArray;
 
 @Controller
@@ -38,16 +38,20 @@ public class SchLfController {
 	 * @Method Name : selectByCrs
 	 * @작성일	    : 2017. 11. 14. 
 	 * @작성자	    : 김동근
-	 * @Method 설명	: 수강신청 페이지 과목명 출력, 전체과정 출력
+	 * @Method 설명	: 수강신청 페이지 과목명 셀렉트박스 출력, 전체과정 출력
 	 * return type  : String
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("viewRegist")
-	public String selectByCrs(Model model){
-		model.addAttribute("sbjt", schLfService.selectBySbjt());
-		model.addAttribute("crs", schLfService.selectByCrs());
-		return "schLf/registClssView";
+	public ModelAndView selectByCrs(Model model){
+		ModelAndView mav = new ModelAndView();
+		List<ClssInfoDto> list = schLfService.selectByCrs();
+		JSONArray json = JSONArray.fromObject(list);
+		mav.addObject("jsonCrs", json);
+		mav.addObject("sbjt", schLfService.selectBySbjt());
+		mav.setViewName("schLf/registClssView");
+		return mav;
 	}
 	
 	/**
@@ -60,8 +64,8 @@ public class SchLfController {
 	 * @return
 	 */
 	@RequestMapping("selectCrsPerSbjt")
-	public @ResponseBody List<CRSDto> selectCrsPerSbjt(@RequestParam("sbjtNm") String sbjtNm){
-		if(sbjtNm.equals("과목선택")){
+	public @ResponseBody List<ClssInfoDto> selectCrsPerSbjt(@RequestParam("sbjtNm") String sbjtNm){
+		if(sbjtNm.equals("선 택")){
 			return schLfService.selectByCrs();
 		}
 		return schLfService.selectCrsPerSbjt(sbjtNm);
@@ -76,10 +80,10 @@ public class SchLfController {
 	 * @param crsId
 	 * @return
 	 */
-	@RequestMapping("selectClssPerCrs")
-	public @ResponseBody List<ClssInfoDto> selectClssPerCrs(@RequestParam("crsId") String crsId){
-		return schLfService.selectClssPerCrs(crsId);
-	}
+//	@RequestMapping("selectClssPerCrs")
+//	public @ResponseBody List<ClssInfoDto> selectClssPerCrs(@RequestParam("crsId") String crsId){
+//		return schLfService.selectClssPerCrs(crsId);
+//	}
 	
 	/**
 	 * @Method Name : applyClss
@@ -121,7 +125,6 @@ public class SchLfController {
 	 */
 	@RequestMapping("myClssList")
 	public String selectMyClss(HttpSession session, Model model){
-		System.out.println(schLfService.selectMyClss(session.getAttribute("id").toString()));
 		model.addAttribute("list", schLfService.selectMyClss(session.getAttribute("id").toString()));
 		return "schLf/myClssView";
 	}
@@ -138,7 +141,6 @@ public class SchLfController {
 	 */
 	@RequestMapping("myAttnd")
 	public ModelAndView selectMyAttnd(HttpSession session, Model model){
-		System.out.println(session.getAttribute("id").toString());
 		SimpleDateFormat formatter1 = new SimpleDateFormat ("yyyyMM");
 		SimpleDateFormat formatter2 = new SimpleDateFormat ("MM");
 		Date currentTime = new Date ();

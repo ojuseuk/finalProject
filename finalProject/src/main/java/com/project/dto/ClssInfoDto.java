@@ -17,6 +17,7 @@ public class ClssInfoDto {
 	private String crsNm;
 	private String stdtclssttn;
 	private String paidDt;
+	private String prd;
 	
 	public ClssInfoDto() {}
 	
@@ -31,7 +32,7 @@ public class ClssInfoDto {
 
 	public ClssInfoDto(String nm, String sbjtChrg, String tchrIntro, String tchrPt, String clssNm, String clssId,
 			String strtDt, String endDt, String strtTm, String endTm, int capa, String clssroom, String crsIntro,
-			String crsNm, String stdtclssttn, String paidDt) {
+			String crsNm, String stdtclssttn, String paidDt, String prd) {
 		super();
 		this.nm = nm;
 		this.sbjtChrg = sbjtChrg;
@@ -49,6 +50,7 @@ public class ClssInfoDto {
 		this.crsNm = crsNm;
 		this.stdtclssttn = stdtclssttn;
 		this.paidDt = paidDt;
+		this.prd = prd;
 	}
 
 	public String getNm() {
@@ -179,6 +181,14 @@ public class ClssInfoDto {
 		this.paidDt = paidDt;
 	}
 
+	public String getPrd() {
+		return prd;
+	}
+
+	public void setPrd(String prd) {
+		this.prd = prd;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -214,6 +224,8 @@ public class ClssInfoDto {
 		builder.append(stdtclssttn);
 		builder.append(", paidDt=");
 		builder.append(paidDt);
+		builder.append(", prd=");
+		builder.append(prd);
 		builder.append("]");
 		return builder.toString();
 	}

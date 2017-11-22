@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<link rel="stylesheet"
+	href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<script src="${root}/js/jquery.min.js"></script>
+<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,28 +30,28 @@
 <body>
 <form name="writeForm" method="post" action="${pageContext.request.contextPath}/sendSms" onSubmit='return checkValid()'>
 	<input type="hidden" name="command" value="notice"/>
-<table align="center" cellpadding="5" cellspacing="2" width="600" border="1">
+<table class="table table-bordered" align="center" cellpadding="5" cellspacing="2" width="50%" height="50%" border="1">
     <tr>
-        <td width="1220" height="20" colspan="2" bgcolor="#336699">
-            <p align="center"><font color="white" size="3"><b>문자발송</b></font></p>
+        <td width="1220" height="20" colspan="2">
+            <p align="center">문자발송</p>
         </td>
     </tr>
     <tr>
         <td width="150" height="20">
-            <p align="right"><b><span style="font-size:9pt;">공지사항</span></b></p>
+            <p align="right">공지사항</p>
         </td>
-        <td width="450" height="20"><b><span style="font-size:9pt;">
-		<textarea name="content" cols="50" rows="10" maxlength="80"></textarea></span></b></td>
+        <td width="450" height="20">
+		<textarea name="content" cols="50" rows="10" maxlength="80"></textarea></td>
     </tr>
     <tr>
         <td width="150" height="20">
-            <p align="right"><b><span style="font-size:9pt;">&nbsp;</span></b></p>
+            <p align="right">&nbsp;</p>
         </td>
-        <td width="450" height="20"><b><span style="font-size:9pt;">
+        <td width="450" height="20">
         <input type=submit value=공지사항전송>
         <input type=reset value=다시쓰기>
    		<input type="button" name="command" value="지각안내" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
-   	 </span></b></td>
+   	 </td>
     </tr>
 </table>
 </form>

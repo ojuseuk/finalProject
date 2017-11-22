@@ -20,12 +20,6 @@
 		<result property="crsIntro" column="CRS_INTRO"/>
 		<result property="sbjtNm" column="SBJT_NM"/>
 	</resultMap>
-	<select id="selectCrs" resultMap="ResultOfCRS">
-		SELECT * FROM TB_CRS
-	</select>
-	<select id="selectCrsPerSbjt" resultMap="ResultOfCRS">
-		SELECT * FROM TB_CRS WHERE SBJT_NM = #{sbjtNm}
-	</select>
 	
 	<resultMap type="ClssInfoDto" id="ResultOfClss">
 		<result property="nm" column="NM"/>
@@ -45,6 +39,30 @@
 		<result property="clssId" column="CLSS_ID"/>
 		<result property="paidDt" column="PAID_DT"/>
 	</resultMap>
+	
+	<select id="selectCrsPerSbjt" resultMap="ResultOfClss">
+		SELECT TB_USR.NM, TB_TCHR.SBJT_CHRG, TB_TCHR.TCHR_INTRO, TB_TCHR.TCHR_PT,
+			   TB_CLSS.CLSS_NM, TB_CLSS.STRT_DT, TB_CLSS.END_DT, TB_CLSS.STRT_TM, 
+			   TB_CLSS.CLSS_ID, TB_CLSS.END_TM, TB_CLSS.CAPA, TB_CLSS.CLSSROOM, 
+			   TB_CRS.CRS_INTRO, TB_CRS.CRS_ID, TB_CRS.CRS_NM, TB_CRS.STDTCLSSTTN, TB_CRS.PRD
+		FROM TB_USR JOIN TB_TCHR ON TB_USR.ID = TB_TCHR.ID
+		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHR.TCHR_NO
+		JOIN TB_CLSS ON TB_TCHRASSN.CLSS_ID = TB_CLSS.CLSS_ID
+		JOIN TB_CRS ON TB_CLSS.CRS_ID = TB_CRS.CRS_ID
+		WHERE SBJT_NM = #{sbjtNm}
+	</select>
+	
+	<select id="selectCrs" resultMap="ResultOfClss">
+		SELECT TB_USR.NM, TB_TCHR.SBJT_CHRG, TB_TCHR.TCHR_INTRO, TB_TCHR.TCHR_PT,
+			   TB_CLSS.CLSS_NM, TB_CLSS.STRT_DT, TB_CLSS.END_DT, TB_CLSS.STRT_TM, 
+			   TB_CLSS.CLSS_ID, TB_CLSS.END_TM, TB_CLSS.CAPA, TB_CLSS.CLSSROOM, 
+			   TB_CRS.CRS_INTRO, TB_CRS.CRS_ID, TB_CRS.CRS_NM, TB_CRS.STDTCLSSTTN, TB_CRS.PRD
+		FROM TB_USR JOIN TB_TCHR ON TB_USR.ID = TB_TCHR.ID
+		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHR.TCHR_NO
+		JOIN TB_CLSS ON TB_TCHRASSN.CLSS_ID = TB_CLSS.CLSS_ID
+		JOIN TB_CRS ON TB_CLSS.CRS_ID = TB_CRS.CRS_ID
+	</select>
+	
 	<select id="selectClssPerCrs" resultMap="ResultOfClss">
 		SELECT TB_USR.NM, TB_TCHR.SBJT_CHRG, TB_TCHR.TCHR_INTRO, TB_TCHR.TCHR_PT,
 			   TB_CLSS.CLSS_NM, TB_CLSS.STRT_DT, TB_CLSS.END_DT, TB_CLSS.STRT_TM, TB_CLSS.CLSS_ID,

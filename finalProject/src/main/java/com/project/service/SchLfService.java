@@ -12,8 +12,8 @@ import com.project.dto.SCRDto;
 
 public interface SchLfService {
 	public List<SBJTDto> selectBySbjt();
-	public List<CRSDto> selectByCrs();
-	public List<CRSDto> selectCrsPerSbjt(String sbjtNm);
+	public List<ClssInfoDto> selectByCrs();
+	public List<ClssInfoDto> selectCrsPerSbjt(String sbjtNm);
 	public List<ClssInfoDto> selectClssPerCrs(String crsId);
 	public List<ClssInfoDto> selectMyClss(String id);
 	public List<Map<String, String>> selectMyAttnd(DateDto dto);

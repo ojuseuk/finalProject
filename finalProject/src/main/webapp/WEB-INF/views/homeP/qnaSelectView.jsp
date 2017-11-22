@@ -78,7 +78,7 @@ tr.shown td.details-control {
 		alert(result);
 
 		function format(d) {
-			return '게시글 내용 : ' + d.content + '<br>'
+			return '게시글 내용 : ' + d.nm + '<br>'
 					+ '<button onclick="location.href=\'' + root
 					+ '/homeP/qnaInsertView?no=' + d.no + '&gpNum=' + d.gpNum
 					+ '&seqNum=' + d.seqNum + '&seqLv=' + d.seqLv
