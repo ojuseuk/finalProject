@@ -9,12 +9,7 @@
 <title>강좌 개설</title>
 </head>
 <body>
-	<button onclick="location.href='${pageContext.request.contextPath}/course'">과정 등록</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/courseList.do'">과정 목록</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/clssInsert.do'">강좌 개설</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/course'">반 배치</button>
-	
-	<br><hr><br>
+<jsp:include page="../../../top.jsp"/>
  	<form action="clssInsert.do" id="frmClss">
 		<fieldset style="width: 40%">
 			<legend>교육 과정</legend>
@@ -280,7 +275,7 @@
 	</script>
 	
 	<!-- 리스트 미리 출력 -->
-	<div id="viewCourseList" style="position:absolute; top:50px; left:750px; width:800px; height:200px; display:inline-block;">
+	<div id="viewCourseList" style="position:absolute; top:250px; left:750px; width:800px; height:200px; display:inline-block;">
 			
 		<table align="center" border="1" width="60%" bordercolorlight="black">
 			<tr>
@@ -351,6 +346,6 @@
 </div>
 	<!-- 리스트 미리 출력 끝-->
 	
-	
+<jsp:include page="../../../footer.jsp"/>	
 </body>
 </html>

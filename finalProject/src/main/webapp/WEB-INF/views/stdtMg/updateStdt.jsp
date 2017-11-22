@@ -15,6 +15,7 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<jsp:include page="../../../top.jsp"/>
 <div style="width: 100%;">
 	<div id="demo" class="card mb-3" align="left"
 		style="float: left; width: 100%; height: 310px">
@@ -80,4 +81,5 @@
 		
 	});
 </script>
+<jsp:include page="../../../footer.jsp"/>
 </html>

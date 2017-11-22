@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <title>나의수강목록</title>
+<jsp:include page="../../../top.jsp"/>
 <c:if test="${not empty requestScope.list}">
 	<table id="myClssList" border="0" cellpadding="5" cellspacing="2"
 		width="100%" bordercolordark="white" bordercolorlight="black">
@@ -53,3 +54,5 @@
 		</c:forEach>
 	</table>
 </c:if>
+<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
+<jsp:include page="../../../footer.jsp"/>

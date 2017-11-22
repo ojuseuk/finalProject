@@ -28,6 +28,7 @@
 	}
 </script>
 <body>
+<jsp:include page="../../../top.jsp"/>
 <form name="writeForm" method="post" action="${pageContext.request.contextPath}/sendSms" onSubmit='return checkValid()'>
 	<input type="hidden" name="command" value="notice"/>
 <table class="table table-bordered" align="center" cellpadding="5" cellspacing="2" width="50%" height="50%" border="1">
@@ -55,5 +56,6 @@
     </tr>
 </table>
 </form>
+<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

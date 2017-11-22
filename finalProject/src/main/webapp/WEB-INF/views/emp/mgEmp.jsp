@@ -13,12 +13,7 @@
 <title>인사 관리</title>
 </head>
 <body>
-	<button onclick="location.href='${pageContext.request.contextPath}/mgEmp">직원관리</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/mgTchr'">강사 관리</button>
-
-	<br>
-	<hr>
-	<br>
+<jsp:include page="../../../top.jsp"/>
 	<form action="empInsert" id="frmEmp" name="frmEmp">
 		<fieldset style="width: 40%">
 			<legend>사용자 정보</legend>
@@ -186,7 +181,7 @@
 
 	<!-- 리스트 출력 -->
 	<div id="viewEmpList"
-		style="position: absolute; top: 50px; left: 600px; width: 700px; height: 200px; display: inline-block;">
+		style="position: absolute; top: 250px; left: 600px; width: 700px; height: 200px; display: inline-block;">
 
 		<table align="center" border="1" width="60%" bordercolorlight="black">
 			<tr>
@@ -263,7 +258,7 @@
 	<!-- 리스트 출력 끝-->
 
 
-
-
+<br>
+<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

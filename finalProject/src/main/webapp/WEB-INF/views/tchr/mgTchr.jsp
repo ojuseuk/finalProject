@@ -9,9 +9,10 @@
 <title>강좌 개설</title>
 </head>
 <body>
-	<button onclick="location.href='${pageContext.request.contextPath}/main.jsp'">홈으로</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/emp'">직원 관리</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/mgTchr">강사 관리</button>
+<jsp:include page="../../../top.jsp"/>
+<%-- 	<button onclick="location.href='${pageContext.request.contextPath}/main.jsp'">홈으로</button> --%>
+<%-- 	<button onclick="location.href='${pageContext.request.contextPath}/emp'">직원 관리</button> --%>
+<%-- 	<button onclick="location.href='${pageContext.request.contextPath}/mgTchr">강사 관리</button> --%>
 	
 	<br><hr><br>
 	
@@ -189,7 +190,7 @@
 	</script>
 	
 	<!-- 리스트 미리 출력 -->
-	<div id="viewTchrList" style="position:absolute; top:50px; left:750px; width:700px; height:200px; display:inline-block;">
+	<div id="viewTchrList" style="position:absolute; top:260px; left:750px; width:700px; height:200px; display:inline-block;">
 			
 		<table align="center" border="1" width="60%" bordercolorlight="black">
 			<tr>
@@ -245,7 +246,7 @@
 		</table>	
 </div>
 	<!-- 리스트 미리 출력 끝-->
-	
+<jsp:include page="../../../footer.jsp"/>	
 	
 
 	

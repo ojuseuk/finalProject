@@ -4,11 +4,12 @@
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <head>
-	<meta charset="UTF-8">
 	<title>Calendar</title>
+	<meta charset="UTF-8">
 	<link rel="stylesheet" href="styles/Calendarstyle.css">
 </head>
 <body>
+<jsp:include page="../../../top.jsp"/>
 <div id="calendar_wrap" width="100%">
 	<table id="calendar">
 <!-- 	border="1" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black" -->
@@ -86,6 +87,7 @@
 </div> 
 <input type="hidden" value='${requestScope.json}' id="json">
 <input type="hidden" value='${requestScope.list.size()}' id="listSize">
+
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -166,6 +168,7 @@ function calendar(new_year, new_month){
 
 })();
 </script>
-
+<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
+<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

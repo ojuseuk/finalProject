@@ -12,8 +12,7 @@
 <link rel="stylesheet"
 	href="${root}/styles/kendo.default.mobile.min.css" />
 
-<link rel="stylesheet"
-	href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet"
 	href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
@@ -22,6 +21,7 @@
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
 </head>
 <body>
+<jsp:include page="../../../top.jsp"/>
 	<select id="year" onchange="yearSale()" name="month">
 		<option value="선택">선택</option>
 	</select>
@@ -294,5 +294,8 @@
 
 		}//end of saleYear
 	</script>
+	
+<br><br><br><br><br><br><br><br><br>
+<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

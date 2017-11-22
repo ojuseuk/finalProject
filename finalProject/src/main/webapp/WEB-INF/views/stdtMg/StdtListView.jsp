@@ -4,10 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet"
-	href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -16,6 +14,7 @@
 <!-- *학생 중복 출력 수정, 업데이트 시 종합반만 변경 가능하게 수정, 중복코드 정리, 변수 정리, 스크롤 -->
 
 <title>학생정보</title>
+<jsp:include page="../../../top.jsp"/>
 <div class="table-responsive">
 	<c:if test="${not empty crsList}">
 	<b>과정</b>
@@ -258,5 +257,8 @@
 	
 </script>
 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<jsp:include page="../../../footer.jsp"/>
 
 

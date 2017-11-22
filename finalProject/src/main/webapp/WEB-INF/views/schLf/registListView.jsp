@@ -5,6 +5,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>수강신청목록</title>
+<jsp:include page="../../../top.jsp"/>
 <div>
 	<c:if test="${not empty requestScope.list}">
 			<table id="appClssList" border="0" cellpadding="5" cellspacing="2"
@@ -57,3 +58,5 @@
 	<p align="center"><input id="delClss" type="button" value="선택삭제" onclick="deleClss('${root}')"><button>결제</button></p>
 </c:if>
 </div>
+<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
+<jsp:include page="../../../footer.jsp"/>

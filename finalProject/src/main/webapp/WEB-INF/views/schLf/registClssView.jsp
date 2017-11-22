@@ -26,7 +26,7 @@ tr.shown td.details-control {
 </style>
 <title>수강신청</title>
 </head>
-<link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
@@ -35,6 +35,7 @@ tr.shown td.details-control {
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
 <script src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
+<jsp:include page="../../../top.jsp"/>
 <div>
 	<c:if test="${not empty requestScope.sbjt}" >
 	<b>과목</b>
@@ -256,4 +257,5 @@ tr.shown td.details-control {
 						});
 			});
 </script>
-
+<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
+<jsp:include page="../../../footer.jsp"/>

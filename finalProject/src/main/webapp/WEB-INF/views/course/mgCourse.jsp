@@ -15,12 +15,7 @@ p {
 </style>
 </head>
 <body>
-	<button onclick="location.href='${pageContext.request.contextPath}/course'">과정 등록</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/courseList.do'">과정 목록</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/mgClss'">강좌 개설</button>
-	<button onclick="location.href='${pageContext.request.contextPath}/course'">반 배치</button>
-	
-	<br><hr><br>
+<jsp:include page="../../../top.jsp"/>
  	<form action="courseInsert">
 <!-- 	<form> -->
 		<fieldset style="width: 40%">
@@ -84,7 +79,7 @@ p {
 	</form>
 	
 	<!-- 리스트 출력 -->
-	<div id="viewCourseList" style="position:absolute; top:50px; left:600px; width:700px; height:200px; display:inline-block;">
+	<div id="viewCourseList" style="position:absolute; top:250px; left:600px; width:700px; height:200px; display:inline-block;">
 			
 		<!-- cellpadding="5" cellspacing="2"  -->
 		<table align="center" border="1" width="60%" bordercolorlight="black">
@@ -159,6 +154,6 @@ p {
 	</script>
 	
 
-	
+	<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

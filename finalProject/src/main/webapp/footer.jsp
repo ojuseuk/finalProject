@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>에러 페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../../../top.jsp"/>
-	오류가 발생했습니다.
+<div style="width: 100%; height: 100px; background-color: #eee; text-align: center;">
+  <p>Footer Text</p>
+</div>
 </body>
 </html>
