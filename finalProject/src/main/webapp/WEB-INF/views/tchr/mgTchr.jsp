@@ -9,11 +9,14 @@
 <title>강좌 개설</title>
 </head>
 <body>
+	<button onclick="location.href='${pageContext.request.contextPath}/main.jsp'">홈으로</button>
 	<button onclick="location.href='${pageContext.request.contextPath}/emp'">직원 관리</button>
 	<button onclick="location.href='${pageContext.request.contextPath}/mgTchr">강사 관리</button>
 	
 	<br><hr><br>
- 	<form action="tchrInsert.do" id="frmTchr">
+	
+ 	<!-- <form action="tchrInsert.do" id="frmTchr" method="post"> -->
+  	<form action="tchrInsert.do" id="frmTchr" method="post" enctype="multipart/form-data">
 		<fieldset style="width: 40%">
 			<legend>사용자 정보</legend>
 			<table>
@@ -48,7 +51,7 @@
 			</table>
 		</fieldset>
 		
-		<fieldset style="width: 40%">				
+		<fieldset style="width: 55%">				
 			<legend>강사 정보</legend>
 			<table>
 				<tr>
@@ -70,6 +73,15 @@
 					<td>강사 소개 : </td>
 					<td><textarea name = "tchrIntro" id="tchrIntro" cols = "50" rows = "7" 
                               placeholder="200자 이내"></textarea></td>
+                    </td>
+					<td><div id="tchrPhoto"><%-- <img src="${pageContext.request.contextPath}/imgs/img/T0046.jpg" 
+						alt="강사사진" style="width:150px;height:150px;"> --%></div>
+                    </td>
+				</tr>
+				<tr>
+					<td>사진 : </td>
+                    <td><input type="file" name="imgFile"><br> 
+                    </td>
 				</tr>
 			</table>
 		</fieldset>
@@ -111,6 +123,15 @@
 					document.getElementById("slr").value = data.slr;
 					document.getElementById("sbjtChrg").value = data.sbjtChrg;
 					document.getElementById("tchrIntro").value = data.tchrIntro;
+					/* document.getElementById("tchrPhoto").innerHTML = '<img src="${pageContext.request.contextPath}/imgs/img/T0046.jpg" style="width:150px;height:150px;">'; */
+					
+					tag = '<img src="${pageContext.request.contextPath}/imgs/img/';
+					tag += data.tchrPt + '" style="width:150px;height:150px;">';
+					
+					console.log(tag);
+					document.getElementById("tchrPhoto").innerHTML = tag;
+					
+					
 					document.getElementById("empNo").readOnly = true;
 					document.getElementById("nm").readOnly = true;
 					document.getElementById("slr").readOnly = true;
@@ -168,7 +189,7 @@
 	</script>
 	
 	<!-- 리스트 미리 출력 -->
-	<div id="viewTchrList" style="position:absolute; top:50px; left:600px; width:700px; height:200px; display:inline-block;">
+	<div id="viewTchrList" style="position:absolute; top:50px; left:750px; width:700px; height:200px; display:inline-block;">
 			
 		<table align="center" border="1" width="60%" bordercolorlight="black">
 			<tr>

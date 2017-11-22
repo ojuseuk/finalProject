@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
+import com.project.dto.EMPDto;
 import com.project.dto.USRDto;
 import com.project.service.CrsMgService;
 
@@ -25,11 +26,35 @@ public class CrsMgController {
 		this.crsMgService = service;
 	}
 	
+//	@RequestMapping("/empSelect")
+//	public @ResponseBody EMPDto empSelect(@RequestParam("empNo") String empNo) {
+//		return empMgService.empSelect(empNo);
+//	}
+	
+	@RequestMapping("/clssSelect")
+	public @ResponseBody CLSSDto clssSelect(@RequestParam("clssId") String clssId) {
+		System.out.println("clssSelect : Cotroller : " + clssId); // @@@
+		return crsMgService.clssSelect(clssId);
+	}
 	
 	@RequestMapping("/crsSelectBySbjtNm")
 	public @ResponseBody List<CRSDto> crsSelectBySbjtNm(@RequestParam("sbjtNm") String sbjtNm) {
-		System.out.println("Cotroller : " + sbjtNm);
+		System.out.println("Cotroller : " + sbjtNm); // @@@
 		return crsMgService.crsSelectBySbjtNm(sbjtNm);
+	}
+	
+	@RequestMapping("/clssSelectByCourse")
+	public String clssSelectByCourse(String crsId, Model data) {
+		String url = "error";
+		try {
+			data.addAttribute("list", crsMgService.clssSelectByCourse(crsId));
+			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
+//			data.addAttribute("courseList", crsMgService.selectAll());
+			url = "course/mgClss";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return url;
 	}
 	
 	@RequestMapping("/mgClss")
@@ -38,7 +63,7 @@ public class CrsMgController {
 		try {
 			data.addAttribute("list", crsMgService.clssSelectAll());
 			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
-			data.addAttribute("courseList", crsMgService.selectAll());
+//			data.addAttribute("courseList", crsMgService.selectAll());
 			url = "course/mgClss";
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,16 +75,11 @@ public class CrsMgController {
 	public String clssInsert(CLSSDto clss, Model data) {
 		String url = "error";
 		System.out.println("controller : " + clss); 		// @@@
-		clss.setStrtDt(clss.getStrtDt().replace("-", "")); 
-		clss.setEndDt(clss.getEndDt().replace("-", "")); 
-		clss.setStrtTm(clss.getStrtTm().replace(":", "") + "00"); 
-		clss.setEndTm(clss.getEndTm().replace(":", "") + "00"); 
-		System.out.println(clss); 								// @@@
+
 		try {
 			crsMgService.clssInsert(clss);
 			data.addAttribute("list", crsMgService.clssSelectAll());
 			url ="course/mgClss";  	
-//			url ="redirect:course/mgCourse";  	// 비동기 처리 시
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,7 +110,6 @@ public class CrsMgController {
 			data.addAttribute("list", crsMgService.selectAll());
 			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
 			url ="course/mgCourse";  	
-//			url ="redirect:course/mgCourse";  	// 비동기 처리 시
 
 		} catch (SQLException e) {
 			e.printStackTrace();

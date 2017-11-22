@@ -59,5 +59,20 @@ public class CrsMgDaoImp implements CrsMgDao {
 		// TODO Auto-generated method stub
 		List list = sqlSession.selectList("crsMgMapper.crsSelectBySbjtNm", sbjtNm);
 		return list;	}
+
+	@Override
+	public CLSSDto clssSelect(String clssId) {
+		// TODO Auto-generated method stub
+		System.out.println("DAO : " + clssId);
+		CLSSDto clss = sqlSession.selectOne("crsMgMapper.clssSelect", clssId);
+		System.out.println("DAO : " + clss);
+		return clss;
+	}
+
+	@Override
+	public List clssSelectByCourse(String crsId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("crsMgMapper.clssSelectByCourse", crsId);
+	}
 	
 }

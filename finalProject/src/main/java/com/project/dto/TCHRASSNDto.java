@@ -7,6 +7,9 @@ public class TCHRASSNDto {
 	private String chrg;
 	private String slr;
 	private String nm;			// d이름
+	private String id;
+	private String tchrIntro;
+	private String tchrPt;
 	
 	public TCHRASSNDto() {
 		// TODO Auto-generated constructor stub
@@ -18,6 +21,19 @@ public class TCHRASSNDto {
 		this.clssId = clssId;
 		this.chrg = chrg;
 		this.slr = slr;
+	}
+
+	public TCHRASSNDto(String tchrNo, String clssId, String chrg, String slr, String nm, String id, String tchrIntro,
+			String tchrPt) {
+		super();
+		this.tchrNo = tchrNo;
+		this.clssId = clssId;
+		this.chrg = chrg;
+		this.slr = slr;
+		this.nm = nm;
+		this.id = id;
+		this.tchrIntro = tchrIntro;
+		this.tchrPt = tchrPt;
 	}
 
 	public String getTchrNo() {
@@ -60,6 +76,30 @@ public class TCHRASSNDto {
 		this.nm = nm;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getTchrIntro() {
+		return tchrIntro;
+	}
+
+	public void setTchrIntro(String tchrIntro) {
+		this.tchrIntro = tchrIntro;
+	}
+
+	public String getTchrPt() {
+		return tchrPt;
+	}
+
+	public void setTchrPt(String tchrPt) {
+		this.tchrPt = tchrPt;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -73,9 +113,16 @@ public class TCHRASSNDto {
 		builder.append(slr);
 		builder.append(", nm=");
 		builder.append(nm);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append(", tchrIntro=");
+		builder.append(tchrIntro);
+		builder.append(", tchrPt=");
+		builder.append(tchrPt);
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 	
 }

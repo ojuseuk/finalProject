@@ -2,6 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="empMgMapper">
 
+	<resultMap type="TCHRASSNDto" id="assnResult">
+		<result property="tchrNo" column="TCHR_NO"/>
+		<result property="clssId" column="CLSS_ID"/>
+		<result property="chrg" column="CHRG"/>
+		<result property="slr" column="SLR"/>
+		<result property="nm" column="NM"/>
+		<result property="id" column="ID"/>
+		<result property="tchrIntro" column="TCHR_INTRO"/>
+		<result property="tchrPt" column="TCHR_PT"/>
+	</resultMap>
+	
+	<select id="tchrAssnSelect" resultMap="assnResult">
+		SELECT TC.ID AS ID,
+			   TA.TCHR_NO AS TCHR_NO,
+			   NM,
+			   TA.SLR AS SLR,
+			   TCHR_INTRO,
+			   TCHR_PT
+		  FROM TB_TCHR  TC
+		  	   INNER JOIN TB_TCHRASSN TA ON TA.TCHR_NO = TC.TCHR_NO
+		  	   INNER JOIN TB_USR US ON US.ID = TC.ID
+		 WHERE CLSS_ID =  #{clssId}
+	</select>
+	
+	<insert id="assnTchr">
+		MERGE INTO TB_TCHRASSN
+		USING DUAL
+		   ON (TCHR_NO = #{tchrNo} AND CLSS_ID = #{clssId})
+		WHEN MATCHED THEN
+			UPDATE
+			   SET SLR = #{slr}
+		WHEN NOT MATCHED THEN
+			INSERT(TCHR_NO, CLSS_ID, SLR)
+			   VALUES(#{tchrNo}, #{clssId}, #{slr})
+	</insert>
+
 	<resultMap type="EMPDto" id="empResult">
 		<result property="empNo" column="EMP_NO"/>
 		<result property="id" column="ID"/>
@@ -89,6 +125,14 @@
 		 WHERE TCHR_NO = #{tchrNo}
 	</update>
 		
+	<select id="tchrSelectBySbjtNm" resultMap="tchrResult" parameterType="String">
+		SELECT  NM,
+				TCHR_NO
+		  FROM 	TB_TCHR TCHR 
+				INNER JOIN TB_USR USR ON TCHR.ID = USR.ID
+		 WHERE 	SBJT_CHRG = #{sbjtNm}
+	</select>	
+		
 	<select id="tchrSelect" resultMap="tchrResult">
 		SELECT  TCHR.ID AS ID,
 				NM,
@@ -96,11 +140,12 @@
 				EMP.SLR AS SLR,
 				TCHR_NO,
 				SBJT_CHRG,
-				TCHR_INTRO
-		FROM 	TB_TCHR TCHR 
+				TCHR_INTRO,
+				TCHR_PT
+		  FROM 	TB_TCHR TCHR 
 				INNER JOIN TB_EMP EMP ON TCHR.EMP_NO = EMP.EMP_NO
 				INNER JOIN TB_USR USR ON TCHR.ID = USR.ID
-		WHERE 	TCHR_NO = #{tchrNo}
+		 WHERE 	TCHR_NO = #{tchrNo}
 	</select>	
 	
 	<select id="tchrSelectById" resultMap="tchrResult">

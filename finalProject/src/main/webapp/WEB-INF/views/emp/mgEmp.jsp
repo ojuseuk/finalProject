@@ -25,7 +25,11 @@
 			<table>
 				<tr>
 					<td>사용자 ID :</td>
-					<td><input type="text" name="id" id="id" />
+					<td><input type="text" name="id" id="id" 
+						<c:if test="${not empty emp.id}">
+							value = ${emp.id}
+						</c:if>
+						/>
 						<input type="button" value="조회"
 						onclick="searchUsr('${pageContext.request.contextPath}', document.getElementById('id').value)">
 					</td>
@@ -33,7 +37,11 @@
 				</tr>
 				<tr>
 					<td>이름 :</td>
-					<td><input type="text" name="nm" id="nm" /></td>
+					<td><input type="text" name="nm" id="nm" 
+					<c:if test="${not empty emp.nm}">
+						value = ${emp.nm}
+					</c:if>
+					/></td>
 				</tr>
 			</table>
 		</fieldset>				
@@ -42,17 +50,29 @@
 			<table>
 				<tr>
 					<td>사원번호 :</td>
-					<td><input type="text" name="empNo" id="empNo" /></td>
+					<td><input type="text" name="empNo" id="empNo"  					
+					<c:if test="${not empty emp.empNo}">
+						value = ${emp.empNo}
+					</c:if>
+					/></td>
 
 				</tr>
 				<tr>
 					<td>급여 :</td>
-					<td><input type="number" name="slr" id="slr" /></td>
+					<td><input type="number" name="slr" id="slr" 
+					<c:if test="${not empty emp.slr}">
+						value = ${emp.slr}
+					</c:if>
+					/></td>
 				</tr>
 				<tr>
 					<td>퇴사 일자 :</td>
-					<td><input type="date" name="strtDt" placeholder="퇴사일자"
-						id="retiredDt" />
+					<td><input type="date" name="retiredDt" placeholder="퇴사일자"
+						id="retiredDt" 
+						<c:if test="${not empty emp.retiredDt}">
+							value = ${emp.retiredDt}
+						</c:if>
+						/>
 						<input type="button" value="퇴직처리"
 						onclick="empRetire('${pageContext.request.contextPath}', document.getElementById('empNo').value)">
 					</td>
