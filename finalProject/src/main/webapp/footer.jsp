@@ -8,11 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
   <style>
   body {
       font: 400 15px/1.8 Lato, sans-serif;
@@ -127,70 +123,6 @@
   }
   </style>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-
-<!-- Container (The Band Section) -->
-<div id="Royal Academy" class="container text-center">
-  <h3>Royal Academy</h3>
-  <p>  
-            저희 학원은 학생들 개개인의 사고와 응용력을 파악하고 이에 맞는 개인별 학습을  할 수 있도록 합니다.<br>
-            학생들의 수준에 맞는 학습 설계와 콘텐츠 제공을 통해 효율적인 성적상승의 결과물을 볼 수 있습니다.<br>
-            다양한 응용과 심화된 학습콘텐츠로 목표하는 바를 이룰 수 있도록  하겠습니다.    
-  </p>
-  <br>
-  <div class="row">
-    <div class="col-sm-4">
-      <p class="text-center"></p><br>
-      <a href="#demo" data-toggle="collapse">
-        <img src="./imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="255" height="255">
-      </a>
-     
-    </div>
-    <div class="col-sm-4">
-      <p class="text-center"></p><br>
-      <a href="#demo2" data-toggle="collapse">
-        <img src="./imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="255" height="255">
-      </a>
-      
-    </div>
-    <div class="col-sm-4">
-      <p class="text-center"></p><br>
-      <a href="#demo3" data-toggle="collapse">
-        <img src="./imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="255" height="255">
-      </a>
-     
-    </div>
-  </div>
-</div>
-
-
-
-<!-- Add Google Maps -->
-<h1>학원위치</h1>
-<div id="map" style="width:100%;height:400px;">
-</div>
-
-
-<!-- 구글 지도 -->
-<script>
-
-function myMap() {
-
-        var uluru = {lat: 37.4787713, lng: 126.8810822};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 18,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
- 
-	}
-
-</script>
-<!-- 구글 지도 -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjvtC_0Hr83DsKOtKr0oamgTdwyBtcuho&callback=myMap"></script>
 
 <!-- Footer -->
 <footer class="text-center">
@@ -231,20 +163,6 @@ $(document).ready(function(){
 })
 </script>
 
-  <!-- <h1>Royal Academy</h1>
-      <div>
-      <img src="./imgs/img/mark3.png" class="img-responsive" style="width:20% ; height: 20%" alt="Image">
-     
-      <p>
-            저희 학원은 학생들 개개인의 사고와 응용력을 파악하고 이에 맞는 개인별 학습을  할 수 있도록 합니다.
-            학생들의 수준에 맞는 학습 설계와 콘텐츠 제공을 통해 효율적인 성적상승의 결과물을 볼 수 있습니다.
-            다양한 응용과 심화된 학습콘텐츠로 목표하는 바를 이룰 수 있도록  하겠습니다.    
-      </p>
-      </div>
-      <hr>
-      <h3>학원 위치</h3>
-      <p>Lorem ipsum...</p>
- -->
 
 </body>
 </html>
