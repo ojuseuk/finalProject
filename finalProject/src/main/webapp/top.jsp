@@ -19,12 +19,6 @@
       margin-bottom: 0;
     }
 
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
     /*로그인 스타일*/
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -183,7 +177,7 @@ span.psw {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="${root}/main.jsp">Logo</a>
+      <a class="navbar-brand" href="${root}/main.jsp"><img src="./imgs/img/mark3.png" width="30" height="30"></a>
       <a class="navbar-brand" href="${root}/main.jsp">Home</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
