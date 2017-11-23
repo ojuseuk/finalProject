@@ -170,7 +170,7 @@ span.psw {
 <body  id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
 <div style="background-color: #eee">
   <div class="container text-center">
-    <h1>HAKWON</h1>      
+    <h1>ROYAL ACADEMY</h1>      
     <p>대학 입시, 주요 과목 특강</p>
   </div>
 </div>
@@ -178,12 +178,7 @@ span.psw {
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="${root}/main.jsp"><img src="./imgs/img/mark3.png" width="30" height="30"></a>
+      <a class="navbar-brand" href="${root}/main.jsp"><img src="./imgs/img/mark3.png" width="40" height="30"></a>
       <a class="navbar-brand" href="${root}/main.jsp">Home</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
