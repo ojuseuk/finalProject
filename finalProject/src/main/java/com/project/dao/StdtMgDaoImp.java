@@ -65,6 +65,11 @@ public class StdtMgDaoImp implements StdtMgDao {
 	}
 
 	@Override
+	public void updateStdtPrnt(STDTDto stdt) {
+		sqlSession.update("stdtMgMapper.updateStdtPrnt", stdt);
+	}
+	
+	@Override
 	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) {
 		return sqlSession.selectList("stdtMgMapper.selectStdtNm", stdtInfo);
 	}
@@ -93,4 +98,5 @@ public class StdtMgDaoImp implements StdtMgDao {
 	public int insertStdtClss(STDTCLSSDto dto) {
 		return sqlSession.insert("stdtMgMapper.insertStdtClss", dto);
 	}
+
 }

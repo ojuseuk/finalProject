@@ -4,55 +4,71 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<script src="${root}/js/jquery.min.js"></script>
+<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+<html>
+<head>
 <title>나의수강목록</title>
+</head>
+
 <jsp:include page="../../../top.jsp"/>
-<c:if test="${not empty requestScope.list}">
-	<table id="myClssList" border="0" cellpadding="5" cellspacing="2"
-		width="100%" bordercolordark="white" bordercolorlight="black">
-		<tr>
-			<div width="100%" align="center">
-				<td><p>
-					<b>나의수강목록</b>
-				</p></td>
+<body>
+<c:if test="${not empty requestScope.json}">
+<div style="width: 100%;">
+	<div id="demo" class="card mb-3" align="left"
+		style="float: left; width: 100%; height: 310px">
+		<div class="card-body">
+			<h2 align="center">${requestScope.json[0].nm}의 수강 정보</h2>
+			<div class="table-responsive">
+				<table class="table table-bordered" id="dataTable">
+					<thead>
+						<tr>
+							<th>강좌명</th>
+							<th>강사명</th>
+							<th>기   간</th>
+							<th>등록일</th>
+							<th>강의실</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
 			</div>
-		</tr>
-		<tr>
-			<td bgcolor="#336699"><p align="center">
-					<font color="white"><b>강좌명</b></font>
-				</p></td>
-			<td bgcolor="#336699"><p align="center">
-					<font color="white"><b>강사명</b></font>
-				</p></td>
-			<td bgcolor="#336699"><p align="center">
-					<font color="white"><b>기 간</b></font>
-				</p></td>
-			<td bgcolor="#336699"><p align="center">
-					<font color="white"><b>등록일</b></font>
-				</p></td>
-			<td bgcolor="#336699"><p align="center">
-					<font color="white"><b>강의실</b></font>
-				</p></td>
-		</tr>
-		<c:forEach items="${requestScope.list}" var="data">
-			<tr>
-				<td bgcolor="">
-					<p align="center">${data.clssNm}</p>
-				</td>
-				<td bgcolor="">
-					<p align="center">${data.nm}</p>
-				</td>
-				<td bgcolor="">
-					<p align="center">${data.strtDt}~${data.endDt}</p>
-				</td>
-				<td bgcolor="">
-					<p align="center">${data.paidDt}</p>
-				</td>
-				<td bgcolor="">
-					<p align="center">${data.clssroom}</p>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+		</div>
+	</div>
+</div>
 </c:if>
-<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+<input type="hidden" id="json" value='${requestScope.json}'>
+<input type="hidden" id="root" value='${root}'>
+<script type="text/javascript">
+	var clssInfo = $("#json").val();
+	var root = $("#root").val();
+	clssInfo = JSON.parse(clssInfo);
+
+	$('#dataTable').DataTable({
+		"scrollY" : 250,
+		"scrollCollapse" : true,
+		data : clssInfo,
+		columns : [ {
+			"data" : "clssNm"
+		}, {
+			"data" : "nm"
+		}, {
+			"data" : "strtDt",
+			"render" : function(data, type, row, meta){
+				return data + "~" + row.endDt;
+			}
+		}, {
+			"data" : "paidDt"
+		}, {
+			"data" : "clssroom"
+		} ]
+	});
+</script>
+<!-- <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br> -->
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
+</body>
+</html>

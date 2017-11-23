@@ -9,9 +9,12 @@
 <%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <html>
+<head>
 <title>나의 성적</title>
+</head>
 <jsp:include page="../../../top.jsp"/>
-	<div id="chart"></div>
+<body>
+	<div id="chart" style="width:100%;"></div>
 	<div id="examTp">
 		<select id="examTpList" onchange="scrBySbjt(this.value,'${root}')"></select>
 	</div>
@@ -41,6 +44,7 @@
 		sbjtTp.push(json[i].sbjtNm);
 		scr.push(json[i].score);
 		sum += json[i].score;
+		
 		if(cnt % 5 == 0){
 			avg.push(sum/5);
 			sum = 0;
@@ -67,6 +71,7 @@
 	examId = examId.unique();
 	
 	var examTpTag = "<option value='default'>시험 선택</option>"
+	
 	for (var i = 0; i < examTitle.length; i++) {
 		examTpTag += "<option value='" + examId[i] + "'>" + examTitle[i] + "</option>"
 	}
@@ -138,7 +143,7 @@
 //  시험별 국영수사과 점수
 	function scrBySbjt(exam, root){
 		if(exam == "default"){
-			document.getElementById("detailChart").innerHTML = "";
+			document.getElementById("chart").innerHTML = "";
 			return;
 		}
 		var sbjtNm = new Array();
@@ -162,7 +167,7 @@
 		} ];
 		
 		function createChart() {
-			$("#detailChart").kendoChart({
+			$("#chart").kendoChart({
 				title : {
 					text : ""
 				},
@@ -200,9 +205,9 @@
 		});
 		
 		function refresh() {
-			var chart = $("#detailChart").data("kendoChart"), type = $(
-					"column").val(), stack = $(
-					"#stack").prop("checked");
+			var chart = $("#chart").data("kendoChart"), 
+				type = $("column").val(), 
+				stack = $("#stack").prop("checked");
 
 			for (var i = 0, length = series.length; i < length; i++) {
 				series[i].stack = stack;
@@ -216,6 +221,7 @@
 		}
 	}
 </script>
-<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+<!-- <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br> -->
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
+</body>
 </html>
