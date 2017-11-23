@@ -128,7 +128,7 @@
 	allList = JSON.parse(allList);
 	console.log(allList);
 	$('#dataTable').DataTable({
-		"scrollY" : 250,
+		"scrollY" : 500,
 		"scrollCollapse" : true,
 		data : allList,
 		columns : [ {
@@ -198,7 +198,7 @@
 				var stdtList = xhttp2.responseText;
 				stdtList = JSON.parse(stdtList);
 				$('#dataTable').DataTable({
-					"scrollY" : 250,
+					"scrollY" : 500,
 					"scrollCollapse" : true,
 					data : stdtList,
 					columns : [ {
@@ -231,7 +231,7 @@
 				var stdtList = xhttp.responseText;
 				stdtList = JSON.parse(stdtList);
 				$('#dataTable').DataTable({
-					"scrollY" : 250,
+					"scrollY" : 500,
 					"scrollCollapse" : true,
 					data : stdtList,
 					columns : [ {

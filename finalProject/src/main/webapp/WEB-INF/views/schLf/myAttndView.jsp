@@ -2,16 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
+<meta charset="UTF-8">
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <head>
 	<title>Calendar</title>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="styles/Calendarstyle.css">
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
 <div id="calendar_wrap" width="100%">
-	<table id="calendar">
+	<table class="table table-bordered" id="calendar">
 <!-- 	border="1" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black" -->
 	  <caption>
 	    <span class="year"></span>년 
@@ -150,7 +150,6 @@ function calendar(new_year, new_month){
 	caption_year.innerHTML = year;
 	caption_month.innerHTML = month + 1;		
 }
-
 
 (function(){
 	var prev = document.getElementById('prev'),

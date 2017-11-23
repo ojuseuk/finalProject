@@ -70,7 +70,7 @@ public class StdtMgController {
 		mav.addObject("crsList", stdtMgService.selectByCrs());
 		mav.addObject("json", json);
 		mav.addObject("stdtNo", stdtNo);
-		mav.setViewName("stdtMg/StdtListView");
+		mav.setViewName("stdtMg/stdtListView");
 		return mav;
 	}
 	
@@ -83,7 +83,7 @@ public class StdtMgController {
 	 * @param crsId
 	 * @return
 	 */
-	@RequestMapping("/clssList")
+	@RequestMapping("clssList")
 	public @ResponseBody List<CLSSDto> selectByClss(@RequestParam("crsId") String crsId){
 		return stdtMgService.selectByClss(crsId);
 	}
@@ -97,7 +97,7 @@ public class StdtMgController {
 	 * @param crsId
 	 * @return
 	 */
-	@RequestMapping("/stdtListCrs")
+	@RequestMapping("stdtListCrs")
 	public @ResponseBody List<STDTInfoDto> selectStdtByCrs(@RequestParam("crsId") String crsId){
 		if(crsId.equals("선 택")){
 			return stdtMgService.selectAllByStdt();
@@ -114,7 +114,7 @@ public class StdtMgController {
 	 * @param clssNm
 	 * @return
 	 */
-	@RequestMapping("/stdtList")
+	@RequestMapping("stdtList")
 	public @ResponseBody List<STDTInfoDto> selectStdtByClss(STDTInfoDto stdtInfo){
 		if(stdtInfo.getClssNm().equals("선 택")){
 			return stdtMgService.selectStdtByCrs(stdtInfo.getCrsId());
@@ -132,13 +132,13 @@ public class StdtMgController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/stdtInfo")
+	@RequestMapping("stdtInfo")
 	public @ResponseBody ModelAndView selectStdtInfo(@RequestParam("stdtNo") String stdtNo, Model model){
 		ModelAndView mav = new ModelAndView();
 		List<STDTInfoDto> list = stdtMgService.selectStdtInfo(stdtNo);
 		JSONArray json = JSONArray.fromObject(list);
 		mav.addObject("json", json);
-		mav.setViewName("stdtMg/updateStdt");
+		mav.setViewName("stdtMg/updateStdtView");
 		return mav;
 	}
 	
@@ -152,12 +152,24 @@ public class StdtMgController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/updateStdt")
-	public String updateToStdt(STDTCLSSDto stdtInfo, Model model){
-		stdtMgService.updateStdtClss(stdtInfo);
-		model.addAttribute("crsList", stdtMgService.selectByCrs());
-		model.addAttribute("stdtAllList", stdtMgService.selectAllByStdt());
-		return "stdtMg/StdtListView";
+	@RequestMapping("updateStdt")
+	public ModelAndView updateToStdt(STDTCLSSDto stdtClss, STDTDto stdt, Model model){
+		stdtMgService.updateStdtClss(stdtClss);
+		stdtMgService.updateStdtPrnt(stdt);
+		String stdtNo = stdtMgService.selectStdtNo();
+		String no = stdtNo.substring(1);
+		int num = Integer.parseInt(no);
+		no = Integer.toString(++num);
+		stdtNo = stdtNo.substring(0, 1) + no;
+		List<STDTInfoDto> list = stdtMgService.selectAllByStdt();
+		ModelAndView mav = new ModelAndView();
+		JSONArray json = JSONArray.fromObject(list);
+		mav.addObject("stdtAllList", list);
+		mav.addObject("crsList", stdtMgService.selectByCrs());
+		mav.addObject("json", json);
+		mav.addObject("stdtNo", stdtNo);
+		mav.setViewName("stdtMg/stdtListView");
+		return mav;
 	}
 	
 	
@@ -171,7 +183,7 @@ public class StdtMgController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/selectStdtNm")
+	@RequestMapping("selectStdtNm")
 	public @ResponseBody List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo, Model model){
 		if(stdtInfo.getClssNm().equals("선 택") && stdtInfo.getNm().equals("")){
 			model.addAttribute("info", stdtMgService.selectAllByStdt());
@@ -198,7 +210,7 @@ public class StdtMgController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/selectStdtId")
+	@RequestMapping("selectStdtId")
 	public @ResponseBody String selectStdtId(@RequestParam("id") String id){
 		return stdtMgService.selectStdtId(id);
 	}
@@ -214,7 +226,7 @@ public class StdtMgController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/insertStdt")
+	@RequestMapping("insertStdt")
 	public String insertStdt(STDTDto stdtDto, STDTCLSSDto stdtClssDto, Model model){
 		String date = stdtClssDto.getPaidDt().replace("-", "");
 		stdtClssDto.setPaidDt(date);

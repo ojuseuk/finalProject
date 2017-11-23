@@ -63,6 +63,12 @@ public class StdtMgServiceImp implements StdtMgService {
 	}
 
 	@Override
+	public void updateStdtPrnt(STDTDto stdt) {
+		stdtMgDao.updateStdtPrnt(stdt);
+		
+	}
+	
+	@Override
 	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) {
 		return stdtMgDao.selectByStdtNm(stdtInfo);
 	}
@@ -91,4 +97,5 @@ public class StdtMgServiceImp implements StdtMgService {
 	public int insertStdtClss(STDTCLSSDto dto) {
 		return stdtMgDao.insertStdtClss(dto);
 	}
+
 }

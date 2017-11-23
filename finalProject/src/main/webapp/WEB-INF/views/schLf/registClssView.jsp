@@ -4,7 +4,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="root" value="${pageContext.request.contextPath}" />
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css" />
+<link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
+<link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
+<html>
 <head>
+<title>수강신청</title>
 <style type="text/css">
 td.details-control {
 	background: url('imgs/grid/plus.JPG') no-repeat center center;
@@ -24,19 +35,12 @@ tr.shown td.details-control {
         overflow: auto;
     }
 </style>
-<title>수강신청</title>
 </head>
-<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
-<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css" />
-<link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
-<link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
-<script src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
+
 <jsp:include page="../../../top.jsp"/>
-<div>
+
+<body>
+<div class="card-body">
 	<c:if test="${not empty requestScope.sbjt}" >
 	<b>과목</b>
  	  <select name="sbjt" id="sbjt" onchange="reqCrsList(this.value,'${root}')">
@@ -51,19 +55,20 @@ tr.shown td.details-control {
 <input type="hidden" id="jsonCrs" value='${requestScope.jsonCrs}'>
 <input type="hidden" id="root" value='${root}'>
 
-<div style="width: 100%; overflow: auto; float: left;">
+<div style="width: 100%; overflow: auto;">
 	<div id="crs" class="card mb-3" align="left"
-		style="float: left; width: 100%; height: 558px">
+		style="width: 100%; height: 558px">
 		<div class="card-body">
-			<h2 align="center">수강신청 목록</h2>
+			<h2 align="center">강좌 목록</h2>
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable">
 					<thead>
 						<tr>
+							<th></th>
 							<th>과정명</th>
 							<th>강좌명</th>
 							<th>강사명</th>
-							<th>기 간</th>
+							<th>기   간</th>
 							<th>수강료</th>
 							<th>상세 보기</th>
 						</tr>
@@ -76,20 +81,20 @@ tr.shown td.details-control {
 	</div>
 </div>
 
+<div id="events"></div>
+
 <div>
-	<form name="reqapplyClss" action="${root}/applyClss" method="POST">
-		<p align="right">
-			<input type="hidden" name="clssList" value=""> 
-			<input id="saveClss" type="button" value="강좌담기"> 
-<%-- 			<input id="appClss" type="button" value="수강신청" onclick="sendClssList('${root}')"> --%>
+<%-- 	<form name="reqapplyClss" action="${root}/applyClss" method="POST"> --%>
+		<p align="center">
+<!-- 			<input id="applyList" type="hidden" name="applyList" value="">  -->
+			<input id="saveClss" type="button" value="수강신청" > 
+<%-- 		<input id="appClss" type="button" value="수강신청" onclick="sendClssList('${root}')"> onclick="sendClssList()"--%>
 		</p>
-	</form>
+<!-- 	</form> -->
 </div>
 
 <div id="modal"></div>
 <div id="applyList"></div>
-
-
 
 <script type="text/javascript">
 	
@@ -97,10 +102,11 @@ tr.shown td.details-control {
 	var root = $("#root").val();
 	crsList = JSON.parse(crsList);
 	console.log(crsList);
+	
 	function format(d) {
 		return '과정 소개 : ' + d.crsIntro + '<br>' + 
-		       '선생님 소개 :' + d.nm + '선생님' + '<br>' + '<img src="imgs/img/eng2.PNG">' +
-		       d.tchrIntro;
+		       '선생님 소개 :' + d.nm + '선생님' + '<br>' + '<img src="imgs/img/eng2.PNG">' 
+		       + d.tchrIntro;
 	}
 	
 	var table = $('#dataTable').DataTable({
@@ -108,12 +114,20 @@ tr.shown td.details-control {
 		"scrollY" : 500,
 		"scrollCollapse" : true,
 		data : crsList,
-	    select : true,
+	    select :  {	
+            style: 'multi',
+            selector: 'td:first-child'
+	    },
 		columns : [ {
+			orderable: false,
+	        className: 'select-checkbox',
+	        targets:   0,
+	        "data" : null,
+	        "render" : function(data, type, row, meta){
+				return "";
+			}
+		}, {
 			"data" : "crsNm",
-// 			"render" : function(data, type, row, meta){
-// 				return "<input id='crsNm' type='checkbox' value='" + row + "'>" + data;
-// 			}
 		}, {
 			"data" : "clssNm"
 		}, {
@@ -149,23 +163,25 @@ tr.shown td.details-control {
 
 	});
 	
-	//////////////////////////////배열 중복 처리
 	var selectClss = new Array();
 	var rowData = '';
-	$('#dataTable tbody').on('click', 'tr', function() {
+	$(document).ready(function() {
+		var events = $('#events');
 	    table
 	        .on( 'select', function ( e, dt, type, indexes ) {
 	            rowData = table.rows( indexes ).data().toArray();
 	            selectClss.push(JSON.stringify( rowData ));
-	            console.log(selectClss);
+	            events.prepend(selectClss[indexes]);
+	            console.log(selectClss)
+	            alert("강좌가 담겼습니다.");
 	        } )
 	        .on( 'deselect', function ( e, dt, type, indexes ) {
-// 	            rowData = table.rows( indexes ).data().toArray();
-	            selectClss.splice(indexes, 1);
-	            console.log(selectClss);
+	            rowData = table.rows( indexes ).data().toArray();
+	            delete selectClss[indexes];
+	            console.log(selectClss)
+	            alert("강좌가 삭제되었습니다.");
 	        } );
-	} );
-	
+	} );	
 	
 	function reqCrsList(sbjtNm, root) {
 		$('#dataTable').dataTable().fnDestroy();
@@ -180,10 +196,23 @@ tr.shown td.details-control {
 					"scrollY" : 500,
 					"scrollCollapse" : true,
 					data : crsBySbjt,
+					select :  {	
+			            style: 'multi',
+//			            selector: ':not(td:last-child)'
+			            selector: 'td:first-child'
+				    },
 					columns : [ {
+						orderable: false,
+				        className: 'select-checkbox',
+				        targets:   0,
+				        "data" : null,
+				        "render" : function(data, type, row, meta){
+							return "";
+						}
+					}, { 
 						"data" : "crsNm",
 // 						"render" : function(data, type, row, meta){
-// 							return "<input id='crsNm' type='checkbox' value='" + row.crsNm +"'>" + data;
+// 							return "<input id='crsNm' type='checkbox' value='" + data + "'>" + data;
 // 						}
 					}, {
 						"data" : "clssNm"
@@ -205,57 +234,34 @@ tr.shown td.details-control {
 					} ]
 				});
 			}
+			
 		}
 		xhttp.open("POST", root + "/selectCrsPerSbjt", true);
 		xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xhttp.send("sbjtNm=" + sbjtNm);
+			
 	}
 	
-	function deleClss(root) {
-		$(document).on("click", "#delCheck", function() {
-			$(".appClssList input:checked").each(function() {
-				console.log($(this).parent().children("#delCheck").val);
-			});
-		});
-	}
-
+// 	function sendClssList(){
+// 		document.reqapplyClss.applyList.value = JSON.stringify(selectClss);
+// 		document.reqapplyClss.submit();
+// 	}	
+	
 	$(document).on("click", "#saveClss", function() {
-				var clssInfoStr = new Array();
-				$("#dataTable input:checked").each(
-						function() {
-							var clssInfoObj = $(this).val();
-// 							{
-// 								crsNm : $(this).parent().children("#crsNm").val(),
-// 								clssNm : $(this).parent().children("#clssNm").val(),
-// 								clssId : $(this).parent().children("#clssId").val(),
-// 								nm : $(this).parent().children("#nm").val(),
-// 								strtDt : $(this).parent().children("#strtDt").val(),
-// 								endDt : $(this).parent().children("#endDt").val(),
-// 								stdtclssttn : $(this).parent().children("#stdtclssttn").val()
-// 								};
-// 							console.log(clssInfoObj);
-// 							clssInfoStr.push(JSON.stringify(clssInfoObj));
-						});
-				
-				$.post({
-					url : root + "/applyClss",
-					data : JSON.stringify(clssInfoStr),
-					contentType : "application/json; charset=UTF-8",
-					success : function(clssInfoStr) {
-						console.log("suc");
-					},
-					error : function() {
-						console.log("fail");
-					}
-				});
-				
-
-				$("#saveClss").on("click", function() {
-							sessionStorage.setItem($("#clssNm").parent()
-									.children("#clssId").val(), clssInfoStr);
-							alert("강좌가 담겼습니다.");
-						});
-			});
+		$.post({
+			url : root + "/applyClss",
+			data : JSON.stringify(selectClss),
+			contentType : "application/json; charset=UTF-8",
+			success : function(list) {
+				console.log(list);
+			},
+			error : function() {
+				console.log("fail");
+			}
+		});
+	});
 </script>
-<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+<!-- <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br> -->
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
+</body>
+</html>
