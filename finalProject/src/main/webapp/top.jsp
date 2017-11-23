@@ -167,7 +167,7 @@ span.psw {
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
-<body>
+<body  id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
 <div style="background-color: #eee">
   <div class="container text-center">
     <h1>HAKWON</h1>      
@@ -212,12 +212,12 @@ span.psw {
         <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
         </c:if>
         <c:if test="${id != null}">
-       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'"><span class="glyphicon glyphicon-user"></span>회원정보${id}</a></li>
-        <li><a href="<c:url value='/logout'/>"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" ><span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
+       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'"><span class="glyphicon glyphicon-user"></span>${id}</a></li>
+        <li><a href="<c:url value='/logout'/>"><span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
         </c:if>
         <c:if test="${staff != null}">
-       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'"><span class="glyphicon glyphicon-user"></span>회원정보${staff}</a></li>
-        <li><a href="<c:url value='/logout'/>"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" ><span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
+       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'"><span class="glyphicon glyphicon-user"></span>${staff}</a></li>
+        <li><a href="<c:url value='/logout'/>"><span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
         </c:if>
       </ul>
     </div>
