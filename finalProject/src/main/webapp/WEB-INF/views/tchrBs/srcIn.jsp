@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${root}/js/jquery.min.js"></script>
 <body>
-
+<jsp:include page="../../../top.jsp"/>
 	<div class="w3-container">
 		<h2>Bordered Table</h2>
 		<p>The w3-bordered class adds a bottom border to each table row:</p>

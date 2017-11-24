@@ -11,6 +11,7 @@
 <script src="${root}/js/jquery.min.js"></script>
 </head>
 <body>
+<jsp:include page="../../../top.jsp"/>
 	<input type="hidden" value='${requestScope.json }' id="json">
 	<select name="clss" id="clss">
 		<option value="선택">선택</option>

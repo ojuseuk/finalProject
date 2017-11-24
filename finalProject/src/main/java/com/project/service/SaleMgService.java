@@ -13,6 +13,6 @@ public interface SaleMgService {
 	Map<List<Map<String, String>>, List<Map<String, String>>> selectLtfee();
 	List<SALEDto> mgSaleList(String date1, String date2);
 	List<TCHRDto> ltfeeInsert(List<String> tchrId, List<String> tchrSlr, List<String> ssnId, List<String> ssnSlr, List<String> tchrNm, List<String> ssnNm);
-	List<SALEDto> mgSaleList2(int year, int month);
+	List<SALEDto> mgSaleList2(int year, int month, int day);
 
 }

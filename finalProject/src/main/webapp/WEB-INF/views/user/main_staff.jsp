@@ -66,6 +66,5 @@
 
 
 <!-- 회원정보 -->
-<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

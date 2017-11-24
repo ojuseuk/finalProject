@@ -9,8 +9,8 @@ import com.project.dto.USRDto;
 
 public interface UsrService {
 	
-	public void userInsert(USRDto usr) throws SQLException;
-	public HashMap<String,Object> userLogin(HashMap<String,Object> map) throws SQLException;
+	public int userInsert(USRDto usr) throws SQLException;
+	public USRDto userLogin(HashMap<String,Object> map) throws SQLException;
 	
 	//findId
 	public USRDto findId(HashMap<String, Object> map) throws SQLException;

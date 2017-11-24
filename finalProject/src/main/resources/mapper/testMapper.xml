@@ -5,4 +5,12 @@
 	<insert id="insertTest" parameterType="testDto" >
 		insert into finaltest1 values(#{test1}, #{test2})
 	</insert>
+	
+	<select id="examTpSelect" resultType="String">
+		select max(EXAM_ID) from tb_exam_tp 
+	</select>
+		
+	<insert id="examTpInsert" parameterType="eXAMTPDto">
+		INSERT INTO TB_EXAM_TP VALUES(#{examId}, #{examTitle}, #{examDt}, #{examTp})
+	</insert>
 </mapper>

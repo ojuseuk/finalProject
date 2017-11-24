@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="tchrBsMapper">
 	
 	<select id="tchrBsTcp" resultType="tPCDto">
@@ -15,9 +16,12 @@
 		INSERT INTO TB_TTLQZ(ID, SBJT_NM, TCHR_NO, TPC_NM, CONTENT, DEGREE, ANSWER, TITLE, SOLUTION) VALUES(seq_ttlqz.NEXTVAL, #{sbjtNm}, #{tchrNo}, #{tpcNm}, #{content}, #{degree}, #{answer}, #{title}, #{solution})
 	</insert>
 	
-	<select id="attnd" parameterType="string" resultType="map">
-		SELECT clssid, attndtp, dt, tchrno
-			from tchrbs_attnd where tchrno=#{id}
+	<select id="attnd" parameterType="map" resultType="map">
+		<![CDATA[
+		SELECT clssid, tchrno
+			FROM tchrbs_attnd where TCHRNO=#{tchrNo}
+			AND strtdt <= #{today} AND #{today} <= enddt
+		]]>
 	</select>
 	
 	<select id="attndClss" parameterType="string" resultType="map">
@@ -85,8 +89,8 @@
 		FROM TB_TTLQZ WHERE ID = #{id}
 	</select>
 	
-	<select id="qzExamSelect" resultType="eXAMTPDto">
-		SELECT EXAM_ID examId, EXAM_TITLE examTitle FROM TB_EXAM_TP
+	<select id="qzExamSelect" resultType="map">
+		SELECT CD_ID cdId, CD_NM cdNm FROM TB_CD
 	</select>
 	
 	<insert id="qzInsert" parameterType="list">
@@ -96,5 +100,9 @@
 		</foreach>
 		SELECT * FROM DUAL
 	</insert>
+	
+	<select id="attndTchrNo" parameterType="string" resultType="string">
+		SELECT TCHR_NO FROM TB_TCHR WHERE ID = #{id}	
+	</select>
 	
 </mapper>

@@ -78,7 +78,7 @@
 		SELECT YEAR year, MONTH month, DAY day, COST_ITEM costItem, NO no,
 		AMOUNT amount FROM TB_SALE
 		<choose>
-			<when test="month == 0 AND day == 0">
+			<when test="month == 0">
 				WHERE YEAR = #{year} ORDER BY MONTH
 			</when>
 			<when test="day == 0">
