@@ -73,10 +73,12 @@ public class UsrServiceImp implements UsrService {
 	}
 	
 	
-	//delete user
-	/*public USRDto delUser(HashMap<String, Object> map)throws SQLException{
-		System.out.println("servicedelUser : " + map);
-		return usrDao.delUser(map);
-	}*/
+	//userOut
+	@Override
+	public int userOut(HashMap<String, Object> map) throws SQLException{
+		System.out.println("serviceuserOut : " + map);
+		return usrDao.userOut(map);
+	}
+	
 	
 }

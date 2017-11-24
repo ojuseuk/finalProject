@@ -3,7 +3,9 @@ package com.project.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -119,7 +121,7 @@ public class UsrController {
 		return url;
 	}
 
-	// logout
+	// go logoutPro.jsp
 	@RequestMapping(value = "logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -177,7 +179,7 @@ public class UsrController {
 		return json.toString();
 	}
 
-	// goto the changepwd_new jsp
+	// goto the changePwdNew jsp
 	@RequestMapping("changePwdNew")
 	public String changePwdNew(String id, Model model) {
 		System.out.println("changePwdNewcontroller id : " + id);
@@ -219,19 +221,23 @@ public class UsrController {
 	public String delUser(HttpSession session) {
 		return "user/delUser";
 	}
-	// delete user
-	/*
-	 * @RequestMapping(value="/del") public @ResponseBody String
-	 * delUser(@RequestParam("pw") String pw) throws SQLException {
-	 * System.out.println("delUsercontroller pw : " + pw); HashMap<String, Object>
-	 * map = new HashMap<String, Object>(); map.put("pw", pw); JSONObject json = new
-	 * JSONObject(); USRDto usrdto=usrService.delUser(map);
-	 * 
-	 * if(usrdto != null) { json.put("delCheck", usrdto.getPw()); }else {
-	 * json.put("delCheck", false); } String data1=json.toString();
-	 * System.out.println(data1);
-	 * 
-	 * return json.toString(); }
-	 */// end delete user
+	//userOut
+	@RequestMapping(value ="/userOut")
+	public @ResponseBody String userOut(String id,String pw) throws SQLException {
+		System.out.println("userOutcontroller id : " + id);
+		System.out.println("userOutcontroller pw : " + pw);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		System.out.println("아이디:" + id);
+		System.out.println("비밀번호:" + pw);
+		map.put("id", id);
+		map.put("pw", pw);
+		JSONObject json = new JSONObject();
+		usrService.userOut(map);
+		String data1 = json.toString();
+		System.out.println(data1);
+		return json.toString();
+
+	}
+	
 
 }// end controller

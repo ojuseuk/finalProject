@@ -66,12 +66,12 @@ public class UsrDaoImp implements UsrDao {
 		return sqlSession.update("usrMapper.changePwdNew",map);
 	}
 	
-	//delete user
-	/*@Override
-	public USRDto delUser(HashMap<String, Object> map) {
-		System.out.println("DAOdelUser:" + map);
-		return sqlSession.delete("usrMapper.delUser",map);
-	}*/
+	//update userOut
+	@Override
+	public int userOut(HashMap<String, Object> map){
+		System.out.println("DAOuserOut:" + map);
+		return sqlSession.update("usrMapper.userOut",map);
+	}
 
 }
 

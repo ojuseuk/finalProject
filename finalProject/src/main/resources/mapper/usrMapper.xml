@@ -49,10 +49,11 @@
 		update TB_USR set pw=#{pw} where id=#{id}
 	</update>
 	
-	<!-- delete user -->
-	<!-- <delete id="delUser" >
-		delete from TB_USR where id=#{id} and pw=#{pw}
-	</delete> -->
+	<!-- update userOut -->
+	<update id="userOut" parameterType="hashmap">
+		update TB_USR set pw='null', nm='null',phone='null',addr='null',email='null',USR_TP='null',pws='null'
+		where id=#{id}
+	</update>
 	
 </mapper>
 
