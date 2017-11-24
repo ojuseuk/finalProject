@@ -15,7 +15,7 @@
 
 	<insert id="userInsert" parameterType="USRDto">
 		INSERT INTO TB_USR
-		VALUES(#{id}, #{pw}, #{nm}, #{phone}, #{addr}, #{email}, 0 , 0)
+		VALUES(#{id}, #{pw}, #{nm}, #{phone}, #{addr}, #{email}, #{usrTp} , #{pws})
 	</insert>
 	
 	<select id="userLogin" parameterType="hashmap" resultMap="UserResult">

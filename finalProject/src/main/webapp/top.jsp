@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -9,36 +10,39 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/styles/main/top.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
-
+<body>
 <div style="background-color: #eee">
   <div class="container text-center">
-   
+    <h1>HAKWON</h1>      
     <p>대학 입시, 주요 과목 특강</p>
   </div>
 </div>
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-    
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="${root}/main.jsp">Logo</a>
       <a class="navbar-brand" href="${root}/main.jsp">Home</a>
     </div>
-    
     <div class="collapse navbar-collapse" id="myNavbar">
-      <c:if test="${id != null && (usrTp == 'st' || usrTp == null)}">
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.nm" var ="nm"/>
+		<sec:authorize access="hasAnyRole('ROLE_ST', 'ROLE_USR')">
+		<sec:authentication property="principal.nm"/>      
       <ul class="nav navbar-nav">
         <li><a href="${root}/viewRegist">수강신청</a></li>
         <li><a href="${root}/myScr">성적확인</a></li>
         <li><a href="${root}/myAttnd">출결확인</a></li>
         <li><a href="${root}/myClssList">수강과정확인</a></li>
       </ul>
-      </c:if>
-      
-      <c:if test="${id != null && usrTp == 'staff'}">
-       <ul class="nav navbar-nav">
+      </sec:authorize>
+      <sec:authorize access="hasRole('ROLE_STAFF')">
+      <ul class="nav navbar-nav">
         <li><a href="${root}/mgTchr">강사 관리</a></li>
         <li><a href="${root}/stdtAllList">학생 관리</a></li>
         <li><a href="${root}/saleMg/manager">매출 관리</a></li>
@@ -47,9 +51,9 @@
         <li><a href="${root}/testSMS">문자 발송</a></li>
         <li><a href="${root}/emp">직원 관리</a></li>
         </ul>
-      </c:if>
-      <c:if test="${id != null && usrTp == 'tchr'}">
+      </sec:authorize>
       
+      <sec:authorize access="hasRole('ROLE_TCHR')">
       <ul class="nav navbar-nav">
         <li><a href="${root}/tchrBs/qzView">문제 생성</a></li>
         <li><a href="${root}/tchrBs/attnd">출석 확인</a></li>
@@ -58,23 +62,27 @@
         <li><a href="${root}/tchrBs/stSearch">학생 성적 확인</a></li>
         <li><a href="${root}/tchrBs/qzSelectView"">시험 출제</a></li>
       </ul>
-      </c:if>
+      </sec:authorize>
+</sec:authorize>
       <ul class="nav navbar-nav navbar-right">
-        <c:if test="${id == null}">
+        <sec:authorize access="isAnonymous()">
         <li><a href="javascript:void(0)" onclick="document.getElementById('id01').style.display='block'"><span class="glyphicon glyphicon-education"></span> 로그인</a></li>
         <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-        </c:if>
-        <c:if test="${id != null}">
-       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'"><span class="glyphicon glyphicon-user"></span>${sessionScope.name}님 - 회원정보</a></li>
-        <li><a href="<c:url value='/logout'/>"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" ><span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
-        </c:if>
+		</sec:authorize>
+	<sec:authorize access="isAuthenticated()">
+       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'"><span class="glyphicon glyphicon-user"></span><sec:authentication property="principal.nm" />님 - 회원정보</a></li>
+        <li><a href="javascript:logout();"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" ><span class="glyphicon glyphicon-remove-sign"></span>${nm}로그아웃</a></li>
+	</sec:authorize>
       </ul>
     </div>
   </div>
+
+</nav>
 <!-- 로그인 -->
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="${root}/userLogin.do" method="post">
+  <form class="modal-content animate" action="${root}/login" method="post">
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
     </div>
@@ -102,6 +110,7 @@
 <div id="id02" class="modal">
   <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
   <form class="modal-content animate" action="${root}/userInsert.do" method="post">
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
     <div class="container">
       <label><b>아이디</b></label>
       <input type="hidden" name="command" value="join">
@@ -158,6 +167,15 @@
     </div>
   </form>
 </div>
-</nav>
+
+<form id="logoutForm" action="${root}/logout" method="post" style="display: none">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+
+<script>
+	function logout() {
+		document.getElementById("logoutForm").submit();
+	}
+</script>
 </body>
 </html>

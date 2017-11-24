@@ -4,10 +4,13 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.dao.UsrDao;
 import com.project.dto.USRDto;
+
+import util.Constants;
 
 @Service
 public class UsrServiceImp implements UsrService {
@@ -19,10 +22,18 @@ public class UsrServiceImp implements UsrService {
 		this.usrDao = dao;
 	}
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public int userInsert(USRDto usr) throws SQLException {
 		System.out.println("service : " + usr); 		
 
+		String encodePass = passwordEncoder.encode(usr.getPw());
+		usr.setPws(encodePass);
+		
+		usr.setUsrTp(Constants.ROLE_TCHR);
+		
 		return usrDao.userInsert(usr);
 		
 	}

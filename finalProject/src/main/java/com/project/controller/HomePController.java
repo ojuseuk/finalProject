@@ -1,14 +1,22 @@
 package com.project.controller;
 
 import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.dto.QNADto;
+import com.project.dto.USRDto;
 import com.project.service.HomePService;
 
 import net.sf.json.JSONArray;
@@ -126,5 +134,63 @@ public class HomePController {
 		mav.setViewName("forward:/homeP/qnaSelectView");
 		
 		return mav;
+	}
+	
+	@RequestMapping("/tchr/main")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
+	public String tchr(Authentication auth, Model model) {
+		
+		System.out.println(auth);
+		model.addAttribute("auth", auth);
+		
+		return "user/main_tchr";
+	}
+	
+	@RequestMapping("/staff/main")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
+	public String staff(Authentication auth, Model model) {
+		System.out.println("usr");
+		model.addAttribute("auth", auth);
+		
+		return "user/main_staff";
+	}
+	
+	
+	@RequestMapping("/usr/main")
+	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
+	public String usr(Authentication auth, Model model, RedirectAttributes redirectAttributes) {
+		System.out.println("usr");
+		model.addAttribute("auth", auth);
+		
+		return "redirect:/main.jsp";
+	}
+	
+	@RequestMapping("/main")
+	public String main(HttpSession session, Authentication auth, Locale locale, Model model) {
+		
+		USRDto usrDto = (USRDto) auth.getPrincipal();
+		System.out.println(usrDto);
+		String url = "forward:/usr/main";
+		
+		if (usrDto.getUsrTp().equals("staff")) {
+			System.out.println("직원");
+			model.addAttribute("auth", auth);
+			
+			url = "forward:/staff/main";
+		} else if (usrDto.getUsrTp().equals("st")) {
+			System.out.println("학생");
+			model.addAttribute("auth", auth);
+			
+		} else if (usrDto.getUsrTp().equals("tchr")) {
+			System.out.println("강사");
+
+			model.addAttribute("auth", auth);
+			url ="forward:/tchr/main";
+
+		} else {
+			System.out.println("사용자");
+			
+		}
+		return url;
 	}
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="com.project.security.handler,com.project.security.provider" />
+	
+	<security:global-method-security pre-post-annotations="enabled"/>
+	
+	<security:http use-expressions="true" auto-config="true">
+<!-- 		<security:intercept-url pattern="/staff/**" access="hasRole('ROLE_STAFF')"/> -->
+<!-- 		<security:intercept-url pattern="/tchr/**" access="hasRole('ROLE_TCHR')"/> -->
+<!-- 		<security:intercept-url pattern="/usr/**" access="hasAnyRole('ROLE_ST', 'ROLE_USR')"/> -->
+			<!--  -->
+		<security:form-login
+			login-page="/top.jsp"
+			login-processing-url="/login"
+			username-parameter="id"
+			password-parameter="pw"
+			default-target-url="/main"
+			authentication-failure-handler-ref="memberAuthenticationFailureHandler" />
+		
+		<security:logout
+			invalidate-session="true"
+			delete-cookies="JSESSIONID"
+			logout-url="/logout"
+			logout-success-url="/main.jsp" />
+	
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider ref="memberAuthenticationProvider" />
+	</security:authentication-manager>
+
+</beans>

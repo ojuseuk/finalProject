@@ -73,6 +73,12 @@ public class UsrDaoImp implements UsrDao {
 		return sqlSession.delete("usrMapper.delUser",map);
 	}*/
 
+//	스프링 보안 적용 로그인
+	@Override
+	public USRDto userLoginId(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("usrMapper.userLoginId", id);
+	}	
 }
 
 

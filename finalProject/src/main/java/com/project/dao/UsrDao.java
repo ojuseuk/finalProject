@@ -17,4 +17,6 @@ public interface UsrDao {
 	//delete user
 /*	USRDto delUser(HashMap<String, Object> map)throws SQLException;
 	*/
+	//스프링 보안 적용 로그인
+	USRDto userLoginId(String id);
 }
