@@ -33,13 +33,13 @@
 	<input type="hidden" name="command" value="notice"/>
 <table class="table table-bordered" align="center" cellpadding="5" cellspacing="2" width="50%" height="50%" border="1">
     <tr>
-        <td width="1220" height="20" colspan="2">
-            <p align="center">문자발송</p>
+        <td width="1220" height="20" colspan="2" align="center">
+            <h2>문자발송</h2>
         </td>
     </tr>
     <tr>
         <td width="150" height="20">
-            <p align="right">공지사항</p>
+            <p align="right">내  용</p>
         </td>
         <td width="450" height="20">
 		<textarea name="content" cols="50" rows="10" maxlength="80"></textarea></td>
@@ -49,8 +49,8 @@
             <p align="right">&nbsp;</p>
         </td>
         <td width="450" height="20">
-        <input type=submit value=공지사항전송>
-        <input type=reset value=다시쓰기>
+        <input type=submit value="전 송">
+        <input type=reset value="다시쓰기">
    		<input type="button" name="command" value="지각안내" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
    	 </td>
     </tr>

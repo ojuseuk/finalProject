@@ -11,10 +11,10 @@
 <body>
 <jsp:include page="../../../top.jsp"/>
 <div id="calendar_wrap" width="100%">
-	<table class="table table-bordered" id="calendar">
+	<table class="table table-bordered" id="calendar" >
 <!-- 	border="1" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black" -->
 	  <caption>
-	    <span class="year"></span>년 
+	    <span class="year" ></span>년 
 	    <span class="month"></span>월 
 	  </caption>
 	  <tr>

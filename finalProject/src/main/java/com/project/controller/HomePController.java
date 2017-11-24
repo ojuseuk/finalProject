@@ -22,7 +22,6 @@ import com.project.service.HomePService;
 import net.sf.json.JSONArray;
 
 @Controller
-@RequestMapping("/homeP")
 public class HomePController {
 
 	@Autowired
@@ -36,7 +35,7 @@ public class HomePController {
 	 * return type  : String
 	 * @return
 	 */
-	@RequestMapping("/qnaInsertView")
+	@RequestMapping("/homeP/qnaInsertView")
 	public ModelAndView qnaInsertView(QNADto qnaDto) {
 		
 		System.out.println(qnaDto);
@@ -56,7 +55,7 @@ public class HomePController {
 	 * @Method 설명	:
 	 * return type  : void
 	 */
-	@RequestMapping("/qnaInsert")
+	@RequestMapping("/homeP/qnaInsert")
 	public void qnaInsert(QNADto qnaDto) {
 		
 		System.out.println("controller QNAInsert");
@@ -73,7 +72,7 @@ public class HomePController {
 	 * return type  : ModelAndView
 	 * @return
 	 */
-	@RequestMapping("/qnaSelectView")
+	@RequestMapping("/homeP/qnaSelectView")
 	public ModelAndView qnaSelectView() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -98,7 +97,7 @@ public class HomePController {
 	 * @param no
 	 * @return
 	 */
-	@RequestMapping("/qnaUpdateView")
+	@RequestMapping("/homeP/qnaUpdateView")
 	public ModelAndView qnaUpdateView(@RequestParam("no") int no) {
 		
 		System.out.println("controller qnaUpdateView");
@@ -122,7 +121,7 @@ public class HomePController {
 	 * @param qnaDto
 	 * @return
 	 */
-	@RequestMapping("/qnaUpdate")
+	@RequestMapping("/homeP/qnaUpdate")
 	public ModelAndView qnaUpdate(QNADto qnaDto) {
 		
 		ModelAndView mav = new ModelAndView();

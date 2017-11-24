@@ -19,4 +19,6 @@ public interface UsrDao {
 	*/
 	//스프링 보안 적용 로그인
 	USRDto userLoginId(String id);
+	//userOut
+	int userOut(HashMap<String, Object> map)throws SQLException;
 }

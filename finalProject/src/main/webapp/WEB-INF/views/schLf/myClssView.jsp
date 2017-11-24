@@ -6,6 +6,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-x.y.z.js"></script>
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -21,7 +22,7 @@
 	<div id="demo" class="card mb-3" align="left"
 		style="float: left; width: 100%; height: 310px">
 		<div class="card-body">
-			<h2 align="center">${requestScope.json[0].nm}의 수강 정보</h2>
+			<h2 align="center">나의 수강 정보</h2>
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable">
 					<thead>
