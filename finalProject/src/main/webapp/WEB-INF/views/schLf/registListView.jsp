@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
+<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
@@ -13,65 +13,38 @@
 <head>
 <title>수강신청목록</title>
 </head>
-<jsp:include page="../../../top.jsp"/>
 <body>
-<div style="width: 100%;">
+<input type="hidden" id="json" value='${requestScope.json}'>
+<input type="hidden" id="json" value='${requestScope.fee}'>
+<input type="hidden" id="root" value='${root}'>
+<c:if test="${not empty requestScope.json}" >
+	<div style="width: 100%;">
 	<div id="demo" class="card mb-3" align="left"
-		style="float: left; width: 100%; height: 310px">
+		style="float: left; width: 100%; height: 200px">
 		<div class="card-body">
-<%-- 			<h2 align="center">${requestScope.json[0].nm}의 정보</h2> --%>
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable">
-					<thead>
-						<tr>
-							<th>강좌명</th>
-							<th>강사명</th>
-							<th>기   간</th>
-							<th>수강료</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
+					<tr>
+						<td>강좌명</td>
+						<td>강사명</td>
+						<td>기   간</td>
+						<td>수강료</td>
+						<td>삭제</td>
+					</tr>
+					<c:forEach items="${requestScope.json}" var="data">
+							<tr>
+								<td>${data.clssNm}</td>
+								<td>${data.nm}</td>
+								<td>${data.strtDt} ~ ${data.endDt}</td>
+								<td>${data.stdtclssttn}원</td>
+								<td align="center">x</td>
+							</tr>
+						</c:forEach>
 				</table>
-				<p align="center"><input id="updateBtn" type="button" value="수정">
-				<input id="saveBtn" type="button" value="저장"></p>
 			</div>
 		</div>
 	</div>
 </div>
-
-			<p align="right">총 결제 금액 : </p>
-	<p align="center"><input id="delClss" type="button" value="선택삭제" onclick="deleClss('${root}')"><button>결제</button></p>
-
-<input type="hidden" id="json" value='${requestScope.json}'>
-<input type="hidden" id="root" value='${root}'>
-
-<script type="text/javascript">
-$('#dataTable').dataTable().fnDestroy();
-	var stdtInfo = $("#json").val();
-	var root = $("#root").val();
-	stdtInfo = JSON.parse(stdtInfo);
-
-	$('#dataTable').DataTable({
-		"scrollY" : 250,
-		"scrollCollapse" : true,
-		data : stdtInfo,
-		columns : [ {
-			"data" : "clssNm"
-		}, {
-			"data" : "nm",
-		}, {
-			"data" : "strtDt",
-			"render" : function(data, type, row, meta){
-				return data + "~" + row.endDt + "(" + row.prd + "일)";
-			}
-		}, {
-			"data" : "stdtclssttn",
-		} ]
-	});
-	
-</script>
-<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+</c:if>
 </body>
 </html>

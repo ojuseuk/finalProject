@@ -21,7 +21,7 @@
 	<div id="demo" class="card mb-3" align="left"
 		style="float: left; width: 100%; height: 310px">
 		<div class="card-body">
-			<h2 align="center">${requestScope.json[0].nm}의 정보</h2>
+			<h3 align="center">${requestScope.json[0].nm}의 정보</h3>
 			<div class="table-responsive">
 				<form action="${root}/updateStdt" method="POST">
 				<table class="table table-bordered" id="dataTable">
@@ -93,7 +93,7 @@
 			}, {
 				"data" : "stdtNo",
 				"render" : function(data, type, row, meta){
-					 return "<input id='stdtNo' type='text' name='stdtNo' value='" + row.stdtNo + "'>" + data;
+					 return "<input id='stdtNo' type='hidden' name='stdtNo' value='" + row.stdtNo + "'>" + data;
 					}
 			}, {
 				"data" : "nm",
