@@ -3,6 +3,7 @@ package com.project.controller;
 import java.text.SimpleDateFormat;
 
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.weaver.ast.Instanceof;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +29,9 @@ import com.project.dto.ClssInfoDto;
 import com.project.dto.DateDto;
 import com.project.dto.SCRDto;
 import com.project.service.SchLfService;
+
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @Controller
 public class SchLfController {
@@ -98,11 +102,30 @@ public class SchLfController {
 	 * @throws Exception
 	 */
 	@RequestMapping("applyClss")
-	public String applyClss(@RequestBody List<String> clssList, Model model) throws Exception{
-		JSONArray json = JSONArray.fromObject(clssList);
-		System.out.println(json);
-		model.addAttribute("list", json);
-		return "schLf/registListView";
+	public ModelAndView applyClss(@RequestBody List<String> clssList, Model model) throws Exception{
+		int fee = 0;
+		ModelAndView mav = new ModelAndView();
+		List<ClssInfoDto> list = new ArrayList<>();
+		JSONParser parser = new JSONParser();
+		JSONObject jo = null;
+			if(!clssList.equals(null)){
+				for (int i = 0; i < clssList.size(); i++) {
+					jo = (JSONObject) parser.parse(clssList.get(i));
+					list.add(new ClssInfoDto(jo.get("nm").toString(), jo.get("clssNm").toString()
+							, jo.get("strtDt").toString(),	jo.get("endDt").toString(), jo.get("stdtclssttn").toString()));
+					fee += Integer.parseInt(jo.get("stdtclssttn").toString());
+				}
+				JSONArray json = JSONArray.fromObject(list);
+				System.out.println(list);
+				mav.addObject("json", json);
+				System.out.println(json);
+			} else {
+				mav.addObject("json", "강좌를 선택하세요");
+			}
+		System.out.println(fee);
+		mav.addObject("fee", fee);
+		mav.setViewName("schLf/registListView");
+		return mav;
 	}
 	
 	/**
@@ -120,6 +143,7 @@ public class SchLfController {
 		ModelAndView mav = new ModelAndView();
 		List<ClssInfoDto> list = schLfService.selectMyClss(session.getAttribute("id").toString());
 		JSONArray json = JSONArray.fromObject(list);
+		System.out.println(json);
 		mav.addObject("json", json);
 		mav.setViewName("schLf/myClssView");
 		return mav;

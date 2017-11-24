@@ -154,6 +154,8 @@ public class StdtMgController {
 	 */
 	@RequestMapping("updateStdt")
 	public ModelAndView updateToStdt(STDTCLSSDto stdtClss, STDTDto stdt, Model model){
+		System.out.println(stdtClss);
+		System.out.println(stdt);
 		stdtMgService.updateStdtClss(stdtClss);
 		stdtMgService.updateStdtPrnt(stdt);
 		String stdtNo = stdtMgService.selectStdtNo();
@@ -170,34 +172,6 @@ public class StdtMgController {
 		mav.addObject("stdtNo", stdtNo);
 		mav.setViewName("stdtMg/stdtListView");
 		return mav;
-	}
-	
-	
-	/**
-	 * @Method Name : selectByStdtNm
-	 * @작성일	    : 2017. 11. 13. 
-	 * @작성자	    : 김동근
-	 * @Method 설명	: 이름으로 수강생 검색(clssNm"선택"을 clssId 변경 )
-	 * return type  : List<STDTInfoDto>
-	 * @param stdtInfo
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("selectStdtNm")
-	public @ResponseBody List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo, Model model){
-		if(stdtInfo.getClssNm().equals("선 택") && stdtInfo.getNm().equals("")){
-			model.addAttribute("info", stdtMgService.selectAllByStdt());
-			return stdtMgService.selectAllByStdt();
-		} else if(stdtInfo.getNm().equals("")){
-			model.addAttribute("info", stdtMgService.selectByStdtList(stdtInfo.getClssNm()));
-			return stdtMgService.selectByStdtList(stdtInfo.getClssNm());
-		} else if(stdtInfo.getClssNm().equals("선 택") && !stdtInfo.getNm().equals("")){
-			model.addAttribute("info", stdtMgService.selectByStdtNm(stdtInfo));
-			return stdtMgService.selectByStdtNm(stdtInfo);
-		} else {
-			model.addAttribute("info", stdtMgService.selectByClssStdtNm(stdtInfo));
-			return stdtMgService.selectByClssStdtNm(stdtInfo);
-		}
 	}
 	
 	/**

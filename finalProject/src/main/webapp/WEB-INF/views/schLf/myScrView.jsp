@@ -18,7 +18,6 @@
 	<div id="examTp">
 		<select id="examTpList" onchange="scrBySbjt(this.value,'${root}')"></select>
 	</div>
-	<div id="detailChart"></div>
 	<input type="hidden" id="scrList" value="${requestScope.scrList.size()}">
 	<input type="hidden" id="json" value='${requestScope.json}'>
 	
@@ -70,7 +69,7 @@
 	examTitle = examTitle.unique();
 	examId = examId.unique();
 	
-	var examTpTag = "<option value='default'>시험 선택</option>"
+	var examTpTag = "<option value='default'>시험 평균</option>"
 	
 	for (var i = 0; i < examTitle.length; i++) {
 		examTpTag += "<option value='" + examId[i] + "'>" + examTitle[i] + "</option>"
@@ -143,8 +142,7 @@
 //  시험별 국영수사과 점수
 	function scrBySbjt(exam, root){
 		if(exam == "default"){
-			document.getElementById("chart").innerHTML = "";
-			return;
+			location.reload();
 		}
 		var sbjtNm = new Array();
 		var detailscr = new Array();
