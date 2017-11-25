@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +41,7 @@ public class SaleMgController {
 	 * @return
 	 */
 	@RequestMapping("/accep")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String accep() {
 
 		System.out.println("controller accep()");
@@ -59,10 +62,10 @@ public class SaleMgController {
 	 * @param costItem
 	 */
 	@RequestMapping("/saleMgInsert")
-	public void saleMgInsert(HttpSession session, @RequestParam("date") String date, @RequestParam("amount") int amount) {
+	@PreAuthorize("hasRole('ROLE_STAFF')")
+	public void saleMgInsert(@RequestParam("date") String date, @RequestParam("amount") int amount) {
 
 		System.out.println("controller saleMgInsert");
-		String adminId = (String) session.getAttribute("adminId");
 
 		saleMgService.insert(date, amount);
 
@@ -76,6 +79,7 @@ public class SaleMgController {
 	 * return type : void
 	 */
 	@RequestMapping("/ltfee")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public ModelAndView saleMgLtfee() {
 
 		ModelAndView mav = new ModelAndView();
@@ -111,6 +115,7 @@ public class SaleMgController {
 	 * @return
 	 */
 	@RequestMapping("/manager")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String saleMgManager() {
 
 		System.out.println("controller saleMgManager");
@@ -140,6 +145,7 @@ public class SaleMgController {
 */
 	
 	@RequestMapping("/mgSale")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody List<SALEDto> saleMgmgSale(@RequestParam("year") int year, @RequestParam("month") int month, @RequestParam("day") int day) {
 
 		System.out.println("controller saleMgMgSale");
@@ -170,6 +176,7 @@ public class SaleMgController {
 	 * @return
 	 */
 	@RequestMapping("/ltfeeInsert")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public ModelAndView saleMgltfeeInsert(@RequestParam(value="tchrId", required=true) List<String> tchrId, 
 	@RequestParam(value="tchrSlr", required=true) List<String> tchrSlr, @RequestParam(value="tchrNm", required=true) List<String> tchrNm, 
 	@RequestParam(value="ssnId", required=true) List<String> ssnId, @RequestParam(value="ssnSlr", required=true) List<String> ssnSlr,

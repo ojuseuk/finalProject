@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,7 @@ import com.project.dto.SCRDto;
 import com.project.dto.TCHRDto;
 import com.project.dto.TPCDto;
 import com.project.dto.TTLQZDto;
+import com.project.dto.USRDto;
 import com.project.service.TchrBsService;
 
 import net.sf.json.JSONArray;
@@ -40,6 +43,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/qzView")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView qzView() {
 		
 		System.out.println("controller qzView");
@@ -74,6 +78,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/ttlqzInsert")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public String ttlqzInsert(TTLQZDto ttlqzDto, HttpSession session) {
 		
 		
@@ -96,13 +101,14 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/attnd")
-	public ModelAndView attnd(HttpSession session) {
+	@PreAuthorize("hasRole('ROLE_TCHR')")
+	public ModelAndView attnd(Authentication auth) {
 		
+		USRDto usrDto = (USRDto) auth.getPrincipal();
 		System.out.println("controller attnd");
 		ModelAndView mav = new ModelAndView();
-		System.out.println(session.getAttribute("id"));
-		String id = (String) session.getAttribute("id");
-		List<Map<String, String>> list = tchrBsService.attnd(id);
+
+		List<Map<String, String>> list = tchrBsService.attnd(usrDto.getId());
 		JSONArray json = JSONArray.fromObject(list);
 		
 		
@@ -123,6 +129,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/attndClss")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public @ResponseBody List<Map<String, String>> attndClss(@RequestParam("clssId") String clssId) {
 		
 		System.out.println("controller attndClss");
@@ -144,6 +151,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/srcIn")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView srcIn() {
 	
 		System.out.println("controller srcIn");
@@ -177,6 +185,7 @@ public class TchrBsController {
 	 * @param scrDto
 	 */
 	@RequestMapping("/srcInsert")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public void srcInsert(SCRDto scrDto) {
 		
 		System.out.println("controller srcInsert");
@@ -195,6 +204,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/stSearch")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView stSearch() {
 		
 		ModelAndView mav= new ModelAndView();
@@ -221,6 +231,7 @@ public class TchrBsController {
 	 * @param clssId
 	 */
 	@RequestMapping("/stClssSearch")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public @ResponseBody List<Map<String, Object>> stClssSearch(@RequestParam("clssId") String clssId) {
 		
 		System.out.println("controller stClssSearch");
@@ -239,6 +250,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/qzSelectView")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView qzSelectView() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -273,6 +285,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/qzSelect")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public @ResponseBody List<Map<String, Object>> qzSelect(@RequestParam String sbjtNm) {
 		
 		System.out.println("controller qzSelect");
@@ -292,6 +305,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/qzUpdateView")
+	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView qzUpdateView() {
 		System.out.println("controller qzUpdateView");
 		

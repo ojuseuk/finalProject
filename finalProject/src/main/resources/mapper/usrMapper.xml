@@ -56,7 +56,7 @@
 	</update>
 	
 	<select id="userLoginId" parameterType="string" resultType="uSRDto">
-		SELECT id, pw, nm, USR_TP usrTp FROM TB_USR WHERE ID = #{id}
+		SELECT id, pw, nm, USR_TP usrTp, phone, email, pws FROM TB_USR WHERE ID = #{id}
 	</select>
 	
 </mapper>
