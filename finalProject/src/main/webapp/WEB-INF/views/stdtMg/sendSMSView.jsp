@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet"
-	href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="root" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -26,6 +27,19 @@
 		}
 		return true;
 	}
+	function allowDrop(ev) {
+	    ev.preventDefault();
+	}
+
+	function drag(ev) {
+	    ev.dataTransfer.setData("text", ev.target.id);
+	}
+
+	function drop(ev) {
+	    ev.preventDefault();
+	    var data = ev.dataTransfer.getData("text");
+	    ev.target.appendChild(document.getElementById(data));
+	}
 </script>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -41,8 +55,15 @@
         <td width="150" height="20">
             <p align="right">내  용</p>
         </td>
-        <td width="450" height="20">
-		<textarea name="content" cols="50" rows="10" maxlength="80"></textarea></td>
+       		<td width="450" height="20">
+				<div ondrop="drop(event)" ondragover="allowDrop(event)">abfasdf</div>       		
+				<textarea  name="content" ondrop="drop(event)" ondragover="allowDrop(event)" cols="50" rows="10" maxlength="80"></textarea>
+			</td>
+		<td>
+			<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<span draggable="true" ondragstart="drag(event)" id="drag1">안녕하세요 학원입니다.</span>
+			</div>
+		</td>
     </tr>
     <tr>
         <td width="150" height="20">

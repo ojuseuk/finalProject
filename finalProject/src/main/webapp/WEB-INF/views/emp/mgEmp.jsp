@@ -7,8 +7,7 @@
 <head>
 <!-- ajax post방식으로 전송해야할경우 JSP파일에 필수로 존재해야함. -->
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header"
-	content="${_csrf.headerName}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>인사 관리</title>
 </head>

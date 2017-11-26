@@ -13,6 +13,13 @@ public class STDTDto {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public STDTDto(String stdtNo, String id) {
+		super();
+		this.stdtNo = stdtNo;
+		this.id = id;
+	}
+
 	public STDTDto(String stdtNo, String id, int retryCnt, String mjrTp, String prntPhone, String nm) {
 		super();
 		this.stdtNo = stdtNo;

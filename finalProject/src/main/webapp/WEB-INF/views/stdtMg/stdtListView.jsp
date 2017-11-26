@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
@@ -171,6 +173,7 @@
 // 	강좌목록
 	function reqCrsList(crsId, root) {
 		stdtListCrs(crsId, root);
+		console.log("???????");
 		xhttp.onreadystatechange = function() {
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
 				clssTag = '<option>선 택</option>';
@@ -185,6 +188,7 @@
 			}
 		}
 		xhttp.open("POST", root + "/clssList", true);
+		xhttp.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("crsId=" + crsId);
 	}
@@ -218,6 +222,7 @@
 			}
 		}
 		xhttp2.open("POST", root + "/stdtListCrs",	true);
+		xhttp2.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 		xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp2.send("crsId=" + crsId);
 	}
@@ -251,14 +256,14 @@
 			}
 		}
 		xhttp.open("POST", root + "/stdtList", true);
+		xhttp.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.send("clssNm=" + clssNm + "&crsId=" + crsId);
 	}
 	
 </script>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <jsp:include page="../../../footer.jsp"/>
 
 
