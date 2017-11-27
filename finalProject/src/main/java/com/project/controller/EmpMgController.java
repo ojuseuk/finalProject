@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import com.project.dto.USRDto;
 import com.project.service.CrsMgService;
 import com.project.service.EmpMgService;
 
+import net.sf.json.JSONArray;
 import util.DateTimeUtil;
 
 @Controller
@@ -42,12 +44,26 @@ public class EmpMgController {
 	
 
 	@RequestMapping("/mgTchr")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String tchrView(Model data) {
 		String url = "error";
+		System.out.println("controller tchrView");
 		try {
-			data.addAttribute("list", empMgService.tchrSelectAll());
-			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
+			
+			List list = empMgService.tchrSelectAll();
+			List sbjtList = crsMgService.sbjtSelectAll();
+			data.addAttribute("list", list);
+			data.addAttribute("sbjtList", sbjtList);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			JSONArray jsonSbjtList = JSONArray.fromObject(sbjtList);
+			
+			data.addAttribute("jsonList", jsonList);
+			data.addAttribute("jsonSbjtList", jsonSbjtList);
+			
 			url = "tchr/mgTchr";
+			System.out.println("tchr controller : " + list.size());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -77,29 +93,43 @@ public class EmpMgController {
 	
 	@RequestMapping("/empSelect")
 	public @ResponseBody EMPDto empSelect(@RequestParam("empNo") String empNo) {
+		System.out.println("emp controller empNo : " + empNo);
+		System.out.println("emp controller emp : " + empMgService.empSelect(empNo));
 		return empMgService.empSelect(empNo);
 	}
 					 
 	@RequestMapping("/tchrSelect")
 	public @ResponseBody TCHRDto tchrSelect(@RequestParam("tchrNo") String tchrNo) {
-		
+		System.out.println("tchr controller tchrNo : " + tchrNo);
 		TCHRDto tchr = empMgService.tchrSelect(tchrNo);
-		System.out.println(tchr);
+		System.out.println("tchr controller tchr : " + tchr);
 		return tchr;
 	}
 	
 	@RequestMapping("/tchrAssnSelect")
-	public @ResponseBody TCHRASSNDto tchrAssnSelect(@RequestParam("clssId") String clssId) {
+	@PreAuthorize("hasRole('ROLE_STAFF')")
+	public @ResponseBody List<TCHRASSNDto> tchrAssnSelect(@RequestParam("clssId") String clssId, Model data) {
 		System.out.println("강사 배정 조회 : Controller " + clssId);
-		return empMgService.tchrAssnSelect(clssId);
+		List list = empMgService.tchrAssnSelect(clssId);
+		System.out.println("강사 배정 조회 : Controller : DB조회 후 : " + list); 
+		JSONArray jsonList = JSONArray.fromObject(list);
+		data.addAttribute("jsonLjsonListTchrist", jsonList);
+		return list;
 	}
 	
 	@RequestMapping("/emp")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String empView(Model data) {
 		String url = "error";
+		
 		try {
-			data.addAttribute("list", empMgService.empSelectAll());
+			List list =  empMgService.empSelectAll();
+			data.addAttribute("list", list);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			data.addAttribute("jsonList", jsonList);
 			url = "emp/mgEmp";
+			System.out.println("emp controller : " + list.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -208,7 +238,6 @@ public class EmpMgController {
 		if(!imgFile.isEmpty()) {
 			String path = session.getServletContext().getRealPath("/") + "imgs\\img\\";
 			
-			
 			System.out.println("imgFile.getOriginalFilename() : " + imgFile.getOriginalFilename()); 
 			System.out.println("imgFile.getName() : " + imgFile.getName()); 
 			System.out.println("imgFile.getContentType() : " + imgFile.getContentType()); 
@@ -248,8 +277,8 @@ public class EmpMgController {
 			e.printStackTrace();
 		}
 		System.out.println("Controller : Insert OK");
+	
 		
-		 
 		return url;
 	}
 

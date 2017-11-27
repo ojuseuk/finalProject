@@ -181,8 +181,10 @@ public class TchrBsServiceImp implements TchrBsService {
 	public List<String> stSearch(String id) {
 		// TODO Auto-generated method stub
 		
+		String tchrNo = tchrBsDao.attndTchrNo(id);
+		
 		System.out.println("service stSearch");
-		List<String> list = tchrBsDao.stSearch(id);
+		List<String> list = tchrBsDao.stSearch(tchrNo);
 		System.out.println(list);
 		
 		return list;
@@ -261,5 +263,6 @@ public class TchrBsServiceImp implements TchrBsService {
 //		tchrBsDao.qzInsert(list);
 		
 	}
+
 	
 }

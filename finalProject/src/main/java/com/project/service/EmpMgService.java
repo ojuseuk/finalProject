@@ -31,7 +31,7 @@ public interface EmpMgService {
 
 	public String assnTchr(TCHRASSNDto tchrAssn);
 
-	public TCHRASSNDto tchrAssnSelect(String clssId);
+	public List tchrAssnSelect(String clssId);
 
 
 }

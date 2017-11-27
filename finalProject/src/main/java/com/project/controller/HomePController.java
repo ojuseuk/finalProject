@@ -1,5 +1,10 @@
 package com.project.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -10,11 +15,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.dto.NTCDto;
 import com.project.dto.QNADto;
 import com.project.dto.USRDto;
 import com.project.service.HomePService;
@@ -192,4 +201,166 @@ public class HomePController {
 		}
 		return url;
 	}
-}
+	
+	/**
+	 * @Method Name : ntcInsertView
+	 * @작성일	    : 2017. 11. 27. 
+	 * @작성자	    : 오주석
+	 * @Method 설명	: 직원이 공지사항을 추가하기 위한 화면으로 이동하는 함수
+	 * return type  : String
+	 * @return
+	 */
+	@RequestMapping("/ntcInsertView")
+	public String ntcInsertView(Authentication auth, Model data) {
+		
+		System.out.println("controller ntcInsertView");
+		data.addAttribute("auth", auth);
+		
+		return "homeP/ntcInsertView";
+	}
+	
+	/**
+	 * @Method Name : ntcInsert
+	 * @작성일	    : 2017. 11. 27. 
+	 * @작성자	    : 오주석
+	 * @Method 설명	: 공지사항을 DB에 추가하기 위한 함수
+	 * return type  : void
+	 * @param auth
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	@RequestMapping(value="/ntcInsert", method=RequestMethod.POST, headers = ("content-type=multipart/*"))
+	public void ntcInsert(Authentication auth, @ModelAttribute NTCDto ntcDto, HttpSession session, @RequestParam("ntcFile") MultipartFile attchFile) throws IllegalStateException, IOException {
+		
+		System.out.println("controller ntcInsert");
+		
+		USRDto usrDto = (USRDto) auth.getPrincipal();
+		
+//		String empNo = empMgService.ntcTchr(usrDto.getId());
+//		System.out.println(empNo);
+		
+		if(!attchFile.isEmpty()) {
+			String path = session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\";
+			System.out.println(path);
+			File targetDir = new File(path);
+			if(!targetDir.exists()) {
+				targetDir.mkdirs();
+			}
+			System.out.println("imgFile.getOriginalFilename() : " + attchFile.getOriginalFilename()); 
+			System.out.println("imgFile.getName() : " + attchFile.getName()); 
+			System.out.println("imgFile.getContentType() : " + attchFile.getContentType()); 
+			
+			String ext[] = attchFile.getOriginalFilename().split("\\.");
+			
+			
+//			파일명을 "강사번호.확장자"로 변경
+			System.out.println("ext[0] : " + ext[0]); 		// @@@
+			System.out.println("ext[1] : " + ext[1]); 		// @@@
+			
+			Date date = new Date();
+			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			File file = new File(path + ext[0] + dateFormat.format(date) + "." + ext[1]);
+			
+			attchFile.transferTo(file);
+			
+			System.out.println("file.getName() : " + file.getName()); 
+			System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
+			
+			ntcDto.setAttchFile(file.getName());
+			System.out.println("■path:::" + path);
+
+		}
+		
+		int result = homePService.ntcInsert(usrDto.getId(), ntcDto);
+		
+	}
+	
+	/**
+	 * @Method Name : ntcList
+	 * @작성일	    : 2017. 11. 27. 
+	 * @작성자	    : 오주석 
+	 * @Method 설명	: 공지사항 목록을 보여주기 위한 controller
+	 * return type  : void
+	 */
+	@RequestMapping("/ntcList")
+	public ModelAndView ntcList(Authentication auth) {
+		
+		USRDto usrDto = (USRDto) auth.getPrincipal();
+		System.out.println("controller ntcList");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<NTCDto> list = homePService.ntcList();
+		System.out.println(list);
+		
+		JSONArray json = JSONArray.fromObject(list);
+		mav.addObject("json", json);
+		mav.addObject("list", list);
+		
+		if(usrDto.getUsrTp().equals("ROLE_STAFF")) {
+			mav.setViewName("homeP/ntcListUpdate");
+		}else {
+			mav.setViewName("homeP/ntcList");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping("/ntcUpdatePage")
+	public ModelAndView ntcUpdatePage(@RequestParam("no") int no, HttpSession session) {
+		
+		System.out.println("controller ntcUpdatePage");
+		System.out.println(no);
+		
+		String path = session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\";
+		ModelAndView mav = new ModelAndView();
+		NTCDto ntcDto = homePService.ntcUpdatePage(no);
+		
+		mav.addObject("path", path);
+		mav.addObject("ntcDto", ntcDto);
+		mav.setViewName("homeP/ntcUpdatePage");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/ntcUpdate", method=RequestMethod.POST, headers = ("content-type=multipart/*"))
+	public void ntcUpdate(Authentication auth, @ModelAttribute NTCDto ntcDto, HttpSession session, @RequestParam("ntcFile") MultipartFile attchFile) throws IllegalStateException, IOException {
+		
+		System.out.println("controller ntcUpdate");
+		System.out.println(attchFile);
+		if(!attchFile.isEmpty()) {
+			String path = session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\";
+			System.out.println(path);
+			File targetDir = new File(path);
+			if(!targetDir.exists()) {
+				targetDir.mkdirs();
+			}
+			System.out.println("imgFile.getOriginalFilename() : " + attchFile.getOriginalFilename()); 
+			System.out.println("imgFile.getName() : " + attchFile.getName()); 
+			System.out.println("imgFile.getContentType() : " + attchFile.getContentType()); 
+			
+			String ext[] = attchFile.getOriginalFilename().split("\\.");
+			
+			
+//			파일명을 "강사번호.확장자"로 변경
+			System.out.println("ext[0] : " + ext[0]); 		// @@@
+			System.out.println("ext[1] : " + ext[1]); 		// @@@
+			
+			Date date = new Date();
+			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			File file = new File(path + ext[0] + dateFormat.format(date) + "." + ext[1]);
+			
+			attchFile.transferTo(file);
+			
+			System.out.println("file.getName() : " + file.getName()); 
+			System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
+			
+			ntcDto.setAttchFile(file.getName());
+			System.out.println("■path:::" + path);
+
+		}		
+		
+		int result = homePService.ntcUpdate(ntcDto);
+		
+	}
+} // end of class

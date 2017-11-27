@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
+import com.project.dto.TCHRDto;
 
 @Repository
 public class CrsMgDaoImp implements CrsMgDao {
@@ -73,6 +74,25 @@ public class CrsMgDaoImp implements CrsMgDao {
 	public List clssSelectByCourse(String crsId) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("crsMgMapper.clssSelectByCourse", crsId);
+	}
+
+	@Override
+	public CRSDto crsSelect(String crsId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("crsMgMapper.crsSelect", crsId);
+	}
+
+	@Override
+	public String clssUpdate(CLSSDto clss) {
+		// TODO Auto-generated method stub
+		String resultMsg = "";
+		int result = sqlSession.update("crsMgMapper.clssUpdate", clss);
+		if (result > 0) {
+			resultMsg = "강좌정보가 정상적으로 수정되었습니다.";
+		} else {
+			resultMsg = "강좌정보 수정에 실패했습니다.";
+		}
+		return resultMsg;
 	}
 	
 }

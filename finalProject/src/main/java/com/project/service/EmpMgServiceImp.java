@@ -92,7 +92,7 @@ public class EmpMgServiceImp implements EmpMgService {
 	}
 
 	@Override
-	public TCHRASSNDto tchrAssnSelect(String clssId) {
+	public List tchrAssnSelect(String clssId) {
 		// TODO Auto-generated method stub
 		return empMgDao.tchrAssnSelect(clssId);
 	}

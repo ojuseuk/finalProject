@@ -29,5 +29,30 @@
 	<update id="qnaUpdate" parameterType="qNADto">
 		UPDATE TB_QNA SET TITLE = #{title}, CONTENT = #{content}, DT=#{dt} WHERE NO = #{no}
 	</update>
+
+	<select id="ntcTchr" parameterType="string" resultType="string">
+		SELECT EMP_NO empNo FROM TB_EMP WHERE ID = #{id}
+	</select>
+	
+	<insert id="ntcInsert" parameterType="string">
+		<if test="attchFile != null">
+			INSERT INTO TB_NTC VALUES(SEQ_NTC.NEXTVAL, #{empNo}, #{title}, #{content}, #{attchFile}, #{dt})
+		</if>
+		<if test="attchFile == null">
+			INSERT INTO TB_NTC(NO, EMP_NO, TITLE, CONTENT, DT) VALUES(SEQ_NTC.NEXTVAL, #{empNo}, #{title}, #{content}, #{dt})
+		</if>
+	</insert>
+	
+	<select id="ntcList" resultType="nTCDto">
+		SELECT no, EMP_NO empNo, title, content, ATTCH_FILE attchFile, dt FROM TB_NTC 
+	</select>
+	
+	<select id="ntcUpdatePage" parameterType="int" resultType="nTCDto">
+		SELECT no, EMP_NO empNo, title, content, ATTCH_FILE attchFile, dt FROM TB_NTC WHERE NO = #{no}
+	</select>
+	
+	<select id="ntcUpdate" parameterType="nTCDto">
+		UPDATE TB_NTC SET TITLE = #{title}, CONTENT = #{content}, ATTCH_FILE = #{attchFile}, DT = #{dt} WHERE NO = #{no}
+	</select>
 	
 </mapper>

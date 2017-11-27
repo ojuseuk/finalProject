@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
 import com.project.dto.EMPDto;
+import com.project.dto.TCHRDto;
 import com.project.dto.USRDto;
 import com.project.service.CrsMgService;
+
+import net.sf.json.JSONArray;
 
 @Controller
 public class CrsMgController {
@@ -26,10 +30,38 @@ public class CrsMgController {
 		this.crsMgService = service;
 	}
 	
-//	@RequestMapping("/empSelect")
-//	public @ResponseBody EMPDto empSelect(@RequestParam("empNo") String empNo) {
-//		return empMgService.empSelect(empNo);
-//	}
+	@RequestMapping(value="/clssUpdate")
+	public String clssUpdate(CLSSDto clss, Model data) {
+		System.out.println("clssUpdate Controller : " + clss);
+		String url = "error";
+		String resultMsg = "";
+		try {
+			resultMsg = crsMgService.clssUpdate(clss);
+			
+			List list = crsMgService.clssSelectAll();
+			List sbjList = crsMgService.sbjtSelectAll();
+			
+			data.addAttribute("list", list);
+			data.addAttribute("sbjtList", sbjList);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			JSONArray jsonSbjtList = JSONArray.fromObject(sbjList);
+			
+			data.addAttribute("jsonList", jsonList);
+			url = "course/mgClss";
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("resultMsg : " + resultMsg);
+		return url;
+	}
+	
+	@RequestMapping("/crsSelect")
+	public @ResponseBody CRSDto crsSelect(@RequestParam("crsId") String crsId) {
+		System.out.println("crsSelect : Cotroller : " + crsId); // @@@
+		return crsMgService.crsSelect(crsId);
+	}
 	
 	@RequestMapping("/clssSelect")
 	public @ResponseBody CLSSDto clssSelect(@RequestParam("clssId") String clssId) {
@@ -44,12 +76,20 @@ public class CrsMgController {
 	}
 	
 	@RequestMapping("/clssSelectByCourse")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String clssSelectByCourse(String crsId, Model data) {
 		String url = "error";
 		try {
-			data.addAttribute("list", crsMgService.clssSelectByCourse(crsId));
-			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
-//			data.addAttribute("courseList", crsMgService.selectAll());
+			List list = crsMgService.clssSelectByCourse(crsId);
+			List sbjList = crsMgService.sbjtSelectAll();
+			
+			data.addAttribute("list", list);
+			data.addAttribute("sbjtList", sbjList);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			JSONArray jsonSbjtList = JSONArray.fromObject(sbjList);
+			
+			data.addAttribute("jsonList", jsonList);
 			url = "course/mgClss";
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,13 +98,46 @@ public class CrsMgController {
 	}
 	
 	@RequestMapping("/mgClss")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String clssView(Model data) {
 		String url = "error";
 		try {
-			data.addAttribute("list", crsMgService.clssSelectAll());
-			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
-//			data.addAttribute("courseList", crsMgService.selectAll());
+			List list = crsMgService.clssSelectAll();
+			List sbjList = crsMgService.sbjtSelectAll();
+			data.addAttribute("list", list);
+			data.addAttribute("sbjtList", sbjList);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			JSONArray jsonSbjtList = JSONArray.fromObject(sbjList);
+			
+			data.addAttribute("jsonList", jsonList);
+
 			url = "course/mgClss";
+			System.out.println("clss controller list size : " + list.size());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return url;
+	}
+	
+	@RequestMapping("/course")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
+	public String courseView(Model data) {
+		String url = "course/error";
+		try {
+			List list = crsMgService.selectAll();
+			List sbjList = crsMgService.sbjtSelectAll();
+			data.addAttribute("list", list);
+			data.addAttribute("sbjtList", sbjList);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			JSONArray jsonSbjtList = JSONArray.fromObject(sbjList);
+			
+			data.addAttribute("jsonList", jsonList);
+
+			url = "course/mgCourse";
+			System.out.println("course controller list size : " + list.size());
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -85,19 +158,6 @@ public class CrsMgController {
 			e.printStackTrace();
 		}
 		System.out.println("OK");
-		return url;
-	}
-	
-	@RequestMapping("/course")
-	public String courseView(Model data) {
-		String url = "course/error";
-		try {
-			data.addAttribute("list", crsMgService.selectAll());
-			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
-			url = "course/mgCourse";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		return url;
 	}
 	

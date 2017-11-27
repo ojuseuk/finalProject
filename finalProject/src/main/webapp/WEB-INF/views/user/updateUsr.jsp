@@ -15,7 +15,7 @@
   		<tr>
   			<td>아이디</td>
   			<td>${requestScope.usr.id}</td>
-  			<td><input type="hidden" name="id" value="${requestScope.usr.id}"></td>
+  			<td><input type="hidden" name="id" id = "id" value="${requestScope.usr.id}"></td>
   		</tr>
   		<tr>
   			<td>비밀번호</td>
@@ -38,7 +38,7 @@
 	  		<td><input type="text" placeholder="이메일" name="email" id="email" value="${requestScope.usr.email}" required></td>
 	  	</tr>
 	    <tr>
-	        <td><button type="submit" class="signupbtn" style="width: 50%;">저장</button>
+	        <td><button type="button" class="signupbtn" style="width: 50%;" onclick="sendIt()">저장</button>
 	        <button type="reset" class="signupbtn" style="width: 50%;">취소</button></td>
 	    </tr>
 	    <tr>

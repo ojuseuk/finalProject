@@ -23,7 +23,7 @@ public interface TchrBsDao {
 	List<Map<String, String>> srcSbjt();
 	List<Map<String, String>> srcStdt();
 	void srcInsert(SCRDto scrDto);
-	List<String> stSearch(String id);
+	List<String> stSearch(String tchrNo);
 	List<Map<String, Object>> stClssSearch(String clssId);
 	List<SBJTDto> qzSelectView();
 	List<Map<String, Object>> qzSelect(String sbjtNm);

@@ -205,12 +205,14 @@ public class TchrBsController {
 	 */
 	@RequestMapping("/stSearch")
 	@PreAuthorize("hasRole('ROLE_TCHR')")
-	public ModelAndView stSearch() {
+	public ModelAndView stSearch(Authentication auth) {
+		
+		USRDto usrDto = (USRDto) auth.getPrincipal();
 		
 		ModelAndView mav= new ModelAndView();
 		
 		System.out.println("controller stSearch");
-		List<String> list = tchrBsService.stSearch("t1");
+		List<String> list = tchrBsService.stSearch(usrDto.getId());
 		
 		JSONArray json = JSONArray.fromObject(list);
 		

@@ -6,6 +6,7 @@ import java.util.List;
 import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
 import com.project.dto.SBJTDto;
+import com.project.dto.TCHRDto;
 
 public interface CrsMgService {
 	
@@ -24,6 +25,10 @@ public interface CrsMgService {
 	public CLSSDto clssSelect(String clssId);
 
 	public List clssSelectByCourse(String crsId);
+
+	public CRSDto crsSelect(String crsId);
+
+	public String clssUpdate(CLSSDto clss);
 	
 	
 

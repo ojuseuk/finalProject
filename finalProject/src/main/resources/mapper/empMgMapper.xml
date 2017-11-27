@@ -6,6 +6,7 @@
 		<result property="tchrNo" column="TCHR_NO"/>
 		<result property="clssId" column="CLSS_ID"/>
 		<result property="chrg" column="CHRG"/>
+		<result property="sbjtChrg" column="SBJT_CHRG"/>
 		<result property="slr" column="SLR"/>
 		<result property="nm" column="NM"/>
 		<result property="id" column="ID"/>
@@ -16,6 +17,7 @@
 	<select id="tchrAssnSelect" resultMap="assnResult">
 		SELECT TC.ID AS ID,
 			   TA.TCHR_NO AS TCHR_NO,
+			   SBJT_CHRG,
 			   NM,
 			   TA.SLR AS SLR,
 			   TCHR_INTRO,
@@ -53,8 +55,7 @@
 			   EMP.ID AS ID
 		FROM   TB_EMP EMP INNER JOIN TB_USR USR
 		  ON   EMP.ID = USR.ID
-		WHERE USR_TP = 'staff'
-		  AND EMP_NO = #{empNo}
+		WHERE  EMP_NO = #{empNo}
 	</select>
 	
 	<select id="empSelectById" parameterType="String" resultMap="empResult">
@@ -70,7 +71,7 @@
 			   RETIRED_DT
 		FROM   TB_EMP EMP INNER JOIN TB_USR USR
 		  ON   EMP.ID = USR.ID
-		WHERE USR_TP = 'staff'
+		WHERE USR_TP = 'ROLE_STAFF'
 		ORDER BY EMP_NO DESC
 	</select>
 	
@@ -162,19 +163,19 @@
 			   EMP_NO
 		FROM   TB_TCHR TCHR INNER JOIN TB_USR USR
 		  ON   TCHR.ID = USR.ID
-		WHERE USR_TP = 'tchr'
+		WHERE USR_TP = 'ROLE_TCHR'
 		ORDER BY TCHR_NO DESC
 	</select>	
 	
 	<update id="usrUpdateToStaff" parameterType="EMPDto">
 		UPDATE TB_USR
-		   SET USR_TP = 'staff'
+		   SET USR_TP = 'ROLE_STAFF'
 		 WHERE ID = #{id}
 	</update>
 	
 	<update id="usrUpdateToTchr" parameterType="String">
 		UPDATE TB_USR
-		   SET USR_TP = 'tchr'
+		   SET USR_TP = 'ROLE_TCHR'
 		 WHERE ID = #{id}
 	</update>
 	
@@ -190,5 +191,6 @@
 		   SET RETIRED_DT = #{retiredDt}
 		 WHERE EMP_NO = #{empNo}
 	</update>
+	
 
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.dao.CrsMgDao;
 import com.project.dto.CLSSDto;
 import com.project.dto.CRSDto;
+import com.project.dto.TCHRDto;
 
 import util.DateTimeUtil;
 
@@ -98,6 +99,23 @@ public class CrsMgServiceImp implements CrsMgService {
 	public List clssSelectByCourse(String crsId) {
 		// TODO Auto-generated method stub
 		return crsMgDao.clssSelectByCourse(crsId);
+	}
+
+	@Override
+	public CRSDto crsSelect(String crsId) {
+		// TODO Auto-generated method stub
+		return crsMgDao.crsSelect(crsId);
+	}
+
+	@Override
+	public String clssUpdate(CLSSDto clss) {
+		// TODO Auto-generated method stub
+		// DB에 넣기 위해 날짜, 시각 형식을 순수 문자열로 변환
+		clss.setStrtDt(clss.getStrtDt().replace("-", "")); 
+		clss.setEndDt(clss.getEndDt().replace("-", "")); 
+		clss.setStrtTm(clss.getStrtTm().replace(":", "") + "00"); 
+		clss.setEndTm(clss.getEndTm().replace(":", "") + "00"); 
+		return crsMgDao.clssUpdate(clss);
 	}
 	
 }
