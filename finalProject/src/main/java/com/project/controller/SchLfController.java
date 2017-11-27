@@ -123,12 +123,13 @@ public class SchLfController {
 							, jo.get("endDt").toString()
 							, jo.get("stdtclssttn").toString()));
 					fee += Integer.parseInt(jo.get("stdtclssttn").toString());
-					JSONArray json = JSONArray.fromObject(list);
-					mav.addObject("json", json);
 				}
 			} else {
 				mav.addObject("json", "강좌를 선택하세요");
 			}
+		JSONArray json = JSONArray.fromObject(list);
+		System.out.println(json);
+		mav.addObject("json", json);
 		mav.addObject("fee", fee);
 		mav.setViewName("schLf/registListView");
 		return mav;
@@ -150,6 +151,7 @@ public class SchLfController {
 		USRDto usr = (USRDto) auth.getPrincipal();
 		ModelAndView mav = new ModelAndView();
 		List<ClssInfoDto> list = schLfService.selectMyClss(usr.getId());
+		System.out.println(usr.getId());
 		JSONArray json = JSONArray.fromObject(list);
 		System.out.println(json);
 		mav.addObject("json", json);
@@ -241,6 +243,16 @@ public class SchLfController {
 		return mav;
 	}
 	
+	/**
+	 * @Method Name : registClss
+	 * @작성일	    : 2017. 11. 27. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 수강신청 결제
+	 * return type  : String
+	 * @param clssList
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/payments/complete")
 	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
 	@Transactional

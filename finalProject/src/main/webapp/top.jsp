@@ -163,6 +163,7 @@
   <form class="modal-content animate" action="${root}/userInsert.do" method="post">
     <div class="container">
       <div class="clearfix">
+        <button type="button" class="signupbtn" style="width: 80%;" onclick="location.href='<c:url value="inputUsrInfo"/>'">회원정보변경</button><br>
         <button type="button" class="signupbtn" style="width: 80%;" onclick="location.href='<c:url value="delUser"/>'">회원탈퇴</button><br>
         <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn" style="width: 19%;">취소</button>
       </div>

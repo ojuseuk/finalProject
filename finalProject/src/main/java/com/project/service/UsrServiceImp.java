@@ -90,6 +90,16 @@ public class UsrServiceImp implements UsrService {
 		System.out.println("serviceuserOut : " + map);
 		return usrDao.userOut(map);
 	}
+
+	@Override
+	public USRDto confirmUsr(USRDto usr) {
+		return usrDao.confirmUsr(usr);
+	}
+
+	@Override
+	public Boolean updateUsr(USRDto usr) {
+		return usrDao.updateUsr(usr);
+	}
 	
 	
 }
