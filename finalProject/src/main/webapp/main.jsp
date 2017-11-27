@@ -51,7 +51,7 @@
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
         <div class="panel-heading">특강정보</div>
-        <div class="panel-body"><img src="./imgs/img/e3.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
+        <div class="panel-body"><img src="./imgs/img/e1.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">영어강사</div>
       </div>
     </div>
