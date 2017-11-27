@@ -59,6 +59,14 @@
 		SELECT id, pw, nm, USR_TP usrTp, phone, email, pws FROM TB_USR WHERE ID = #{id}
 	</select>
 	
+	<select id="confirmUsr" parameterType="USRDto" resultType="USRDto">
+		SELECT * FROM TB_USR WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<update id="updateUsr" parameterType="USRDto">
+		UPDATE TB_USR SET PW = #{pw}, NM = #{nm}, PHONE = #{phone}, ADDR = #{addr}, EMAIL = #{email}
+		WHERE ID = #{id}
+	</update>
 </mapper>
 
 

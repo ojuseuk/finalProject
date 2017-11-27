@@ -78,7 +78,16 @@ public class UsrDaoImp implements UsrDao {
 	public USRDto userLoginId(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("usrMapper.userLoginId", id);
-	}	
+	}
+
+	@Override
+	public USRDto confirmUsr(USRDto usr) {
+		return sqlSession.selectOne("usrMapper.confirmUsr", usr);
+	}
+	
+	public Boolean updateUsr(USRDto usr) {
+		return sqlSession.update("usrMapper.updateUsr", usr) > 0 ? true : false;
+	}
 }
 
 

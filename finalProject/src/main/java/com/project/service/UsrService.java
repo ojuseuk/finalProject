@@ -28,5 +28,9 @@ public interface UsrService {
 	public int changePwdNew(HashMap<String, Object> map) throws SQLException;
 	//userOut
 	public int userOut(HashMap<String, Object> map) throws SQLException;
+	
+	public USRDto confirmUsr(USRDto usr);
+	
+	public Boolean updateUsr(USRDto usr); 
 		
 }

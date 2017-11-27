@@ -34,8 +34,8 @@
     <div class="collapse navbar-collapse" id="myNavbar">
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.nm" var ="nm"/>
-		<sec:authorize access="hasAnyRole('ROLE_ST', 'ROLE_USR')">
-		<sec:authentication property="principal.nm"/>      
+	  
+	  <sec:authorize access="hasAnyRole('ROLE_ST', 'ROLE_USR')">		 
       <ul class="nav navbar-nav">
         <li><a href="${root}/viewRegist">수강신청</a></li>
         <li><a href="${root}/myScr">성적확인</a></li>
@@ -45,6 +45,7 @@
         <li><a href="${root}/ntcList">공지사항</a></li>
       </ul>
       </sec:authorize>
+      
       <sec:authorize access="hasRole('ROLE_STAFF')">
       <ul class="nav navbar-nav">
         <li><a href="${root}/mgTchr">강사 관리</a></li>
@@ -71,6 +72,7 @@
         <li><a href="${root}/homeP/qnaSelectView">댓글 게시판 목록</a></li>
       </ul>
       </sec:authorize>
+      
 </sec:authorize>
       <ul class="nav navbar-nav navbar-right">
         <sec:authorize access="isAnonymous()">
@@ -174,6 +176,7 @@
   <form class="modal-content animate" action="${root}/userInsert.do" method="post">
     <div class="container">
       <div class="clearfix">
+        <button type="button" class="signupbtn" style="width: 80%;" onclick="location.href='<c:url value="inputUsrInfo"/>'">회원정보변경</button><br>
         <button type="button" class="signupbtn" style="width: 80%;" onclick="location.href='<c:url value="delUser"/>'">회원탈퇴</button><br>
         <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn" style="width: 19%;">취소</button>
       </div>
