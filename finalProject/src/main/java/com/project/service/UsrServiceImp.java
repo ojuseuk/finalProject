@@ -32,7 +32,7 @@ public class UsrServiceImp implements UsrService {
 		String encodePass = passwordEncoder.encode(usr.getPw());
 		usr.setPws(encodePass);
 		
-		usr.setUsrTp(Constants.ROLE_TCHR);
+		usr.setUsrTp(Constants.ROLE_USR);
 		
 		return usrDao.userInsert(usr);
 		

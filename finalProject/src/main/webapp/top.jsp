@@ -117,7 +117,7 @@
 
 
 <!-- 회원가입 -->
-<div id="id02" class="modal">
+<div id="id02" class="modal" style="overflow: scroll;">
   <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
   <form class="modal-content animate" action="${root}/userInsert.do" method="post" id="f">
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >

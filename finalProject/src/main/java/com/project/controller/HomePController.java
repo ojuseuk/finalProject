@@ -2,6 +2,7 @@ package com.project.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,7 +70,12 @@ public class HomePController {
 		
 		System.out.println("controller QNAInsert");
 		System.out.println(qnaDto);
-		homePService.qnaInsert(qnaDto);
+		try {
+			homePService.qnaInsert(qnaDto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -87,7 +93,13 @@ public class HomePController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("controller qnaSelectView");
 		
-		List<QNADto> list = homePService.qnaSelectView();
+		List<QNADto> list=null;
+		try {
+			list = homePService.qnaSelectView();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		mav.addObject("list", list);
 		mav.addObject("json", jsonArray);
@@ -112,7 +124,13 @@ public class HomePController {
 		System.out.println("controller qnaUpdateView");
 		System.out.println(no);
 		ModelAndView mav = new ModelAndView();
-		QNADto qnaDto = homePService.qnaUpdateView(no);
+		QNADto qnaDto =null;
+		try {
+			qnaDto = homePService.qnaUpdateView(no);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(qnaDto);
 		
 		mav.addObject("qnaDto", qnaDto);
@@ -136,7 +154,13 @@ public class HomePController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("controller qnaUpdate");
 		
-		int result = homePService.qnaUpdate(qnaDto);
+		int result = 0;
+		try {
+			result = homePService.qnaUpdate(qnaDto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(result);
 		mav.addObject("result", result);
 		mav.setViewName("forward:/homeP/qnaSelectView");
@@ -271,7 +295,13 @@ public class HomePController {
 
 		}
 		
-		int result = homePService.ntcInsert(usrDto.getId(), ntcDto);
+		int result =0;
+		try {
+			result = homePService.ntcInsert(usrDto.getId(), ntcDto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -290,7 +320,13 @@ public class HomePController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<NTCDto> list = homePService.ntcList();
+		List<NTCDto> list=null;
+		try {
+			list = homePService.ntcList();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(list);
 		
 		JSONArray json = JSONArray.fromObject(list);
@@ -314,7 +350,13 @@ public class HomePController {
 		
 		String path = session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\";
 		ModelAndView mav = new ModelAndView();
-		NTCDto ntcDto = homePService.ntcUpdatePage(no);
+		NTCDto ntcDto = null;
+		try {
+			ntcDto = homePService.ntcUpdatePage(no);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		mav.addObject("path", path);
 		mav.addObject("ntcDto", ntcDto);
@@ -360,7 +402,14 @@ public class HomePController {
 
 		}		
 		
-		int result = homePService.ntcUpdate(ntcDto);
+		int result = 0;
+		
+		try {
+			result = homePService.ntcUpdate(ntcDto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 } // end of class

@@ -71,6 +71,7 @@ public class EmpMgController {
 	}
 	
 	@RequestMapping("/usrSearch")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody USRDto usrSelect(@RequestParam("id") String id) {
 		return empMgDao.usrSelect(id);
 	}

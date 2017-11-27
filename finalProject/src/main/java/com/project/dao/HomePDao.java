@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.project.dto.NTCDto;
@@ -7,17 +8,17 @@ import com.project.dto.QNADto;
 
 public interface HomePDao {
 
-	void qnaInsert(QNADto qnaDto);
-	int qnaCnt();
-	int qnaSeqNum(QNADto qnaDto);
-	List<QNADto> qnaSelectView();
-	QNADto qnaUpdateView(int no);
-	int qnaUpdate(QNADto qnaDto);
-	String ntcTchr(String id);
-	int ntcInsert(NTCDto ntcDto);
-	List<NTCDto> ntcList();
-	NTCDto ntcUpdatePage(int no);
-	int ntcUpdate(NTCDto ntcDto);
+	void qnaInsert(QNADto qnaDto) throws SQLException;
+	int qnaCnt() throws SQLException;
+	int qnaSeqNum(QNADto qnaDto) throws SQLException;
+	List<QNADto> qnaSelectView() throws SQLException;
+	QNADto qnaUpdateView(int no) throws SQLException;
+	int qnaUpdate(QNADto qnaDto) throws SQLException;
+	String ntcTchr(String id) throws SQLException;
+	int ntcInsert(NTCDto ntcDto) throws SQLException;
+	List<NTCDto> ntcList() throws SQLException;
+	NTCDto ntcUpdatePage(int no) throws SQLException;
+	int ntcUpdate(NTCDto ntcDto) throws SQLException;
 
 
 }

@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class SaleMgDaoImp implements SaleMgDao {
 	 * @param saleDto
 	 */
 	@Override
-	public void insert(SALEDto saleDto) {
+	public void insert(SALEDto saleDto) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("dao Insert");
 		sqlSession.insert("saleMgMapper.saleInsert", saleDto);
@@ -40,7 +41,7 @@ public class SaleMgDaoImp implements SaleMgDao {
 	 * @return
 	 */
 	@Override
-	public int saleNo(SALEDto saleDto) {
+	public int saleNo(SALEDto saleDto) throws SQLException {
 		// TODO Auto-generated method stub
 
 		System.out.println("dao saleNo");
@@ -56,7 +57,7 @@ public class SaleMgDaoImp implements SaleMgDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> selectTchr() {
+	public List<Map<String, String>> selectTchr() throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("dao selectTchr");
 
@@ -72,7 +73,7 @@ public class SaleMgDaoImp implements SaleMgDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> selectTchrassn() {
+	public List<Map<String, String>> selectTchrassn() throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("dao selectTchrassn");
 
@@ -89,7 +90,7 @@ public class SaleMgDaoImp implements SaleMgDao {
 	 * @return
 	 */
 	@Override
-	public List<SALEDto> mgSaleList(Map<String, String> map) {
+	public List<SALEDto> mgSaleList(Map<String, String> map) throws SQLException {
 		// TODO Auto-generated method stub
 
 		return sqlSession.selectList("saleMgMapper.mgSaleLsit", map);
@@ -103,7 +104,7 @@ public class SaleMgDaoImp implements SaleMgDao {
 	 * @param list
 	 */
 	@Override
-	public void ltfeeInsert(List<TCHRDto> list) {
+	public void ltfeeInsert(List<TCHRDto> list) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("dao ltfeeInsert");
 		TCHRDto tchr = new TCHRDto();
@@ -121,7 +122,7 @@ public class SaleMgDaoImp implements SaleMgDao {
 	 * @return
 	 */
 	@Override
-	public int ltfeeInsertTest(TCHRDto tchrDto) {
+	public int ltfeeInsertTest(TCHRDto tchrDto) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("이놈 실행");
 		System.out.println("1:" + tchrDto);
@@ -133,7 +134,7 @@ public class SaleMgDaoImp implements SaleMgDao {
 	}
 
 	@Override
-	public List<SALEDto> mgSaleList2(SALEDto saleDto) {
+	public List<SALEDto> mgSaleList2(SALEDto saleDto) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("dao mgSaleList2");
