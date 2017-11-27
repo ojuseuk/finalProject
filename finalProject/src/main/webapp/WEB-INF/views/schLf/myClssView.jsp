@@ -17,7 +17,6 @@
 
 <jsp:include page="../../../top.jsp"/>
 <body>
-<c:if test="${not empty requestScope.json}">
 <div style="width: 100%;">
 	<div id="demo" class="card mb-3" align="left"
 		style="float: left; width: 100%; height: 310px">
@@ -41,7 +40,6 @@
 		</div>
 	</div>
 </div>
-</c:if>
 <input type="hidden" id="json" value='${requestScope.json}'>
 <input type="hidden" id="root" value='${root}'>
 <script type="text/javascript">

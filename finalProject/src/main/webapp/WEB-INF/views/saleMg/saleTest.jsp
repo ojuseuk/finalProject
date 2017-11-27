@@ -95,6 +95,8 @@
 	</div>
 	
 	<script type="text/javascript">
+	
+		
 		let date = new Date(); // 현재 일자
 		let year = date.getFullYear(); // 현재 년도
 
@@ -207,7 +209,10 @@
 								"data" : "costItem",
 								"searchable": false
 							}, {
-								"data" : "amount"
+								"data" : "amount",
+								"render" : function(data){
+									return data.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+								}
 							} ]
 						});
 						

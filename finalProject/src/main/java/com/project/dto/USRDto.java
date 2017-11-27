@@ -11,12 +11,13 @@ public class USRDto {
 	private String usrTp;
 	private String pws;
 	
-	
-	
-	public USRDto() {
-		// TODO Auto-generated constructor stub
-	}
+	public USRDto() {}
 
+	public USRDto(String id, String pw) {
+		super();
+		this.id = id;
+		this.pw = pw;
+	}
 
 	public USRDto(String id, String pw, String nm, String phone, String addr, String email, String usrTp, String pws) {
 		super();

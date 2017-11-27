@@ -6,6 +6,7 @@
 		<result property="sbjtNm" column="SBJT_NM"/>
 		<result property="weight" column="weight"/>
 	</resultMap>
+	
 	<select id="selectSbjt" resultMap="ResultOfSBJT">
 		SELECT * FROM TB_SBJT
 	</select>
@@ -46,19 +47,19 @@
 			   TB_CLSS.CLSS_ID, TB_CLSS.END_TM, TB_CLSS.CAPA, TB_CLSS.CLSSROOM, 
 			   TB_CRS.CRS_INTRO, TB_CRS.CRS_ID, TB_CRS.CRS_NM, TB_CRS.STDTCLSSTTN, TB_CRS.PRD
 		FROM TB_USR JOIN TB_TCHR ON TB_USR.ID = TB_TCHR.ID
-		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHR.TCHR_NO
+		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHRASSN.TCHR_NO
 		JOIN TB_CLSS ON TB_TCHRASSN.CLSS_ID = TB_CLSS.CLSS_ID
 		JOIN TB_CRS ON TB_CLSS.CRS_ID = TB_CRS.CRS_ID
 		WHERE SBJT_NM = #{sbjtNm}
 	</select>
 	
 	<select id="selectCrs" resultMap="ResultOfClss">
-		SELECT TB_USR.NM, TB_TCHR.SBJT_CHRG, TB_TCHR.TCHR_INTRO, TB_TCHR.TCHR_PT,
+		SELECT DISTINCT TB_CRS.CRS_ID, TB_USR.NM, TB_TCHR.SBJT_CHRG, TB_TCHR.TCHR_INTRO, TB_TCHR.TCHR_PT,
 			   TB_CLSS.CLSS_NM, TB_CLSS.STRT_DT, TB_CLSS.END_DT, TB_CLSS.STRT_TM, 
 			   TB_CLSS.CLSS_ID, TB_CLSS.END_TM, TB_CLSS.CAPA, TB_CLSS.CLSSROOM, 
 			   TB_CRS.CRS_INTRO, TB_CRS.CRS_ID, TB_CRS.CRS_NM, TB_CRS.STDTCLSSTTN, TB_CRS.PRD
 		FROM TB_USR JOIN TB_TCHR ON TB_USR.ID = TB_TCHR.ID
-		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHR.TCHR_NO
+		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHRASSN.TCHR_NO
 		JOIN TB_CLSS ON TB_TCHRASSN.CLSS_ID = TB_CLSS.CLSS_ID
 		JOIN TB_CRS ON TB_CLSS.CRS_ID = TB_CRS.CRS_ID
 	</select>
@@ -69,7 +70,7 @@
 			   TB_CLSS.END_TM, TB_CLSS.CAPA, TB_CLSS.CLSSROOM, TB_CRS.CRS_INTRO,
 			   TB_CRS.CRS_NM, TB_CRS.STDTCLSSTTN
 		FROM TB_USR JOIN TB_TCHR ON TB_USR.ID = TB_TCHR.ID
-		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHR.TCHR_NO
+		JOIN TB_TCHRASSN ON TB_TCHR.TCHR_NO = TB_TCHRASSN.TCHR_NO
 		JOIN TB_CLSS ON TB_TCHRASSN.CLSS_ID = TB_CLSS.CLSS_ID
 		JOIN TB_CRS ON TB_CLSS.CRS_ID = TB_CRS.CRS_ID
 		WHERE TB_CRS.CRS_ID = #{crsId}
@@ -77,7 +78,7 @@
 	
 	<select id="selectMyClss" resultMap="ResultOfClss">
 		SELECT TB_CLSS.CLSS_NM, TB_CLSS.STRT_DT, TB_CLSS.END_DT, TB_CLSS.CLSSROOM,
-			   TB_STDTCLSS.PAID_DT, TB_USR.NM
+        	   TB_STDTCLSS.PAID_DT, TB_USR.NM
 		FROM TB_CLSS JOIN TB_STDTCLSS ON TB_CLSS.CLSS_ID = TB_STDTCLSS.CLSS_ID
 		JOIN TB_STDT ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
 		JOIN TB_TCHRASSN ON TB_CLSS.CLSS_ID = TB_TCHRASSN.CLSS_ID
@@ -94,6 +95,7 @@
 		WHERE ID = #{id} AND DT BETWEEN #{strtDt} AND #{endDt}
 		ORDER BY DT
 	</select>
+	
 	<resultMap type="SCRDto" id="ResultOfMyScr">
 		<result property="examId" column="EXAM_ID"/>
 		<result property="stdtNo" column="STDT_NO"/>
@@ -101,6 +103,7 @@
 		<result property="score" column="SCORE"/>
 		<result property="examTitle" column="EXAM_TITLE"/>
 	</resultMap>
+	
 	<select id="myScr" resultMap="ResultOfMyScr" parameterType="String">
 		SELECT TB_STDT.STDT_NO, TB_EXAM_TP.EXAM_TITLE, TB_SCR.SBJT_NM, TB_SCR.SCORE, TB_SCR.EXAM_ID
 		FROM TB_STDT
@@ -108,4 +111,20 @@
 		JOIN TB_EXAM_TP ON TB_SCR.EXAM_ID = TB_EXAM_TP.EXAM_ID
 		WHERE ID = #{id}
 	</select>
+	
+	<select id="myStdtNo" parameterType="String" resultType="String">
+		SELECT STDT_NO FROM TB_STDT WHERE ID = #{id} 
+	</select>
+	
+	<select id="selectStdtNo" resultType="String">
+		SELECT * FROM (SELECT * FROM TB_STDT ORDER BY STDT_NO DESC) WHERE ROWNUM = 1
+	</select>
+	
+	<insert id="insertNewStdt" parameterType="STDTDto">
+		INSERT INTO TB_STDT (STDT_NO, ID) VALUES(#{stdtNo}, #{id})
+	</insert>
+	
+	<insert id="insertStdtToStdtClss" parameterType="STDTCLSSDto">
+		INSERT INTO TB_STDTCLSS (CLSS_ID, STDT_NO, PAID_DT) VALUES(#{clssId}, #{stdtNo}, #{paidDt})
+	</insert>
 </mapper>

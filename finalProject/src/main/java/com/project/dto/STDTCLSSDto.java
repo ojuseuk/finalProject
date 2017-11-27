@@ -7,7 +7,13 @@ public class STDTCLSSDto {
 	private String repaidDt;
 	private String paidDt;
 	
-	public STDTCLSSDto() {}
+	
+	public STDTCLSSDto(String clssId, String stdtNo, String paidDt) {
+		super();
+		this.clssId = clssId;
+		this.stdtNo = stdtNo;
+		this.paidDt = paidDt;
+	}
 
 	public STDTCLSSDto(String clssId, String stdtNo, String repaidDt, String paidDt) {
 		super();

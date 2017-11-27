@@ -12,6 +12,8 @@ import com.project.dto.ClssInfoDto;
 import com.project.dto.DateDto;
 import com.project.dto.SBJTDto;
 import com.project.dto.SCRDto;
+import com.project.dto.STDTCLSSDto;
+import com.project.dto.STDTDto;
 
 @Service
 public class SchLfServiceImp implements SchLfService{
@@ -54,6 +56,24 @@ public class SchLfServiceImp implements SchLfService{
 		return schLfDao.selectMyScr(id);
 	}
 
-	
+	@Override
+	public String selectMyStdtNo(String id) {
+		return schLfDao.selectMyStdtNo(id);
+	}
+
+	@Override
+	public String selectStdtNo() {
+		return schLfDao.selectStdtNo();
+	}
+
+	@Override
+	public void insertNewStdt(STDTDto stdt) {
+		schLfDao.insertNewStdt(stdt);
+	}
+
+	@Override
+	public void insertStdtToStdtClss(STDTCLSSDto stdtclss) {
+		schLfDao.insertStdtToStdtClss(stdtclss);
+	}
 
 }

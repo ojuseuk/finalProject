@@ -1,36 +1,33 @@
 package com.project.controller;
 
 import java.text.SimpleDateFormat;
-
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.aspectj.weaver.ast.Instanceof;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.dto.CRSDto;
 import com.project.dto.ClssInfoDto;
 import com.project.dto.DateDto;
 import com.project.dto.SCRDto;
+import com.project.dto.STDTCLSSDto;
+import com.project.dto.STDTDto;
+import com.project.dto.USRDto;
 import com.project.service.SchLfService;
 
-import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -49,12 +46,18 @@ public class SchLfController {
 	 * @return
 	 */
 	@RequestMapping("viewRegist")
-	public ModelAndView selectByCrs(Model model){
+	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
+	public ModelAndView selectByCrs(Authentication auth){
+		USRDto usr = (USRDto) auth.getPrincipal();
 		ModelAndView mav = new ModelAndView();
 		List<ClssInfoDto> list = schLfService.selectByCrs();
 		JSONArray json = JSONArray.fromObject(list);
 		mav.addObject("jsonCrs", json);
 		mav.addObject("sbjt", schLfService.selectBySbjt());
+		mav.addObject("usrId", usr.getId());
+		mav.addObject("usrNm", usr.getNm());
+		mav.addObject("usrPhone", usr.getPhone());
+		mav.addObject("usrEmail", usr.getEmail());
 		mav.setViewName("schLf/registClssView");
 		return mav;
 	}
@@ -69,6 +72,7 @@ public class SchLfController {
 	 * @return
 	 */
 	@RequestMapping("selectCrsPerSbjt")
+	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
 	public @ResponseBody List<ClssInfoDto> selectCrsPerSbjt(@RequestParam("sbjtNm") String sbjtNm){
 		if(sbjtNm.equals("선 택")){
 			return schLfService.selectByCrs();
@@ -85,10 +89,10 @@ public class SchLfController {
 	 * @param crsId
 	 * @return
 	 */
-//	@RequestMapping("selectClssPerCrs")
-//	public @ResponseBody List<ClssInfoDto> selectClssPerCrs(@RequestParam("crsId") String crsId){
-//		return schLfService.selectClssPerCrs(crsId);
-//	}
+/*	@RequestMapping("selectClssPerCrs")
+	public @ResponseBody List<ClssInfoDto> selectClssPerCrs(@RequestParam("crsId") String crsId){
+		return schLfService.selectClssPerCrs(crsId);
+	}*/
 	
 	/**
 	 * @Method Name : applyClss
@@ -102,7 +106,8 @@ public class SchLfController {
 	 * @throws Exception
 	 */
 	@RequestMapping("applyClss")
-	public ModelAndView applyClss(@RequestBody List<String> clssList, Model model) throws Exception{
+	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
+	public ModelAndView applyClss(@RequestBody List<String> clssList) throws Exception{
 		int fee = 0;
 		ModelAndView mav = new ModelAndView();
 		List<ClssInfoDto> list = new ArrayList<>();
@@ -111,18 +116,20 @@ public class SchLfController {
 			if(!clssList.equals(null)){
 				for (int i = 0; i < clssList.size(); i++) {
 					jo = (JSONObject) parser.parse(clssList.get(i));
-					list.add(new ClssInfoDto(jo.get("nm").toString(), jo.get("clssNm").toString()
-							, jo.get("strtDt").toString(),	jo.get("endDt").toString(), jo.get("stdtclssttn").toString()));
+					list.add(new ClssInfoDto(jo.get("id").toString()
+							, jo.get("nm").toString()
+							, jo.get("clssNm").toString()
+							, jo.get("strtDt").toString()
+							, jo.get("endDt").toString()
+							, jo.get("stdtclssttn").toString()));
 					fee += Integer.parseInt(jo.get("stdtclssttn").toString());
 				}
-				JSONArray json = JSONArray.fromObject(list);
-				System.out.println(list);
-				mav.addObject("json", json);
-				System.out.println(json);
 			} else {
 				mav.addObject("json", "강좌를 선택하세요");
 			}
-		System.out.println(fee);
+		JSONArray json = JSONArray.fromObject(list);
+		System.out.println(json);
+		mav.addObject("json", json);
 		mav.addObject("fee", fee);
 		mav.setViewName("schLf/registListView");
 		return mav;
@@ -139,9 +146,12 @@ public class SchLfController {
 	 * @return
 	 */
 	@RequestMapping("myClssList")
-	public ModelAndView selectMyClss(HttpSession session, Model model){
+	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
+	public ModelAndView selectMyClss(Authentication auth){
+		USRDto usr = (USRDto) auth.getPrincipal();
 		ModelAndView mav = new ModelAndView();
-		List<ClssInfoDto> list = schLfService.selectMyClss(session.getAttribute("id").toString());
+		List<ClssInfoDto> list = schLfService.selectMyClss(usr.getId());
+		System.out.println(usr.getId());
 		JSONArray json = JSONArray.fromObject(list);
 		System.out.println(json);
 		mav.addObject("json", json);
@@ -160,7 +170,10 @@ public class SchLfController {
 	 * @return
 	 */
 	@RequestMapping("myAttnd")
-	public ModelAndView selectMyAttnd(HttpSession session, Model model){
+	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
+	public ModelAndView selectMyAttnd(Authentication auth){
+		USRDto usr = (USRDto) auth.getPrincipal();
+	
 		SimpleDateFormat formatter1 = new SimpleDateFormat ("yyyyMM");
 		SimpleDateFormat formatter2 = new SimpleDateFormat ("MM");
 		Date currentTime = new Date ();
@@ -197,7 +210,7 @@ public class SchLfController {
 			System.out.println("Error");
 		}
 		
-		DateDto dto = new DateDto(session.getAttribute("id").toString(), statDt, endDt);
+		DateDto dto = new DateDto(usr.getId(), statDt, endDt);
 		ModelAndView mav = new ModelAndView();
 		List<Map<String, String>> list = schLfService.selectMyAttnd(dto);
 		JSONArray json = JSONArray.fromObject(list);
@@ -218,13 +231,78 @@ public class SchLfController {
 	 * @return
 	 */
 	@RequestMapping("/myScr")
-	public ModelAndView selectMyScr(HttpSession session, Model model){
+	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
+	public ModelAndView selectMyScr(Authentication auth){
+		USRDto usr = (USRDto) auth.getPrincipal();
 		ModelAndView mav = new ModelAndView();
-		List<SCRDto> list = schLfService.selectMyScr(session.getAttribute("id").toString());
+		List<SCRDto> list = schLfService.selectMyScr(usr.getId());
 		JSONArray json = JSONArray.fromObject(list);
 		mav.addObject("scrList", list);
 		mav.addObject("json", json);
 		mav.setViewName("schLf/myScrView");
 		return mav;
 	}
+	
+	/**
+	 * @Method Name : registClss
+	 * @작성일	    : 2017. 11. 27. 
+	 * @작성자	    : 김동근
+	 * @Method 설명	: 수강신청 결제
+	 * return type  : String
+	 * @param clssList
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/payments/complete")
+	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
+	@Transactional
+	public String registClss(@RequestBody List<String> clssList) throws Exception{
+		System.out.println("registClss");
+		JSONParser parser = new JSONParser();
+		JSONObject jo = null;
+		String id = "";
+		ArrayList<String> list = new ArrayList<>();
+		// clssList json으로 변환
+		if(!clssList.equals(null)){
+			for (int i = 0; i < clssList.size(); i++) {
+				jo = (JSONObject) parser.parse(clssList.get(i));
+				list.add(jo.get("clssId").toString());
+			}
+			id = jo.get("id").toString();
+		}
+		// 나의 수강생 번호 조회
+		String stdtNo = schLfService.selectMyStdtNo(id);
+		System.out.println("나의 수강생 번호 : " + stdtNo);
+		// 수강생 번호 없을 시 번호 생성
+		if(stdtNo.equals("")){
+			stdtNo = schLfService.selectStdtNo();
+			String no = stdtNo.substring(1);
+			int num = Integer.parseInt(no);
+			no = Integer.toString(++num);
+			stdtNo = stdtNo.substring(0, 1) + no;
+			STDTDto stdt = new STDTDto(stdtNo, id);
+			System.out.println("새로운 수강생 : " + stdt);
+			// 새로운 수강생 Insert
+			schLfService.insertNewStdt(stdt);
+		} 
+		
+		// 오늘 날짜 구하기
+		SimpleDateFormat formatter = new SimpleDateFormat ("yyyyMMdd");
+		Date currentTime = new Date ();
+		String date = formatter.format(currentTime);
+		
+		STDTCLSSDto stdtClss;
+		for (int i = 0; i < list.size(); i++) {
+			stdtClss = new STDTCLSSDto(list.get(i), stdtNo, date);
+			// 새로운 수강생 수강테이블에 Insert
+			System.out.println("수강 : " + stdtClss);
+			schLfService.insertStdtToStdtClss(stdtClss);
+		}
+		
+		System.out.println(list);
+		System.out.println(id);
+		return "schLf/paymentSucView";
+	}
+	
+	
 }

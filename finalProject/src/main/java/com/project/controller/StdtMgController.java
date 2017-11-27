@@ -3,6 +3,7 @@ package com.project.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,11 +40,13 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("/testSMS")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String testM(){
 		return "stdtMg/sendSMSView";
 	}
 	
 	@RequestMapping("/sendSms")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String sendMsg(@RequestParam("command") String command, SmsContentDto msg) {
 		return SMS.sendMsg(command, msg , stdtMgService);
 	}
@@ -57,6 +60,7 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("stdtAllList")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public ModelAndView selectByCrs(Model model){
 		String stdtNo = stdtMgService.selectStdtNo();
 		String no = stdtNo.substring(1);
@@ -84,6 +88,7 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("clssList")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody List<CLSSDto> selectByClss(@RequestParam("crsId") String crsId){
 		return stdtMgService.selectByClss(crsId);
 	}
@@ -98,10 +103,13 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("stdtListCrs")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody List<STDTInfoDto> selectStdtByCrs(@RequestParam("crsId") String crsId){
+		System.out.println(1111);
 		if(crsId.equals("선 택")){
 			return stdtMgService.selectAllByStdt();
 		}
+		System.out.println(stdtMgService.selectStdtByCrs(crsId));
 		return stdtMgService.selectStdtByCrs(crsId);
 	}
 	
@@ -115,6 +123,7 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("stdtList")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody List<STDTInfoDto> selectStdtByClss(STDTInfoDto stdtInfo){
 		if(stdtInfo.getClssNm().equals("선 택")){
 			return stdtMgService.selectStdtByCrs(stdtInfo.getCrsId());
@@ -133,6 +142,7 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("stdtInfo")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody ModelAndView selectStdtInfo(@RequestParam("stdtNo") String stdtNo, Model model){
 		ModelAndView mav = new ModelAndView();
 		List<STDTInfoDto> list = stdtMgService.selectStdtInfo(stdtNo);
@@ -153,6 +163,7 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("updateStdt")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public ModelAndView updateToStdt(STDTCLSSDto stdtClss, STDTDto stdt, Model model){
 		System.out.println(stdtClss);
 		System.out.println(stdt);
@@ -185,6 +196,7 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("selectStdtId")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody String selectStdtId(@RequestParam("id") String id){
 		return stdtMgService.selectStdtId(id);
 	}
@@ -201,6 +213,7 @@ public class StdtMgController {
 	 * @return
 	 */
 	@RequestMapping("insertStdt")
+	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String insertStdt(STDTDto stdtDto, STDTCLSSDto stdtClssDto, Model model){
 		String date = stdtClssDto.getPaidDt().replace("-", "");
 		stdtClssDto.setPaidDt(date);

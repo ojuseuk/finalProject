@@ -5,6 +5,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -63,6 +65,10 @@
 	$(document).ready(function(){
 		$('#btn_ok').on("click", function(){
 			$.ajax({
+                beforeSend : function(xhr)
+                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
 				type: 'post',	
 				url: urlRoot,
 				data:{"id":$("#id").val(),"pw":$("#pw").val()},

@@ -1,6 +1,8 @@
 package com.project.dto;
 
 public class ClssInfoDto {
+	
+	private String id;
 	private String nm;
 	private String sbjtChrg;
 	private String tchrIntro;
@@ -21,8 +23,9 @@ public class ClssInfoDto {
 	
 	public ClssInfoDto() {}
 	
-	public ClssInfoDto(String nm, String clssNm, String strtDt, String endDt, String stdtclssttn) {
+	public ClssInfoDto(String id, String nm, String clssNm, String strtDt, String endDt, String stdtclssttn) {
 		super();
+		this.id = id;
 		this.nm = nm;
 		this.clssNm = clssNm;
 		this.strtDt = strtDt;
@@ -30,10 +33,11 @@ public class ClssInfoDto {
 		this.stdtclssttn = stdtclssttn;
 	}
 
-	public ClssInfoDto(String nm, String sbjtChrg, String tchrIntro, String tchrPt, String clssNm, String clssId,
-			String strtDt, String endDt, String strtTm, String endTm, int capa, String clssroom, String crsIntro,
-			String crsNm, String stdtclssttn, String paidDt, String prd) {
+	public ClssInfoDto(String id, String nm, String sbjtChrg, String tchrIntro, String tchrPt, String clssNm,
+			String clssId, String strtDt, String endDt, String strtTm, String endTm, int capa, String clssroom,
+			String crsIntro, String crsNm, String stdtclssttn, String paidDt, String prd) {
 		super();
+		this.id = id;
 		this.nm = nm;
 		this.sbjtChrg = sbjtChrg;
 		this.tchrIntro = tchrIntro;
@@ -51,6 +55,14 @@ public class ClssInfoDto {
 		this.stdtclssttn = stdtclssttn;
 		this.paidDt = paidDt;
 		this.prd = prd;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getNm() {
@@ -192,7 +204,9 @@ public class ClssInfoDto {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ClssInfoDto [nm=");
+		builder.append("ClssInfoDto [id=");
+		builder.append(id);
+		builder.append(", nm=");
 		builder.append(nm);
 		builder.append(", sbjtChrg=");
 		builder.append(sbjtChrg);
@@ -230,4 +244,5 @@ public class ClssInfoDto {
 		return builder.toString();
 	}
 
+	
 }
