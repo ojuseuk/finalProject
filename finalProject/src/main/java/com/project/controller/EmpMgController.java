@@ -208,7 +208,6 @@ public class EmpMgController {
 		if(!imgFile.isEmpty()) {
 			String path = session.getServletContext().getRealPath("/") + "imgs\\img\\";
 			
-			
 			System.out.println("imgFile.getOriginalFilename() : " + imgFile.getOriginalFilename()); 
 			System.out.println("imgFile.getName() : " + imgFile.getName()); 
 			System.out.println("imgFile.getContentType() : " + imgFile.getContentType()); 
@@ -248,8 +247,8 @@ public class EmpMgController {
 			e.printStackTrace();
 		}
 		System.out.println("Controller : Insert OK");
+	
 		
-		 
 		return url;
 	}
 

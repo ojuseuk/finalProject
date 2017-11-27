@@ -183,11 +183,11 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<String> stSearch(String id) {
+	public List<String> stSearch(String tchrNo) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("dao stSearch");
-		return sqlSession.selectList("tchrBsMapper.stSearch", id);
+		return sqlSession.selectList("tchrBsMapper.stSearch", tchrNo);
 		
 	}
 
@@ -309,6 +309,14 @@ public class TchrBsDaoImp implements TchrBsDao {
 		return sqlSession.selectOne("tchrBsMapper.attndTchrNo", id);
 	}
 
+	/**
+	 * @Method Name : examTpInsert
+	 * @작성일	    : 2017. 11. 27. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @param examtpDto
+	 * @return
+	 */
 	@Override
 	public int examTpInsert(EXAMTPDto examtpDto) {
 		// TODO Auto-generated method stub
@@ -318,6 +326,13 @@ public class TchrBsDaoImp implements TchrBsDao {
 		
 	}
 
+	/**
+	 * @Method Name : examTpSelect
+	 * @작성일	    : 2017. 11. 27. 
+	 * @작성자 		 : 
+	 * @Method 설명  :
+	 * @return
+	 */
 	@Override
 	public String examTpSelect() {
 		System.out.println("dao examTpSelect");
@@ -325,7 +340,6 @@ public class TchrBsDaoImp implements TchrBsDao {
 		System.out.println("-----------------------");
 		return str;
 	}
-	
 	
 	
 }

@@ -51,7 +51,7 @@
 		SELECT CLSS.CLSS_ID
 			FROM TB_TCHR TCHR, TB_TCHRASSN ASSN, TB_CLSS CLSS
 				WHERE TCHR.TCHR_NO = ASSN.TCHR_NO AND ASSN.CLSS_ID = CLSS.CLSS_ID
-				AND TCHR.TCHR_NO = #{id}
+				AND TCHR.TCHR_NO = #{tchrNo}
 	</select>
 	
 	<select id="stClssSearch" parameterType="String" resultType="map">
@@ -104,5 +104,4 @@
 	<select id="attndTchrNo" parameterType="string" resultType="string">
 		SELECT TCHR_NO FROM TB_TCHR WHERE ID = #{id}	
 	</select>
-	
 </mapper>

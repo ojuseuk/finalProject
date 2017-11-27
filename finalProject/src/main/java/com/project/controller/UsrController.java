@@ -37,17 +37,17 @@ public class UsrController {
 	public String userInsert(USRDto usr, Model data) {
 		String url = "user/error";
 		System.out.println("controller : " + usr);
-		try {
-			int num = usrService.userInsert(usr);
-			System.out.println(num);
-			System.out.println("insert");
-			System.out.println(data);
-			url = "redirect:/main.jsp";
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println("OK");
+//		try {
+//			int num = usrService.userInsert(usr);
+//			System.out.println(num);
+//			System.out.println("insert");
+//			System.out.println(data);
+//			url = "redirect:/main.jsp";
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("OK");
 		return url;
 	}
 

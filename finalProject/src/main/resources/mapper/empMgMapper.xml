@@ -190,5 +190,6 @@
 		   SET RETIRED_DT = #{retiredDt}
 		 WHERE EMP_NO = #{empNo}
 	</update>
+	
 
 </mapper>
