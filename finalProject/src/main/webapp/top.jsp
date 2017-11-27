@@ -32,8 +32,8 @@
     <div class="collapse navbar-collapse" id="myNavbar">
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal.nm" var ="nm"/>
-		<sec:authorize access="hasAnyRole('ROLE_ST', 'ROLE_USR')">
-		<sec:authentication property="principal.nm"/>      
+	  
+	  <sec:authorize access="hasAnyRole('ROLE_ST', 'ROLE_USR')">		 
       <ul class="nav navbar-nav">
         <li><a href="${root}/viewRegist">수강신청</a></li>
         <li><a href="${root}/myScr">성적확인</a></li>
@@ -41,6 +41,7 @@
         <li><a href="${root}/myClssList">수강과정확인</a></li>
       </ul>
       </sec:authorize>
+      
       <sec:authorize access="hasRole('ROLE_STAFF')">
       <ul class="nav navbar-nav">
         <li><a href="${root}/mgTchr">강사 관리</a></li>
@@ -63,6 +64,7 @@
         <li><a href="${root}/tchrBs/qzSelectView"">시험 출제</a></li>
       </ul>
       </sec:authorize>
+      
 </sec:authorize>
       <ul class="nav navbar-nav navbar-right">
         <sec:authorize access="isAnonymous()">
