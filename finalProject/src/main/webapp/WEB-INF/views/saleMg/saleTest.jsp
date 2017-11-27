@@ -331,11 +331,11 @@
 							});
 						}//end of createChart
 	
-							$(document).ready(function() {
+// 							$(document).ready(function() {
 								createChart();
 								$(document).bind("kendo:skinChange", createChart);
 								$(".options").bind("change", refresh);
-							});
+// 							});
 	
 							function refresh() {
 								var chart = $("#chart").data("kendoChart"), type = $(

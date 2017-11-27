@@ -8,8 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hakwon example</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="${root}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 </head>
-
 <body>
 <jsp:include page="top.jsp"/>
 
