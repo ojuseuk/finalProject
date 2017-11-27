@@ -63,7 +63,7 @@
 	<form action="${root}/insertStdt">
 		<table class="table table-bordered" id="inStdt" width="100%">
 			<tr>
-				<td colspan="2"><h3 align="center">수강생 등록</h3></td>
+				<td colspan="2"><h2 align="center">수강생 등록</h2></td>
 			</tr>
 			<tr>
 				<td>아이디</td>

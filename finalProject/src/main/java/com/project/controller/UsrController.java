@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dto.USRDto;
 import com.project.service.UsrService;
@@ -238,6 +240,54 @@ public class UsrController {
 		return json.toString();
 
 	}
+	
+	// id, pw 확인창으로 이동
+	@RequestMapping("inputUsrInfo")
+	public String inputUsrInfo(){
+		return "user/confirmUsr";
+	}
+	
+	// id, pw 검증
+	@RequestMapping("/confirmUsr")
+	public ModelAndView confirmUsr(String id, String pw){
+		System.out.println("confirmUsr");
+		System.out.println(id);
+		System.out.println(pw);
+		ModelAndView mav = new ModelAndView();
+		USRDto usr = new USRDto(id, pw);
+		usr = usrService.confirmUsr(usr);
+		System.out.println(usr);
+		if(usr == null){
+			mav.addObject("usr", usr);
+			mav.setViewName("user/confirmUsr");
+		} else {
+			mav.addObject("usr", usr);
+			mav.setViewName("user/updateUsr");
+		}
+		return mav;
+	}
+	
+	@RequestMapping("changeUsr")
+	public ModelAndView changeUsr(USRDto usr){
+		ModelAndView mav = new ModelAndView();
+		System.out.println(usr);
+		boolean flag = false;
+		
+		flag = usrService.updateUsr(usr);
+		if(flag){
+			// 업데이트 성공시
+			usr = usrService.confirmUsr(usr);
+			mav.addObject("usr", usr);
+			mav.setViewName("user/updateUsr");
+		} else {
+			// 업데이트 실패시
+			mav.addObject("fail", "f");
+			mav.setViewName("user/updateUsr");
+		}
+		return mav;
+	}
+	
+	
 	
 
 }// end controller

@@ -21,4 +21,8 @@ public interface UsrDao {
 	USRDto userLoginId(String id);
 	//userOut
 	int userOut(HashMap<String, Object> map)throws SQLException;
+	
+	public USRDto confirmUsr(USRDto usr);
+	
+	public Boolean updateUsr(USRDto usr);
 }

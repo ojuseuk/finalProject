@@ -213,6 +213,7 @@ var IMP = window.IMP;
                 },
 				contentType : "application/json; charset=UTF-8",
 				success : function(list) {
+					alert(list);
 					document.getElementById("events").innerHTML = list;
 				},
 				error : function() {
@@ -220,8 +221,9 @@ var IMP = window.IMP;
 				}
 			});
 			console.log("체크한리스트" + selectClss);
-			//테이블에서 삭제
+			
 		})
+		//선택한 테이블에서 삭제
 		.on('deselect', function(e, dt, type, indexes) {
 			rowData = table.rows(indexes).data().toArray();
 			tMoney -= parseInt(rowData[0].stdtclssttn);
