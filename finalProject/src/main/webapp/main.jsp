@@ -13,25 +13,30 @@
 <body>
 <jsp:include page="top.jsp"/>
 
-<div class="container">    
+
+
+
+<div class="container">  
+ 
   <div class="row">
+         
     <div class="col-sm-4">
       <div class="panel panel-danger">
-        <div class="panel-heading">특강정보</div>
+        <div class="panel-heading">단과</div>
         <div class="panel-body"><img src="./imgs/img/k1.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">국어강사</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
-        <div class="panel-heading">특강정보</div>
+        <div class="panel-heading">단과</div>
         <div class="panel-body"><img src="./imgs/img/e1.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">영어강사</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
-        <div class="panel-heading">특강정보</div>
+        <div class="panel-heading">단과</div>
         <div class="panel-body"><img src="./imgs/img/m1.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">수학강사</div>
       </div>
@@ -43,27 +48,28 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="panel panel-danger">
-        <div class="panel-heading">특강정보</div>
+        <div class="panel-heading">단과</div>
         <div class="panel-body"><img src="./imgs/img/k2.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">국어강사</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
-        <div class="panel-heading">특강정보</div>
+        <div class="panel-heading">단과</div>
         <div class="panel-body"><img src="./imgs/img/e3.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">영어강사</div>
       </div>
     </div>
     <div class="col-sm-4"> 
       <div class="panel panel-danger">
-        <div class="panel-heading">특강정보</div>
+        <div class="panel-heading">단과</div>
         <div class="panel-body"><img src="./imgs/img/m2.PNG" class="img-responsive" style="width:100%" alt="Image"></div>
         <div class="panel-footer">수학강사</div>
       </div>
     </div>
+       
   </div>
-</div><br><br>
+ </div>
 
 <!-- 로그인 -->
 <div id="id01" class="modal">
