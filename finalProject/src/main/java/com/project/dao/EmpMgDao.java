@@ -41,6 +41,6 @@ public interface EmpMgDao {
 
 	String assnTchr(TCHRASSNDto tchrAssn);
 
-	TCHRASSNDto tchrAssnSelect(String clssId);
+	List tchrAssnSelect(String clssId);
 
 }

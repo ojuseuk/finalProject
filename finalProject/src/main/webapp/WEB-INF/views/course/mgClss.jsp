@@ -2,11 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<c:set var="root" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
 <html>
 <head>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>강좌 개설</title>
+<title>강좌 관리</title>
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<script src="${root}/js/jquery.min.js"></script>
+<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -16,8 +23,8 @@
 			<table>
 				<tr>
 					<td>과목명 :</td>
-					<td><select name="sbjtNm" id="sbjtNm" required onchange="crsSelect('${pageContext.request.contextPath}', this.value);
-																			 tchrSelectBySbjtNm('${pageContext.request.contextPath}', this.value)">
+					<td><select name="sbjtNm" id="sbjtNm" required onchange="crsSelect('${root}', this.value);
+																			 tchrSelectBySbjtNm('${root}', this.value)">
 							<option value="">과목 선택</option>
 							<c:forEach items="${requestScope.sbjtList}" var="data">
 								<option value=${data.sbjtNm}>${data.sbjtNm}</option>
@@ -30,7 +37,7 @@
 					
 						</select>
 					</td>
-					<td align="right"><input type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${pageContext.request.contextPath}', document.getElementById('crsId').value)">
+					<td align="right"><input type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${root}', document.getElementById('crsId').value)">
 					</td>
 					
 				</tr>
@@ -69,13 +76,14 @@
 		</fieldset><br>
 		<input type="reset" value="화면 초기화"> 
  		<input type="submit" value="강좌 개설"> 
-		<input type="button" value="수정 내용 저장" onclick="tchrUpdate()">
+		<input type="button" value="수정 내용 저장" onclick="clssUpdate()">
 		<input type="button" value="강사 배정" onclick="tchrShow()">
 		<input type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
 		<br>
-		<fieldset style="width: 45%" id="fsTchr" hidden>				
+		<div>
+		<fieldset style="width: 75%" id="fsTchr" hidden>				
 			<legend>강사 정보</legend>
-			<table>
+			<table style="float:left">
 				<tr>
 					<td>강사명 :</td>
 					<td>
@@ -101,32 +109,144 @@
 					<td><textarea name = "tchrIntro" id="tchrIntro" cols = "50" rows = "7" 
                               placeholder="200자 이내"></textarea></td>
                     </td>
-					<td><div id="tchrPhoto"></div>
-                    </td>
+					<td><div id="tchrPhoto"></div> </td>
+				</tr>
+				<tr>
+					<td colspan="3">
+					
+						<input type="button" value="화면초기화" id="btnClear">
+						<input type="button" value="저장" onclick="assgnTchr('${pageContext.request.contextPath}')">
+						<input type="button" value="닫기" onclick="tchrClose()">
+					</td>
 				</tr>
 			</table>
-			<input type="button" value="저장" onclick="assgnTchr('${pageContext.request.contextPath}')">
-			<input type="button" value="닫기" onclick="tchrClose()">
+			
 			<!-- name="assgnTchr" id="assgnTchr" --> 
+			
+			<!-- 강사 리스트 DataTable -->
+			<div id="divDtTchr" class="card mb-3" style="position:absolute; left:50%; width:400px; display:inline-block;">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dtTchr">
+							<thead >
+								<tr>
+									<th>과목</th>
+									<th>강사명</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- 강사 리스트 DataTable -->	
 		</fieldset>
+		</div>
 	</form>
 	
+	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
+	<input type = "hidden" id="root" value='${root}'>
+
+		<!-- 강좌 리스트 DataTable -->
+		<div id="demo" class="card mb-3" style="position:absolute; top:45%; left:750px; width:700px; height:200px; display:inline-block;">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable">
+						<thead >
+							<tr>
+								<th>강좌 ID</th>
+								<th>과목</th>
+								<th>과정명</th>
+								<th>강좌명</th>
+								<th>개강일</th>
+								<th>수강인원</th>
+								<th>강의실</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- 과정 리스트 DataTable -->
+
+
+		
 	<script type="text/javascript">
 		var xhttp = new XMLHttpRequest();
 		var xhttp2 = new XMLHttpRequest();
 		var data;
+		var header = document.querySelector('meta[id="_csrf_header"]').getAttribute('content');
+		var token = document.querySelector('meta[id="_csrf"]').getAttribute('content');
 		var data2;
+		var root = document.getElementById("root").value;
+		var jsonList = document.getElementById("jsonList").value;
+		jsonList = JSON.parse(jsonList);
 		
+		/* 화면 초기화 */
+		$(document).ready(function() {
+            $('#btnClear').click(function() {
+                location.reload();
+            });
+        });
+
+		
+		/* 강좌 리스트 DataTable 채우기*/
+		$(document).ready(function(){
+			$('#dataTable').DataTable({
+				"language": {
+					    search: "검색 : " ,
+			            "thousands": ","
+				},
+				"scrollY" : 330,
+				"scrollCollapse" : true,
+				data : jsonList,
+				columns : [ {
+						"data" : "clssId",
+						"searchable": false,
+						"render" : function(data, type, row, meta){
+
+							data  = '<div align="center"><input type="button" value="' + data + '" onclick="clssSelect(\''+ root + '\', \''+data+'\');'
+// 							                                                                    + 'tchrAssnSelectList(\'' + root + '\', \'' + data + '\');';
+							                                                                    + 'tchrAssnSelect(\'' + root + '\', \'' + data + '\')"></div>';
+							return data;
+						}
+					}, {
+						"data" : "sbjtNm"
+					}, {
+						"data" : "crsNm"
+					}, {
+						"data" : "clssNm"
+					}, {
+						"data" : "strtDt"
+					}, {
+						"data" : "capa",
+						"render" : function(data){
+							data = '<div align="right">' + data.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + '</div>';	
+							return data;
+						}
+					}, {
+						"data" : "clssroom"
+					}]
+			});
+		});
+		
+		/* 강좌 수정 */
+		function clssUpdate(){
+			document.getElementById("frmClss").action = "${root}/clssUpdate";
+			document.getElementById("frmClss").submit();
+		}
+
+
 		/* 강사 배정 */
 		function assgnTchr(root){
 			xhttp.onreadystatechange = function(){
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					data = xhttp.responseText;
-					
-/* 					document.getElementById("tchrNo").value = data.tchrNo;
-					document.getElementById("clssId").value = data.clssId;
-					 document.getElementById("chrg").value = data.chrg; 
-					document.getElementById("slr").value = data.slr; */
 					alert(data);
 				}
 			}
@@ -146,7 +266,8 @@
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			
 			/* spring-security를 사용할 경우 해아할 setRequestHeader */
-			/* xhttp.setRequestHeader(header, token); */
+			xhttp.setRequestHeader(header, token);
+			alert(params);
 			xhttp.send(params);
 		}
 		
@@ -192,17 +313,47 @@
 				console.log(xhttp2.status);
 				if (xhttp2.readyState == 4 && xhttp2.status == 200) {
 					var data2 = xhttp2.responseText;
+					console.log("xhttp2.responseText : " + xhttp2.responseText);
+					console.log("data2.length : " + data2.length);
 					data2 = JSON.parse(data2);
-					document.getElementById("slr").value = data2.slr;
-					document.getElementById("tchrIntro").value = data2.tchrIntro;
+					console.log("data2.length 파싱 후 : " + data2.length);
+					$('#dtTchr').dataTable().fnDestroy();
 					
-					tag = '<option value="' + data2.tchrNo + '">' + data2.nm + '</option>';
-					document.getElementById("tchrNo").innerHTML = tag;
-					
-					tag = '<img src="${pageContext.request.contextPath}/imgs/img/';
-					tag += data2.tchrPt + '" style="width:150px;height:150px;">';
-					document.getElementById("tchrPhoto").innerHTML = tag;
-					
+					if(data2.length == 0){ 			/* 강사가 배정되지 않은 경우 */
+						tchrSelectBySbjtNm(root, document.getElementById("sbjtNm").value);
+						document.getElementById("slr").value = "";
+						document.getElementById("tchrIntro").value = "";
+// 						$("#imgTchr").remove();
+//  						$('#dtTchr').remove();
+					} else if(data2.length == 1){								/* 강사가 배정된 경우 */
+						console.log("parsing 후 data2 : " + data2[0]);
+						document.getElementById("slr").value = data2[0].slr;
+						document.getElementById("tchrIntro").value = data2[0].tchrIntro;
+						
+						tag = '<option value="' + data2[0].tchrNo + '">' + data2[0].nm + '</option>';
+						document.getElementById("tchrNo").innerHTML = tag;
+						
+						tag = '<img id="imgTchr" src="${pageContext.request.contextPath}/imgs/img/';
+						tag += data2[0].tchrPt + '" style="width:150px;height:150px;">';
+						document.getElementById("tchrPhoto").innerHTML = tag;
+						
+						
+					}	
+					/* 강사 리스트 DataTable 채우기*/
+		 			$('#dtTchr').DataTable({
+		 				"language": {
+		 					    search: "검색 : " ,
+		 			            "thousands": ","
+		 				},
+		 				"scrollY" : 330,
+		 				"scrollCollapse" : true,
+		 				data : data2,
+		 				columns : [ {
+		 						"data" : "sbjtChrg"
+		 					}, {
+		 						"data" : "nm"
+		 					}]
+		 			});		
 				}
 			}
 			xhttp2.open("GET", root + "/tchrAssnSelect?clssId=" + clssId, true);
@@ -229,8 +380,6 @@
 					tag = '<option value="' + data.crsId + '">' + data.crsNm + '</option>';
 					document.getElementById("crsId").innerHTML = tag;
 					
-					/* 리스트에서 특정 강좌 선택 시, 해당 과목의 강사 조회 */
-					/* tchrSelectBySbjtNm('${pageContext.request.contextPath}', data.sbjtNm); */
 				}
 			}
 			xhttp.open("GET", root + "/clssSelect?clssId=" + clssId, true);
@@ -274,77 +423,7 @@
 		}
 	</script>
 	
-	<!-- 리스트 미리 출력 -->
-	<div id="viewCourseList" style="position:absolute; top:250px; left:750px; width:800px; height:200px; display:inline-block;">
-			
-		<table align="center" border="1" width="60%" bordercolorlight="black">
-			<tr>
-		        <td bgcolor="#336699">
-		            <p align="center">
-		            <font color="white"><b><span style="font-size:9pt;">강좌 ID</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center"><font color="white"><b><span style="font-size:9pt;">과목</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center"><font color="white"><b><span style="font-size:9pt;">과정명</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center"><font color="white"><b><span style="font-size:9pt;">강좌명</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center"><font color="white"><b><span style="font-size:9pt;">시작일자</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center"><font color="white"><b><span style="font-size:9pt;">수강인원</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center"><font color="white"><b><span style="font-size:9pt;">강의실</span></b></font></p>
-		        </td>
-		    </tr>
-		    
-			<c:if test="${empty list || fn:length(list) == 0}">
-				<tr>
-			        <td colspan="7">
-			            <p align="center"><b><span style="font-size:9pt;">개설된 강좌가 없습니다.</span></b></p>
-			        </td>
-			    </tr>
-			</c:if>
-			
-			<c:forEach items="${requestScope.list}" var="data">
-				    <tr>
-				        <td bgcolor="">
-				        <%-- <input type="button" value=${data.tchrNo} onclick="tchrSelect('${pageContext.request.contextPath}', '${data.tchrNo}')"></p> --%>
-				        
-				            <p align="center"><span style="font-size:9pt;">
-				            <%-- <input type="button" value=${data.clssId} onclick="clssSelect('${pageContext.request.contextPath}', '${data.clssId}')"></span></p> --%>
- 				            <input type="button" value=${data.clssId} onclick="clssSelect('${pageContext.request.contextPath}', '${data.clssId}');
- 				                                                               tchrAssnSelect('${pageContext.request.contextPath}', '${data.clssId}')"></span></p>
-				        </td>
-				        <td bgcolor="">
-							<p><span style="font-size:9pt;">${data.sbjtNm}</a></span></p>
-				        </td>
-				        <td bgcolor="">
-							<p><span style="font-size:9pt;">${data.crsNm}</a></span></p>
-				        </td>
-				        <td bgcolor="">
-							<p><span style="font-size:9pt;">${data.clssNm}</a></span></p>
-				        </td>
-				        <td bgcolor="">
-							<p><span style="font-size:9pt;">${data.strtDt}</a></span></p>
-				        </td>
-				        <td bgcolor="">
-							<p><span style="font-size:9pt;">${data.capa}</a></span></p>
-				        </td>
-				        <td bgcolor="">
-							<p><span style="font-size:9pt;">${data.clssroom}</a></span></p>
-				        </td>
-		
-				    </tr>
-			</c:forEach>
-		</table>	
-</div>
-	<!-- 리스트 미리 출력 끝-->
+
 	
 <jsp:include page="../../../footer.jsp"/>	
 </body>
