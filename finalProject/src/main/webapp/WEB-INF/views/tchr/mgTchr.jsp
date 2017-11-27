@@ -2,19 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>강좌 개설</title>
+<title>강사 관리</title>
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<script src="${root}/js/jquery.min.js"></script>
+<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
-<%-- 	<button onclick="location.href='${pageContext.request.contextPath}/main.jsp'">홈으로</button> --%>
-<%-- 	<button onclick="location.href='${pageContext.request.contextPath}/emp'">직원 관리</button> --%>
-<%-- 	<button onclick="location.href='${pageContext.request.contextPath}/mgTchr">강사 관리</button> --%>
-	
-	<br><hr><br>
 	
  	<!-- <form action="tchrInsert.do" id="frmTchr" method="post"> -->
   	<form action="tchrInsert.do" id="frmTchr" method="post" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
 			<table>
 				<tr>
 					<td>사용자 ID :</td>
-					<td><input type="text" name="id" id="id" />
+					<td><input type="text" name="id" id="id1" />
   						<input type="button" value="조회"
 						onclick="searchUsr('${pageContext.request.contextPath}', document.getElementById('id').value);
 								 searchEmpById('${pageContext.request.contextPath}', document.getElementById('id').value);
@@ -32,7 +32,7 @@
 				</tr>  
 				<tr>
 					<td>이름 :</td>
-					<td><input type="text" name="nm" id="nm" placeholder="비동기로 DB 데이터 출력"/></td>
+					<td><input type="text" name="nm" id="nm1" /></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -47,7 +47,7 @@
 				</tr>  
 				<tr>
 					<td>급여 :</td>
-					<td><input type="number" name="slr" id="slr"/></td>
+					<td><input type="text" name="slr" id="slr"/></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -96,6 +96,9 @@
  		<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
 	</form>
 	
+	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
+	<input type = "hidden" id="root" value='${root}'>
+	
 	<script type="text/javascript">
 		var xhttp = new XMLHttpRequest();
 		var xhttp2 = new XMLHttpRequest();
@@ -105,12 +108,54 @@
 		if(resultMsg != ""){
 			alert(resultMsg);
 		}
+		
+		var root = document.getElementById("root").value;
+		var jsonList = document.getElementById("jsonList").value;
+		console.log(jsonList);
+		jsonList = JSON.parse(jsonList);
+
+		/* dataTable 처리 */
+		$(document).ready(function(){
+			$('#dataTable').DataTable({
+				"language": {
+					    search: "검색 : " 
+				},
+//	 			"destroy": true,
+				"scrollY" : 400,
+				"scrollCollapse" : true,
+				data : jsonList,
+				columns : [ {
+					"data" : "id",
+					"searchable": false
+					}, {
+						"data" : "empNo",
+						"searchable": false
+					/* <input type="button" value=${data.tchrNo} onclick="tchrSelect('${pageContext.request.contextPath}', '${data.tchrNo}')"></p> */
+					}, {
+						"data" : "tchrNo",
+						"render" : function(data, type, row, meta){
+							data = '<div align="center"><input type="button" value="' + data + '" onclick="tchrSelect(\''+root+'\', \''+data+'\')"></div>';
+							return data;
+						}
+					}, {
+						"data" : "sbjtChrg"
+					}, {
+						"data" : "nm"
+					}]
+			});
+		});
+		
+		
 		/* 강사번호로 TB_TCHR 업데이트 */
 		function tchrUpdate(){
 			document.getElementById("frmTchr").action = "${pageContext.request.contextPath}/tchrUpdate";
 			document.getElementById("frmTchr").submit();
 		}
 		
+ 		function inputNumberFormat(slr) {
+		    return String(slr).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
+
 		/* 강사번호로 TB_TCHR 검색 */
 		function tchrSelect(root, tchrNo){
 			xhttp.onreadystatechange = function(){
@@ -119,12 +164,12 @@
 					data = JSON.parse(data);
 					document.getElementById("tchrNo").value = data.tchrNo;
 					document.getElementById("empNo").value = data.empNo;
-					document.getElementById("id").value = data.id;
-					document.getElementById("nm").value = data.nm;
-					document.getElementById("slr").value = data.slr;
+					document.getElementById("id1").value = data.id;
+					document.getElementById("nm1").value = data.nm;
+					console.log(data.nm);
+ 					document.getElementById("slr").value = inputNumberFormat(data.slr); 
 					document.getElementById("sbjtChrg").value = data.sbjtChrg;
 					document.getElementById("tchrIntro").value = data.tchrIntro;
-					/* document.getElementById("tchrPhoto").innerHTML = '<img src="${pageContext.request.contextPath}/imgs/img/T0046.jpg" style="width:150px;height:150px;">'; */
 					
 					tag = '<img src="${pageContext.request.contextPath}/imgs/img/';
 					tag += data.tchrPt + '" style="width:150px;height:150px;">';
@@ -134,7 +179,7 @@
 					
 					
 					document.getElementById("empNo").readOnly = true;
-					document.getElementById("nm").readOnly = true;
+					document.getElementById("nm1").readOnly = true;
 					document.getElementById("slr").readOnly = true;
 				}
 			}
@@ -150,7 +195,7 @@
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					data = xhttp.responseText;
 					data = JSON.parse(data);
-					document.getElementById("nm").value = data.nm;
+					document.getElementById("nm1").value = data.nm;
 				}
 			}
 			xhttp.open("GET", root + "/usrSearch?id=" + id, true);
@@ -189,64 +234,87 @@
 		
 	</script>
 	
+
+	
 	<!-- 리스트 미리 출력 -->
-	<div id="viewTchrList" style="position:absolute; top:260px; left:750px; width:700px; height:200px; display:inline-block;">
+	<div id="demo" class="card mb-3" style="position:absolute; top:30%; left:750px; width:700px; height:200px; display:inline-block;">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>사번</th>
+								<th>강사번호</th>
+								<th>담당과목</th>
+								<th>이름</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+<!-- 	 <div id="viewTchrList" style="position:absolute; top:260px; left:750px; width:700px; height:200px; display:inline-block;"> -->
 			
-		<table align="center" border="1" width="60%" bordercolorlight="black">
-			<tr>
-		        <td bgcolor="#336699">
-		            <p align="center">
-		            <font color="white"><b><span style="font-size:9pt;">ID</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center">
-		            <font color="white"><b><span style="font-size:9pt;">사번</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center">
-		            <font color="white"><b><span style="font-size:9pt;">강사번호</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center"><font color="white"><b><span style="font-size:9pt;">담당과목</span></b></font></p>
-		        </td>
-		        <td bgcolor="#336699">
-		            <p align="center"><font color="white"><b><span style="font-size:9pt;">이름</span></b></font></p>
-		        </td>
-		    </tr>
+<!-- 		<table align="center" border="1" width="60%" bordercolorlight="black"> -->
+<!-- 			<tr> -->
+<!-- 		        <td bgcolor="#336699"> -->
+<!-- 		            <p align="center"> -->
+<!-- 		            <font color="white"><b><span style="font-size:9pt;">ID</span></b></font></p> -->
+<!-- 		        </td> -->
+<!-- 		        <td bgcolor="#336699"> -->
+<!-- 		            <p align="center"> -->
+<!-- 		            <font color="white"><b><span style="font-size:9pt;">사번</span></b></font></p> -->
+<!-- 		        </td> -->
+<!-- 		        <td bgcolor="#336699"> -->
+<!-- 		            <p align="center"> -->
+<!-- 		            <font color="white"><b><span style="font-size:9pt;">강사번호</span></b></font></p> -->
+<!-- 		        </td> -->
+<!-- 		        <td bgcolor="#336699"> -->
+<!-- 		            <p align="center"><font color="white"><b><span style="font-size:9pt;">담당과목</span></b></font></p> -->
+<!-- 		        </td> -->
+<!-- 		        <td bgcolor="#336699"> -->
+<!-- 		            <p align="center"><font color="white"><b><span style="font-size:9pt;">이름</span></b></font></p> -->
+<!-- 		        </td> -->
+<!-- 		    </tr> -->
 		    
-			<c:if test="${empty list || fn:length(list) == 0}">
-				<tr>
-			        <td colspan="7">
-			            <p align="center"><b><span style="font-size:9pt;">등록된 강사가 없습니다.</span></b></p>
-			        </td>
-			    </tr>
-			</c:if>
+<%-- 			<c:if test="${empty list || fn:length(list) == 0}"> --%>
+<!-- 				<tr> -->
+<!-- 			        <td colspan="7"> -->
+<!-- 			            <p align="center"><b><span style="font-size:9pt;">등록된 강사가 없습니다.</span></b></p> -->
+<!-- 			        </td> -->
+<!-- 			    </tr> -->
+<%-- 			</c:if> --%>
 			
-			<c:forEach items="${requestScope.list}" var="data">
-				    <tr>
-				        <td bgcolor="">
-				            <p align="center"><span style="font-size:9pt;">${data.id}</span></p>
+<%-- 			<c:forEach items="${requestScope.list}" var="data"> --%>
+<!-- 				    <tr> -->
+<!-- 				        <td bgcolor=""> -->
+<%-- 				            <p align="center"><span style="font-size:9pt;">${data.id}</span></p> --%>
 				            
-				        </td>
-				        <td bgcolor="">
-				            <p align="center"><span style="font-size:9pt;">${data.empNo}</span></p>
-				        </td>
-				        <td bgcolor="">
-				        	<p align="center">
-				        	<input type="button" value=${data.tchrNo} onclick="tchrSelect('${pageContext.request.contextPath}', '${data.tchrNo}')"></p>
-				        </td>
-				        <td bgcolor="">
-							<p><span style="font-size:9pt;">${data.sbjtChrg}</a></span></p>
-				        </td>
-				        <td bgcolor="">
-							<p><span style="font-size:9pt;">${data.nm}</a></span></p>
-				        </td>
-				    </tr>
-			</c:forEach>
-		</table>	
-</div>
+<!-- 				        </td> -->
+<!-- 				        <td bgcolor=""> -->
+<%-- 				            <p align="center"><span style="font-size:9pt;">${data.empNo}</span></p> --%>
+<!-- 				        </td> -->
+<!-- 				        <td bgcolor=""> -->
+<!-- 				        	<p align="center"> -->
+<%-- 				        	<input type="button" value=${data.tchrNo} onclick="tchrSelect('${pageContext.request.contextPath}', '${data.tchrNo}')"></p> --%>
+<!-- 				        </td> -->
+<!-- 				        <td bgcolor=""> -->
+<%-- 							<p><span style="font-size:9pt;">${data.sbjtChrg}</a></span></p> --%>
+<!-- 				        </td> -->
+<!-- 				        <td bgcolor=""> -->
+<%-- 							<p><span style="font-size:9pt;">${data.nm}</a></span></p> --%>
+<!-- 				        </td> -->
+<!-- 				    </tr> -->
+<%-- 			</c:forEach> --%>
+<!-- 		</table>	 -->
+<!-- </div>  -->
 	<!-- 리스트 미리 출력 끝-->
-<jsp:include page="../../../footer.jsp"/>	
+<%-- <jsp:include page="../../../footer.jsp"/>	 --%>
 	
 
 	

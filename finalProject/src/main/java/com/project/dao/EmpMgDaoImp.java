@@ -132,9 +132,10 @@ public class EmpMgDaoImp implements EmpMgDao {
 	}
 
 	@Override
-	public TCHRASSNDto tchrAssnSelect(String clssId) {
+	public List tchrAssnSelect(String clssId) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("empMgMapper.tchrAssnSelect", clssId);
+		return sqlSession.selectList("empMgMapper.tchrAssnSelect", clssId);
+//		return sqlSession.selectOne("empMgMapper.tchrAssnSelect", clssId);
 	}
 
 	
