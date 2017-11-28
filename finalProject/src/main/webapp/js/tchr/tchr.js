@@ -54,6 +54,7 @@
  		function inputNumberFormat(slr) {
 		    return String(slr).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		}
+ 		
 
 		/* 강사번호로 TB_TCHR 검색 */
 		function tchrSelect(root, tchrNo){
@@ -63,8 +64,8 @@
 					data = JSON.parse(data);
 					document.getElementById("tchrNo").value = data.tchrNo;
 					document.getElementById("empNo").value = data.empNo;
-					document.getElementById("id1").value = data.id;
-					document.getElementById("nm1").value = data.nm;
+					document.getElementById("id2").value = data.id;
+					document.getElementById("nm2").value = data.nm;
 					console.log(data.nm);
  					document.getElementById("slr").value = inputNumberFormat(data.slr); 
 					document.getElementById("sbjtChrg").value = data.sbjtChrg;
@@ -78,7 +79,7 @@
 					
 					
 					document.getElementById("empNo").readOnly = true;
-					document.getElementById("nm1").readOnly = true;
+					document.getElementById("nm2").readOnly = true;
 					document.getElementById("slr").readOnly = true;
 				}
 			}
@@ -87,14 +88,14 @@
 		}
 		
 		/* 사용자 ID로 TB_USR 검색 */
-		function searchUsr(root,id){
-			console.log(root,id);
-			
+		function searchUsr(root, id){
+			console.log(root, id);
+			alert(root + " " + id);
 			xhttp.onreadystatechange = function(){
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					data = xhttp.responseText;
 					data = JSON.parse(data);
-					document.getElementById("nm1").value = data.nm;
+					document.getElementById("nm2").value = data.nm;
 				}
 			}
 			xhttp.open("GET", root + "/usrSearch?id=" + id, true);

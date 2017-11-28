@@ -24,16 +24,16 @@
 			<table>
 				<tr>
 					<td>사용자 ID :</td>
-					<td><input type="text" name="id" id="id1" />
+					<td><input type="text" name="id" id="id2" />
   						<input type="button" value="조회"
-						onclick="searchUsr('${pageContext.request.contextPath}', document.getElementById('id1').value);
-								 searchEmpById('${pageContext.request.contextPath}', document.getElementById('id1').value);
-								 searchTchrById('${pageContext.request.contextPath}', document.getElementById('id1').value)">
+						onclick="searchUsr('${pageContext.request.contextPath}', $('#id2').val());
+								 searchEmpById('${pageContext.request.contextPath}', document.getElementById('nm2').value);
+								 searchTchrById('${pageContext.request.contextPath}', document.getElementById('nm2').value)">
 					</td>
 				</tr>  
 				<tr>
 					<td>이름 :</td>
-					<td><input type="text" name="nm" id="nm1" /></td>
+					<td><input type="text" name="nm" id="nm2" /></td>
 				</tr>
 			</table>
 		</fieldset>

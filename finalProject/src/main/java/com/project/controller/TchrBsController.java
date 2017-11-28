@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,7 +50,13 @@ public class TchrBsController {
 		System.out.println("controller qzView");
 		
 		ModelAndView mav= new ModelAndView();
-		Map<List<TPCDto>, List<TCHRDto>> map = tchrBsService.qzView();
+		Map<List<TPCDto>, List<TCHRDto>> map = null;
+		try {
+			map = tchrBsService.qzView();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Set<List<TPCDto>> key = map.keySet();
 		List<TPCDto> listTpc = null;
 		List<TCHRDto> listTchr = null;
@@ -89,7 +96,12 @@ public class TchrBsController {
 		
 		System.out.println(ttlqzDto);
 		
-		tchrBsService.ttlqzInsert(ttlqzDto);
+		try {
+			tchrBsService.ttlqzInsert(ttlqzDto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return "tchrBs/ttlqzView";
 	}
@@ -110,7 +122,14 @@ public class TchrBsController {
 		System.out.println("controller attnd");
 		ModelAndView mav = new ModelAndView();
 
-		List<Map<String, String>> list = tchrBsService.attnd(usrDto.getId());
+		List<Map<String, String>> list = null;
+		
+		try {
+			list = tchrBsService.attnd(usrDto.getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JSONArray json = JSONArray.fromObject(list);
 		
 		
@@ -139,7 +158,13 @@ public class TchrBsController {
 		
 		System.out.println(clssId);
 		
-		List<Map<String, String>> list = tchrBsService.attndClss(clssId);
+		List<Map<String, String>> list = null;
+		try {
+			list = tchrBsService.attndClss(clssId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return list;
 	}
@@ -160,7 +185,13 @@ public class TchrBsController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		Map<String, List<Map<String, String>>> map = tchrBsService.srcIn();
+		Map<String, List<Map<String, String>>> map = null;
+		try {
+			map = tchrBsService.srcIn();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		List<Map<String, String>> examTp = map.get("examTp");
 		List<Map<String, String>> sbjt = map.get("sbjt"); 
@@ -183,18 +214,24 @@ public class TchrBsController {
 	 * @작성일	    : 2017. 11. 15. 
 	 * @작성자	    : 오주석
 	 * @Method 설명	:
-	 * return type  : void
+	 * return type  : String
 	 * @param scrDto
 	 */
 	@RequestMapping("/srcInsert")
 	@PreAuthorize("hasRole('ROLE_TCHR')")
-	public void srcInsert(SCRDto scrDto) {
+	public String srcInsert(SCRDto scrDto) {
 		
 		System.out.println("controller srcInsert");
 		System.out.println(scrDto);
 		
-		tchrBsService.srcInsert(scrDto);
-		
+		try {
+			tchrBsService.srcInsert(scrDto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		return "forward:/tchrBs/srcIn";
 	}
 	
 	/**
@@ -214,7 +251,13 @@ public class TchrBsController {
 		ModelAndView mav= new ModelAndView();
 		
 		System.out.println("controller stSearch");
-		List<String> list = tchrBsService.stSearch(usrDto.getId());
+		List<String> list = null;
+		try {
+			list = tchrBsService.stSearch(usrDto.getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		JSONArray json = JSONArray.fromObject(list);
 		
@@ -239,7 +282,13 @@ public class TchrBsController {
 	public @ResponseBody List<Map<String, Object>> stClssSearch(@RequestParam("clssId") String clssId) {
 		
 		System.out.println("controller stClssSearch");
-		List<Map<String, Object>> list = tchrBsService.stClssSearch(clssId);
+		List<Map<String, Object>> list = null;
+		try {
+			list = tchrBsService.stClssSearch(clssId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(list);
 		
 		return list;
@@ -259,7 +308,13 @@ public class TchrBsController {
 		
 		ModelAndView mav = new ModelAndView();
 		System.out.println("controller qzSelectView");
-		Map<List<SBJTDto>, List<Map<String, String>>> map = tchrBsService.qzSelectView();
+		Map<List<SBJTDto>, List<Map<String, String>>> map = null;
+		try {
+			map = tchrBsService.qzSelectView();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Set<List<SBJTDto>> key = map.keySet();
 		List<SBJTDto> listTchr = null;
@@ -294,7 +349,13 @@ public class TchrBsController {
 		
 		System.out.println("controller qzSelect");
 		System.out.println(sbjtNm);
-		List<Map<String, Object>> list = tchrBsService.qzSelect(sbjtNm);
+		List<Map<String, Object>> list = null;
+		try {
+			list = tchrBsService.qzSelect(sbjtNm);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //		System.out.println(list);
 		
 		return list;
@@ -314,7 +375,13 @@ public class TchrBsController {
 		System.out.println("controller qzUpdateView");
 		
 		ModelAndView mav = new ModelAndView();
-		List<TTLQZDto> list = tchrBsService.qzUpdateView();
+		List<TTLQZDto> list = null;
+		try {
+			list = tchrBsService.qzUpdateView();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		mav.addObject("list", list);
 		mav.setViewName("tchrBs/qzUpdateView");
@@ -336,7 +403,13 @@ public class TchrBsController {
 	public ModelAndView qzUpdateSearch(@RequestParam int id) {
 		System.out.println(id);
 		ModelAndView mav = new ModelAndView();
-		TTLQZDto ttlqzDto = tchrBsService.qzUpdateSearch(id);
+		TTLQZDto ttlqzDto = null;
+		try {
+			ttlqzDto = tchrBsService.qzUpdateSearch(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mav.addObject("ttlqzDto", ttlqzDto);
 		mav.setViewName("tchrBs/qzUpdateSearch");
 		
@@ -359,7 +432,12 @@ public class TchrBsController {
 		System.out.println(examtpDto);
 		System.out.println(id);
 		System.out.println(id.size());
-		tchrBsService.qzInsert(examtpDto, id);
+		try {
+			tchrBsService.qzInsert(examtpDto, id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

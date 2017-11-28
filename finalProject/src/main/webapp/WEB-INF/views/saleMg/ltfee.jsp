@@ -39,7 +39,6 @@
 				</tr>
 				 <c:forEach items="${requestScope.listSsn}" var="ssn">
 					<tr>
-<%-- 						<td>${ssn.TCHRNO}</td> --%>
 						<td>${ssn.NM}</td>
 						<td>${ssn.SLR}</td>
 					</tr>

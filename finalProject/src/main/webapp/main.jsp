@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${root}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 <!-- banner style -->
-<style>
+<!-- <style>
 *{ margin:0;padding:0;text-decoration:none}
 li{list-style:none}
 
@@ -36,7 +36,7 @@ li{list-style:none}
 .product_con .btn_prev { left:0px;}
 .product_con .btn_next { right:0px;}
 .numlist {width:105px; margin:0 auto;}
-</style>
+</style> -->
 </head>
 <body>
 <jsp:include page="top.jsp"/>
@@ -51,8 +51,6 @@ li{list-style:none}
 <!--     </ul> -->
 <!--     <a class="btn_prev" href="#none">◀prev</a> -->
 <!--     <a class="btn_next" href="#none">next▶</a> -->
-
-   
 <!-- </div> -->
 <script type="text/javascript">
 // $(function(){
@@ -114,7 +112,6 @@ li{list-style:none}
 //     $('.numlist a').on('click', indicate)
 
 // });
-
 
 </script>
 <!-- banner end -->
@@ -199,6 +196,90 @@ li{list-style:none}
   </div>
  </div>
 
+<!-- 모달 시작 -->
+<!-- 로그인 -->
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="${root}/login" method="post">
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
+
+    <div class="container">
+      <label><b>아이디</b></label>
+      <input type="hidden" name="command" value="userLogin">
+      <input type="text" placeholder="아이디" name="id" required>
+	   <br>
+      <label><b>비밀번호</b></label>
+      <input type="password" placeholder="비밀번호" name="pw" required><br>
+      <%-- <div id="div_Check" style="font-weight: bold;color:red;">${login_errMsg }</div>  --%>
+      <button type="submit">로그인</button><br>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">취소</button>
+      <button type="button" class="idpwbtn" onclick="location.href='<c:url value="/idpwfind"/>'">아이디/비밀번호 찾기</button>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+    </div>
+  </form>
+</div>
+
+
+<!-- 회원가입 -->
+<div id="id02" class="modal" style="overflow: scroll;">
+  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+  <form class="modal-content animate" action="${root}/userInsert.do" method="post" id="f">
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+    <div class="container">
+      <label><b>아이디</b></label>
+      <input type="hidden" name="command" value="join">
+      <input type="text" placeholder="아이디 ※ 영문+숫자 조합 6~14자 이내" class="id1" name="id" id="id1" class="id" required >
+      <br>
+      <span class="check_error"></span>
+      <br>
+      <!-- <input type="button" id="btn_idcheck" name="btn_idcheck" value="중복확인"> -->
+	 
+
+      <label><b>비밀번호</b></label>     
+      <input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" class="pw" name="pw" id="pw1" required>
+      <span class="check_error"></span>
+      <br>
+      
+	  <label><b>비밀번호 확인</b></label>     
+      <input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" class="pw2" id="pw2" name="pw2" required>
+      <span class="check_error"></span>
+      <br>
+
+      <label><b>이름</b></label>
+      <input type="text" placeholder="이름" class="nm" name="nm" id="nm1" required>
+      <span class="check_error"></span>
+      <br>
+      
+      <label><b>전화</b></label>
+      <input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" class="phone" name="phone" id="phone1" required>
+      <span class="check_error"></span>
+      <br>
+       	
+      <label><b>주소</b></label>
+      <input type="text" placeholder="주소" class="addr" name="addr" id="addr1" required>
+      <span class="check_error"></span>
+      <br>
+      
+      <label><b>이메일</b></label>
+      <input type="text" placeholder="이메일" class="email" name="email" id="email1" required><br>
+      <span class="check_error"></span>
+      <br>
+      
+	  <div class="clearfix">
+<!--         <button type="submit" class="signupbtn" style="width: 50%;"  onclick="sendit()">회원가입</button><br> -->
+        <input type="button" value="회원가입" onclick="sendIt()"> 
+        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn" style="width: 19%;">취소</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- 모달 끝 -->
 <div id="Royal Academy" class="container text-center">
   <h3>Royal Academy</h3>
   <p>  

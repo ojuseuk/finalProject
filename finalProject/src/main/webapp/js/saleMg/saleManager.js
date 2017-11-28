@@ -207,7 +207,7 @@ function saleYear(root, button) {
 				function createChart() {
 					$("#chart").kendoChart({
 						title : {
-							text : "Site Visitors Stats /thousands/"
+							text : "매출 관리"
 						},
 						legend : {
 							position : "bottom"

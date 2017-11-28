@@ -51,14 +51,14 @@
 		SELECT no, EMP_NO empNo, title, content, ATTCH_FILE attchFile, dt FROM TB_NTC WHERE NO = #{no}
 	</select>
 	
-	<select id="ntcUpdate" parameterType="nTCDto">
+	<update id="ntcUpdate" parameterType="nTCDto">
 		
 		<if test="attchFile != null">
-			INSERT INTO TB_NTC VALUES(SEQ_NTC.NEXTVAL, #{empNo}, #{title}, #{content}, #{attchFile}, #{dt})
+			UPDATE TB_NTC SET TITLE = #{title}, CONTENT = #{content}, ATTCH_FILE = #{attchFile}, DT = #{dt} WHERE NO = #{no}
 		</if>
 		<if test="attchFile == null">
 			UPDATE TB_NTC SET TITLE = #{title}, CONTENT = #{content}, DT = #{dt} WHERE NO = #{no}
 		</if>
-	</select>
+	</update>
 	
 </mapper>
