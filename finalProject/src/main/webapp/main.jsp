@@ -12,14 +12,10 @@
 <script type="text/javascript" src="${root}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 <!-- banner style -->
-
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 .mySlides {display:none;}
 </style>
-
-
-
 </head>
 <body>
 <jsp:include page="top.jsp"/>
@@ -48,7 +44,20 @@
 
 
 <script type="text/javascript">
+var slideIndex = 0;
+carousel();
 
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none"; 
+    }
+    slideIndex++;
+    if (slideIndex > x.length) {slideIndex = 1} 
+    x[slideIndex-1].style.display = "block"; 
+    setTimeout(carousel, 2000); 
+}
 </script>
 <!-- banner end -->
 
