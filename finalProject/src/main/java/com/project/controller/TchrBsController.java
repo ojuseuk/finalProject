@@ -58,10 +58,12 @@ public class TchrBsController {
 			listTchr = map.get(list);
 		}
 		JSONArray json = JSONArray.fromObject(listTpc);
+		JSONArray jsonTchr = JSONArray.fromObject(listTchr);
 		System.out.println(listTpc.size());
 		mav.addObject("listTpc", listTpc);
 		mav.addObject("json", json);
 		mav.addObject("listTchr", listTchr);
+		mav.addObject("jsonTchr", jsonTchr);
 		mav.setViewName("tchrBs/ttlqzView");
 		
 		return mav;

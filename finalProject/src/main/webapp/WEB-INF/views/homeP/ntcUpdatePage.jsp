@@ -14,14 +14,15 @@
 		<h2>공지사항 수정</h2>
 		<form action="${root}/ntcUpdate" method="POST"  enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+			<input type="hidden" name="empNo" value="${requestScope.ntcDto.no}">
 			<table class="w3-table w3-bordered">
 				<tr>
 					<td>게시글 제목</td>
-					<td><input type="text" name="title" value="${requestScope.ntcDto.no}"></td>
+					<td><input type="text" name="title" value="${requestScope.ntcDto.title}" size="100"></td>
 				</tr>
 				<tr>
 					<td>게시글 내용</td>
-				<td><textarea rows="10" cols="40" name="content">${requestScope.ntcDto.content}</textarea></td>
+				<td><textarea rows="10" cols="90" name="content">${requestScope.ntcDto.content}</textarea></td>
 				</tr>
 				<tr>
 					<td>기본파일</td>

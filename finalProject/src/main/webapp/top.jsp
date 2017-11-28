@@ -63,7 +63,6 @@
       <ul class="nav navbar-nav">
         <li><a href="${root}/tchrBs/qzView">문제 생성</a></li>
         <li><a href="${root}/tchrBs/attnd">출석 확인</a></li>
-        <li><a href="${root}/saleMg/manager">매출 관리</a></li>
         <li><a href="${root}/tchrBs/srcIn">성적 입력</a></li>
         <li><a href="${root}/tchrBs/stSearch">학생 성적 확인</a></li>
         <li><a href="${root}/tchrBs/qzSelectView">시험 출제</a></li>
@@ -122,7 +121,7 @@
     <div class="container">
       <label><b>아이디</b></label>
       <input type="hidden" name="command" value="join">
-      <input type="text" placeholder="아이디 ※ 영문+숫자 조합 6~14자 이내" name="id" id="id" required >
+      <input type="text" placeholder="아이디 ※ 영문+숫자 조합 6~14자 이내" name="id" id="id1" required >
       <br>
       <span class="check_error"></span>
       <br>
@@ -130,7 +129,7 @@
 	 
 
       <label><b>비밀번호</b></label>     
-      <input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" name="pw" id="pw" required>
+      <input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" name="pw" id="pw1" required>
       <span class="check_error"></span>
       <br>
       
@@ -140,22 +139,22 @@
       <br>
 
       <label><b>이름</b></label>
-      <input type="text" placeholder="이름" name="nm" id="nm" required>
+      <input type="text" placeholder="이름" name="nm" id="nm1" required>
       <span class="check_error"></span>
       <br>
       
       <label><b>전화</b></label>
-      <input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" name="phone" id="phone" required>
+      <input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" name="phone" id="phone1" required>
       <span class="check_error"></span>
       <br>
        	
       <label><b>주소</b></label>
-      <input type="text" placeholder="주소" name="addr" id="addr" required>
+      <input type="text" placeholder="주소" name="addr" id="addr1" required>
       <span class="check_error"></span>
       <br>
       
       <label><b>이메일</b></label>
-      <input type="text" placeholder="이메일" name="email" id="email" required><br>
+      <input type="text" placeholder="이메일" name="email" id="email1" required><br>
       <span class="check_error"></span>
       <br>
       

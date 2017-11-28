@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <!-- select : true 사용하기 위한 css -->
 <link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
-<!-- datatable select 사용을 위한 js -->
 </head>
 <body>
 <input type="hidden" value='${requestScope.json}' id="json">
@@ -47,6 +46,7 @@
 	</div>
 </div>
 <%-- <jsp:include page="../../../footer.jsp"/> --%>
+<script type="text/javascript" src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
 <script type="text/javascript">

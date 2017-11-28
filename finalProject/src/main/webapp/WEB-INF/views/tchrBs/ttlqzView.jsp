@@ -28,10 +28,11 @@
 				<tr>
 					<td>강사 번호</td>
 					<td>
-						<select name="tchrNo">
-							<c:forEach items="${requestScope.listTchr}" var="tchr">
+						<select name="tchrNo" id="tchrNo">
+							<option value="선택" id="tchrDefault">선택</option>
+							<%-- <c:forEach items="${requestScope.listTchr}" var="tchr">
 								<option value="${tchr.tchrNo}">${tchr.tchrNo}</option>
-							</c:forEach>
+							</c:forEach> --%>
 						</select>
 					</td>
 				</tr>
@@ -79,11 +80,8 @@
 	</div>
 
 	<input type="hidden" value='${requestScope.json}' id="json">
+	<input type="hidden" value='${requestScope.jsonTchr}' id="jsonTchr">
 	<input type="hidden" value="${requestScope.listTpc.size()}" id="list">
 	<script type="text/javascript" src="${root}/js/tchrBs/qzView.js"></script>
-	<script type="text/javascript">
-
-	</script>
-
 </body>
 </html>
