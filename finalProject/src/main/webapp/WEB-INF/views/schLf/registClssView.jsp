@@ -123,8 +123,17 @@ var IMP = window.IMP;
 		console.log(crsList);
 
 		function format(d) {
-			return '과정 소개 : ' + d.crsIntro + '<br>' + '선생님 소개 :' + d.nm + '선생님'
-					+ '<br>' + '<img src="imgs/img/이장규.JPG" width="50%">' + d.tchrIntro;
+			return '<table>'
+					+ '<tr>'
+					+ '<td colspan="2">과정 소개 : ' + d.crsIntro + '</td>' 
+					+ '</tr>'
+					+ '<tr>'
+					+ '<td>선생님 소개 :' + d.nm + '선생님</td>'
+					+ '<br>' 
+					+ '<tr>'
+					+ '<td><img src="imgs/img/이장규.JPG" width="100%"></td>' 
+					+ '<td>' + d.tchrIntro + '</td></tr>'
+					+ '</table>';
 		}
 
 		var table = $('#dataTable').DataTable({
