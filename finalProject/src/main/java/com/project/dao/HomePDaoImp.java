@@ -193,6 +193,6 @@ public class HomePDaoImp implements HomePDao {
 		// TODO Auto-generated method stub
 		System.out.println("dao ntcUpdate");
 		System.out.println(ntcDto);
-		return sqlSession.selectOne("homePMapper.ntcUpdate", ntcDto);
+		return sqlSession.update("homePMapper.ntcUpdate", ntcDto);
 	}
 }

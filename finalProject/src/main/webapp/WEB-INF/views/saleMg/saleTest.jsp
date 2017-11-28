@@ -12,10 +12,19 @@
 <link rel="stylesheet" href="${root}/styles/kendo.default.mobile.min.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
-<script src="${root}/js/kendo.all.min.js"></script>
-</head>
+<script src="${root}/js/kendo.all.js"></script>
+<!-- <style type="text/css">
+#content {
+    min-height: calc(70vh - 100px);
+}
+footer {
+    height: 100px;
+}
+</style>
+</head> -->
 <body>
 <jsp:include page="../../../top.jsp"/>
+<div id="content">
 	<select id="year" onchange="yearSale()" name="month">
 		<option value="선택">선택</option>
 	</select>
@@ -91,10 +100,13 @@
 			</div>
 		</div>
 	</div>
+</div>
+<br><br><br><br><br><br><br><br><br>
+<footer>
+<jsp:include page="../../../footer.jsp"/>
+</footer>
 <script src="${root}/js/saleMg/saleManager.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
-<br><br><br><br><br><br><br><br><br>
-<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

@@ -13,14 +13,14 @@
 <body>
 <jsp:include page="../../../top.jsp"/>
 	<div class="w3-container">
-		<h2>Bordered Table</h2>
-		<p>The w3-bordered class adds a bottom border to each table row:</p>
+		<h2>성적 입력</h2>
+
 		<form action="${root}/tchrBs/srcInsert">
 			<table class="w3-table w3-bordered">
 				<tr>
 					<td>시험 명</td>
 					<td>
-						<select name="qzId" id="qzId">
+						<select name="examId" id="qzId">
 							<option value="선택">선택</option>
 						</select>				
 					</td>

@@ -188,7 +188,8 @@ public class HomePServiceImp implements HomePService {
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		ntcDto.setDt(dateFormat.format(date));
-		
+		System.out.println("dao ntcUpdate");
+		System.out.println(ntcDto);
 		return homePDao.ntcUpdate(ntcDto);
 	}
 }

@@ -94,10 +94,10 @@
 		
 		/* 사용자 ID로 TB_USR 검색 */
 		function searchUsr(root, id){
-			
 			xhttp.onreadystatechange = function(){
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					data = xhttp.responseText;
+					alert(data);
 					data = JSON.parse(data);
 					document.getElementById("nm1").value = data.nm;
 				}

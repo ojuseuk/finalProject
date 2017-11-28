@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ import com.project.service.CrsMgService;
 import com.project.service.EmpMgService;
 
 import net.sf.json.JSONArray;
+import util.Constants;
 import util.DateTimeUtil;
 
 @Controller
@@ -43,8 +45,8 @@ public class EmpMgController {
 	private CrsMgService crsMgService;
 	
 
+	@Secured("ROLE_STAFF")
 	@RequestMapping("/mgTchr")
-	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String tchrView(Model data) {
 		String url = "error";
 		System.out.println("controller tchrView");
@@ -73,6 +75,7 @@ public class EmpMgController {
 	@RequestMapping("/usrSearch")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody USRDto usrSelect(@RequestParam("id") String id) {
+		System.out.println(id);
 		return empMgDao.usrSelect(id);
 	}
 	

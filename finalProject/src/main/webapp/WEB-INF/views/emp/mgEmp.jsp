@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
-<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="${root}/js/emp/emp.js"></script>	
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -31,7 +32,7 @@
 						</c:if>
 						/>
 						<input type="button" value="조회"
-						onclick="searchUsr('${pageContext.request.contextPath}', document.getElementById('id1').value)">
+						onclick="searchUsr('${pageContext.request.contextPath}', document.getElementById('id1'))">
 					</td>
 					
 				</tr>
@@ -122,8 +123,8 @@
 
 <br>
 
-	<script src="${root}/js/emp/emp.js"></script>
 
-<jsp:include page="../../../footer.jsp"/>
+
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>

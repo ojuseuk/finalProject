@@ -10,7 +10,7 @@
 </head>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
-	
+<jsp:include page="../../../top.jsp"/>
 	<div class="w3-container">
 		<h2>댓글 게시판</h2>
 		<form action="${root}/homeP/qnaInsert">

@@ -30,8 +30,8 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	private UsrDao usrDao;
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
@@ -49,11 +49,11 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		}
 
 		// 2. 존재하면 비밀번호 비교
-		String password = (String) auth.getCredentials();// 비밀번호
-		
-//		if (!passwordEncoder.matches(password, usrDto.getPw())) {
-//			throw new BadCredentialsException("패스워드 오류입니다.");
-//		}
+		String password = (String) auth.getCredentials();  // 비밀번호
+		System.out.println(password);
+		if (!passwordEncoder.matches(password, usrDto.getPws())) {
+			throw new BadCredentialsException("패스워드 오류입니다.");
+		}
 
 
 		// db에서 가지고 온 권한을 GrantedAuthority 로 변환 

@@ -111,7 +111,6 @@ public class USRDto {
 		this.pws = pws;
 	}
 
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -129,13 +128,10 @@ public class USRDto {
 		builder.append(email);
 		builder.append(", usrTp=");
 		builder.append(usrTp);
+		builder.append(", pws=");
+		builder.append(pws);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
-	
-	
-	
+
 }
