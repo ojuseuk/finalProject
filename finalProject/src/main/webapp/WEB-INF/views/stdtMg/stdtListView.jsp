@@ -229,7 +229,7 @@ $('#dataTable').dataTable().fnDestroy();
 }
 
 //	강좌별 수강생목록
-function reqClssList(clssNm, root) {
+function reqClssList(clssId, root) {
 	$('#dataTable').dataTable().fnDestroy();
 	var crsId = document.getElementById("crs").value;
 	xhttp.onreadystatechange = function() {

@@ -124,9 +124,9 @@ console.log(crsList);
 function format(d) {
 	return '<table>'
 	+ '<tr>'
-	+ '<td align="center"><img src="imgs/img/이장규.JPG" width="50%"></td>' 
+	+ '<td align="center"><img src="imgs/imgTchr/' + d.nm + '.JPG" width="50%"></td>' 
 	+ '<td>과정 소개 <br> ' + d.crsIntro.replace(/(?:\r\n|\r\n)/g, '<br />') + '<br><br>'
-	+ d.nm + '선생님<br><br>'
+	+ '▣' + d.nm + '선생님<br><br>'
 	+ d.tchrIntro.replace(/(?:\r\n|\r\n)/g, '<br />') + '</tr>'
 	+ '</table>';
 }

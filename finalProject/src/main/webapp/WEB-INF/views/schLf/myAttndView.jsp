@@ -91,87 +91,133 @@
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
-var json = $('#json').val();
-var listSize = $('#listSize').val();
-json = JSON.parse(json);
-var attndTp = new Array();
-var attndTpIn = new Array();
-var attndTpOut = new Array();
-var attdnDate = new Array();
-
-for (var i = 0; i < listSize; i++) {
-	if (json[i].ATTND_TP == 'at001'	|| json[i].ATTND_TP == 'at002') {
-		attndTpIn.push(json[i].ATTND_TP);
-	} else {
-		attndTpOut.push(json[i].ATTND_TP);
+	var json = $('#json').val();
+	var listSize = $('#listSize').val();
+	json = JSON.parse(json);
+	var attndTpIn = new Array(); // 출석, 지각
+	var attndTpOut = new Array(); // 조퇴, 퇴실
+	var attndDate = new Array(); // 학원 수업 날짜
+	var standard = new Array();	// 한달 날짜
+	console.log(json);
+	
+	for (var i = 0; i < listSize; i++) {
+		if (json[i].ATTND_TP == 'at001'	|| json[i].ATTND_TP == 'at002') {
+			attndTpIn.push(json[i].ATTND_TP);
+		} else {
+			attndTpOut.push(json[i].ATTND_TP);
+		}
 	}
-}
-for (var i = 0; i < listSize; i++) {
-	attdnDate.push(json[i].DT);
-}
-//calendar 함수
-function calendar(new_year, new_month){
-// 특정 年月을 시작일부터 조회(year, month, date)
-var	d = new Date(new_year, new_month-1, 1),
-    // 월별 일수 구하기
-    d_length = 32 - new Date(new_year, new_month-1, 32).getDate(),
-    year = d.getFullYear(),
-    month = d.getMonth(),
-    date = d.getDate(),
-    day = d.getDay();
-	attnd = "";
-var today = new Date();
-
-// caption 영역 날짜 표시 객체
-var caption_year = document.querySelector('.year'),
-    caption_month = document.querySelector('.month');
-
-var start_day = document.querySelectorAll('tr td');
-
-// 테이블 초기화
-for(var i = 0; i < start_day.length; i++){
-	start_day[i].innerHTML = '&nbsp;';
-}
-// 한달치 날짜를 테이블에 시작 요일부터 순서대로 표시
-for(var i = day; i < day + d_length; i++){
-		if(date > today.getDate()){
-		attndTpIn[i] = "예정";
-		attndTpOut[i] = "예정";
+	for (var i = 0; i < listSize; i++) {
+		attndDate.push(json[i].DT);
+	}
+	console.log(attndDate);
+	//calendar 함수
+	function calendar(new_year, new_month){
+	// 특정 年月을 시작일부터 조회(year, month, date)
+	var	d = new Date(new_year, new_month-1, 1),
+	    // 월별 일수 구하기
+	    d_length = 32 - new Date(new_year, new_month-1, 32).getDate(),
+	    year = d.getFullYear(),
+	    month = d.getMonth(),
+	    date = d.getDate(),
+	    day = d.getDay();
+		attnd = "";
+	var today = new Date();
+	var montly = month + 1;
+	for (var i = 1; i <= d_length; i++) {
+		standard.push("" + year + "" + montly + "" + pad(i, 2));
+	}
+	console.log(standard);
+	// 1을 01로 바꿔주는 함수
+	function pad(n, width) {
+		  n = n + '';
+		  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+	}
+	// caption 영역 날짜 표시 객체
+	var caption_year = document.querySelector('.year'),
+	    caption_month = document.querySelector('.month');
+	
+	var start_day = document.querySelectorAll('tr td');
+	
+	// 테이블 초기화
+	for(var i = 0; i < start_day.length; i++){
+		start_day[i].innerHTML = '&nbsp;';
+	}
+	
+	// 배열의 중복값 제거
+	Array.prototype.unique = function() {
+		var a = {};
+		for (var i = 0; i < this.length; i++) {
+			if (typeof a[this[i]] == 'undefined') {
+				a[this[i]] = 1;
+			}
 		}
-		if (attndTpIn[i] == "at001"){
-			attndTpIn[i] = "<b>출석</b>";
-		} else if (attndTpIn[i] == "at002"){
-			attndTpIn[i] = "<font color='red'><b>지각</b></font>";
-		}  
-		if (attndTpOut[i] == "at003"){
-			attndTpOut[i] = "<b>퇴실</b>";
-		} else if (attndTpOut[i] == "at004"){
-			attndTpOut[i] = "<font color='green'><b>조퇴</b></font>";
+		this.length = 0;
+		for ( var i in a) {
+			this[this.length] = i;
 		}
-	start_day[i].innerHTML = date + "<br>" + attndTpIn[i] + "<br>" + attndTpOut[i];
-	date++;
-}
-
-// caption 날짜 표시
-caption_year.innerHTML = year;
-caption_month.innerHTML = month + 1;		
-}
-
-(function(){
-var prev = document.getElementById('prev'),
-	next = document.getElementById('next'),
-	year = new Date().getFullYear(),
-	month = new Date().getMonth() + 1;
-
-calendar(year, month);
-//	prev.onclick = function(){
-//		calendar(year, --month);
-//	};
-//	next.onclick = function(){
-//		calendar(year, ++month);
-//	};		
-
-})();
+		return this;
+	};
+	attndDate = attndDate.unique();
+	console.log(attndDate);
+	var j = 0;
+	// 한달치 날짜를 테이블에 시작 요일부터 순서대로 표시
+	for(var i = day; i < day + d_length; i++){
+		if (date > today.getDate()){
+			attndTpIn[j] = "예정";
+			attndTpOut[j] = "예정";
+		}
+// 		console.log(attndDate[j]);
+// 		console.log(standard[j]);
+			let str = "";
+			str += date;
+		for (var k = 0; k < d_length; k++) {
+			if(attndDate[j] == standard[k]){
+				
+				if (attndTpIn[j] == "at001"){
+// 					attndTpIn[j] = "<b>출석</b>";
+					str += "<br><b>출석</b>";
+					
+				} else if (attndTpIn[j] == "at002"){
+// 					attndTpIn[j] = "<font color='red'><b>지각</b></font>";
+					str += "<br><font color='red'><b>지각</b></font>";
+				}
+				if (attndTpOut[j] == "at003"){
+// 					attndTpOut[j] = "<b>퇴실</b>";
+					str += "<br><b>퇴실</b>";
+				} else if (attndTpOut[j] == "at004"){
+// 					attndTpOut[j] = "<font color='blue'><b>조퇴</b></font>";
+					str += "<br><font color='blue'><b>조퇴</b></font>";
+				}
+				
+			}
+		}
+		start_day[i].innerHTML = str;
+		j++;
+		date++;
+		
+	}
+	
+	// caption 날짜 표시
+	caption_year.innerHTML = year;
+	caption_month.innerHTML = month + 1;		
+	}
+	
+	(function(){
+	var prev = document.getElementById('prev'),
+		next = document.getElementById('next'),
+		year = new Date().getFullYear(),
+		month = new Date().getMonth() + 1;
+	
+	calendar(year, month);
+	//	prev.onclick = function(){
+	//		calendar(year, --month);
+	//	};
+	//	next.onclick = function(){
+	//		calendar(year, ++month);
+	//	};		
+	
+	})();
 </script>
 <Br><Br><Br><Br>
 <jsp:include page="../../../footer.jsp"/>

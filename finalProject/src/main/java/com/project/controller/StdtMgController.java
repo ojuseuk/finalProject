@@ -154,6 +154,7 @@ public class StdtMgController {
 	@RequestMapping("stdtList")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody List<STDTInfoDto> selectStdtByClss(STDTInfoDto stdtInfo){
+		System.out.println(stdtInfo);
 		List<STDTInfoDto> list = new ArrayList<>();
 		try {
 			if(stdtInfo.getClssId().equals("default")){

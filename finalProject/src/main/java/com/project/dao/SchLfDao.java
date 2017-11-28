@@ -11,15 +11,15 @@ import com.project.dto.STDTCLSSDto;
 import com.project.dto.STDTDto;
 
 public interface SchLfDao {
-	public List<SBJTDto> selectBySbjt();
-	public List<ClssInfoDto> selectByCrs();
-	public List<ClssInfoDto> selectCrsPerSbjt(String sbjtNm);
-	public List<ClssInfoDto> selectClssPerCrs(String crsId);
-	public List<ClssInfoDto> selectMyClss(String id);
-	public List<Map<String, String>> selectMyAttnd(DateDto dto);
-	public List<SCRDto> selectMyScr(String id);
-	public String selectMyStdtNo(String id);
-	public String selectStdtNo();
-	public void insertNewStdt(STDTDto stdt);
-	public void insertStdtToStdtClss(STDTCLSSDto stdtclss);
+	public List<SBJTDto> selectBySbjt() throws Exception;
+	public List<ClssInfoDto> selectByCrs()throws Exception;
+	public List<ClssInfoDto> selectCrsPerSbjt(String sbjtNm)throws Exception;
+	public List<ClssInfoDto> selectClssPerCrs(String crsId)throws Exception;
+	public List<ClssInfoDto> selectMyClss(String id)throws Exception;
+	public List<Map<String, String>> selectMyAttnd(DateDto dto)throws Exception;
+	public List<SCRDto> selectMyScr(String id)throws Exception;
+	public String selectMyStdtNo(String id)throws Exception;
+	public String selectStdtNo()throws Exception;
+	public void insertNewStdt(STDTDto stdt)throws Exception;
+	public void insertStdtToStdtClss(STDTCLSSDto stdtclss)throws Exception;
 }
