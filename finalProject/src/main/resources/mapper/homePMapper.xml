@@ -13,7 +13,7 @@
 	</update>
 	
 	<insert id="qnaInsert" parameterType="qNADto">
-		INSERT INTO TB_QNA VALUES (seq_qna.NEXTVAL, 'test', #{title}, #{content}, #{dt}, #{gpNum}, #{seqLv}, #{seqNum})
+		INSERT INTO TB_QNA VALUES (seq_qna.NEXTVAL, #{id}, #{title}, #{content}, #{dt}, #{gpNum}, #{seqLv}, #{seqNum})
 	</insert>
 	
 	<select id="qnaSelectView" resultType="qNADto">

@@ -10,8 +10,8 @@
 </head>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
-	
-	<div class="w3-container">
+<jsp:include page="../../../top.jsp"/>	
+	<div class="w3-container" style="width: 80%; margin: auto;">
 		<h2>댓글 게시판</h2>
 		<form action="${root}/homeP/qnaUpdate">
 			<input type="hidden" value="${requestScope.qnaDto.no}" name="no">

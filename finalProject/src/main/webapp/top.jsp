@@ -14,7 +14,7 @@
 <body>
 <div style="background-color: #e6e6ff">
   <div class="container text-center">
-    <h1>HAKWON</h1>      
+    <h1><img src="./imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="50" height="50" style="margin-bottom: 10px">&nbsp; Royal Academy</h1>      
     <p>대학 입시, 주요 과목 특강</p>
   </div>
 </div>

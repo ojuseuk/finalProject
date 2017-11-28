@@ -70,8 +70,10 @@ public class HomePController {
 	 * return type  : void
 	 */
 	@RequestMapping("/homeP/qnaInsert")
-	public void qnaInsert(QNADto qnaDto) {
+	public String qnaInsert(QNADto qnaDto, Authentication auth) {
 		
+		USRDto usrDto = (USRDto) auth.getPrincipal();
+		qnaDto.setId(usrDto.getId());
 		System.out.println("controller QNAInsert");
 		System.out.println(qnaDto);
 		try {
@@ -80,6 +82,8 @@ public class HomePController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return "forward:/homeP/qnaSelectView";
 		
 	}
 	

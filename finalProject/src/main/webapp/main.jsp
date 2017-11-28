@@ -13,23 +13,33 @@
 <script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 <!-- banner style -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="${root}/styles/w3/w3.css">
 <style>
 .mySlides {display:none;}
+
+<!-- 배너 오른쪽 -->
+#cAsideR .sky_bnr .sky_bnrline > div{border:0;margin:0}
+#cAsideR .sky_bnr .sky_bnrline .lineno{border:1px solid #cecece;margin-top:5px;}
+#cAsideR .sky_bnr .sky_bnrline .sky_bnrtline{border:1px solid #cecece;border-top:0;}
+	
 </style>
 </head>
 <body>
 <jsp:include page="top.jsp"/>
 
-
 <!-- Sidebar left   -->
-<div class="w3-sidebar  w3-bar-block" style="width:15%; background-color: #ffffff;">
-  <h3 class="w3-bar-item">EVENT</h3>
-  <img class="w3-padding" src="./imgs/img/event1.jpg"  >  
+<div class="sidebar" style="width:10%; background-color: #ffffff; margin-left: 90px;">
+  <div><img class="w3-padding" src="./imgs/banner/sky_bnr2.png"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/ss_bn_go12.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/flo_crup.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/main_ss.gif"  ></div>  
 </div>
 <!-- Sidebar right -->
-<div class="w3-sidebar w3-bar-block " style="width:15%;right:0; background-color: #ffffff;">
-  <h3 class="w3-bar-item">EVENT</h3>
-  <img class="w3-padding" src="./imgs/img/event2.gif"  >
+<div class="sidebar" style="width:10%;right:0; background-color: #ffffff;">
+  <div><img class="w3-padding" src="./imgs/banner/90x135.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/90x135(1).gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/90x333.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/main_ss.jpg"  ></div>
 </div>
 
 <br>
@@ -292,11 +302,44 @@ function myMap() {
 <script type="text/javascript">
 
 </script>
+	<script type="text/javascript">
+	var J$ = jQuery.noConflict();
+	J$(document).ready(function() {
+		J$.fn.movRolling = function (options) {
+			var op = J$.extend({
+				 no:2,
+				 speed:2000
+			}, options );
+			return this .each( function () {
+				var dom=J$(this);
+				var onNO = 1;
+				setInterval(function(){
+					dom.children('div').fadeOut('500').eq(onNO-1).fadeIn('500');
+					if(op.no == onNO){onNO=1}else{onNO++;}
+				}, op.speed);
+			});
+		};
+
+		J$(".main_bn_ss").movRolling({
+			no:2,
+			speed:3000
+		});
+	});
+	
+	J$(document).ready(function() {
+		J$('#cAsideR .sky_bnrline > div').each(function(index, Element){
+			var dname =  J$('#cAsideR').attr('id');
+			J$(this).addClass(dname+"_div_"+index)
+		});
+	});
+
+	</script>
 
 
 <jsp:include page="footer.jsp"/>
 
 </body>
 </html>
+
 
 

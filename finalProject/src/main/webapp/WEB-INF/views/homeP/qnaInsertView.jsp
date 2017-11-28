@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
 <jsp:include page="../../../top.jsp"/>
-	<div class="w3-container">
+	<div class="w3-container" style="width: 80%; margin: auto;">
 		<h2>댓글 게시판</h2>
 		<form action="${root}/homeP/qnaInsert">
 			<input type="hidden" value="${requestScope.qnaDto.no}" name="no">
@@ -25,10 +25,12 @@
 				</tr>
 				<tr>
 					<td>내용 입력</td>
-					<td><textarea rows="10" cols="40" name="content"></textarea></td>
+					<td><textarea rows="10" cols="165" name="content"></textarea></td>
 				</tr>
 			</table>
-			<input type="submit" value="작성">	
+			<div style="float: right;">
+				<input type="submit" value="작성">
+			</div>	
 		</form>
 	</div>
 

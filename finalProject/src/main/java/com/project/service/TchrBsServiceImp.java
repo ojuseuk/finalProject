@@ -36,7 +36,6 @@ public class TchrBsServiceImp implements TchrBsService {
 	 * @return
 	 */
 	@Override
-	@Transactional
 	public Map<List<TPCDto>, List<TCHRDto>> qzView() throws SQLException {
 		// TODO Auto-generated method stub
 		
