@@ -54,6 +54,7 @@
  		function inputNumberFormat(slr) {
 		    return String(slr).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		}
+ 		
 
 		/* 강사번호로 TB_TCHR 검색 */
 		function tchrSelect(root, tchrNo){
