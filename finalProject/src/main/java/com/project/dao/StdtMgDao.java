@@ -14,7 +14,7 @@ public interface StdtMgDao {
 	public List<String> selectBySTDT() throws Exception;
 	public List<CRSDto> selectByCrs() throws Exception;
 	public List<CLSSDto> selectByClss(String crsId) throws Exception;
-	public List<STDTInfoDto> selectByStdtList(String clssNm) throws Exception;
+	public List<STDTInfoDto> selectByStdtList(String clssId) throws Exception;
 	public String selectStdtNo() throws Exception;
 	public List<STDTInfoDto> selectAllByStdt() throws Exception;
 	public List<STDTInfoDto> selectStdtInfo(String stdtNo) throws Exception;

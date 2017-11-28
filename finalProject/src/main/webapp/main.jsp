@@ -41,79 +41,79 @@ li{list-style:none}
 <body>
 <jsp:include page="top.jsp"/>
 <!-- banner start -->
-<div class="product_con">
-    <ul class="product_list">
-        <li><a href="#none">1</a></li>
-        <li><a href="#none">2</a></li>
-        <li><a href="#none">3</a></li>
-        <li><a href="#none">4</a></li>
-        <li><a href="#none">5</a></li>
-    </ul>
-    <a class="btn_prev" href="#none">◀prev</a>
-    <a class="btn_next" href="#none">next▶</a>
+<!-- <div class="product_con"> -->
+<!--     <ul class="product_list"> -->
+<!--         <li><a href="#none">1</a></li> -->
+<!--         <li><a href="#none">2</a></li> -->
+<!--         <li><a href="#none">3</a></li> -->
+<!--         <li><a href="#none">4</a></li> -->
+<!--         <li><a href="#none">5</a></li> -->
+<!--     </ul> -->
+<!--     <a class="btn_prev" href="#none">◀prev</a> -->
+<!--     <a class="btn_next" href="#none">next▶</a> -->
 
    
-</div>
+<!-- </div> -->
 <script type="text/javascript">
-$(function(){
-    var selNum = 0,
-        $proList = $(".product_lis, li"),
-        totalNum = $proList.length,
-        $btnprev = $(".product_con .btn_prev"),
-        $btnnext = $(".product_con .btn_next"),
-        oldNum;
+// $(function(){
+//     var selNum = 0,
+//         $proList = $(".product_lis, li"),
+//         totalNum = $proList.length,
+//         $btnprev = $(".product_con .btn_prev"),
+//         $btnnext = $(".product_con .btn_next"),
+//         oldNum;
 
-    $proList.css({display:"none"});
-    $proList.eq(selNum).fadeIn(1500);
+//     $proList.css({display:"none"});
+//     $proList.eq(selNum).fadeIn(1500);
 
-    function prevItem() {
-        oldNum = selNum;
-        selNum = selNum - 1;
-        if(selNum < 0) {
-            selNum = totalNum - 1;
-        }
-        setting('-1');
-    }
+//     function prevItem() {
+//         oldNum = selNum;
+//         selNum = selNum - 1;
+//         if(selNum < 0) {
+//             selNum = totalNum - 1;
+//         }
+//         setting('-1');
+//     }
 
-    function nextItem() {
-        oldNum = selNum;
-        selNum = selNum + 1;
-        if(selNum >= totalNum) {
-            selNum = 0;
-        }
-        setting('1');
-    }
+//     function nextItem() {
+//         oldNum = selNum;
+//         selNum = selNum + 1;
+//         if(selNum >= totalNum) {
+//             selNum = 0;
+//         }
+//         setting('1');
+//     }
 
-    $btnprev.on('click', prevItem);
-    $btnnext.on('click', nextItem);
+//     $btnprev.on('click', prevItem);
+//     $btnnext.on('click', nextItem);
 
-    function setting(adjust) {
-        var adjust1 = adjust * 1,
-                adjust2 = adjust * -1;
-        if(setting.caller == indicate) {
-            if(selNum < oldNum) {
-                adjust1 = adjust * -1,
-                        adjust2 = adjust;
-            }
-        }
-        $proList.eq(selNum).css({ left : adjust1 * 200 + 'px', display : 'block', opacity :0 })
-        $proList.eq(oldNum).stop().animate({
-                    left : adjust2 * 200 + 'px', opacity : 0}
-        );
-        $proList.eq(selNum).stop().animate({left : 0, opacity : 1},500, function(){});
+//     function setting(adjust) {
+//         var adjust1 = adjust * 1,
+//                 adjust2 = adjust * -1;
+//         if(setting.caller == indicate) {
+//             if(selNum < oldNum) {
+//                 adjust1 = adjust * -1,
+//                         adjust2 = adjust;
+//             }
+//         }
+//         $proList.eq(selNum).css({ left : adjust1 * 200 + 'px', display : 'block', opacity :0 })
+//         $proList.eq(oldNum).stop().animate({
+//                     left : adjust2 * 200 + 'px', opacity : 0}
+//         );
+//         $proList.eq(selNum).stop().animate({left : 0, opacity : 1},500, function(){});
 
-    }
+//     }
 
-    function indicate(){
-        oldNum = selNum;
-        selNum = $(this).index();
-        if( selNum == oldNum) return;
-        setting('1')
-    }
+//     function indicate(){
+//         oldNum = selNum;
+//         selNum = $(this).index();
+//         if( selNum == oldNum) return;
+//         setting('1')
+//     }
 
-    $('.numlist a').on('click', indicate)
+//     $('.numlist a').on('click', indicate)
 
-});
+// });
 
 
 </script>
