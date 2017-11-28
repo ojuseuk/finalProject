@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +32,7 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @param costItem
 	 */
 	@Override
-	public void insert(String date, int amount) {
+	public void insert(String date, int amount) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("Service insert");
 		String[] ymd = date.split("-");
@@ -52,7 +53,7 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @return
 	 */
 	@Override
-	public Map<List<Map<String, String>>, List<Map<String, String>>> selectLtfee() {
+	public Map<List<Map<String, String>>, List<Map<String, String>>> selectLtfee() throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("service selectLtfee");
 		List<Map<String, String>> listTchr = saleMgDao.selectTchr();
@@ -79,7 +80,7 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @return
 	 */
 	@Override
-	public List<SALEDto> mgSaleList(String date1, String date2) {
+	public List<SALEDto> mgSaleList(String date1, String date2) throws SQLException {
 		// TODO Auto-generated method stub
 		String[] ymd1 = date1.split("-");
 		String[] ymd2 = date2.split("-");
@@ -113,7 +114,7 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @param ssnSlr
 	 */
 	@Override
-	public List<TCHRDto> ltfeeInsert(List<String> tchrId, List<String> tchrSlr, List<String> ssnId, List<String> ssnSlr, List<String> tchrNm, List<String> ssnNm) {
+	public List<TCHRDto> ltfeeInsert(List<String> tchrId, List<String> tchrSlr, List<String> ssnId, List<String> ssnSlr, List<String> tchrNm, List<String> ssnNm) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		TCHRDto tchr = null;
@@ -155,7 +156,7 @@ public class SaleMgServiceImp implements SaleMgService {
 
 
 	@Override
-	public List<SALEDto> mgSaleList2(int year, int month, int day) {
+	public List<SALEDto> mgSaleList2(int year, int month, int day) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("service mgSaleList2");
 		System.out.println(month);

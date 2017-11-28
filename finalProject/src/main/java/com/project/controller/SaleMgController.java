@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import java.util.Map;
@@ -67,7 +68,12 @@ public class SaleMgController {
 
 		System.out.println("controller saleMgInsert");
 
-		saleMgService.insert(date, amount);
+		try {
+			saleMgService.insert(date, amount);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -85,7 +91,13 @@ public class SaleMgController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("controller saleMgLtfee");
 
-		Map<List<Map<String, String>>, List<Map<String, String>>> map = saleMgService.selectLtfee();
+		Map<List<Map<String, String>>, List<Map<String, String>>> map = null;
+		try {
+			map = saleMgService.selectLtfee();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Set<List<Map<String, String>>> set = map.keySet();
 
 		List<Map<String, String>> listTchr = null;
@@ -153,7 +165,13 @@ public class SaleMgController {
 		System.out.println(month);
 
 //		List<SALEDto> list = saleMgService.mgSaleList(date1, date2);
-		List<SALEDto> list = saleMgService.mgSaleList2(year, month, day);
+		List<SALEDto> list = null;
+		try {
+			list = saleMgService.mgSaleList2(year, month, day);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JSONArray json = JSONArray.fromObject(list);
 		System.out.println(list);
 
@@ -185,7 +203,13 @@ public class SaleMgController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<TCHRDto> list = saleMgService.ltfeeInsert(tchrId, tchrSlr, ssnId, ssnSlr, tchrNm, ssnNm);
+		List<TCHRDto> list = null;
+		try {
+			list = saleMgService.ltfeeInsert(tchrId, tchrSlr, ssnId, ssnSlr, tchrNm, ssnNm);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mav.addObject("list", list);
 		mav.setViewName("saleMg/ltfeeConfirm");
 		

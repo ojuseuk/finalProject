@@ -249,8 +249,9 @@ public class TchrBsServiceImp implements TchrBsService {
 		String a = examId.substring(0, 1);
 		String b = examId.substring(1, 5);
 		int bb = Integer.parseInt(b);
-		System.out.println(a + "   " + b);
-		String str = (a+(bb+1));
+		String suffix = String.format("%03d", (bb+1));
+		System.out.println(a + "   " + suffix);
+		String str = (a+suffix);
 		System.out.println(str);
 		examtpDto.setExamId(str);
 //		tchrBsDao.examTpInsert(examtpDto);

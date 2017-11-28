@@ -8,163 +8,117 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>hakwon example</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="${root}/js/jquery.min.js"></script>
-
-
+<script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 <!-- banner style -->
 <style>
-* {box-sizing:border-box}
-body {font-family: Verdana,sans-serif;margin:0}
-.mySlides {display:none}
+*{ margin:0;padding:0;text-decoration:none}
+li{list-style:none}
 
-/* Slideshow container */
-.slideshow-container {
-  max-width:500px;
-  position: relative;
-  margin: auto;
-}
+.product_con{ position:relative; width:300px; top:100px;margin:0 auto; border:1px solid green }
+.product_con .product_list{overflow:hidden;position:relative;margin-left:50px;width:200px; height:200px; border:1px solid red}
+.product_con .product_list li{ position:absolute;left:0;}
+.product_con .product_list li:nth-child(1){left:0px;}
+.product_con .product_list li:nth-child(2){left:200px;}
+.product_con .product_list li:nth-child(3){left:200px;}
+.product_con .product_list li:nth-child(4){left:200px;}
+.product_con .product_list li:nth-child(5){left:200px;}
 
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-}
+.product_con .product_list li a{display:block; width:200px;height:200px;background:red;font-size:150px;color:#fff;text-align: center}
+.product_con .product_list li:nth-child(1) a{background:#65f078;left:-200px;}
+.product_con .product_list li:nth-child(2) a{background:#f5da5c}
+.product_con .product_list li:nth-child(3) a{background:#fe719c;left:200px;}
+.product_con .product_list li:nth-child(4) a{background:#10A8AB;left:200px;}
+.product_con .product_list li:nth-child(5) a{background:#A1305E;left:200px;}
 
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
-}
+.product_con .btn_prev,.product_con .btn_next { position:absolute;top:100px;}
+.product_con .btn_prev { left:0px;}
+.product_con .btn_next { right:0px;}
+.numlist {width:105px; margin:0 auto;}
 </style>
-
 </head>
 <body>
 <jsp:include page="top.jsp"/>
 <!-- banner start -->
-<div class="slideshow-container">
+<div class="product_con">
+    <ul class="product_list">
+        <li><a href="#none">1</a></li>
+        <li><a href="#none">2</a></li>
+        <li><a href="#none">3</a></li>
+        <li><a href="#none">4</a></li>
+        <li><a href="#none">5</a></li>
+    </ul>
+    <a class="btn_prev" href="#none">◀prev</a>
+    <a class="btn_next" href="#none">next▶</a>
 
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="./imgs/img/k750490.png" style="width:100%">
-  
+   
 </div>
+<script type="text/javascript">
+$(function(){
+    var selNum = 0,
+        $proList = $(".product_lis, li"),
+        totalNum = $proList.length,
+        $btnprev = $(".product_con .btn_prev"),
+        $btnnext = $(".product_con .btn_next"),
+        oldNum;
 
-<div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
-  <img src="./imgs/img/m750490.png" style="width:100%">
-  
-</div>
+    $proList.css({display:"none"});
+    $proList.eq(selNum).fadeIn(1500);
 
-<div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
-  <img src="./imgs/img/s750490.png" style="width:100%">
-</div>
+    function prevItem() {
+        oldNum = selNum;
+        selNum = selNum - 1;
+        if(selNum < 0) {
+            selNum = totalNum - 1;
+        }
+        setting('-1');
+    }
 
-<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-<a class="next" onclick="plusSlides(1)">&#10095;</a>
+    function nextItem() {
+        oldNum = selNum;
+        selNum = selNum + 1;
+        if(selNum >= totalNum) {
+            selNum = 0;
+        }
+        setting('1');
+    }
 
-</div>
-<br>
-<script>
-var slideIndex = 1;
-showSlides(slideIndex);
+    $btnprev.on('click', prevItem);
+    $btnnext.on('click', nextItem);
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+    function setting(adjust) {
+        var adjust1 = adjust * 1,
+                adjust2 = adjust * -1;
+        if(setting.caller == indicate) {
+            if(selNum < oldNum) {
+                adjust1 = adjust * -1,
+                        adjust2 = adjust;
+            }
+        }
+        $proList.eq(selNum).css({ left : adjust1 * 200 + 'px', display : 'block', opacity :0 })
+        $proList.eq(oldNum).stop().animate({
+                    left : adjust2 * 200 + 'px', opacity : 0}
+        );
+        $proList.eq(selNum).stop().animate({left : 0, opacity : 1},500, function(){});
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+    }
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
- 
-  slides[slideIndex-1].style.display = "block";
-}
+    function indicate(){
+        oldNum = selNum;
+        selNum = $(this).index();
+        if( selNum == oldNum) return;
+        setting('1')
+    }
+
+    $('.numlist a').on('click', indicate)
+
+});
+
+
 </script>
+
+
 <!-- banner end -->
 <div class="container">  
  

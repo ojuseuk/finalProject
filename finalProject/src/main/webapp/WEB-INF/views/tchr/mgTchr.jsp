@@ -18,6 +18,7 @@
 	
  	<!-- <form action="tchrInsert.do" id="frmTchr" method="post"> -->
   	<form action="tchrInsert.do" id="frmTchr" method="post" enctype="multipart/form-data">
+  	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
 		<fieldset style="width: 40%">
 			<legend>사용자 정보</legend>
 			<table>

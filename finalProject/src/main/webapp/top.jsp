@@ -10,8 +10,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/styles/main/top.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script type="text/javascript" src="${root}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 </head>
 <body>
 <div style="background-color: #eee">
@@ -117,7 +115,7 @@
 
 
 <!-- 회원가입 -->
-<div id="id02" class="modal">
+<div id="id02" class="modal" style="overflow: scroll;">
   <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
   <form class="modal-content animate" action="${root}/userInsert.do" method="post" id="f">
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
@@ -192,7 +190,6 @@
 	function logout() {
 		document.getElementById("logoutForm").submit();
 	}
-	
 </script>
 </body>
 </html>

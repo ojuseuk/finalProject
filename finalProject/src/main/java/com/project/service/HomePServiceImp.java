@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +29,7 @@ public class HomePServiceImp implements HomePService {
 	 */
 	@Override
 	@Transactional
-	public void qnaInsert(QNADto qnaDto) {
+	public void qnaInsert(QNADto qnaDto) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("dao qnaInsert");
@@ -70,7 +71,7 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public List<QNADto> qnaSelectView() {
+	public List<QNADto> qnaSelectView() throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service qnaSelectView");
@@ -89,7 +90,7 @@ public class HomePServiceImp implements HomePService {
 	 * @param no
 	 */
 	@Override
-	public QNADto qnaUpdateView(int no) {
+	public QNADto qnaUpdateView(int no) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service qnaUpdateView");
@@ -107,7 +108,7 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public int qnaUpdate(QNADto qnaDto) {
+	public int qnaUpdate(QNADto qnaDto) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("service qnaUpdate");
 		
@@ -126,7 +127,7 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public String ntcTchr(String id) {
+	public String ntcTchr(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("serivced ntcTchr");
 
@@ -142,7 +143,7 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public int ntcInsert(String id, NTCDto ntcDto) {
+	public int ntcInsert(String id, NTCDto ntcDto) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("service ntcInsert");
 		String empNo = homePDao.ntcTchr(id);
@@ -163,7 +164,7 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public List<NTCDto> ntcList() {
+	public List<NTCDto> ntcList() throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service ntcList");
@@ -173,7 +174,7 @@ public class HomePServiceImp implements HomePService {
 	}
 
 	@Override
-	public NTCDto ntcUpdatePage(int no) {
+	public NTCDto ntcUpdatePage(int no) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("service ntcUpdatePage");
 		
@@ -181,7 +182,7 @@ public class HomePServiceImp implements HomePService {
 	}
 
 	@Override
-	public int ntcUpdate(NTCDto ntcDto) {
+	public int ntcUpdate(NTCDto ntcDto) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		Date date = new Date();
