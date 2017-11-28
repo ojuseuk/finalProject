@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
@@ -41,9 +43,10 @@
 					<tbody>
 					</tbody>
 				</table>
-				
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<p id="updateForm" align="center"><input id="updateBtn" type="button" value="수정">
-				</p></form>
+				</p>
+				</form>
 			</div>
 		</div>
 	</div>

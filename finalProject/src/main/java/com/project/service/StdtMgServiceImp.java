@@ -19,83 +19,88 @@ public class StdtMgServiceImp implements StdtMgService {
 	@Autowired
 	private StdtMgDao stdtMgDao;
 	@Override
-	public Map<String, STDTDto> selectByAttnd() {
+	public Map<String, STDTDto> selectByAttnd() throws Exception {
 		return stdtMgDao.selectByAttnd();
 	}
 
 	@Override
-	public List<String> selectBySTDT() {
+	public List<String> selectBySTDT() throws Exception {
 		return stdtMgDao.selectBySTDT();
 	}
 	
-	public List<CRSDto> selectByCrs() {
+	public List<CRSDto> selectByCrs() throws Exception {
 		return stdtMgDao.selectByCrs();
 	}
 
 	@Override
-	public List<CLSSDto> selectByClss(String crsId) {
+	public List<CLSSDto> selectByClss(String crsId) throws Exception {
 		return stdtMgDao.selectByClss(crsId);
 	}
 
 	@Override
-	public List<STDTInfoDto> selectByStdtList(String clssNm) {
+	public List<STDTInfoDto> selectByStdtList(String clssNm) throws Exception {
 		return stdtMgDao.selectByStdtList(clssNm);
 	}
 
 	@Override
-	public String selectStdtNo() {
+	public String selectStdtNo() throws Exception {
 		return stdtMgDao.selectStdtNo();
 	}
 
 	@Override
-	public List<STDTInfoDto> selectAllByStdt() {
+	public List<STDTInfoDto> selectAllByStdt() throws Exception {
 		return stdtMgDao.selectAllByStdt();
 	}
 
 	@Override
-	public List<STDTInfoDto> selectStdtInfo(String stdtNo) {
+	public List<STDTInfoDto> selectStdtInfo(String stdtNo) throws Exception {
 		return stdtMgDao.selectStdtInfo(stdtNo);
 	}
 
 	@Override
-	public void updateStdtClss(STDTCLSSDto stdtInfo) {
+	public void updateStdtClss(STDTCLSSDto stdtInfo) throws Exception{
 		stdtMgDao.updateStdtClss(stdtInfo);
 	}
 
 	@Override
-	public void updateStdtPrnt(STDTDto stdt) {
+	public void updateStdtPrnt(STDTDto stdt) throws Exception {
 		stdtMgDao.updateStdtPrnt(stdt);
 		
 	}
 	
 	@Override
-	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) {
+	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) throws Exception {
 		return stdtMgDao.selectByStdtNm(stdtInfo);
 	}
 	
 	@Override
-	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo) {
+	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo) throws Exception {
 		return stdtMgDao.selectByClssStdtNm(stdtInfo);
 	}
 
 	@Override
-	public List<STDTInfoDto> selectStdtByCrs(String crsId) {
+	public List<STDTInfoDto> selectStdtByCrs(String crsId) throws Exception {
 		return stdtMgDao.selectStdtByCrs(crsId);
 	}
 	
 	@Override
-	public String selectStdtId(String id) {
+	public String selectStdtId(String id) throws Exception {
 		return stdtMgDao.selectStdtId(id);
 	}
 
 	@Override
-	public int insertStdt(STDTDto dto) {
+	public int insertStdt(STDTDto dto) throws Exception {
 		return stdtMgDao.insertStdt(dto);
 	}
 
 	@Override
-	public int insertStdtClss(STDTCLSSDto dto) {
+	public int insertStdtClss(STDTCLSSDto dto) throws Exception{
 		return stdtMgDao.insertStdtClss(dto);
+	}
+
+	@Override
+	public int updateUsrTp(STDTDto stdt) throws Exception {
+		return stdtMgDao.updateUsrTp(stdt);
 	}
 
 }

@@ -91,6 +91,7 @@
 <!-- 		ORDER BY TB_STDT.STDT_NO -->
 		SELECT TB_USR.NM, TB_STDT.STDT_NO, TB_STDT.MJR_TP 
 		FROM TB_STDT JOIN TB_USR ON TB_STDT.ID = TB_USR.ID
+		WHERE TB_USR.NM IS NOT NULL
 	</select>
 	
 	<select id="selectStdtInfo" parameterType="String" resultMap="ResultOfStdt">
@@ -154,5 +155,9 @@
 	<insert id="insertStdtClss" parameterType="STDTCLSSDto">
 		INSERT INTO TB_STDTCLSS VALUES (#{clssId}, #{stdtNo}, #{repaidDt}, #{paidDt})
 	</insert>
+	
+	<update id="updateUsrTp">
+		UPDATE TB_USR SET TB_USR.USR_TP = 'ROLE_ST' WHERE ID = #{id}
+	</update>
 	
 </mapper>

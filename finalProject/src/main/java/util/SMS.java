@@ -15,7 +15,7 @@ import com.project.dto.SmsDto;
 import com.project.service.StdtMgService;
 
 public class SMS {
-	public static String sendMsg(String command, SmsContentDto msg, StdtMgService stdtMgService) {
+	public static String sendMsg(String command, SmsContentDto msg, StdtMgService stdtMgService) throws Exception {
 		String api_key = "NCSMEHTF8CJTANRZ";
 		String api_secret = "BEJXLRRUN8QFXGCRICN86VE9MQLKYJ4K";
 		SmsDto sms = new SmsDto(api_key, api_secret);

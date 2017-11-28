@@ -10,21 +10,21 @@ import com.project.dto.STDTDto;
 import com.project.dto.STDTInfoDto;
 
 public interface StdtMgService {
-	public Map<String, STDTDto> selectByAttnd();
-	public List<String> selectBySTDT();
-	public List<CRSDto> selectByCrs();
-	public List<CLSSDto> selectByClss(String crsId);
-	public List<STDTInfoDto> selectByStdtList(String clssNm);
-	public String selectStdtNo();
-	public List<STDTInfoDto> selectAllByStdt();
-	public List<STDTInfoDto> selectStdtInfo(String stdtNo);
-	public void updateStdtClss(STDTCLSSDto stdtClss);
-	public void updateStdtPrnt(STDTDto stdt);
-	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo);
-	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo);
-	public List<STDTInfoDto> selectStdtByCrs(String crsId);
-	public String selectStdtId(String id);
-	public int insertStdt(STDTDto dto);
-	public int insertStdtClss(STDTCLSSDto dto);
-	
+	public Map<String, STDTDto> selectByAttnd() throws Exception;
+	public List<String> selectBySTDT() throws Exception;
+	public List<CRSDto> selectByCrs() throws Exception;
+	public List<CLSSDto> selectByClss(String crsId) throws Exception;
+	public List<STDTInfoDto> selectByStdtList(String clssNm) throws Exception;
+	public String selectStdtNo() throws Exception;
+	public List<STDTInfoDto> selectAllByStdt() throws Exception;
+	public List<STDTInfoDto> selectStdtInfo(String stdtNo) throws Exception;
+	public void updateStdtClss(STDTCLSSDto stdtClss) throws Exception;
+	public void updateStdtPrnt(STDTDto stdt) throws Exception;
+	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) throws Exception;
+	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo) throws Exception;
+	public List<STDTInfoDto> selectStdtByCrs(String crsId)throws Exception;
+	public String selectStdtId(String id) throws Exception;
+	public int insertStdt(STDTDto dto) throws Exception;
+	public int insertStdtClss(STDTCLSSDto dto) throws Exception;
+	public int updateUsrTp(STDTDto stdt) throws Exception;
 }
