@@ -276,7 +276,7 @@ td, th {
 	font-weight: 400;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale
+	/* -moz-osx-font-smoothing: grayscale */
 }
 
 .glyphicon-asterisk:before {
@@ -1384,7 +1384,7 @@ img {
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive,
 	.thumbnail a>img, .thumbnail>img {
 	display: block;
-	max-width: 100%;
+	max-width: 50%;
 	height: auto
 }
 
@@ -3873,7 +3873,7 @@ tbody.collapse.in {
 	background-color: transparent;
 	background-image: none;
 	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false)
-}
+ }
 
 .open>.dropdown-menu {
 	display: block
@@ -6420,7 +6420,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus,
 	line-height: 1;
 	color: #000;
 	text-shadow: 0 1px 0 #fff;
-	filter: alpha(opacity = 20);
+	filter: alpha(opacity = 20); 
 	opacity: .2
 }
 
@@ -6603,13 +6603,13 @@ button.close {
 	word-spacing: normal;
 	word-wrap: normal;
 	white-space: normal;
-	filter: alpha(opacity = 0);
+	filter: alpha(opacity = 0); 
 	opacity: 0;
 	line-break: auto
 }
 
 .tooltip.in {
-	filter: alpha(opacity = 90);
+	filter: alpha(opacity = 90); 
 	opacity: .9
 }
 
@@ -6869,7 +6869,7 @@ button.close {
 
 .carousel-inner {
 	position: relative;
-	width: 100%;
+	width: 50%;
 	overflow: hidden
 }
 
@@ -6972,7 +6972,7 @@ button.close {
 	background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0,
 		rgba(0, 0, 0, .0001) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000',
-		endColorstr='#00000000', GradientType=1);
+		endColorstr='#00000000', GradientType=1); 
 	background-repeat: repeat-x
 }
 
@@ -6988,7 +6988,7 @@ button.close {
 	background-image: linear-gradient(to right, rgba(0, 0, 0, .0001) 0,
 		rgba(0, 0, 0, .5) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000',
-		endColorstr='#80000000', GradientType=1);
+		endColorstr='#80000000', GradientType=1); 
 	background-repeat: repeat-x
 }
 
