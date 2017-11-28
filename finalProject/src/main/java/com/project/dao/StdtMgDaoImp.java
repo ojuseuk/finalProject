@@ -20,83 +20,88 @@ public class StdtMgDaoImp implements StdtMgDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public Map<String, STDTDto> selectByAttnd() {
+	public Map<String, STDTDto> selectByAttnd() throws Exception {
 		return sqlSession.selectMap("stdtMgMapper.phoneByAttnd", "prntPhone");
 	}
 
 	@Override
-	public List<String> selectBySTDT() {
+	public List<String> selectBySTDT() throws Exception {
 		return sqlSession.selectList("stdtMgMapper.phoneBySTDT");
 	}
 
 	@Override
-	public List<CRSDto> selectByCrs() {
+	public List<CRSDto> selectByCrs() throws Exception {
 		return sqlSession.selectList("stdtMgMapper.selectByCrs");
 	}
 
 	@Override
-	public List<CLSSDto> selectByClss(String crsId) {
+	public List<CLSSDto> selectByClss(String crsId) throws Exception {
 		return sqlSession.selectList("stdtMgMapper.selectByClss", crsId);
 	}
 
 	@Override
-	public List<STDTInfoDto> selectByStdtList(String clssNm) {
+	public List<STDTInfoDto> selectByStdtList(String clssNm) throws Exception {
 		return sqlSession.selectList("stdtMgMapper.selectByStdtClss", clssNm);
 	}
 
 	@Override
-	public String selectStdtNo() {
+	public String selectStdtNo() throws Exception {
 		return sqlSession.selectOne("stdtMgMapper.selectStdtNo");
 	}
 
 	@Override
-	public List<STDTInfoDto> selectAllByStdt() {
+	public List<STDTInfoDto> selectAllByStdt() throws Exception {
 		return sqlSession.selectList("stdtMgMapper.selectAllOfStdt");
 	}
 
 	@Override
-	public List<STDTInfoDto> selectStdtInfo(String stdtNo) {
+	public List<STDTInfoDto> selectStdtInfo(String stdtNo) throws Exception {
 		return sqlSession.selectList("stdtMgMapper.selectStdtInfo", stdtNo);
 	}
 
 	@Override
-	public void updateStdtClss(STDTCLSSDto stdtInfo) {
+	public void updateStdtClss(STDTCLSSDto stdtInfo) throws Exception {
 		sqlSession.update("stdtMgMapper.updateStdtClss", stdtInfo);
 	}
 
 	@Override
-	public void updateStdtPrnt(STDTDto stdt) {
+	public void updateStdtPrnt(STDTDto stdt) throws Exception {
 		sqlSession.update("stdtMgMapper.updateStdtPrnt", stdt);
 	}
 	
 	@Override
-	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) {
+	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo) throws Exception {
 		return sqlSession.selectList("stdtMgMapper.selectStdtNm", stdtInfo);
 	}
 	
 	@Override
-	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo) {
+	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo) throws Exception {
 		return sqlSession.selectList("stdtMgMapper.selectClssStdtNm", stdtInfo);
 	}
 
 	@Override
-	public List<STDTInfoDto> selectStdtByCrs(String crsId) {
+	public List<STDTInfoDto> selectStdtByCrs(String crsId) throws Exception {
 		return sqlSession.selectList("stdtMgMapper.selectStdtByCrs", crsId);
 	}
 	
 	@Override
-	public String selectStdtId(String id) {
+	public String selectStdtId(String id) throws Exception {
 		return sqlSession.selectOne("stdtMgMapper.selectStdtId", id);
 	}
 
 	@Override
-	public int insertStdt(STDTDto dto) {
+	public int insertStdt(STDTDto dto) throws Exception {
 		return sqlSession.insert("stdtMgMapper.insertStdt", dto);
 	}
 	
 	@Override
-	public int insertStdtClss(STDTCLSSDto dto) {
+	public int insertStdtClss(STDTCLSSDto dto) throws Exception {
 		return sqlSession.insert("stdtMgMapper.insertStdtClss", dto);
+	}
+
+	@Override
+	public int updateUsrTp(STDTDto stdt) throws Exception {
+		return sqlSession.update("stdtMgMapper.updateUsrTp", stdt);
 	}
 
 }
