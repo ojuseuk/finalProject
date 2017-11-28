@@ -9,11 +9,8 @@ public class STDTDto {
 	private String prntPhone;
 	private String nm;
 	
-	public STDTDto() {
-		// TODO Auto-generated constructor stub
-	}
+	public STDTDto() {}
 
-	
 	public STDTDto(String stdtNo, String id) {
 		super();
 		this.stdtNo = stdtNo;

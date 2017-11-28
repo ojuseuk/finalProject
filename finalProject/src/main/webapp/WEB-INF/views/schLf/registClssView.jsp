@@ -124,7 +124,7 @@ var IMP = window.IMP;
 
 		function format(d) {
 			return '과정 소개 : ' + d.crsIntro + '<br>' + '선생님 소개 :' + d.nm + '선생님'
-					+ '<br>' + '<img src="imgs/img/eng2.PNG">' + d.tchrIntro;
+					+ '<br>' + '<img src="imgs/img/이장규.JPG" width="50%">' + d.tchrIntro;
 		}
 
 		var table = $('#dataTable').DataTable({
@@ -213,7 +213,6 @@ var IMP = window.IMP;
                 },
 				contentType : "application/json; charset=UTF-8",
 				success : function(list) {
-					alert(list);
 					document.getElementById("events").innerHTML = list;
 				},
 				error : function() {

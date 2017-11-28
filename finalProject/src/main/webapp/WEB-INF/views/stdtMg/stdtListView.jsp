@@ -67,8 +67,8 @@
 			</tr>
 			<tr>
 				<td>아이디</td>
-				<td><input id="stdtId" type="text" name="id" value="" placeholder="ID검색">
-				<input id="selectId" type="button" value="조회"></td>
+				<td><input id="stdtId" type="text" name="id" placeholder="ID검색">
+				<input id="selectId" type="button" value="조회"><div id="selectResult"></div></td>
 			</tr>
 			<tr>
 				<td>수강생번호</td>
@@ -77,18 +77,18 @@
 			<tr>
 				<td>학 과</td>
 				<td><select id="mjrTp" name="mjrTp">
-					<option value="mj001">문 과</option>
-					<option value="mj002">이 과</option>
-					<option value="mj003">예체능</option>
+					<option value="문 과">문 과</option>
+					<option value="이 과">이 과</option>
+					<option value="예체능">예체능</option>
 				</select>
 				</td>
 			</tr>
 			<tr>
 				<td>강좌</td>
 				<td><select id="geClss" name="clssId">
-					<option value="clss5">종합반A</option>
-					<option value="clss2">종합반B</option>
-					<option value="clss6">종합반C</option>
+					<option value="CL004">종합반A</option>
+					<option value="CL005">종합반B</option>
+					<option value="CL006">종합반C</option>
 				</select>
 				</td>
 			</tr>
@@ -153,17 +153,21 @@
 		$("#selectId").click(function(){
 			var id = $("#stdtId").val();
 			$.post({
-				url : "/project/selectStdtId",
+				url : root + "/selectStdtId",
 				data : $("#stdtId").serialize(),
+				beforeSend : function(xhr)
+                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
 				success : function(id){
 					if(id == ''){
-						alert("회원이 아닙니다");
+						document.getElementById("selectResult").innerHTML = "회원이 아닙니다";
 					} else {
-						alert("회원입니다");
+						document.getElementById("selectResult").innerHTML = "회원입니다";
 					}
 				},
 				error : function(){
-					alert("조회에 실패했습니다");
+					document.getElementById("selectResult").innerHTML = "조회에 실패했습니다";
 				}
 			});
 		});
@@ -173,7 +177,6 @@
 // 	강좌목록
 	function reqCrsList(crsId, root) {
 		stdtListCrs(crsId, root);
-		console.log("???????");
 		xhttp.onreadystatechange = function() {
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
 				clssTag = '<option>선 택</option>';
@@ -202,7 +205,6 @@
 				var stdtList = xhttp2.responseText;
 				stdtList = JSON.parse(stdtList);
 				$('#dataTable').DataTable({
-					"scrollY" : 500,
 					"scrollCollapse" : true,
 					data : stdtList,
 					columns : [ {
@@ -264,6 +266,7 @@
 </script>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
 <jsp:include page="../../../footer.jsp"/>
 
 

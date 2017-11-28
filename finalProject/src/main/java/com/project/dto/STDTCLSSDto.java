@@ -7,6 +7,7 @@ public class STDTCLSSDto {
 	private String repaidDt;
 	private String paidDt;
 	
+	public STDTCLSSDto() {}
 	
 	public STDTCLSSDto(String clssId, String stdtNo, String paidDt) {
 		super();
