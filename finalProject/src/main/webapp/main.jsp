@@ -20,7 +20,7 @@
 <body>
 <jsp:include page="top.jsp"/>
 
-<!-- Sidebar left -->
+<!-- Sidebar left   -->
 <div class="w3-sidebar  w3-bar-block" style="width:15%; background-color: #ffffff;">
   <h3 class="w3-bar-item">EVENT</h3>
   <img class="w3-padding" src="./imgs/img/event1.jpg"  >  
