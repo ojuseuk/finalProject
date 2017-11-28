@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-<div style="background-color: #eee">
+<div style="background-color: #e6e6ff">
   <div class="container text-center">
     <h1>HAKWON</h1>      
     <p>대학 입시, 주요 과목 특강</p>
