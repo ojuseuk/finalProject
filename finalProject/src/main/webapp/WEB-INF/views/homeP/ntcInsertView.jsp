@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-
-	<div class="w3-container">
+<jsp:include page="../../../top.jsp"/>
+	<div class="w3-container" style="width: 70%; margin: auto;">
 		<h2>공지사항 등록</h2>
 		<form action="${root}/ntcInsert" method="POST"  enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<td>게시글 내용</td>
-					<td><textarea rows="10" cols="40" name="content"></textarea></td>
+					<td><textarea rows="10" cols="120" name="content"></textarea></td>
 				</tr>
 				<tr>
 					<td>첨부파일</td>

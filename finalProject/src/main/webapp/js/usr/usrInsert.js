@@ -3,18 +3,18 @@
  */
 	
 function sendIt() {
-	let email = $('#email').val();
+	let email = $('#email1').val();
 	let regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 	let regPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-	let id = $('#id');
+	let id = $('#id1');
 	let idVal = id.val();
-	let pw = $('#pw');
+	let pw = $('#pw1');
 	let pwVal = pw.val();
-	let nm = $('#nm');
+	let nm = $('#nm1');
 	let nmVal = nm.val();
-	let phone = $('#phone');
+	let phone = $('#phone1');
 	let phoneVal = phone.val();
-	
+
 	alert(nmVal);
 	// 아이디 입력여부 검사
 	if (idVal == "") {
@@ -131,7 +131,7 @@ function sendIt() {
 $(function(){
 	  var check_error=0;
    
-   $("#id").focusout(function(){
+   $("#id1").focusout(function(){
       var id=$(this).val();
       var id_valid=/^[a-z0-9_-]{6,14}$/;
       var msg="";
@@ -143,7 +143,7 @@ $(function(){
          $(this).next().next().removeClass("check_error").addClass("check_ok");
       }
    });
-   $("#pw").focusout(function(){
+   $("#pw1").focusout(function(){
       var pw=$(this).val();
       var pwd_valid=/^[a-zA-Z0-9_-]{6,14}$/;
       var msg="";
@@ -155,7 +155,7 @@ $(function(){
      	 $(this).next().removeClass("check_error").addClass("check_ok");
       }
    });
-   $("#nm").focusout(function(){
+   $("#nm1").focusout(function(){
        var msg="";
        if($(this).val().length<2){
           $(this).next().html("이름을 올바르게 입력해 주세요.");
@@ -165,7 +165,7 @@ $(function(){
      	 $(this).next().removeClass("check_error").addClass("check_ok");
        }
    });
-   $("#phone").focusout(function(){
+   $("#phone1").focusout(function(){
       var phone_valid=/[-]/;
       var phone=$(this).val();
       var msg="";
@@ -180,7 +180,7 @@ $(function(){
       	$(this).next().removeClass("check_error").addClass("check_ok");
       }
    });
-   $("#email").focusout(function(){
+   $("#email1").focusout(function(){
       var email_validA=/[@]/;
       var email_validDot=/[.]/;
       var email=$(this).val();

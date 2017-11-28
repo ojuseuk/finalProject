@@ -6,36 +6,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원정보변경</title>
+<script type="text/javascript" src="${root}/js/jquery.min.js"></script>
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
 <div id="" class="container">
-  <form action="${root}/changeUsr" method="post">
+  <form action="${root}/changeUsr" method="post" id="f">
   	<table>
   		<tr>
   			<td>아이디</td>
-  			<td>${requestScope.usr.id}</td>
-  			<td><input type="hidden" name="id" id = "id" value="${requestScope.usr.id}"></td>
+  			<td>${requestScope.usr.id}<input type="hidden" name="id" id = "id1" value="${requestScope.usr.id}"></td>
+  			<td><span class="check_error"></span></td>
   		</tr>
   		<tr>
   			<td>비밀번호</td>
-  			<td><input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" name="pw" id="pw" value="${requestScope.usr.pw}" required></td>
+  			<td><input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" name="pw" id="pw1" value="${requestScope.usr.pw}" required></td>
+  			<td><span class="check_error"></span></td>
+	  	</tr>
+	 	<tr>
+  			<td>비밀번호</td>
+  			<td><input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" name="pw" id="pw2" value="${requestScope.usr.pw}" required></td>
+  			<td><span class="check_error"></span></td>
 	  	</tr>
 	  	<tr>
 	  		<td>이름</td>
-	  		<td><input type="text" placeholder="이름" name="nm" id="nm" value="${requestScope.usr.nm}" required></td>
+	  		<td><input type="text" placeholder="이름" name="nm" id="nm1" value="${requestScope.usr.nm}" required></td>
+	  		<td><span class="check_error"></span></td>
 	  	</tr>
 	  	<tr>
 	  		<td>전화</td>
-	  		<td><input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" name="phone" id="phone" value="${requestScope.usr.phone}" required></td>
+	  		<td><input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" name="phone" id="phone1" value="${requestScope.usr.phone}" required></td>
+	  		<td><span class="check_error"></span></td>
 	  	</tr>
 	  	<tr>
 	  		<td>주소</td>
-	  		<td> <input type="text" placeholder="주소" name="addr" id="addr" value="${requestScope.usr.addr}" required></td>
+	  		<td> <input type="text" placeholder="주소" name="addr" id="addr1" value="${requestScope.usr.addr}" required></td>
+	  		<td><span class="check_error"></span></td>
 	  	</tr>
 	  	<tr>
 	  		<td>이메일</td>
-	  		<td><input type="text" placeholder="이메일" name="email" id="email" value="${requestScope.usr.email}" required></td>
+	  		<td><input type="text" placeholder="이메일" name="email" id="email1" value="${requestScope.usr.email}" required></td>
+	  		<td><span class="check_error"></span></td>
 	  	</tr>
 	    <tr>
 	        <td><button type="button" class="signupbtn" style="width: 50%;" onclick="sendIt()">저장</button>
@@ -48,16 +59,21 @@
   </form>
 </div>
 <input type="hidden" id="fail" value="${requestScope.fail}">
-<script type="text/javascript" src="${root}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 <script>
 if($("#fail").val == 'f'){
 	alert("업데이트 실패");
 }
+// function abc(){
+// 	alert(document.getElementById("name").value);
+// 	alert($('[name="nm"]').val());
+// 	alert($('#name').val());
+// }
    /* 유효성 체크 */
-   $(function(){
-	  var check_error=0;
-      
+/*   $(function(){
+	  var check_error=0;	
       $("#pw").focusout(function(){
+    	  alert(3);
          var pw=$(this).val();
          var pwd_valid=/^[a-zA-Z0-9_-]{6,14}$/;
          var msg="";
@@ -120,7 +136,7 @@ if($("#fail").val == 'f'){
              return;
           }
        });
-   });
+   });  */
 </script>
 </body>
 </html>

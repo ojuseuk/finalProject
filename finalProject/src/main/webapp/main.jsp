@@ -13,7 +13,6 @@
 </head>
 <body>
 <jsp:include page="top.jsp"/>
-
 <div class="container">    
   <div class="row">
     <div class="col-sm-4">

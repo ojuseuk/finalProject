@@ -5,14 +5,18 @@
 
 //var listSize = '${requestScope.listTpc.size()}';
 //var json = '${requestScope.json}';
-var json = "";
-var sbjtNm = "";
-var listSize = "";
+let json = "";
+let jsonTchr = "";
+let sbjtNm = "";
+let listSize = "";
 // 데이터 가져와서 구분 및 정리
 $(document).ready(function(){
 	listSize = $('#list').val();
 	json = $('#json').val();
 	json = JSON.parse(json);
+	
+	jsonTchr = $('#jsonTchr').val();
+	jsonTchr = JSON.parse(jsonTchr);
 	sbjtNm = new Array();
 
 	for (var i = 0; i < listSize; i++) {
@@ -46,8 +50,9 @@ $(document).ready(function(){
 function sbjtNmClick() {
 	
 	$("select[name='tpcNm'] option").not("[value='선택']").remove();
+	$("select[name='tchrNo'] option").not("[value='선택']").remove();
 	
-	for (var i = 0; i < listSize; i++) {
+	for (var i = 0; i < json.length; i++) {
 
 		if (json[i].sbjtNm == $('#sbjtNm').val()) {
 
@@ -58,6 +63,15 @@ function sbjtNmClick() {
 		}
 	}
 
+	for (var i = 0; i < jsonTchr.length; i++) {
+		if ($('#sbjtNm').val() == jsonTchr[i].sbjtChrg) {
+			
+			$("#tchrNo option:eq(0)").after(
+					"<option name='a' value='" + jsonTchr[i].tchrNo + "'>"
+							+ jsonTchr[i].tchrNo + "</option>");
+			
+		}
+	}
 }
 
 // 과목명 변경 안하고 토픽명 바꾸려고 할때 alert창 보여주기

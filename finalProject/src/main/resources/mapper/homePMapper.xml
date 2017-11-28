@@ -52,7 +52,13 @@
 	</select>
 	
 	<select id="ntcUpdate" parameterType="nTCDto">
-		UPDATE TB_NTC SET TITLE = #{title}, CONTENT = #{content}, ATTCH_FILE = #{attchFile}, DT = #{dt} WHERE NO = #{no}
+		
+		<if test="attchFile != null">
+			INSERT INTO TB_NTC VALUES(SEQ_NTC.NEXTVAL, #{empNo}, #{title}, #{content}, #{attchFile}, #{dt})
+		</if>
+		<if test="attchFile == null">
+			UPDATE TB_NTC SET TITLE = #{title}, CONTENT = #{content}, DT = #{dt} WHERE NO = #{no}
+		</if>
 	</select>
 	
 </mapper>
