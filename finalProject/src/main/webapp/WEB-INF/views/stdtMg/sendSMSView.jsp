@@ -13,33 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>문자 발송</title>
 </head>
-<script type="text/javascript">
-	function checkValid() {
-		var f = window.document.writeForm;
-		if (f.content.value == "") {
-			alert("문자내용을 입력하세요.");
-			return false;
-		}
-		if (f.content.value.length > 80) {
-			alert("80byte를 초과할 수 없습니다.");
-			return false;
-		}
-		return true;
-	}
-	function allowDrop(ev) {
-	    ev.preventDefault();
-	}
-
-	function drag(ev) {
-	    ev.dataTransfer.setData("text", ev.target.id);
-	}
-
-	function drop(ev) {
-	    ev.preventDefault();
-	    var data = ev.dataTransfer.getData("text");
-	    ev.target.appendChild(document.getElementById(data));
-	}
-</script>
+<script src="${root}/js/stdtMg/sendSMS.js"></script>
 <body>
 <jsp:include page="../../../top.jsp"/>
 <form name="writeForm" method="post" action="${pageContext.request.contextPath}/sendSms" onSubmit='return checkValid()'>

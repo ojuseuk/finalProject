@@ -12,6 +12,19 @@
 		<result property="sbjtNm" column="SBJT_NM"/>
 		<result property="crsTp" column="CRS_TP"/>
 	</resultMap>
+	
+	<update id="courseUpdate" parameterType="CRSDto">
+		UPDATE TB_CRS
+		   SET CRS_NM = #{crsNm},
+		       PRD = #{prd},
+		       STDTCLSSTTN = #{stdtclssttn},
+		       DAY_CLSS_TM = #{dayClssTm},
+		       CRS_INTRO = #{crsIntro},
+		       SBJT_NM = #{sbjtNm},
+		       CRS_TP = #{crsTp}
+ 		 WHERE CRS_ID = #{crsId}
+	</update>
+		       
 
 	<select id="crsSelect" parameterType="String" resultMap="CourseResult">
 		SELECT CRS_ID,
@@ -74,9 +87,10 @@
 		       CLSSROOM = #{clssroom}
  		 WHERE CLSS_ID = #{clssId}
 	</update>
-		       
-	<insert id="clssInsert">
-		INSERT INTO TB_CLSS
+	
+
+	<insert id="clssInsert" parameterType="CLSSDto">
+		INSERT INTO TB_CLSS(CLSS_ID, CRS_ID, CLSS_NM, STRT_DT, END_DT, STRT_TM, END_TM, CAPA, CLSSROOM)
 		VALUES(#{clssId}, #{crsId}, #{clssNm}, #{strtDt}, #{endDt}, #{strtTm}, #{endTm}, #{capa}, #{clssroom})
 	</insert>
 	

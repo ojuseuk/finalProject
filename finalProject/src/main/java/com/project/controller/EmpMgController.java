@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ import com.project.service.CrsMgService;
 import com.project.service.EmpMgService;
 
 import net.sf.json.JSONArray;
+import util.Constants;
 import util.DateTimeUtil;
 
 @Controller
@@ -43,8 +45,8 @@ public class EmpMgController {
 	private CrsMgService crsMgService;
 	
 
+	@Secured("ROLE_STAFF")
 	@RequestMapping("/mgTchr")
-	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String tchrView(Model data) {
 		String url = "error";
 		System.out.println("controller tchrView");
@@ -73,6 +75,7 @@ public class EmpMgController {
 	@RequestMapping("/usrSearch")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody USRDto usrSelect(@RequestParam("id") String id) {
+		System.out.println(id);
 		return empMgDao.usrSelect(id);
 	}
 	
@@ -130,7 +133,7 @@ public class EmpMgController {
 			JSONArray jsonList = JSONArray.fromObject(list);
 			data.addAttribute("jsonList", jsonList);
 			url = "emp/mgEmp";
-			System.out.println("emp controller : " + list.size());
+			System.out.println("emp controller list.size() : " + list.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -146,8 +149,13 @@ public class EmpMgController {
 		}
 		try {
 			empMgService.empInsert(emp);
-			data.addAttribute("list", empMgService.empSelectAll());
-			data.addAttribute("resultMsg", "직원 정보가 정상적으로 등록되었습니다.");
+			
+			List list =  empMgService.empSelectAll();
+			data.addAttribute("list", list);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			data.addAttribute("jsonList", jsonList);
+			
 			url ="emp/mgEmp";  	
 
 		} catch (SQLException e) {
@@ -247,7 +255,7 @@ public class EmpMgController {
 			
 			System.out.println("tchr.getTchrNo().length() : " + tchr.getTchrNo().length()); 		// @@@
 			
-//			파일명을 "강사번호.확장자"로 변경
+			/*파일명을 "강사번호.확장자"로 변경*/
 			System.out.println("ext[0] : " + ext[0]); 		// @@@
 			System.out.println("ext[1] : " + ext[1]); 		// @@@
 			
@@ -261,17 +269,18 @@ public class EmpMgController {
 			tchr.setTchrPt(file.getName());
 			
 			System.out.println("■path:::" + path);
-
-
 		}
 // file upload 끝
 		
 		try {
 			System.out.println("controller : " + tchr);
 			empMgService.tchrInsert(tchr);
-			data.addAttribute("list", empMgService.tchrSelectAll());
+			
+			List list =  empMgService.tchrSelectAll();
+			JSONArray jsonList = JSONArray.fromObject(list);
+			data.addAttribute("list", list);
+			data.addAttribute("jsonList", jsonList);
 			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
-			data.addAttribute("resultMsg", "강사 정보가 정상적으로 등록되었습니다.");
 			url ="tchr/mgTchr";  	
 			
 		} catch (SQLException e) {

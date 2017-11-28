@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	 */
 	@Override
 	@Transactional
-	public Map<List<TPCDto>, List<TCHRDto>> qzView() {
+	public Map<List<TPCDto>, List<TCHRDto>> qzView() throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service qzView");
@@ -62,7 +63,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	 * @return
 	 */
 	@Override
-	public int ttlqzInsert(TTLQZDto ttlqzDto) {
+	public int ttlqzInsert(TTLQZDto ttlqzDto) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service qzInsert");
@@ -83,7 +84,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> attnd(String id) {
+	public List<Map<String, String>> attnd(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service attnd");
@@ -112,7 +113,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> attndClss(String clssId) {
+	public List<Map<String, String>> attndClss(String clssId) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service attndClss");
@@ -131,7 +132,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	 * @return
 	 */
 	@Override
-	public Map<String, List<Map<String, String>>> srcIn() {
+	public Map<String, List<Map<String, String>>> srcIn() throws SQLException {
 		// TODO Auto-generated method stub
 	
 		System.out.println("service arcIn");
@@ -161,7 +162,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	 * @param scrDto
 	 */
 	@Override
-	public void srcInsert(SCRDto scrDto) {
+	public void srcInsert(SCRDto scrDto) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service srcInsert");
@@ -178,7 +179,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	 * @return
 	 */
 	@Override
-	public List<String> stSearch(String id) {
+	public List<String> stSearch(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		String tchrNo = tchrBsDao.attndTchrNo(id);
@@ -191,7 +192,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	}
 
 	@Override
-	public List<Map<String, Object>> stClssSearch(String clssId) {
+	public List<Map<String, Object>> stClssSearch(String clssId) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("serviced stClssSearch");
 		List<Map<String, Object>> list = tchrBsDao.stClssSearch(clssId);
@@ -201,7 +202,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	}
 
 	@Override
-	public Map<List<SBJTDto>, List<Map<String, String>>> qzSelectView() {
+	public Map<List<SBJTDto>, List<Map<String, String>>> qzSelectView() throws SQLException {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service qzSelectView");
@@ -216,7 +217,7 @@ public class TchrBsServiceImp implements TchrBsService {
 	}
 
 	@Override
-	public List<Map<String, Object>> qzSelect(String sbjtNm) {
+	public List<Map<String, Object>> qzSelect(String sbjtNm) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("servicde qzSelect");
 		
@@ -225,13 +226,13 @@ public class TchrBsServiceImp implements TchrBsService {
 	}
 
 	@Override
-	public List<TTLQZDto> qzUpdateView() {
+	public List<TTLQZDto> qzUpdateView() throws SQLException {
 		// TODO Auto-generated method stub
 		return tchrBsDao.qzUpdateView();
 	}
 
 	@Override
-	public TTLQZDto qzUpdateSearch(int id) {
+	public TTLQZDto qzUpdateSearch(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		
 		return tchrBsDao.qzUpdateSearch(id);
@@ -239,29 +240,37 @@ public class TchrBsServiceImp implements TchrBsService {
 
 	@Override
 	@Transactional
-	public void qzInsert(EXAMTPDto examtpDto, List<Integer> id) {
+	public void qzInsert(EXAMTPDto examtpDto, List<Integer> id) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		System.out.println("dao qzInsert");
 		System.out.println(id.size());
 		
 		String examId = tchrBsDao.examTpSelect();
 		System.out.println(examId);
-		String a = examId.substring(0, 1);
-		String b = examId.substring(1, 5);
-		int bb = Integer.parseInt(b);
-		String suffix = String.format("%03d", (bb+1));
-		System.out.println(a + "   " + suffix);
-		String str = (a+suffix);
+		String str = null;
+		if(examId == null) {
+			str = "EX0001";
+		}else {
+			String a = examId.substring(0, 2);
+			String b = examId.substring(2, 5);
+			int bb = Integer.parseInt(b);
+			String suffix = String.format("%03d", (bb+1));
+			System.out.println(a + "   " + suffix);
+			str = (a+suffix);
+		}
+		
 		System.out.println(str);
 		examtpDto.setExamId(str);
-//		tchrBsDao.examTpInsert(examtpDto);
-//		
-//		List<QZDto> list = new ArrayList<>();
-//		for(int i=0;i<id.size();i++) {
-//			list.add(new QZDto(examtpDto.getExamId(), id.get(i), (i+1), 10));
-//		}
-//		
-//		tchrBsDao.qzInsert(list);
+		String[] ymd = examtpDto.getExamDt().split("-");
+		examtpDto.setExamDt(ymd[0]+ymd[1]+ymd[2]);
+		tchrBsDao.examTpInsert(examtpDto);
+		
+		List<QZDto> list = new ArrayList<>();
+		for(int i=0;i<id.size();i++) {
+			list.add(new QZDto(examtpDto.getExamId(), id.get(i), (i+1), 10));
+		}
+		
+		tchrBsDao.qzInsert(list);
 		
 	}
 

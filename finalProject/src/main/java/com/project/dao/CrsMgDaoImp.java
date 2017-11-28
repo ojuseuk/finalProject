@@ -94,5 +94,18 @@ public class CrsMgDaoImp implements CrsMgDao {
 		}
 		return resultMsg;
 	}
+
+	@Override
+	public String courseUpdate(CRSDto course) {
+		// TODO Auto-generated method stub
+		String resultMsg = "";
+		int result = sqlSession.update("crsMgMapper.courseUpdate", course);
+		if (result > 0) {
+			resultMsg = "과정정보가 정상적으로 수정되었습니다.";
+		} else {
+			resultMsg = "과정정보 수정에 실패했습니다.";
+		}
+		return resultMsg;
+	}
 	
 }

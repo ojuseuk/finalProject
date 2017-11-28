@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <!-- select : true 사용하기 위한 css -->
 <link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
-<!-- datatable select 사용을 위한 js -->
 </head>
 <body>
 <input type="hidden" value='${requestScope.json}' id="json">
@@ -47,15 +46,16 @@
 	</div>
 </div>
 <%-- <jsp:include page="../../../footer.jsp"/> --%>
+<script type="text/javascript" src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8">
 	let json = $('#json').val();
 	json = JSON.parse(json);
 	let usrTp = $('#usrTp').val();
 	
 	function format(d) {
-		return '게시글 내용 : ' + d.content;
+		return '게시글 내용 : ' + d.content.replace(/(?:\r\n|\r\n)/g, '<br />');
 	}
 	
 	$(document).ready(function(){
@@ -74,7 +74,12 @@
 				"data" : "title"
 			}, {
 				"data" : "attchFile",
-				"searchable": false
+				"searchable": false,
+				"render" :function(data, row, type, meta){
+					let attch = '<div onclick="download(\''+data+'\')" >'+data+'</div>';
+					return attch;
+					
+				}
 			}, {
 				"data" : "dt",
 				"searchable": false
@@ -103,7 +108,36 @@
 			row.child.hide();
 			tr.removeClass('shown');
 	    } );
+	    
+// 	    $("a[name='file']").on("click", function(e){
+// 	    	e.preventDefault();
+// 	    	alert($('#aefqeqwewqe').val());
+//             download($('#aefqeqwewqe').val());
+// 	    });
+	    
 	});
+
+	function download(obj){
+		alert(obj);
+// 		var comSubmit = new ComSubmit();
+// 		comSubmit.setUrl("<c:url value='/downloadFile' />");
+// 		comSubmit.addParam("attch", obj);
+// 		comSubmit.submit();
+		$.ajax({
+			url : '${root}'+"/downloadFile",
+			data : {"attch" : obj},
+			dataType : 'json',
+			success:function(data){
+				alert(data);
+			}
+			
+		});
+		
+
+
+	}
+	
+	
 </script>
 </body>
 </html>

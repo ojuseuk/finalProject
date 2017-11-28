@@ -17,7 +17,6 @@ tr.shown td.details-control {
 	background: url('../imgs/grid/minus.JPG') no-repeat center center;
 }
 </style>
-</head>
 <!-- dataTable 기본 css -->
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <!-- select : true 사용하기 위한 css -->
@@ -25,14 +24,15 @@ tr.shown td.details-control {
 <link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
 <!-- datatable select 사용을 위한 js -->
 <script src="${root}/js/vendor/datatables/select.min.js"></script>
+</head>
 <body>
 <input type="hidden" value='${requestScope.json}' id="json">
 <input type="hidden" value='${root}' id="root">
 <input type="hidden" value="${requestScope.result }" id="result">
-<h2>게시판 목록</h2>
-	
 <jsp:include page="../../../top.jsp"/>
-<div class="container-fluid">
+<br/>
+<h2 align="center">게시판 목록</h2>
+<div class="container-fluid" style="width: 80%; margin: auto;">
 	<div id="demo" class="card mb-3">
 		<div class="card-body">
 			<div class="table-responsive">
@@ -52,7 +52,7 @@ tr.shown td.details-control {
 				</table>
 			</div>
 		</div>
-		<div>
+		<div style="float: right;">
 			<button onclick="location.href='${root}/homeP/qnaInsertView?no=0'">게시글 생성</button>
 		</div>
 	</div>

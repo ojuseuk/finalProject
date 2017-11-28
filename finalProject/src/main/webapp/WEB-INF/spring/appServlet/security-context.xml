@@ -9,13 +9,13 @@
 
 	<context:component-scan base-package="com.project.security.handler,com.project.security.provider" />
 	
-	<security:global-method-security pre-post-annotations="enabled"/>
+	<security:global-method-security proxy-target-class="true" pre-post-annotations="enabled" secured-annotations="enabled"/>
 	
 	<security:http use-expressions="true" auto-config="true">
 <!-- 		<security:intercept-url pattern="/staff/**" access="hasRole('ROLE_STAFF')"/> -->
 <!-- 		<security:intercept-url pattern="/tchr/**" access="hasRole('ROLE_TCHR')"/> -->
 <!-- 		<security:intercept-url pattern="/usr/**" access="hasAnyRole('ROLE_ST', 'ROLE_USR')"/> -->
-			<!--  -->
+
 		<security:form-login
 			login-page="/top.jsp"
 			login-processing-url="/login"

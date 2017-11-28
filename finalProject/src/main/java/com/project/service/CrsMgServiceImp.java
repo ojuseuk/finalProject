@@ -117,5 +117,11 @@ public class CrsMgServiceImp implements CrsMgService {
 		clss.setEndTm(clss.getEndTm().replace(":", "") + "00"); 
 		return crsMgDao.clssUpdate(clss);
 	}
+
+	@Override
+	public String courseUpdate(CRSDto course) {
+		// TODO Auto-generated method stub
+		return crsMgDao.courseUpdate(course);
+	}
 	
 }

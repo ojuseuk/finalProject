@@ -98,6 +98,10 @@ public class UsrServiceImp implements UsrService {
 
 	@Override
 	public Boolean updateUsr(USRDto usr) {
+		
+		String encodePass = passwordEncoder.encode(usr.getPw());
+		usr.setPws(encodePass);
+		
 		return usrDao.updateUsr(usr);
 	}
 	

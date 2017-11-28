@@ -38,8 +38,8 @@ public class StdtMgServiceImp implements StdtMgService {
 	}
 
 	@Override
-	public List<STDTInfoDto> selectByStdtList(String clssNm) throws Exception {
-		return stdtMgDao.selectByStdtList(clssNm);
+	public List<STDTInfoDto> selectByStdtList(String clssId) throws Exception {
+		return stdtMgDao.selectByStdtList(clssId);
 	}
 
 	@Override
