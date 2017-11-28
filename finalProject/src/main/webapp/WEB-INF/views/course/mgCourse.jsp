@@ -16,13 +16,10 @@ p {
 </style>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
-<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
-<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
- 	<form action="courseInsert">
-<!-- 	<form> -->
+ 	<form id="frmCrs" action="courseInsert">
 		<fieldset style="width: 40%">
 			<legend>교육 과정</legend>
 			<table>
@@ -71,10 +68,14 @@ p {
 				</tr>
 			</table>
 		</fieldset><br><br>
+		<input type="reset" value="화면 초기화"> 
  		<input type="submit" value="과정 등록"> 
-		<input type="button"  onclick="javascript:history.back()" value="등록 취소" >
+		<input type="button" value="수정 내용 저장" onclick="courseUpdate()">
+		<input type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
+		
 	</form>
 
+	<input type="hidden" id="resultMsg" value="${resultMsg}">
 	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
 	<input type = "hidden" id="root" value='${root}'>
 		
@@ -104,102 +105,10 @@ p {
 	
 	
 	
-	<script type="text/javascript">
+<script src="${root}/js/course/course.js"></script>
 	
-	var root = document.getElementById("root").value;
-	var jsonList = document.getElementById("jsonList").value;
-	console.log(jsonList);
-	jsonList = JSON.parse(jsonList);
-	var xhttp = new XMLHttpRequest();
-	
-	function inputNumberFormat(slr) {
-	    return String(slr).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-	}
-	
-	/* 과정ID로 과정 조회 */
-	function crsSelect(root, crsId){
-		xhttp.onreadystatechange = function(){
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				data = xhttp.responseText;
-				data = JSON.parse(data);
-				console.log(data);
-				document.getElementById("crsId").value = data.crsId;
-				document.getElementById("crsNm").value = data.crsNm;
-				document.getElementById("prd").value = data.prd;
-				document.getElementById("stdtclssttn").value = inputNumberFormat(data.stdtclssttn);
-				document.getElementById("dayClssTm").value = inputNumberFormat(data.dayClssTm); 
-				document.getElementById("crsIntro").value = data.crsIntro;
-				document.getElementById("sbjtNm").value = data.sbjtNm;
-				
-				if(data.crsTp == '종합'){
-// 					$("#crsTp_1").prop("checked", true);
-					document.getElementById("crsTp_1").checked = "checked";	
-				} else {
-					document.getElementById("crsTp_2").checked = "checked";
-				}
-				document.getElementById("crsId").readOnly = true;
-			}
-		}
-		xhttp.open("GET", root + "/crsSelect?crsId=" + crsId, true);
-		xhttp.send();
-	}
-	
-	/* 과정 리스트 DataTable */
-	$(document).ready(function(){
-		$('#dataTable').DataTable({
-			"language": {
-				    search: "검색 : " ,
-		            "thousands": ","
-			},
-			"scrollY" : 330,
-			"scrollCollapse" : true,
-			data : jsonList,
-			columns : [ {
-					"data" : "crsId",
-					"searchable": false,
-					"render" : function(data, type, row, meta){
-						data = '<div align="center"><input type="button" value="' + data + '" onclick="crsSelect(\''+ root + '\', \''+data+'\')"></div>';
-					return data;
-					}
-				}, {
-					"data" : "sbjtNm"
-				}, {
-					"data" : "crsNm"
-				}, {
-					"data" : "prd",
-					"render" : function(data, type, row, meta){
-						data = '<div align="center">' + data + '</div>';
-						return data;
-					}
-				}, {
-					"data" : "stdtclssttn",
-					"render" : function(data){
-						data = '<div align="right">' + data.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + '</div>';	
-						return data;
-					}
-				}]
-		});
-	});
-
-		function crsTpRadio(crsTp){
-			if(crsTp == "종합"){
- 				document.getElementById("sbjtNm").hidden = true;
-				document.getElementById("sbjtNm").disabled = true;
- 				document.getElementById("prd").hidden = true;
- 				document.getElementById("prd").disabled = true;
- 			}
-			if(crsTp == "특강"){
-				/* document.getElementById("sbjtNm").disabled = "disabled"; */
-				document.getElementById("sbjtNm").hidden = false;
-				document.getElementById("sbjtNm").disabled = false;
-				document.getElementById("prd").hidden = false;
- 				document.getElementById("prd").disabled = false;
-			}
-				
-		}
-	</script>
-	
-
-	<jsp:include page="../../../footer.jsp"/>
+<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

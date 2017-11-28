@@ -29,6 +29,8 @@ public interface CrsMgService {
 	public CRSDto crsSelect(String crsId);
 
 	public String clssUpdate(CLSSDto clss);
+
+	public String courseUpdate(CRSDto course);
 	
 	
 

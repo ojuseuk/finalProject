@@ -28,4 +28,6 @@ public interface CrsMgDao {
 
 	String clssUpdate(CLSSDto clss);
 
+	String courseUpdate(CRSDto course);
+
 }
