@@ -29,6 +29,7 @@ import com.project.dto.USRDto;
 import com.project.service.SchLfService;
 
 import net.sf.json.JSONArray;
+import util.DateTimeUtil;
 
 @Controller
 public class SchLfController {
@@ -130,8 +131,8 @@ public class SchLfController {
 					list.add(new ClssInfoDto(jo.get("id").toString()
 							, jo.get("nm").toString()
 							, jo.get("clssNm").toString()
-							, jo.get("strtDt").toString()
-							, jo.get("endDt").toString()
+							, DateTimeUtil.dateForm(jo.get("strtDt").toString())
+							, DateTimeUtil.dateForm(jo.get("endDt").toString())
 							, jo.get("stdtclssttn").toString()));
 					fee += Integer.parseInt(jo.get("stdtclssttn").toString());
 				}
