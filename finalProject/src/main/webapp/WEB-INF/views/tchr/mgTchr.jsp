@@ -15,15 +15,16 @@
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
-	
+<div style="width: 80%; margin: auto;">
  	<!-- <form action="tchrInsert.do" id="frmTchr" method="post"> -->
+ 	<div style="width: 50%; float: left">
   	<form action="tchrInsert.do" id="frmTchr" method="post" enctype="multipart/form-data">
   	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
-		<fieldset style="width: 40%">
+		<fieldset style="width: 100%">
 			<legend>사용자 정보</legend>
 			<table>
 				<tr>
-					<td>사용자 ID :</td>
+					<td>사용자 ID </td>
 					<td><input type="text" name="id" id="id2" />
   						<input type="button" value="조회"
 						onclick="searchUsr('${pageContext.request.contextPath}', $('#id2').val());
@@ -32,28 +33,28 @@
 					</td>
 				</tr>  
 				<tr>
-					<td>이름 :</td>
+					<td>이름 </td>
 					<td><input type="text" name="nm" id="nm2" /></td>
 				</tr>
 			</table>
 		</fieldset>
 
-		<fieldset style="width: 40%">
+		<fieldset style="width: 100%">
 			<legend>직원 정보</legend>
 			<table>
 				<tr>
-					<td>사원번호 :</td>
+					<td>사원번호 </td>
 					<td><input type="text" name="empNo" id="empNo"/>
 					</td>
 				</tr>  
 				<tr>
-					<td>급여 :</td>
+					<td>급여 </td>
 					<td><input type="text" name="slr" id="slr"/></td>
 				</tr>
 			</table>
 		</fieldset>
 		
-		<fieldset style="width: 55%">				
+		<fieldset style="width: 100%">				
 			<legend>강사 정보</legend>
 			<table>
 				<tr>
@@ -93,18 +94,17 @@
 		<input type="submit" value="강사 등록"> 
 		<input type="button" value="수정 내용 저장" onclick="tchrUpdate()">
 		<input type="button" onclick="javascript:history.back()" value="이전 화면으로">
-		
  		<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
 	</form>
-	
+	</div>
 	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
 	<input type = "hidden" id="root" value='${root}'>
 	
 	
 
-	
+	<span width="10%"></span>
 	<!-- 리스트 미리 출력 -->
-	<div id="demo" class="card mb-3" style="position:absolute; top:30%; left:750px; width:700px; height:200px; display:inline-block;">
+	<div id="demo" class="card mb-3" style="top:30%; width:50%; height:200px; display:inline-block;">
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">
@@ -124,7 +124,7 @@
 				</div>
 			</div>
 		</div>
-		
+	</div>	
 	<script src="${root}/js/tchr/tchr.js"></script>
 
 	

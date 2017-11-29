@@ -11,14 +11,44 @@
 <link rel="stylesheet" href="${root}/styles/main/top.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+<style>
+div.backgroundTop {
+	background: url('./imgs/img/back.png') no-repeat center center;
+	cursor: pointer;
+	height: 200px;
+}
+div.brain {
+	background: url('./imgs/img/brain.jpg') no-repeat center center;
+	cursor: pointer;
+	height: 50px;
+	width: 50px;
+}
+.title {
+	font-size: 40px;
+	color: #ffffff;
+}
+.subtitle {
+	font-size: 20px;
+	color: #ffffff;
+}
+body {
+	background-color: #f2f4f7;
+}
+nav.menu{
+	background: #ffffff;
+	color: #000000;
+	border-color: #898989;	
+}
+</style>
 <body>
-<div style="background-color: #e6e6ff">
+<div class="backgroundTop">
   <div class="container text-center">
-    <h1><img src="./imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="50" height="50" style="margin-bottom: 10px">&nbsp; Royal Academy</h1>      
-    <p>대학 입시, 주요 과목 특강</p>
+  	<div class="brain"></div>
+    <p class="title" style="margin-top: 30px">Royal Academy </p>      
+    <p class="subtitle">대학 입시, 주요 과목 단과</p>
   </div>
 </div>
-<nav class="navbar navbar-inverse">
+<nav class="menu">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -26,8 +56,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="${root}/main.jsp">Logo</a>
-      <a class="navbar-brand" href="${root}/main.jsp">Home</a>
+      <a class="navbar-brand" href="${root}/main.jsp"><font color="#000000">Logo</font></a>
+      <a class="navbar-brand" href="${root}/main.jsp"><font color="#000000">Home</font></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
 <sec:authorize access="isAuthenticated()">
@@ -73,12 +103,16 @@
 </sec:authorize>
       <ul class="nav navbar-nav navbar-right">
         <sec:authorize access="isAnonymous()">
-        <li><a href="javascript:void(0)" onclick="document.getElementById('id01').style.display='block'"><span class="glyphicon glyphicon-education"></span> 로그인</a></li>
-        <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+        <li><a href="javascript:void(0)" onclick="document.getElementById('id01').style.display='block'">
+        <span class="glyphicon glyphicon-education"></span> 로그인</a></li>
+        <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'">
+        <span class="glyphicon glyphicon-user"></span>회원가입</a></li>
 		</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
-       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'"><span class="glyphicon glyphicon-user"></span><sec:authentication property="principal.nm" />님</a></li>
-        <li><a href="javascript:logout();"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" ><span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
+       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'">
+       	<span class="glyphicon glyphicon-user"></span><sec:authentication property="principal.nm" />님</a></li>
+        <li><a href="javascript:logout();"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" >
+        <span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
 	</sec:authorize>
       </ul>
     </div>
