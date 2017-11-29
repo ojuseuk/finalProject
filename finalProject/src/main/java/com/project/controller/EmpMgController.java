@@ -81,6 +81,8 @@ public class EmpMgController {
 	
 	@RequestMapping("/empSearchById")
 	public @ResponseBody EMPDto empSelectById(@RequestParam("id") String id) {
+		System.out.println("여기서는 ???" + id);
+		System.out.println(empMgDao.empSelectById(id));
 		return empMgDao.empSelectById(id);
 	}
 	

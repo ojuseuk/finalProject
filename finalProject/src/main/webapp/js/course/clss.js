@@ -136,17 +136,21 @@
 		function tchrSelect(root, tchrNo){
 			
 			/*강사 배정 현황 초기화*/
-			tchrSelectBySbjtNm(root, sbjtNm);
-			document.getElementById("slr").value = "";
-			document.getElementById("tchrIntro").value = "";
-			$("#imgTchr").remove();
+//			tchrSelectBySbjtNm(root, sbjtNm);
+//			document.getElementById("slr").value = "";
+//			document.getElementById("tchrIntro").value = "";
+//			$("#imgTchr").remove();
 			
 			xhttp.onreadystatechange = function(){
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					data = xhttp.responseText;
 					data = JSON.parse(data);
+					console.log("여기다!!!!" + data.nm);
+					
+					tag = '<option value="' + data.tchrNo + '">' + data.nm + '</option>';
+					document.getElementById("tchrNo").innerHTML = tag;
 					document.getElementById("tchrIntro").value = data.tchrIntro;
-
+					document.getElementById("slr").value = data.slr;
 					tag = '<img src="' + root + '/imgs/img/';
 					tag += data.tchrPt + '" style="width:150px;height:150px;">';
 					

@@ -108,6 +108,7 @@
 			xhttp2.onreadystatechange = function(){
 				if (xhttp2.readyState == 4 && xhttp2.status == 200) {
 					data = xhttp2.responseText;
+					console.log(data);
 					data = JSON.parse(data);
 					document.getElementById("empNo").value = data.empNo;
 					document.getElementById("slr").value = data.slr;
