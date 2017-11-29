@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/styles/main/top.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<%-- <link rel="stylesheet" href="${root}/styles/main/topBoot.css" /> --%>
 </head>
 <style>
 div.backgroundTop {
@@ -33,6 +34,9 @@ nav.menu{
 	color: #000000;
 	border-color: #898989;	
 }
+#fontBlack{
+	color : black;
+}
 </style>
 <body>
 <div class="backgroundTop">
@@ -42,7 +46,7 @@ nav.menu{
     <p class="subtitle">대학 입시, 주요 과목 단과</p>
   </div>
 </div>
-<nav class="menu">
+<nav class="menu" style="border: 1px solid #ccc">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -59,47 +63,47 @@ nav.menu{
 	  
 	  <sec:authorize access="hasAnyRole('ROLE_ST', 'ROLE_USR')">		 
       <ul class="nav navbar-nav">
-        <li><a href="${root}/viewRegist">수강신청</a></li>
-        <li><a href="${root}/myScr">성적확인</a></li>
-        <li><a href="${root}/myAttnd">출결확인</a></li>
-        <li><a href="${root}/myClssList">수강과정확인</a></li>
-        <li><a href="${root}/homeP/qnaSelectView">댓글 게시판 목록</a></li>
-        <li><a href="${root}/ntcList">공지사항</a></li>
+        <li><a href="${root}/viewRegist" id="fontBlack">수강신청</a></li>
+        <li><a href="${root}/myScr" id="fontBlack">성적확인</a></li>
+        <li><a href="${root}/myAttnd" id="fontBlack">출결확인</a></li>
+        <li><a href="${root}/myClssList" id="fontBlack">수강과정확인</a></li>
+        <li><a href="${root}/homeP/qnaSelectView" id="fontBlack">댓글 게시판 목록</a></li>
+        <li><a href="${root}/ntcList" id="fontBlack">공지사항</a></li>
       </ul>
       </sec:authorize>
       
       <sec:authorize access="hasRole('ROLE_STAFF')">
       <ul class="nav navbar-nav">
-        <li><a href="${root}/mgTchr">강사 관리</a></li>
-        <li><a href="${root}/stdtAllList">학생 관리</a></li>
-        <li><a href="${root}/saleMg/manager">매출 관리</a></li>
-        <li><a href="${root}/course">과정 관리</a></li>
-        <li><a href="${root}/mgClss">강좌 관리</a></li>
-        <li><a href="${root}/testSMS">문자 발송</a></li>
-        <li><a href="${root}/emp">직원 관리</a></li>
-        <li><a href="${root}/ntcInsertView">공지사항 등록</a></li>
-        <li><a href="${root}/homeP/qnaSelectView">댓글 게시판 목록</a></li>
-        <li><a href="${root}/ntcList">공지사항</a></li>
+        <li><a href="${root}/mgTchr" id="fontBlack">강사 관리</a></li>
+        <li><a href="${root}/stdtAllList" id="fontBlack">학생 관리</a></li>
+        <li><a href="${root}/saleMg/manager" id="fontBlack">매출 관리</a></li>
+        <li><a href="${root}/course" id="fontBlack">과정 관리</a></li>
+        <li><a href="${root}/mgClss" id="fontBlack">강좌 관리</a></li>
+        <li><a href="${root}/testSMS" id="fontBlack">문자 발송</a></li>
+        <li><a href="${root}/emp" id="fontBlack">직원 관리</a></li>
+        <li><a href="${root}/ntcInsertView" id="fontBlack">공지사항 등록</a></li>
+        <li><a href="${root}/homeP/qnaSelectView" id="fontBlack">댓글 게시판 목록</a></li>
+        <li><a href="${root}/ntcList" id="fontBlack">공지사항</a></li>
         </ul>
       </sec:authorize>
       
       <sec:authorize access="hasRole('ROLE_TCHR')">
       <ul class="nav navbar-nav">
-        <li><a href="${root}/tchrBs/qzView">문제 생성</a></li>
-        <li><a href="${root}/tchrBs/attnd">출석 확인</a></li>
-        <li><a href="${root}/tchrBs/srcIn">성적 입력</a></li>
-        <li><a href="${root}/tchrBs/stSearch">학생 성적 확인</a></li>
-        <li><a href="${root}/tchrBs/qzSelectView">시험 출제</a></li>
-        <li><a href="${root}/homeP/qnaSelectView">댓글 게시판 목록</a></li>
+        <li><a href="${root}/tchrBs/qzView" id="fontBlack">문제 생성</a></li>
+        <li><a href="${root}/tchrBs/attnd" id="fontBlack">출석 확인</a></li>
+        <li><a href="${root}/tchrBs/srcIn" id="fontBlack">성적 입력</a></li>
+        <li><a href="${root}/tchrBs/stSearch" id="fontBlack">학생 성적 확인</a></li>
+        <li><a href="${root}/tchrBs/qzSelectView" id="fontBlack">시험 출제</a></li>
+        <li><a href="${root}/homeP/qnaSelectView" id="fontBlack">댓글 게시판 목록</a></li>
       </ul>
       </sec:authorize>
       
 </sec:authorize>
       <ul class="nav navbar-nav navbar-right">
         <sec:authorize access="isAnonymous()">
-        <li><a href="javascript:void(0)" onclick="document.getElementById('id01').style.display='block'">
+        <li><a href="javascript:void(0)" onclick="document.getElementById('id01').style.display='block'" id="fontBlack">
         <span class="glyphicon glyphicon-education"></span> 로그인</a></li>
-        <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'">
+        <li><a href="javascript:void(0)" onclick="document.getElementById('id02').style.display='block'" id="fontBlack">
         <span class="glyphicon glyphicon-user"></span>회원가입</a></li>
 		</sec:authorize>
 	<sec:authorize access="isAuthenticated()">

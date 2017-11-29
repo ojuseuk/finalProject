@@ -48,7 +48,7 @@
       
 		<div class="divJoin" style="margin-left: 85px">
 			<input type="button" class="join" value="회원가입" onclick="sendIt()">
-			<input type="button" class="join" onclick="document.getElementById('id02').style.display='none'" value="취소">
+			<input type="button" class="join" onclick="location.href='main.jsp'" value="취소">
 		</div>
     </div>
   </form>

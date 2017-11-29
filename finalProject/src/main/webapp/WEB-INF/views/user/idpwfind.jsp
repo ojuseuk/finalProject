@@ -95,7 +95,7 @@
 			<span id="span_findPwd_result"></span>
 		</div>
 	</div>
-	
+<jsp:include page="../../../modal.jsp"/>
 </div>
 	<script type="text/javascript">
 	var root = $("#root").val();
