@@ -16,41 +16,37 @@
 <script src="${root}/js/stdtMg/sendSMS.js"></script>
 <body>
 <jsp:include page="../../../top.jsp"/>
-<form name="writeForm" method="post" action="${pageContext.request.contextPath}/sendSms" onSubmit='return checkValid()'>
-	<input type="hidden" name="command" value="notice"/>
-		<table class="table table-bordered" align="center" cellpadding="5" cellspacing="2" width="50%" height="50%" border="1">
-   		<tr>
-        	<td width="1220" height="20" colspan="2" align="center">
-        	    <h2>문자발송</h2>
-       		</td>
-   		</tr>
-    	<tr>
-      		<td width="150" height="20">
-            	<p align="right">내  용</p>
-       		</td>
-       		<td width="450" height="20">
-				<div ondrop="drop(event)" ondragover="allowDrop(event)">Here</div>       		
-				<textarea  name="content" ondrop="drop(event)" ondragover="allowDrop(event)" cols="50" rows="10" maxlength="80"></textarea>
-			</td>
-			<td>
-			<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<span draggable="true" ondragstart="drag(event)" id="drag1">안녕하세요 학원입니다.</span>
-			</div>
-			</td>
-   	 	</tr>
-    	<tr>
-        	<td width="150" height="20">
-           		<p align="right">&nbsp;</p>
-       		 </td>
-        <td width="450" height="20">
-        <input type=submit value="전 송">
-        <input type=reset value="다시쓰기">
-   		<input type="button" name="command" value="지각안내" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
-   		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-   		</td>
-    </tr>
-</table>
-</form>
+<div style="width: 80%; margin: auto;">
+	<form name="writeForm" method="post" action="${pageContext.request.contextPath}/sendSms" onSubmit='return checkValid()'>
+		<input type="hidden" name="command" value="notice"/>
+			<table class="table table-bordered" align="center" cellpadding="5" cellspacing="2" width="50%" height="50%" border="1">
+	   		<tr>
+	        	<td width="1220" height="20" colspan="2" align="center">
+	        	    <h2>문자발송</h2>
+	       		</td>
+	   		</tr>
+	    	<tr>
+	      		<td width="150" height="20">
+	            	<p align="right">내  용</p>
+	       		</td>
+	       		<td width="450" height="20">
+					<textarea name="content" cols="50" rows="10" maxlength="80"></textarea>
+				</td>
+	   	 	</tr>
+	    	<tr>
+	        	<td width="150" height="20">
+	           		<p align="right">&nbsp;</p>
+	       		 </td>
+	        <td width="450" height="20">
+	        <input type=submit value="전 송">
+	        <input type=reset value="다시쓰기">
+	   		<input type="button" name="command" value="지각안내" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
+	   		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	   		</td>
+	    </tr>
+		</table>
+	</form>
+</div>
 <jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

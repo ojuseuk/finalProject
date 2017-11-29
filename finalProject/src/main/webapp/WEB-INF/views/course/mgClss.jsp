@@ -17,12 +17,14 @@
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
+<div style="width: 80%; margin: auto;">
+<div style="width: 50%; float: left">
  	<form action="clssInsert.do" id="frmClss">
-		<fieldset style="width: 40%">
+		<fieldset style="width: 100%">
 			<legend>교육 과정</legend>
 			<table>
 				<tr>
-					<td>과목명 :</td>
+					<td>과목명 </td>
 					<td><select name="sbjtNm" id="sbjtNm" required onchange="crsSelect('${root}', this.value);
 																			 tchrSelectBySbjtNm('${root}', this.value)">
 							<option value="">과목 선택</option>
@@ -32,7 +34,7 @@
 						</select></td>
 				</tr>  
 				<tr>
-					<td>과정명 :</td>
+					<td>과정명 </td>
 					<td><select name="crsId" id="crsId">
 					
 						</select>
@@ -43,33 +45,33 @@
 				</tr>
 			</table>
 		</fieldset>
-		<fieldset style="width: 40%">
+		<fieldset style="width: 100%">
 			<legend>강좌 정보</legend>
 			<table>
 				<tr>
-					<td>강좌 ID :</td>
+					<td>강좌 ID </td>
 					<td><input type="text" name="clssId" id="clssId"/></td>
 				</tr>
 				</tr>
-					<td>강좌명 :</td>
+					<td>강좌명 </td>
 					<td><input type="text" name="clssNm" id="clssNm"/></td>
 				</tr>
 				<tr>
-					<td>강좌 기간 : </td>
+					<td>강좌 기간 </td>
 					<td><input type="date" name="strtDt" placeholder="시작일자" id="strtDt"/>부터</td>
 					<td><input type="date" name="endDt" placeholder="종료일자" id="endDt"/>까지</td>
 				</tr>
 				<tr>
-					<td>수업시간 :</td>
+					<td>수업시간 </td>
 					<td><input type="time" name="strtTm" placeholder="시작시각" id="strtTm"/></td>
 					<td><input type="time" name="endTm" placeholder="종료시각" id="endTm"/></td>
 				</tr>
 				<tr>
-					<td>수강인원 :</td>
+					<td>수강인원 </td>
 					<td><input type="number" name="capa" id="capa"/></td>
 				</tr>
 				<tr>
-					<td>강의실 :</td>
+					<td>강의실 </td>
 					<td><input type="text" name="clssroom" id="clssroom"/></td>
 				</tr>
 			</table>
@@ -81,7 +83,7 @@
 		<input type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
 		<br>
 		<div>
-		<fieldset style="width: 75%" id="fsTchr" hidden>				
+		<fieldset style="width: 100%" id="fsTchr" hidden>				
 			<legend>강사 정보</legend>
 			<table style="float:left">
 				<tr>
@@ -117,7 +119,7 @@
 			</table>
 			
 			<!-- 강사 리스트 DataTable -->
-			<div id="divDtTchr" class="card mb-3" style="position:absolute; left:50%; width:400px; display:inline-block;">
+			<div id="divDtTchr" class="card mb-3" style="width:50%; display:inline-block;">
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dtTchr">
@@ -138,12 +140,13 @@
 		</fieldset>
 		</div>
 	</form>
+	</div>
 	<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
 	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
 	<input type = "hidden" id="root" value='${root}'>
 
 		<!-- 강좌 리스트 DataTable -->
-		<div id="demo" class="card mb-3" style="position:absolute; top:45%; left:750px; width:700px; height:200px; display:inline-block;">
+		<div id="demo" class="card mb-3" style="width:50%; height:200px; display:inline-block;">
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">
@@ -165,7 +168,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- 과정 리스트 DataTable -->
+	</div>	<!-- 과정 리스트 DataTable -->
 
 
 		

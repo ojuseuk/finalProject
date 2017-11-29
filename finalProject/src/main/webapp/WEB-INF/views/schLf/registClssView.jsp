@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="${root}/styles/w3/w3.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script	src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -39,6 +41,9 @@ tr.shown td.details-control {
 	height: 200px;
 	overflow: auto;
 }
+#cAsideR .sky_bnr .sky_bnrline > div{border:0;margin:0}
+#cAsideR .sky_bnr .sky_bnrline .lineno{border:1px solid #cecece;margin-top:5px;}
+#cAsideR .sky_bnr .sky_bnrline .sky_bnrtline{border:1px solid #cecece;border-top:0;}
 </style>
 </head>
 <script type="text/javascript">
@@ -48,6 +53,21 @@ var IMP = window.IMP;
 <jsp:include page="../../../top.jsp" />
 
 <body>
+<!-- Sidebar left   -->
+<!-- <div class="sidebar" style="width:6%; background-color: #ffffff; margin-left: 90px;"> -->
+<!--   <div><img class="w3-padding" src="./imgs/banner/sky_bnr2.png"  ></div> -->
+<!--   <div><img class="w3-padding" src="./imgs/banner/ss_bn_go12.gif"  ></div> -->
+<!--   <div><img class="w3-padding" src="./imgs/banner/flo_crup.gif"  ></div> -->
+<!--   <div><img class="w3-padding" src="./imgs/banner/main_ss.gif"  ></div>   -->
+<!-- </div> -->
+<!-- Sidebar right -->
+<div class="sidebar" style="width:6%;right:0; background-color: #ffffff;">
+  <div><img class="w3-padding" src="./imgs/banner/90x135.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/90x135(1).gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/90x333.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/main_ss.jpg"  ></div>
+</div>
+
 	<input type="hidden" id="jsonCrs" value='${requestScope.jsonCrs}'>
 	<input type="hidden" id="usrId" value='${requestScope.usrId}'>
 	<input type="hidden" id="usrNm" value='${requestScope.usrNm}'>
@@ -68,6 +88,7 @@ var IMP = window.IMP;
 				</select>
 			</c:if>
 		</div>
+		
 		<div id="crs" class="card mb-3" align="left" style="width: 100%; height: 475px">
 			<div class="card-body">
 				<h2 align="center">강좌 목록</h2>
@@ -103,6 +124,7 @@ var IMP = window.IMP;
 		</p>
 	</div>
 </div>
+
 <%-- <script src="${root}/js/schLf/registClss.js"></script> --%>
 <script type="text/javascript">
 var crsList = $("#jsonCrs").val();
@@ -126,14 +148,13 @@ function format(d) {
 	+ '<tr>'
 	+ '<td align="center"><img src="imgs/imgTchr/' + d.nm + '.JPG" width="50%"></td>' 
 	+ '<td>과정 소개 <br> ' + d.crsIntro.replace(/(?:\r\n|\r\n)/g, '<br />') + '<br><br>'
-	+ '▣' + d.nm + '선생님<br><br>'
+	+ d.nm + '선생님<br><br>'
 	+ d.tchrIntro.replace(/(?:\r\n|\r\n)/g, '<br />') + '</tr>'
 	+ '</table>';
 }
-
+// 전체강좌리스트 테이블
 var table = $('#dataTable').DataTable({
 	"language" : {
-		"decimal" : ",",
 		"thousands" : ","
 	},
 	"processing" : true,
@@ -161,12 +182,13 @@ var table = $('#dataTable').DataTable({
 	}, {
 		"data" : "strtDt",
 		"render" : function(data, type, row, meta) {
-			return data + "~" + row.endDt + "(" + row.prd + "일)";
+			return data + "~" + row.endDt + " (" + row.prd + "일)";
 		}
 	}, {
 		"data" : "stdtclssttn",
-		"render" : function(data, type, row, meta) {
-			return parseInt(data);
+		"render" : function(data){
+			data = data.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + '원';	
+			return data;
 		}
 	}, {
 		"className" : 'details-control',
@@ -207,7 +229,8 @@ table.on('select',	function(e, dt, type, indexes) {
 					+ '}');
 	//총 금액 
 	tMoney += parseInt(rowData[0].stdtclssttn);
-	document.getElementById("tMoney").innerHTML = "<b>총 결제 금액 : " + tMoney + "원</b>";
+	document.getElementById("tMoney").innerHTML = "<b>총 결제 금액 : " + inputNumberFormat(tMoney) + "원</b>";
+	console.log(inputNumberFormat(tMoney));
 	$.post({
 		url : root + "/applyClss",
 		data : JSON.stringify(selectClss),
@@ -238,8 +261,8 @@ table.on('select',	function(e, dt, type, indexes) {
 			+ ',"endDt":' + JSON.stringify(rowData[0].endDt)
 			+ ',"stdtclssttn":' + JSON.stringify(rowData[0].stdtclssttn) + '}';
 			
-	console.log(tMoney);
-	document.getElementById("tMoney").innerHTML = "<b>총 결제 금액 : " + tMoney + "원</b>";
+	document.getElementById("tMoney").innerHTML = "<b>총 결제 금액 : " + inputNumberFormat(tMoney) + "원</b>";
+	console.log(inputNumberFormat(tMoney));
 	
 	for (var i = 0; i < selectClss.length; i++) {
 		if (rowData == selectClss[i]) {
@@ -274,6 +297,10 @@ table.on('select',	function(e, dt, type, indexes) {
 });
 });
 
+function inputNumberFormat(tMoney) {
+    return String(tMoney).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+// 과목별 리스트 테이블
 function reqCrsList(sbjtNm, root) {
 $('#dataTable').dataTable().fnDestroy();
 var xhttp = new XMLHttpRequest();
@@ -317,9 +344,10 @@ xhttp.onreadystatechange = function() {
 					}
 			}, {
 				"data" : "stdtclssttn"
-//					"render" : function(data, type, row, meta) {
-//						return data + "' type='number'/>원";
-//					}	
+// 				"render" : function(data){
+// 					data = data.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + '원';	
+// 					return data;
+// 				}
 			}, {
 				"className" : 'details-control',
 				"width" : "10%",
@@ -336,6 +364,7 @@ xhttp.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 xhttp.send("sbjtNm=" + sbjtNm);
 }
 
+// 결제
 $("#payment").click(function() {
 	reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss);
 });
@@ -364,7 +393,6 @@ function reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss) {
                      xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
                  }
 	    	}).done(function(data) {
-//		    		if ( everythings_fine ) {
 	    			var msg = '결제가 완료되었습니다.';
 	    			msg += '\n고유ID : ' + rsp.imp_uid;
 	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
@@ -372,12 +400,6 @@ function reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss) {
 	    			msg += '카드 승인번호 : ' + rsp.apply_num;
 					document.getElementById("clssView").innerHTML = data;
 	    			alert(msg);
-//		    		} else {
-//		    			var msg = '아직 제대로 결제가 되지 않았습니다.';
-//		    			alert(msg);
-	    			//[3] 아직 제대로 결제가 되지 않았습니다.
-	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-//		    		}
 	    	});
 	    } else {
 	        var msg = '결제에 실패하였습니다.';

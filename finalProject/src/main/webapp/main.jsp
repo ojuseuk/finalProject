@@ -15,9 +15,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="${root}/styles/w3/w3.css">
 <style>
-.mySlides {
-	display: none;
-}
+.mySlides {display:none;}	
 
 <!--
 배너 오른쪽 -->#cAsideR .sky_bnr .sky_bnrline>div {
@@ -39,53 +37,33 @@
 <body>
 	<jsp:include page="top.jsp" />
 
-	<!-- Sidebar left   -->
-	<div class="sidebar"
-		style="width: 10%; background-color: #ffffff; margin-left: 90px;">
-		<div>
-			<img class="w3-padding" src="./imgs/banner/sky_bnr2.png">
-		</div>
-		<div>
-			<img class="w3-padding" src="./imgs/banner/ss_bn_go12.gif">
-		</div>
-		<div>
-			<img class="w3-padding" src="./imgs/banner/flo_crup.gif">
-		</div>
-		<div>
-			<img class="w3-padding" src="./imgs/banner/main_ss.gif">
-		</div>
-	</div>
-	<!-- Sidebar right -->
-	<div class="sidebar"
-		style="width: 10%; right: 0; background-color: #ffffff;">
-		<div>
-			<img class="w3-padding" src="./imgs/banner/90x135.gif">
-		</div>
-		<div>
-			<img class="w3-padding" src="./imgs/banner/90x135(1).gif">
-		</div>
-		<div>
-			<img class="w3-padding" src="./imgs/banner/90x333.gif">
-		</div>
-		<div>
-			<img class="w3-padding" src="./imgs/banner/main_ss.jpg">
-		</div>
-	</div>
 
-	<br>
-	<br>
-	<!-- banner start -->
-	<div class="w3-content" style="max-width: 500px;">
-		<img class="mySlides" src="./imgs/img/k750490.png"
-			style="width: 500px; height: 300px;"> <img class="mySlides"
-			src="./imgs/img/c750490.png" style="width: 500px; height: 300px;">
-		<img class="mySlides" src="./imgs/img/m750490.png"
-			style="width: 500px; height: 300px;"> <img class="mySlides"
-			src="./imgs/img/e750490.png" style="width: 500px; height: 300px;">
-	</div>
+<!-- Sidebar left   -->
+<div class="sidebar" style="width:6%; background-color: #ffffff; margin-left: 90px;">
+  <div><img class="w3-padding" src="./imgs/banner/sky_bnr2.png"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/ss_bn_go12.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/flo_crup.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/main_ss.gif"  ></div>  
+</div>
+<!-- Sidebar right -->
+<div class="sidebar" style="width:6%;right:0; background-color: #ffffff;">
+  <div><img class="w3-padding" src="./imgs/banner/90x135.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/90x135(1).gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/90x333.gif"  ></div>
+  <div><img class="w3-padding" src="./imgs/banner/main_ss.jpg"  ></div>
+</div>
 
-
-	<script type="text/javascript">
+<br>
+<br>
+<!-- banner start -->
+<div class="w3-content" style="max-width:500px;">
+<!--   <img class="mySlides" src="./imgs/img/k750490.png" style="width:500px; height: 300px;"> -->
+<!--   <img class="mySlides" src="./imgs/img/c750490.png" style="width:500px; height: 300px;"> 	 -->
+<!--   <img class="mySlides" src="./imgs/img/m750490.png" style="width:500px; height: 300px;"> -->
+<!--   <img class="mySlides" src="./imgs/img/e750490.png" style="width:500px; height: 300px;"> -->
+<!-- 	<img src="./imgs/banner/banner.png" style="100%"> -->
+</div>
+<!-- 	<script type="text/javascript">
 		var slideIndex = 0;
 		carousel();
 
@@ -103,7 +81,7 @@
 			setTimeout(carousel, 2000);
 		}
 	</script>
-	<!-- banner end -->
+	banner end -->
 
 	<div class="container">
 		<div class="row">
