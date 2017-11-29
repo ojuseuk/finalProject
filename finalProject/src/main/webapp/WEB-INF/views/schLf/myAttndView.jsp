@@ -18,13 +18,13 @@
 	    &nbsp;&nbsp;<span class="month" style="font-size: 40px"></span>월 </p>
 	  </caption>
 	  <tr>
-	    <th style="text-align: center">일</th>
-	    <th style="text-align: center">월</th>
-	    <th style="text-align: center">화</th>
-	    <th style="text-align: center">수</th>
-	    <th style="text-align: center">목</th>
-	    <th style="text-align: center">금</th>
-	    <th style="text-align: center">토</th>
+	    <th style="text-align: center; background-color: #90909096">일</th>
+	    <th style="text-align: center; background-color: #90909096">월</th>
+	    <th style="text-align: center; background-color: #90909096">화</th>
+	    <th style="text-align: center; background-color: #90909096">수</th>
+	    <th style="text-align: center; background-color: #90909096">목</th>
+	    <th style="text-align: center; background-color: #90909096">금</th>
+	    <th style="text-align: center; background-color: #90909096">토</th>
 	  </tr>
 	  <tr>
 	    <td>&nbsp;</td>

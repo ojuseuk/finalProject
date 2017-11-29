@@ -14,6 +14,17 @@
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
+<style type="text/css">
+.select {
+    width: 198px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -26,7 +37,7 @@
 			<table>
 				<tr>
 					<td width="18%">과목명 </td>
-					<td><select name="sbjtNm" id="sbjtNm" required onchange="crsSelect('${root}', this.value);
+					<td><select class="select" name="sbjtNm" id="sbjtNm" required onchange="crsSelect('${root}', this.value);
 																			 tchrSelectBySbjtNm('${root}', this.value)">
 							<option value="">과목 선택</option>
 							<c:forEach items="${requestScope.sbjtList}" var="data">
@@ -36,8 +47,8 @@
 				</tr>  
 				<tr>
 					<td width="18%">과정명 </td>
-					<td><select name="crsId" id="crsId">
-					
+					<td><select class="select" name="crsId" id="crsId">
+							<option value="">과정 선택</option>
 						</select>
 					</td>
 					<td align="right"><input class="w3-button w3-border" style="background-color: #90909096" type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${root}', document.getElementById('crsId').value)">
@@ -86,32 +97,27 @@
 		<div>
 		<fieldset style="width: 80%" id="fsTchr" hidden>				
 			<legend>강사 정보</legend>
-			<table style="float:left">
+			<table style="float:left; height:250px">
 				<tr>
-					<td width="20%">강사명 :</td>
+					<td width="20%">강사명</td>
 					<td>
-						<select name="tchrNo" id="tchrNo" onchange="tchrSelect('${pageContext.request.contextPath}', this.value)">
+						<select class="select" name="tchrNo" id="tchrNo" onchange="tchrSelect('${pageContext.request.contextPath}', this.value)">
 							<option value="">강사 선택</option>
-
 						</select>
-
 					</td>
-					
 				</tr>
 				<tr>
-					<td>강의료 :</td>
+					<td>강의료 </td>
 					<td><input type="number" name="slr" id="slr">  
-				
 				</tr>
 				<tr>
-					<td>강사 소개 : </td>
+					<td>강사 소개 </td>
 					<td><textarea name = "tchrIntro" id="tchrIntro" cols = "40" rows = "7" 
                               placeholder="200자 이내"></textarea></td>
 					<td><div id="tchrPhoto"></div> </td>
 				</tr>
 				<tr>
 					<td colspan="3">
-					
 						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="화면초기화" id="btnClear">
 						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="저장" onclick="assgnTchr('${pageContext.request.contextPath}')">
 						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="닫기" onclick="tchrClose()">
@@ -120,7 +126,7 @@
 			</table>
 			
 			<!-- 강사 리스트 DataTable -->  
-			<div id="divDtTchr" class="card mb-3" style="position:absolute; left:47%; width:400px; top:720px; display:inline-block;">
+			<div id="divDtTchr" class="card mb-3" style="position:absolute; left:47%; width:50%; top:800px; display:inline-block;">
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dtTchr">
@@ -148,7 +154,7 @@
 	<input type="hidden" id="root" value='${root}'>
 
 		<!-- 강좌 리스트 DataTable -->
-		<div id="demo" class="card mb-3" style="width:50%; height:200px; display:inline-block;">
+		<div id="demo" class="card mb-3" style="position:absolute; left:47%; width:50%; height:200px; display:inline-block;">
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">

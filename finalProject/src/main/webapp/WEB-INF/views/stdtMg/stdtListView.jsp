@@ -21,6 +21,16 @@
 #datatable{
     background-color:#fff;
 }
+.select {
+    width: 100px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
+
 </style>
 </head>
 <title>학생정보</title>
@@ -28,16 +38,16 @@
 <div style="width: 80%; margin: auto;">
 	<div class="table-responsive" style="margin: 20">
 		<c:if test="${not empty crsList}">
-		<b>과정</b>
-			<select name="crs" id="crs"	onchange="reqCrsList(this.value,'${root}')">
+		<font style="font-size: 17px"><b>과정</b></font>
+			<select class="select" name="crs" id="crs" onchange="reqCrsList(this.value,'${root}')">
 				<option value="default">선 택</option>
 				<c:forEach items="${crsList}" var="data">
 					<option value="${data.crsId}">${data.crsNm}</option>
 				</c:forEach>
 			</select>
 		</c:if>
-		<b>강좌</b>
-			<select id="clss" onchange="reqClssList(this.value, '${root}')">
+		<font style="font-size: 18px"><b>강좌</b></font>
+			<select class="select" id="clss" onchange="reqClssList(this.value, '${root}')">
 				<option>선 택</option>
 			</select> 
 	</div>
@@ -66,22 +76,22 @@
 	<span style="width:10%"></span>
 	<div style="width:50%; height:400px; float:left;">
 	<form action="${root}/insertStdt">
-	<table class="table table-bordered" id="inStdt" width="100%">
+	<table class="table table-bordered" id="inStdt" style="width:100%;">
 		<tr>
 			<td colspan="2"><h2 align="center">수강생 등록</h2></td>
 		</tr>
 		<tr>
-			<td>아이디</td>
+			<td align="center">아이디</td>
 			<td><input id="stdtId" type="text" name="id" placeholder="ID검색">
 			<input class="w3-button w3-border w3-tiny" id="selectId" style="background-color: #90909096" type="button" value="조회"><div id="selectResult"></div></td>
 		</tr>
 		<tr>
-			<td>수강생번호</td>
+			<td align="center">수강생번호</td>
 			<td><input type="text" name="stdtNo" value="${stdtNo}"></td>
 				</tr>
 				<tr>
-					<td>학 과</td>
-					<td><select id="mjrTp" name="mjrTp">
+					<td align="center">학 과</td>
+					<td><select select class="select" id="mjrTp" name="mjrTp">
 						<option value="문 과">문 과</option>
 						<option value="이 과">이 과</option>
 						<option value="예체능">예체능</option>
@@ -89,8 +99,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td>강좌</td>
-					<td><select id="geClss" name="clssId">
+					<td align="center">강좌</td>
+					<td><select select class="select" id="geClss" name="clssId">
 						<option value="CL004">종합반A</option>
 						<option value="CL005">종합반B</option>
 						<option value="CL006">종합반C</option>
@@ -98,19 +108,19 @@
 					</td>
 				</tr>
 				<tr>
-					<td>대입응시횟수</td>
+					<td align="center">대입응시횟수</td>
 					<td><input type="number" name="retryCnt"></td>
 				</tr>
 				<tr>
-					<td>부모님 연락처</td>
+					<td align="center">부모님 연락처</td>
 					<td><input type="text" name="prntPhone"></td>
 				</tr>
 				<tr>
-					<td>등록일</td>
+					<td align="center">등록일</td>
 					<td><input type="date" name="paidDt" id="regDate"></td>
 				</tr>
 				<tr>
-					<td>환불일</td>
+					<td align="center">환불일</td>
 					<td><input type="date" name="repaidDt" id="retDate"></td>
 				</tr>
 				<tr>
@@ -272,8 +282,8 @@ function reqClssList(clssId, root) {
 
 </script>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br>
-<jsp:include page="../../../footer.jsp"/>
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+<!-- <br><br> -->
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
 
 

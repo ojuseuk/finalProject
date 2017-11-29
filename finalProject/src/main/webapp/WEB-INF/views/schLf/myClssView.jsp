@@ -29,7 +29,7 @@
 		<div class="card-body">
 			<h2 align="center">나의 수강 정보</h2>
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable">
+				<table class="table table-bordered" id="dataTable" style="text-align: center;">
 					<thead style="background-color: #90909096">
 						<tr>
 							<th>강좌명</th>
@@ -85,7 +85,7 @@ function inputDateFormat(date) {
 	return year + '-' + month + '-' + day;
 }
 </script>
-<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+<!-- <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br> -->
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>

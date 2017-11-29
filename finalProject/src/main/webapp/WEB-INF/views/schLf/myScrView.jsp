@@ -11,12 +11,23 @@
 <html>
 <head>
 <title>나의 성적</title>
+<style>
+.select {
+    width: 220px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
+</style>
 </head>
 <jsp:include page="../../../top.jsp"/>
 <body>
 <div style="width: 80%; margin: auto;">
 	<div id="examTp" style="margin:20">
-		<p align="right"><select id="examTpList" onchange="scrBySbjt(this.value,'${root}')"></select></p>
+		<p align="right"><select class="select" id="examTpList" onchange="scrBySbjt(this.value,'${root}')"></select></p>
 	</div>
 	<div id="chart" style="width:100%;"></div>
 </div>
@@ -204,12 +215,9 @@
 			});
 		}
 	
-// 		$(document).ready(function() {
-			console.log(2);
-			createChart();
-			$(document).bind("kendo:skinChange", createChart);
-			$(".options").bind("change", refresh);
-// 		});
+		createChart();
+		$(document).bind("kendo:skinChange", createChart);
+		$(".options").bind("change", refresh);
 		
 		function refresh() {
 			console.log(3);
@@ -222,14 +230,13 @@
 				series[i].type = type;
 			}
 			;
-	
 			chart.setOptions({
 				series : detailscr
 			});
 		}
 	}
 </script>
-<Br><Br><Br><Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+<!-- <Br><Br><Br><Br><Br> -->
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>

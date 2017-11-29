@@ -12,11 +12,23 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
-<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
+<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+<style>
+.select {
+    width: 179px;
+    height: 25px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 0px;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
-<div style="width: 80%; margin: auto;">
+<div style="margin-top: 20px"></div>
+<div style="width: 84%; margin: auto;">
  	<!-- <form action="tchrInsert.do" id="frmTchr" method="post"> -->
  	<div style="width: 50%; float: left">
   	<form action="tchrInsert.do" id="frmTchr" method="post" enctype="multipart/form-data">
@@ -59,14 +71,14 @@
 			<legend>강사 정보</legend>
 			<table>
 				<tr>
-					<td>강사번호 :</td>
+					<td>강사번호 </td>
 					<td><input type="text" name="tchrNo" id="tchrNo"/>
 					</td>
 					
 				</tr>  
 				<tr>
-					<td>담당과목 :</td>
-					<td><select name="sbjtChrg" id="sbjtChrg">
+					<td>담당과목 </td>
+					<td><select class="select" name="sbjtChrg" id="sbjtChrg">
 							<option value="">과목 선택</option>
 							<c:forEach items="${requestScope.sbjtList}" var="data">
 								<option value=${data.sbjtNm}>${data.sbjtNm}</option>
@@ -74,7 +86,7 @@
 						</select></td>
 				</tr>
 				<tr>
-					<td>강사 소개 : </td>
+					<td>강사 소개 </td>
 					<td><textarea name = "tchrIntro" id="tchrIntro" cols = "50" rows = "7" 
                               placeholder="200자 이내"></textarea></td>
                     </td>
@@ -83,7 +95,7 @@
                     </td>
 				</tr>
 				<tr>
-					<td>사진 : </td>
+					<td>사진 </td>
                     <td><input type="file" name="imgFile"><br> 
                     </td>
 				</tr>

@@ -29,7 +29,7 @@ tr.shown td.details-control {
 <div id="demo" class="card mb-3" style="width: 80%; margin: auto;">
 	<div class="card-body">
 		<div class="table-responsive">
-			<table class="table table-bordered" id="dataTable">
+			<table class="table table-bordered" id="dataTable" style="text-align: center;">
 				<thead style="background-color: #90909096;">
 					<tr>
 						<th>번호</th>

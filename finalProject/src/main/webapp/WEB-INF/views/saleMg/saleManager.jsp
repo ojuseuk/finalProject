@@ -23,21 +23,33 @@ footer {
 }
 </style>
 </head> -->
+<style type="text/css">
+.select {
+    width: 100px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
+</style>
 <body>
 <jsp:include page="../../../top.jsp"/>
+<div style="margin-top: 20px"></div>
 <div id="content" style="width: 80%; margin: auto;">
-	<select id="year" onchange="yearSale()" name="month">
+	<select class="select" id="year" onchange="yearSale()" name="month">
 		<option value="선택">선택</option>
 	</select>
 	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'y')" value="년 매출">
-	<select id="month" name="month" onchange="monthSale()">
+	<select class="select" id="month" name="month" onchange="monthSale()">
 		<option value="선택" id="default">선택</option>
 	</select>
 	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'm')" value="월 매출">
 	<input type="date" id="day" name="day">
 	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'd')" value="일 매출">
 	
-	<div style="width: 100%;">
+	<div style="width: 100%; margin-top: 10px">
 		<div id="demo" class="card mb-3" align="left"
 			style="float: left; width: 50%">
 			<div class="card-body">
@@ -102,10 +114,10 @@ footer {
 		</div>
 	</div>
 </div>
-<br><br><br><br><br><br><br><br><br>
-<footer>
-<jsp:include page="../../../footer.jsp"/>
-</footer>
+<!-- <br><br><br><br><br><br><br><br><br> -->
+<!-- <footer> -->
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
+<!-- </footer> -->
 <script src="${root}/js/saleMg/saleManager.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	

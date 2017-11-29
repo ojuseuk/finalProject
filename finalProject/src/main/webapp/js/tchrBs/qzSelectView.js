@@ -27,7 +27,7 @@ function qzSelect(root) {
 			
 			var $form = $('<form action="'+root+'/tchrBs/qzInsert"></form>');
 			var $tableInput = $('<table></table>');
-			var $select = $('<select id="examTp" name="examTp"></select>');
+			var $select = $('<select class="select" id="examTp" name="examTp"></select>');
 			var $option1 = $('<option value="선택">선택</option>');
 			var $input1 = $('<input type="text" name="examTitle">');
 			var $input2 = $('<input type="date" name="examDt">');
