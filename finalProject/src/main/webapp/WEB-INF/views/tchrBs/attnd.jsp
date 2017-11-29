@@ -12,39 +12,14 @@
 <script src="${root}/js/jquery.min.js"></script>
 <body>
 <jsp:include page="../../../top.jsp"/>
-	<div class="w3-container">
-		<h2>강사 업무 - 출석 확인</h2>
+	<div class="w3-container" style="width: 80%; margin: auto;">
+		<h2 align="center">출석 확인</h2>
 
 		<select name="clss" id="clss">
 			<option value="선택">선택</option>
 		</select>
 		<button onclick="clssSearch('${root}')">조회</button>
 
-		<div id="default">
-			<table class="w3-table w3-bordered">
-				<tr>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-				</tr>
-				<tr>
-					<td>월</td>
-					<td>화</td>
-					<td>수</td>
-					<td>목</td>
-					<td>금</td>
-				</tr>
-				<tr>
-					<td>abc</td>
-					<td>abc</td>
-					<td>abc</td>
-					<td>abc</td>
-					<td>abc</td>
-				</tr>
-			</table>
-		</div>
 		<br>
 		<br>
 		<br>

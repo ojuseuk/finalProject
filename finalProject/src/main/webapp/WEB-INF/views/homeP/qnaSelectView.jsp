@@ -106,8 +106,11 @@ tr.shown td.details-control {
 				"data" : "id"/* ,
 				"width" : "15%" */
 			}, {
-				"data" : "dt"/* ,
-				"width" : "15%" */
+				"data" : "dt",
+				"render" : function(data){
+					
+					return data.substring(0,4) + "-"+data.substring(4,6) + "-"+data.substring(6,8);
+				}
 			}, {
 				"className" : 'details-control',
 				"width" : "10%",

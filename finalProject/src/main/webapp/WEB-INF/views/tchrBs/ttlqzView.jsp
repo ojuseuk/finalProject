@@ -12,8 +12,8 @@
 <script src="${root}/js/jquery.min.js"></script>
 <body>
 <jsp:include page="../../../top.jsp"/>
-	<div class="w3-container">
-		<h2>문제 생성</h2>
+	<div class="w3-container" style="width: 80%; margin: auto;">
+		<h2 align="center">문제 생성</h2>
 
 		<form action="${root}/tchrBs/ttlqzInsert">
 			<table class="w3-table w3-bordered">
@@ -46,15 +46,15 @@
 				</tr>
 				<tr>
 					<td>문제 제목</td>
-					<td><textarea rows="3" cols="50" name="title"></textarea></td>
+					<td><textarea rows="3" cols="100" name="title"></textarea></td>
 				</tr>
 				<tr>
 					<td>문제 내용</td>
-					<td><textarea rows="10" cols="50" name="content"></textarea></td>
+					<td><textarea rows="10" cols="100" name="content"></textarea></td>
 				</tr>
 				<tr>
 					<td>문제 답(골라야 함)</td>
-					<td><textarea rows="10" cols="50" name="solution"></textarea></td>
+					<td><textarea rows="10" cols="100" name="solution"></textarea></td>
 				</tr>
 				<tr>
 					<td>문제 난이도</td>

@@ -51,7 +51,7 @@ public class TchrBsDaoImp implements TchrBsDao {
 		
 		System.out.println("dao tchrBsTchr");
 		
-		return sqlSession.selectList("test.tchrBsTchr");
+		return sqlSession.selectList("tchrBsMapper.tchrBsTchr");
 	}
 
 	/**
