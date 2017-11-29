@@ -118,10 +118,10 @@ nav.menu{
 <div id="id03" class="modal">
   <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">×</span>
   <form class="modal-content animate" action="${root}/userInsert.do" method="post">
-    <div class="container">
-      <div class="clearfix">
-        <button type="button" class="signupbtn" style="width: 80%;" onclick="location.href='<c:url value="inputUsrInfo"/>'">회원정보변경</button><br>
-        <button type="button" class="signupbtn" style="width: 80%;" onclick="location.href='<c:url value="delUser"/>'">회원탈퇴</button><br>
+    <div class="containerInfo">
+      <div class="InfoContainer">
+        <button type="button" class="signupbtn"  onclick="location.href='<c:url value="inputUsrInfo"/>'">회원정보변경</button><br>
+        <button type="button" class="signupbtn"  onclick="location.href='<c:url value="delUser"/>'">회원탈퇴</button><br>
         <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn" style="width: 19%;">취소</button>
       </div>
     </div>

@@ -24,7 +24,7 @@ footer {
 </head> -->
 <body>
 <jsp:include page="../../../top.jsp"/>
-<div id="content">
+<div id="content" style="width: 80%; margin: auto;">
 	<select id="year" onchange="yearSale()" name="month">
 		<option value="선택">선택</option>
 	</select>

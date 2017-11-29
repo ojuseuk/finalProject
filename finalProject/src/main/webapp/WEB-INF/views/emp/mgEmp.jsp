@@ -16,10 +16,10 @@
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
-<script src="${root}/js/emp/emp.js"></script>	
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
+<br><br>
 <div style="width: 80%; margin: auto;">
 	<div style="width: 50%; float: left;">
 		<form action="empInsert" id="frmEmp" name="frmEmp">
@@ -53,12 +53,12 @@
 				<table>
 					<tr>
 						<td>사원번호 :</td>
-						<td><input type="text" name="empNo" id="empNo"  					
-						<c:if test="${not empty emp.empNo}">
-							value = ${emp.empNo}
-						</c:if>
-						/></td>
-	
+						<td>
+						<input type="text" name="empNo" id="empNo"/>  					
+							<c:if test="${not empty emp.empNo}">
+								value = ${emp.empNo}
+							</c:if>
+						</td>
 					</tr>
 					<tr>
 						<td>급여 :</td>
@@ -100,9 +100,6 @@
 	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
 	<input type = "hidden" id="root" value='${root}'>
 
-
-
-
 	<!-- 리스트 출력 -->
 		<!-- 직원 리스트 DataTable -->
 	<div id="demo" class="card mb-3" style="width:50%; height:200px; display:inline-block;">
@@ -127,9 +124,7 @@
 	</div>
 </div>
 <br>
-
-
-
+<script src="${root}/js/emp/emp.js"></script>
 <%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>
