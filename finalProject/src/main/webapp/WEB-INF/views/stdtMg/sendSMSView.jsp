@@ -5,6 +5,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -37,10 +38,12 @@
 	        	<td width="150" height="20">
 	           		<p align="right">&nbsp;</p>
 	       		 </td>
-	        <td width="450" height="20">
-	        <input type=submit value="전 송">
-	        <input type=reset value="다시쓰기">
-	   		<input type="button" name="command" value="지각안내" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
+	        <td width="450" height="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        <input class="w3-button w3-border" style="background-color: #90909096" type=submit value="전 송">
+	        &nbsp;
+	        <input class="w3-button w3-border" style="background-color: #90909096" type=reset value="다시쓰기">
+	   		&nbsp;
+	   		<input class="w3-button w3-border" style="background-color: #90909096" type="button" name="command" value="지각안내" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
 	   		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	   		</td>
 	    </tr>

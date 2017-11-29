@@ -11,20 +11,20 @@
 <body>
 <jsp:include page="../../../top.jsp"/>
 <div id="calendar_wrap" style="width: 80%; margin: auto;">
-	<table class="table table-bordered" id="calendar" >
+	<table class="table table-bordered" id="calendar" style="background-color: #ffffff; text-align: center">
 <!-- 	border="1" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black" -->
 	  <caption>
 	    <p align="center"><span class="year" style="font-size: 40px"></span>년 
 	    &nbsp;&nbsp;<span class="month" style="font-size: 40px"></span>월 </p>
 	  </caption>
 	  <tr>
-	    <th>일</th>
-	    <th>월</th>
-	    <th>화</th>
-	    <th>수</th>
-	    <th>목</th>
-	    <th>금</th>
-	    <th>토</th>
+	    <th style="text-align: center">일</th>
+	    <th style="text-align: center">월</th>
+	    <th style="text-align: center">화</th>
+	    <th style="text-align: center">수</th>
+	    <th style="text-align: center">목</th>
+	    <th style="text-align: center">금</th>
+	    <th style="text-align: center">토</th>
 	  </tr>
 	  <tr>
 	    <td>&nbsp;</td>

@@ -16,7 +16,7 @@
 	<select name="clss" id="clss">
 		<option value="선택">선택</option>
 	</select>
-	<button onclick="stSearch('${root}')">조회</button>
+	<button class="w3-button w3-border" style="background-color: #90909096" onclick="stSearch('${root}')">조회</button>
 	
 			<table class="w3-table w3-bordered" id="search">
 				<tr id="default">

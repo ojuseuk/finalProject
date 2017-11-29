@@ -18,7 +18,7 @@
 		<select name="clss" id="clss">
 			<option value="선택">선택</option>
 		</select>
-		<button onclick="clssSearch('${root}')">조회</button>
+		<button class="w3-button w3-border w3-tiny" style="background-color: #90909096" onclick="clssSearch('${root}')">조회</button>
 
 		<br>
 		<br>

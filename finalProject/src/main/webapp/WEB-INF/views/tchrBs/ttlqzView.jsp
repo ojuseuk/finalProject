@@ -75,10 +75,10 @@
 					<td><input type="file" value="파일 첨부" name="imgFile"></td>
 				</tr>
 			</table>
-			<input type="submit" value="문제 생성">
+			<p align="center"><input class="w3-bar w3-border" style="background-color: #90909096; width:50%; align:center" type="submit" value="문제 생성"></p>
 		</form>
 	</div>
-
+	<br><br><br>
 	<input type="hidden" value='${requestScope.json}' id="json">
 	<input type="hidden" value='${requestScope.jsonTchr}' id="jsonTchr">
 	<input type="hidden" value="${requestScope.listTpc.size()}" id="list">

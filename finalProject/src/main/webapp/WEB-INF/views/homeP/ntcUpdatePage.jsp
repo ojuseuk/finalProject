@@ -43,7 +43,7 @@
 				</tr>
 			</table>
 			<div style="float: right;">
-				<input type="submit" value="공지사항 수정">
+				<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="공지사항 수정">
 			</div>
 		</form>
 	</div>

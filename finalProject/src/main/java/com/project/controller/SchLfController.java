@@ -79,10 +79,12 @@ public class SchLfController {
 	@RequestMapping("selectCrsPerSbjt")
 	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
 	public @ResponseBody List<ClssInfoDto> selectCrsPerSbjt(@RequestParam("sbjtNm") String sbjtNm){
+		System.out.println(sbjtNm);
 		List<ClssInfoDto> list = new ArrayList<>();
 		try {
-			if(sbjtNm.equals("선 택")){
+			if(sbjtNm.equals("default")){
 				list = schLfService.selectByCrs();
+				return list;
 			}
 			list = schLfService.selectCrsPerSbjt(sbjtNm);
 		} catch (Exception e) {
@@ -331,8 +333,7 @@ public class SchLfController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// clssList json으로 변환
-		return "schLf/paymentSucView";
+		return "schLf/myClssView";
 	}
 	
 	

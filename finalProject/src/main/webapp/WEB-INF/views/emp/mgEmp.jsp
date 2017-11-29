@@ -16,6 +16,7 @@
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -33,7 +34,7 @@
 								value = ${emp.id}
 							</c:if>
 							/>
-							<input type="button" value="조회"
+							<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" value="조회"
 							onclick="searchUsr('${pageContext.request.contextPath}', document.getElementById('id2').value)">
 						</td>
 						
@@ -76,7 +77,7 @@
 								value = ${emp.retiredDt}
 							</c:if>
 							/>
-							<input type="button" value="퇴직처리"
+							<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" value="퇴직처리"
 							onclick="empRetire('${pageContext.request.contextPath}', document.getElementById('empNo').value)">
 						</td>
 					</tr>
@@ -84,15 +85,15 @@
 			</fieldset>
 			<br>
 			<br> 
-			<input type="reset" value="화면 초기화"> 
-			<input type="submit" value="직원 등록"> 
+			<input class="w3-button w3-border" style="background-color: #90909096" type="reset" value="화면 초기화"> 
+			<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="직원 등록"> 
 			
 			<!-- 동기 방식 -->
-			<input type="button" value="수정 내용 저장" onclick="empUpdate()">
+			<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="수정 내용 저장" onclick="empUpdate()">
 			<%-- 비동기 처리 시
 	 			<input type="button" value="수정 내용 저장" onclick="empUpdate('${pageContext.request.contextPath}', '${data.empNo}')"> 
 	 		--%>
-			<input type="button" onclick="javascript:history.back()" value="이전 화면으로">
+			<input class="w3-button w3-border" style="background-color: #90909096" type="button" onclick="javascript:history.back()" value="이전 화면으로">
 	 		<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
 	
 		</form>
