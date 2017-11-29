@@ -22,25 +22,17 @@
 	<div class="card-body">
 		<div class="table-responsive">
 			<table class="table table-bordered" id="dataTable">
-				<thead>
+				<thead style="background-color: #90909096;">
 					<tr>
 						<th>번호</th>
 						<th>게시글 제목</th>
 						<th>첨부 파일</th>
 						<th>날짜</th>
+						<th>상세 보기</th>
 						<th>수정 하기</th>
 					</tr>
 				</thead>
-				<tfoot>
-					<tr>
-						<th>번호</th>
-						<th>게시글 제목</th>
-						<th>첨부 파일</th>
-						<th>날짜</th>
-						<th>수정 하기</th>
-					</tr>
-				</tfoot>
-				<tbody>
+				<tbody style="background-color: white;">
 					<tr class="odd" id="dataDefault">
 						<td valign="top" colspan="6" class="dataTables_empty"
 							align="center">No data available in table</td>

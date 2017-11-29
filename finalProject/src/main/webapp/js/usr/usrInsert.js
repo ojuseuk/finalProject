@@ -6,7 +6,7 @@ function sendIt() {
 	let email = $('.email').val();
 	let regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 	let regPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-	let id = $('.id1');
+	let id = $('.id');
 	let idVal = id.val();
 	let pw = $('.pw');
 	let pwVal = pw.val();
@@ -15,8 +15,6 @@ function sendIt() {
 	let phone = $('.phone');
 	let phoneVal = phone.val();
 
-	alert(idVal);
-	alert(pwVal);
 	// 아이디 입력여부 검사
 	if (idVal == "") {
 		alert("아이디를 입력하지 않았습니다.")

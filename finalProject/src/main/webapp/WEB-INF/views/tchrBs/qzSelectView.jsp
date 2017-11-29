@@ -12,7 +12,7 @@
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
-	<h2>문제 생성</h2>
+	<h2>시험 출제</h2>
 	<input type="hidden" value='${requestScope.jsonTchr}' id="jsonTchr">
 	<input type="hidden" value='${requestScope.jsonExam}' id="jsonExam">
 	<select id="qzSbjtNm" name="sbjtNm">

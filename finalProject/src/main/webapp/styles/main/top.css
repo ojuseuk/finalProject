@@ -28,7 +28,7 @@
 
 /* 로그인 전송 버튼 */
 .submit{
-    background-color: #e6e6ff;
+    background-color: #5b5e61b3;
     color: white;
     padding: 10px 20px;
     margin: 8px 0;
@@ -46,17 +46,17 @@
 	background-color: #5b5e61b3;
     color: white;
     padding: 10px 20px;
-    margin: auto 14px auto 14px;
+    margin: auto 23px;
     border: none;
     cursor: pointer;
-    width: 44%;
+    width: 40%;
     align-content: center;
 /*     float: right; */
 }
 
 /* Set a style for all buttons */
 button[type="button"] {
-    background-color: #3333cc;
+    background-color: #5b5e61b3;
     color: white;
     padding: 10px 20px;
     margin: 8px 0;

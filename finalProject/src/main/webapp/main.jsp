@@ -40,10 +40,10 @@
 
 
 <!-- Sidebar left   -->
-<div class="sidebar" style="width:6%; background-color: #f2f4f7; margin-left: 90px;">
+<div class="sidebar" style="width:6%; background-color: #f2f4f7; margin-left: 3%;">
   <div><img class="w3-padding" src="./imgs/banner/90x333.gif"></div>
-  <div><img class="w3-padding" src="./imgs/banner/flo_crup.gif"  ></div>
-  <div><img class="w3-padding" src="./imgs/banner/main_ss.gif"  ></div>  
+  <div><img class="w3-padding" src="./imgs/banner/flo_crup.gif" width="120px"></div>
+  <div><img class="w3-padding" src="./imgs/banner/main_ss.gif" width="120px"></div>  
 </div>
 <!-- Sidebar right -->
 <div class="sidebar" style="width:6%;right:0; background-color: #f2f4f7;">

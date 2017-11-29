@@ -17,7 +17,7 @@
     <div class="container">
 		<label><b>아이디</b></label>
 		<input type="text" id="id1" name="id" value="${requestScope.usr.id}" disabled="disabled">
-		<input type="hidden" placeholder="아이디 ※ 영문+숫자 조합 6~14자 이내" class="id1" name="id" id="id1" value="${requestScope.usr.id}" required ><br>
+		<input type="hidden" placeholder="아이디 ※ 영문+숫자 조합 6~14자 이내" class="id" name="id" id="id1" value="${requestScope.usr.id}" required ><br>
 		<span class="check_error"></span><br>
 		<!-- <input type="button" id="btn_idcheck" name="btn_idcheck" value="중복확인"> -->
 		

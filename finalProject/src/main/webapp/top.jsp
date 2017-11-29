@@ -14,7 +14,7 @@
 </head>
 <style>
 div.backgroundTop {
-	background: url('./imgs/img/back.png') no-repeat center center;
+	background: url('${root}/imgs/img/back.png') no-repeat center center;
 	cursor: pointer;
 	height: 200px;
 }
@@ -54,7 +54,6 @@ nav.menu{
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="${root}/main.jsp"><font color="#000000">Logo</font></a>
       <a class="navbar-brand" href="${root}/main.jsp"><font color="#000000">Home</font></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -107,9 +106,9 @@ nav.menu{
         <span class="glyphicon glyphicon-user"></span>회원가입</a></li>
 		</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
-       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'">
+       	<li><a href="javascript:void(0)" onclick="document.getElementById('id03').style.display='block'" id="fontBlack">
        	<span class="glyphicon glyphicon-user"></span><sec:authentication property="principal.nm" />님</a></li>
-        <li><a href="javascript:logout();"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" >
+        <li><a href="javascript:logout();"  class="w3-bar-item w3-button w3-padding-large w3-hide-small"  id="fontBlack">
         <span class="glyphicon glyphicon-remove-sign"></span>로그아웃</a></li>
 	</sec:authorize>
       </ul>
