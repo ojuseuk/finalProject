@@ -146,6 +146,7 @@ public class EmpMgController {
 			
 			JSONArray jsonList = JSONArray.fromObject(list);
 			data.addAttribute("jsonList", jsonList);
+			System.out.println(jsonList);
 			url = "emp/mgEmp";
 			System.out.println("emp controller list.size() : " + list.size());
 		} catch (SQLException e) {

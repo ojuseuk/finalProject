@@ -6,13 +6,15 @@
 			만약 getAttribute('content')를 했을경우 ''가 찍힌다면 spring-security의 
 			csrf 방어를 할지 안할지의 여부 확인 필요.
 		*/
-		var root = document.getElementById("root").value;
+//		var root = document.getElementById("root").value;
+		var root = $('#root').val();
 		var token = document.getElementById('_csrf').getAttribute('content');
 		var header = document.getElementById('_csrf_header').getAttribute('content');
 		var xhttp = new XMLHttpRequest();
 		var data;
-
-		resultMsg = document.getElementById("resultMsg").value;
+		
+		var resultMsg = $('#resultMsg').val();
+//		var resultMsg = document.getElementById("resultMsg").value;
 		if(resultMsg != ""){
 			alert(resultMsg);
 		}
@@ -24,7 +26,8 @@
 		}
 //		document.getElementById("frmCrs").action = root + "/courseUpdate";
 
-		var jsonList = document.getElementById("jsonList").value;
+		var jsonList = $('#jsonList').val();
+//		var jsonList = document.getElementById("jsonList").value;
 		console.log(jsonList);
 		jsonList = JSON.parse(jsonList);
 		

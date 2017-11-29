@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-<div style="background-color: #e6e6ff">
+<div style="background-color: #e6e6ff; height: 200px;">
   <div class="container text-center">
-    <h1><img src="./imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="50" height="50" style="margin-bottom: 10px">&nbsp; Royal Academy</h1>      
+    <h1><img src="${root}/imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="50" height="50" style="margin-bottom: 10px">&nbsp; Royal Academy</h1>      
     <p>대학 입시, 주요 과목 특강</p>
   </div>
 </div>
@@ -90,10 +90,10 @@
 <div id="id03" class="modal">
   <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">×</span>
   <form class="modal-content animate" action="${root}/userInsert.do" method="post">
-    <div class="container">
-      <div class="clearfix">
-        <button type="button" class="signupbtn" style="width: 80%;" onclick="location.href='<c:url value="inputUsrInfo"/>'">회원정보변경</button><br>
-        <button type="button" class="signupbtn" style="width: 80%;" onclick="location.href='<c:url value="delUser"/>'">회원탈퇴</button><br>
+    <div class="containerInfo">
+      <div class="InfoContainer">
+        <button type="button" class="signupbtn"  onclick="location.href='<c:url value="inputUsrInfo"/>'">회원정보변경</button><br>
+        <button type="button" class="signupbtn"  onclick="location.href='<c:url value="delUser"/>'">회원탈퇴</button><br>
         <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn" style="width: 19%;">취소</button>
       </div>
     </div>

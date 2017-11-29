@@ -53,7 +53,8 @@ tr.shown td.details-control {
 		</div>
 	</div>
 </div>
-
+<Div st> 
+</Div>
 	<!-- dataTable 기본 js -->
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -123,7 +124,7 @@ tr.shown td.details-control {
 		});
 
  		$('#dataTable tbody').on('click', 'td.details-control', function() {
-			var tr = $(this).closest('tr');
+ 			var tr = $(this).closest('tr');
 			var row = table.row(tr);
 			
 			if (row.child.isShown()) {
@@ -133,6 +134,7 @@ tr.shown td.details-control {
 			} else {
 				// Open this row
 				row.child(format(row.data())).show();
+				tr.next().css('background', 'yellow');
 				tr.addClass('shown');
 			}
 

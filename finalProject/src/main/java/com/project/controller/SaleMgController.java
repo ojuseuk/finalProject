@@ -55,7 +55,7 @@ public class SaleMgController {
 	 * @Method Name : saleMgInsert
 	 * @작성일 : 2017. 11. 8.
 	 * @작성자 : 오주석
-	 * @Method 설명 : 
+	 * @Method 설명 : 학생 수강료 수납
 	 * return type : void
 	 * @param session
 	 * @param date
@@ -64,7 +64,7 @@ public class SaleMgController {
 	 */
 	@RequestMapping("/saleMgInsert")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
-	public void saleMgInsert(@RequestParam("date") String date, @RequestParam("amount") int amount) {
+	public String saleMgInsert(@RequestParam("date") String date, @RequestParam("amount") int amount) {
 
 		System.out.println("controller saleMgInsert");
 
@@ -75,6 +75,7 @@ public class SaleMgController {
 			e.printStackTrace();
 		}
 
+		return "saleMg/accep";
 	}
 
 	/**
@@ -132,7 +133,7 @@ public class SaleMgController {
 
 		System.out.println("controller saleMgManager");
 
-		return "/saleMg/saleTest";
+		return "/saleMg/saleManager";
 	}
 
 	/**

@@ -16,7 +16,6 @@
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
-<script src="${root}/js/emp/emp.js"></script>	
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -91,14 +90,12 @@
  			<input type="button" value="수정 내용 저장" onclick="empUpdate('${pageContext.request.contextPath}', '${data.empNo}')"> 
  		--%>
 		<input type="button" onclick="javascript:history.back()" value="이전 화면으로">
- 		<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
+ 		<input type="hidden" id="resultMsg" name="resultMsg" value="${requestScope.resultMsg}">
 
 	</form>
-	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
-	<input type = "hidden" id="root" value='${root}'>
-
-
-
+	
+	<input type = "hidden" id="jsonList" name="jsonList" value='${jsonList}'>
+	<input type = "hidden" id="root" name="root" value="${root}">
 
 	<!-- 리스트 출력 -->
 		<!-- 직원 리스트 DataTable -->
@@ -124,9 +121,7 @@
 		</div>
 
 <br>
-
-
-
+<script src="${root}/js/emp/emp.js"></script>
 <%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>
