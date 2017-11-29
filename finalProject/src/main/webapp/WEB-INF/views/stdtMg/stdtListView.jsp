@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css"> -->
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
 <!-- *학생 중복 출력 수정, 업데이트 시 종합반만 변경 가능하게 수정, 중복코드 정리, 변수 정리, 스크롤 -->
@@ -22,7 +23,7 @@
     background-color:#fff;
 }
 .select {
-    width: 100px;
+    width: 150px;
     height: 30px;
     padding-left: 10px;
     font-size: 15px;
@@ -76,60 +77,61 @@
 	<span style="width:10%"></span>
 	<div style="width:50%; height:400px; float:left;">
 	<form action="${root}/insertStdt">
-	<table class="table table-bordered" id="inStdt" style="width:100%;">
-		<tr>
-			<td colspan="2"><h2 align="center">수강생 등록</h2></td>
-		</tr>
-		<tr>
-			<td align="center">아이디</td>
-			<td><input id="stdtId" type="text" name="id" placeholder="ID검색">
-			<input class="w3-button w3-border w3-tiny" id="selectId" style="background-color: #90909096" type="button" value="조회"><div id="selectResult"></div></td>
-		</tr>
-		<tr>
-			<td align="center">수강생번호</td>
-			<td><input type="text" name="stdtNo" value="${stdtNo}"></td>
-				</tr>
-				<tr>
-					<td align="center">학 과</td>
-					<td><select select class="select" id="mjrTp" name="mjrTp">
-						<option value="문 과">문 과</option>
-						<option value="이 과">이 과</option>
-						<option value="예체능">예체능</option>
-					</select>
-					</td>
-				</tr>
-				<tr>
-					<td align="center">강좌</td>
-					<td><select select class="select" id="geClss" name="clssId">
-						<option value="CL004">종합반A</option>
-						<option value="CL005">종합반B</option>
-						<option value="CL006">종합반C</option>
-					</select>
-					</td>
-				</tr>
-				<tr>
-					<td align="center">대입응시횟수</td>
-					<td><input type="number" name="retryCnt"></td>
-				</tr>
-				<tr>
-					<td align="center">부모님 연락처</td>
-					<td><input type="text" name="prntPhone"></td>
-				</tr>
-				<tr>
-					<td align="center">등록일</td>
-					<td><input type="date" name="paidDt" id="regDate"></td>
-				</tr>
-				<tr>
-					<td align="center">환불일</td>
-					<td><input type="date" name="repaidDt" id="retDate"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><p align="center">
-						<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="저장">
-						<input class="w3-button w3-border" style="background-color: #90909096" type="reset" value="리셋">
-					</p></td>
-				</tr>
-			</table>
+		<fieldset style="width: 100%">
+			<legend style="text-align: center;"><h2>수강생 등록</h2></legend>
+				<table class="table table-bordered" id="inStdt" style="width:100%;">
+					<tr>
+						<td align="center">아이디</td>
+						<td><input id="stdtId" type="text" name="id" placeholder="ID검색">
+						<input class="w3-button w3-border w3-tiny" id="selectId" style="background-color: #90909096" type="button" value="조회">
+						<div id="selectResult"></div></td>
+					</tr>
+					<tr>
+						<td align="center">수강생번호</td>
+						<td><input type="text" name="stdtNo" value="${stdtNo}"></td>
+					</tr>
+					<tr>
+						<td align="center">학 과</td>
+						<td><select select class="select" id="mjrTp" name="mjrTp">
+							<option value="문 과">문 과</option>
+							<option value="이 과">이 과</option>
+							<option value="예체능">예체능</option>
+						</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">강좌</td>
+						<td><select select class="select" id="geClss" name="clssId">
+							<option value="CL004">종합반A</option>
+							<option value="CL005">종합반B</option>
+							<option value="CL006">종합반C</option>
+						</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">대입응시횟수</td>
+						<td><input type="number" name="retryCnt"></td>
+					</tr>
+					<tr>
+						<td align="center">부모님 연락처</td>
+						<td><input type="text" name="prntPhone"></td>
+					</tr>
+					<tr>
+						<td align="center">등록일</td>
+						<td><input type="date" name="paidDt" id="regDate"></td>
+					</tr>
+					<tr>
+						<td align="center">환불일</td>
+						<td><input type="date" name="repaidDt" id="retDate"></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p align="center">
+							<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="저장">
+							<input class="w3-button w3-border" style="background-color: #90909096" type="reset" value="리셋">
+						</p></td>
+					</tr>
+				</table>
+			</fieldset>
 		</form>
 	</div>
 </div>

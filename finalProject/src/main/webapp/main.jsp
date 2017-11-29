@@ -14,6 +14,7 @@
 <!-- banner style -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="${root}/styles/w3/w3.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
 
 <style>
 .mySlides {display:none;}	
@@ -83,7 +84,7 @@
 		}
 	</script>
 <!-- 	banner end -->
-
+<!-- 	<div style="width:80%; margin-top: auto;"><img src="imgs/imgTchr/캡처.PNG"></div> -->
 	<div class="container">
 		<div class="row">
 
@@ -188,9 +189,7 @@
 					</div>
 					<div class="panel-footer">수학강사</div>
 				</div>
-				
 			</div>
-
 		</div>
 	</div>
 	<jsp:include page="modal.jsp"/>
