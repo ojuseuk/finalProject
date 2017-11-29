@@ -65,19 +65,7 @@ public class CrsMgController {
 		String resultMsg = "";
 		try {
 			resultMsg = crsMgService.clssUpdate(clss);
-			
-			List list = crsMgService.clssSelectAll();
-			List sbjList = crsMgService.sbjtSelectAll();
-			
-			data.addAttribute("list", list);
-			data.addAttribute("sbjtList", sbjList);
-			
-			JSONArray jsonList = JSONArray.fromObject(list);
-			JSONArray jsonSbjtList = JSONArray.fromObject(sbjList);
-			
-			data.addAttribute("jsonList", jsonList);
-			url = "course/mgClss";
-			
+			url = listClss(clss, data, resultMsg, url);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -85,6 +73,24 @@ public class CrsMgController {
 		return url;
 	}
 	
+	private String listClss(CLSSDto clss, Model data, String resultMsg, String url) throws SQLException {
+		List list = crsMgService.clssSelectAll();
+		List sbjList = crsMgService.sbjtSelectAll();
+		
+		data.addAttribute("list", list);
+		data.addAttribute("sbjtList", sbjList);
+		
+		JSONArray jsonList = JSONArray.fromObject(list);
+		JSONArray jsonSbjtList = JSONArray.fromObject(sbjList);
+		
+		data.addAttribute("jsonList", jsonList);
+		data.addAttribute("clss", clss);
+		data.addAttribute("resultMsg", resultMsg);
+		
+		return "course/mgClss";
+		
+	}
+
 	@RequestMapping("/crsSelect")
 	public @ResponseBody CRSDto crsSelect(@RequestParam("crsId") String crsId) {
 		System.out.println("crsSelect : Cotroller : " + crsId); // @@@

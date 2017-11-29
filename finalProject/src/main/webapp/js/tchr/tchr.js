@@ -47,7 +47,7 @@
 		
 		/* 강사번호로 TB_TCHR 업데이트 */
 		function tchrUpdate(){
-			document.getElementById("frmTchr").action = "${pageContext.request.contextPath}/tchrUpdate";
+			document.getElementById("frmTchr").action = root + "/tchrUpdate";
 			document.getElementById("frmTchr").submit();
 		}
 		
@@ -71,7 +71,7 @@
 					document.getElementById("sbjtChrg").value = data.sbjtChrg;
 					document.getElementById("tchrIntro").value = data.tchrIntro;
 					
-					tag = '<img src="${pageContext.request.contextPath}/imgs/img/';
+					tag = '<img src="' + root + '/imgs/img/';
 					tag += data.tchrPt + '" style="width:150px;height:150px;">';
 					
 					console.log(tag);
@@ -90,7 +90,6 @@
 		/* 사용자 ID로 TB_USR 검색 */
 		function searchUsr(root, id){
 			console.log(root, id);
-			alert(root + " " + id);
 			xhttp.onreadystatechange = function(){
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					data = xhttp.responseText;

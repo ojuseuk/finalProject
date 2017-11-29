@@ -11,21 +11,21 @@ public interface EmpMgService {
 
 	public List empSelectAll() throws SQLException;
 
-	public void empInsert(EMPDto emp) throws SQLException;
+	public String empInsert(EMPDto emp) throws SQLException;
 
 	public List tchrSelectAll() throws SQLException;
 
-	public void tchrInsert(TCHRDto tchr) throws SQLException;
+	public String tchrInsert(TCHRDto tchr) throws SQLException;
 
 	public EMPDto empSelect(String empNo);
 
-	public int empUpdate(EMPDto emp);
+	public String empUpdate(EMPDto emp);
 
-	public int empRetire(EMPDto emp);
+	public String empRetire(EMPDto emp);
 
 	public TCHRDto tchrSelect(String tchrNo);
 
-	public int tchrUpdate(TCHRDto tchr);
+	public String tchrUpdate(TCHRDto tchr);
 
 	public List tchrSelectBySbjtNm(String sbjtNm);
 

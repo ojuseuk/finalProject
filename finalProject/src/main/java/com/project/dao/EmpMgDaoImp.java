@@ -23,10 +23,17 @@ public class EmpMgDaoImp implements EmpMgDao {
 	}
 
 	@Override
-	public void empInsert(EMPDto emp) {
+	public String empInsert(EMPDto emp) {
 		// TODO Auto-generated method stub
-		int num = 0;
-		num = sqlSession.insert("empMgMapper.empInsert", emp);
+		int result = 0;
+		String resultMsg = "";
+		result = sqlSession.insert("empMgMapper.empInsert", emp);
+		if(result > 0) {
+			resultMsg = "직원 정보가 정상적으로 등록되었습니다.";
+		} else {
+			resultMsg = "직원 정보 등록에 실패하였습니다.";
+		}
+		return resultMsg;
 	}
 
 	@Override
@@ -57,36 +64,76 @@ public class EmpMgDaoImp implements EmpMgDao {
 	}
 
 	@Override
-	public void tchrInsert(TCHRDto tchr) {
-		int num = 0;
-		num = sqlSession.insert("empMgMapper.tchrInsert", tchr);
+	public String tchrInsert(TCHRDto tchr) {
+		int result = 0;
+		String resultMsg = "";
+		result = sqlSession.insert("empMgMapper.tchrInsert", tchr);
+		if(result > 0) {
+			resultMsg = "강사정보가 정상적으로 등록되었습니다.";
+		} else {
+			resultMsg = "강사정보가 정상적으로 등록되었습니다.";
+		}
+		return resultMsg;
 	}
 
 	@Override
-	public void usrUpdateToTchr(String id) {
+	public String usrUpdateToTchr(String id) {
 		// TODO Auto-generated method stub
-		sqlSession.update("empMgMapper.usrUpdateToTchr", id);
-		
+		int result = 0;
+		String resultMsg = "";
+		result = sqlSession.update("empMgMapper.usrUpdateToTchr", id);
+		if(result > 0) {
+			resultMsg = "사용자 유형이 강사로 변경되었습니다.";
+		} else {
+			resultMsg = "사용자 유형 변경에 실패하였습니다.";
+		}
+		return resultMsg;		
 	}
 
 	@Override
-	public void usrUpdateToStaff(String id) {
-		// TODO Auto-generated method stub
-		sqlSession.update("empMgMapper.usrUpdateToStaff", id);
-		
+	public String usrUpdateToStaff(String id) {
+		int result = 0;
+		String resultMsg = "";
+		result = sqlSession.update("empMgMapper.usrUpdateToStaff", id);
+		if(result > 0) {
+			resultMsg = "사용자 유형이 직원으로 변경되었습니다.";
+		} else {
+			resultMsg = "사용자 유형 변경에 실패하였습니다.";
+		}
+		System.out.println("EMP DAO DB 리턴값 : " + result);
+		return resultMsg;			
 	}
 
 	@Override
-	public int empUpdate(EMPDto emp) {
+	public String empUpdate(EMPDto emp) {
 		// TODO Auto-generated method stub
 		System.out.println("DAO Update : " + emp);
-		return sqlSession.update("empMgMapper.empUpdate", emp);
+		int result = 0;
+		String resultMsg = "";
+		result = sqlSession.update("empMgMapper.empUpdate", emp);
+		if(result > 0) {
+			resultMsg = "직원의 정보가 정상적으로 변경되었습니다.";
+		} else {
+			resultMsg = "직원 정보의 변경에 실패하였습니다.";
+		}
+		System.out.println("EMP DAO DB 리턴값 : " + result);
+		return resultMsg;	
 	}
 
 	@Override
-	public int empRetire(EMPDto emp) {
+	public String empRetire(EMPDto emp) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("empMgMapper.empRetire", emp);
+		System.out.println("empRetire : " + emp);
+		int result = 0;
+		String resultMsg = "";
+		result = sqlSession.update("empMgMapper.empRetire", emp);
+		if(result > 0) {
+			resultMsg = "직원을 정상적으로 퇴직 처리하였습니다.";
+		} else {
+			resultMsg = "직원의 퇴직처리를 실패하였습니다.";
+		}
+		System.out.println("EMP DAO DB 리턴값 : " + result);
+		return resultMsg;	
 	}
 
 	@Override
@@ -103,10 +150,20 @@ public class EmpMgDaoImp implements EmpMgDao {
 	}
 
 	@Override
-	public int tchrUpdate(TCHRDto tchr) {
+	public String tchrUpdate(TCHRDto tchr) {
 		// TODO Auto-generated method stub
 		System.out.println("DAO update 전 : " + tchr);
-		return sqlSession.update("empMgMapper.tchrUpdate", tchr);
+		int result = 0;
+		String resultMsg = "";
+		result =  sqlSession.update("empMgMapper.tchrUpdate", tchr);
+		System.out.println("tchrUpdate 실행결과 : " + result); 	
+		if(result > 0) {
+			resultMsg = "강사의 정보가 정상적으로 수정되었습니다.";
+		} else {
+			resultMsg = "강사 정보의 수정 작업에 실패하였습니다.";
+		}
+		System.out.println(resultMsg); // @@@ 
+		return resultMsg;
 	}
 
 	@Override

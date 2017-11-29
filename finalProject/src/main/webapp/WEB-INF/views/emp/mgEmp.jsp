@@ -25,19 +25,19 @@
 			<table>
 				<tr>
 					<td>사용자 ID :</td>
-					<td><input type="text" name="id" id="id1" 
+					<td><input type="text" name="id" id="id2" 
 						<c:if test="${not empty emp.id}">
 							value = ${emp.id}
 						</c:if>
 						/>
 						<input type="button" value="조회"
-						onclick="searchUsr('${pageContext.request.contextPath}', document.getElementById('id1').value)">
+						onclick="searchUsr('${pageContext.request.contextPath}', document.getElementById('id2').value)">
 					</td>
 					
 				</tr>
 				<tr>
 					<td>이름 :</td>
-					<td><input type="text" name="nm" id="nm1" 
+					<td><input type="text" name="nm" id="nm2" 
 					<c:if test="${not empty emp.nm}">
 						value = ${emp.nm}
 					</c:if>
@@ -90,6 +90,8 @@
  			<input type="button" value="수정 내용 저장" onclick="empUpdate('${pageContext.request.contextPath}', '${data.empNo}')"> 
  		--%>
 		<input type="button" onclick="javascript:history.back()" value="이전 화면으로">
+ 		<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
+
 	</form>
 	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
 	<input type = "hidden" id="root" value='${root}'>

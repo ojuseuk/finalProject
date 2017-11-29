@@ -11,7 +11,7 @@ public interface EmpMgDao {
 
 	List empSelectAll();
 
-	void empInsert(EMPDto emp);
+	String empInsert(EMPDto emp);
 
 	EMPDto empSelect(String id);
 
@@ -19,15 +19,15 @@ public interface EmpMgDao {
 
 	List tchrSelectAll();
 
-	void tchrInsert(TCHRDto tchr);
+	String tchrInsert(TCHRDto tchr);
 
-	void usrUpdateToTchr(String id);
+	String usrUpdateToTchr(String id);
 
-	void usrUpdateToStaff(String id);
+	String usrUpdateToStaff(String id);
 
-	int empUpdate(EMPDto emp);
+	String empUpdate(EMPDto emp);
 
-	int empRetire(EMPDto emp);
+	String empRetire(EMPDto emp);
 
 	EMPDto empSelectById(String id);
 
@@ -35,7 +35,7 @@ public interface EmpMgDao {
 
 	TCHRDto tchrSelect(String tchrNo);
 
-	int tchrUpdate(TCHRDto tchr);
+	String tchrUpdate(TCHRDto tchr);
 
 	List tchrSelectBySbjtNm(String sbjtNm);
 

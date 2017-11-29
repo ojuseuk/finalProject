@@ -114,9 +114,23 @@ public class EmpMgController {
 		List list = empMgService.tchrAssnSelect(clssId);
 		System.out.println("강사 배정 조회 : Controller : DB조회 후 : " + list); 
 		JSONArray jsonList = JSONArray.fromObject(list);
-		data.addAttribute("jsonLjsonListTchrist", jsonList);
+		data.addAttribute("jsonListTchr", jsonList);
 		return list;
 	}
+
+	
+	@RequestMapping(value="/assgnTchr", method=RequestMethod.POST, produces = "application/json; charset=utf8")
+	public @ResponseBody List<TCHRASSNDto> assgnTchr(TCHRASSNDto tchrAssn, Model data) {
+		System.out.println("강사 배정 : controller : tchrAssn : " + tchrAssn);
+		String resultMsg = "";
+		resultMsg = empMgService.assnTchr(tchrAssn);
+		List list = empMgService.tchrAssnSelect(tchrAssn.getClssId());
+		JSONArray jsonList = JSONArray.fromObject(list);
+		data.addAttribute("jsonListTchr", jsonList);
+		return list;		
+		
+	}
+
 	
 	@RequestMapping("/emp")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
@@ -141,24 +155,19 @@ public class EmpMgController {
 	@RequestMapping("/empInsert")
 	public String empInsert(EMPDto emp, Model data) {
 		String url = "error";
+		String resultMsg = "";
+		
 		if(emp.getRetiredDt() != null) {
 			emp.setRetiredDt(emp.getRetiredDt().replace("-", ""));
 		}
 		try {
-			empMgService.empInsert(emp);
+			resultMsg = empMgService.empInsert(emp);
+			url = listEmp(emp, data, resultMsg, url);
 			
-			List list =  empMgService.empSelectAll();
-			data.addAttribute("list", list);
-			
-			JSONArray jsonList = JSONArray.fromObject(list);
-			data.addAttribute("jsonList", jsonList);
-			
-			url ="emp/mgEmp";  	
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("OK");
+		System.out.println(resultMsg);
 		return url;
 	}
 											   
@@ -166,127 +175,131 @@ public class EmpMgController {
 	public String empUpdate(EMPDto emp, Model data) {
 		System.out.println("/empUpdate update Controller : " + emp);
 		String url = "error";
-		if(emp.getRetiredDt() != null) {
-			emp.setRetiredDt(emp.getRetiredDt().replace("-", ""));
-		}
+		String resultMsg = "";
+
 		try {
-			empMgService.empUpdate(emp);
-			data.addAttribute("list", empMgService.empSelectAll());
-			data.addAttribute("resultMsg", "직원 정보가 정상적으로 수정되었습니다.");
-			// 날짜처럼 보이기 위해 '-' 삽입
-			if(emp != null) {
-				if(!emp.getRetiredDt().equals("")) {
-					emp.setRetiredDt(DateTimeUtil.dateForm(emp.getRetiredDt()));
-				}
-			}
-			data.addAttribute("emp", emp); // @@@		20171120
-			url ="emp/mgEmp";  	
-			
+			resultMsg = empMgService.empUpdate(emp);
+			url = listEmp(emp, data, resultMsg, url);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("OK");
+		System.out.println(resultMsg);
 		return url;
 	}
 	
-	@RequestMapping(value="/tchrUpdate")
-	public String tchrUpdate(TCHRDto tchr, Model data) {
-		System.out.println("tchrUpdate Controller : " + tchr);
+	private String listEmp(EMPDto emp, Model data, String resultMsg, String url) throws SQLException {
+		List list =  empMgService.empSelectAll();
+		data.addAttribute("list", list);
+		
+		JSONArray jsonList = JSONArray.fromObject(list);
+		data.addAttribute("jsonList", jsonList);
+		data.addAttribute("resultMsg", resultMsg);
+		data.addAttribute("emp", emp); // @@@		20171120
+		
+		return "emp/mgEmp";  	
+		
+	}
+
+	@RequestMapping(value="/empRetire")
+	public String empRetire(EMPDto emp, Model data) {
+		System.out.println("empRetire Controller : " + emp); // @@@
+		String resultMsg = "";
 		String url = "error";
 		try {
-			empMgService.tchrUpdate(tchr);
-			data.addAttribute("list", empMgService.tchrSelectAll());
+			resultMsg = empMgService.empRetire(emp);
+			url = listEmp(emp, data, resultMsg, url);
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(resultMsg);
+		return url;
+	}
+	
+
+	@RequestMapping(value="/tchrUpdate")
+	public String tchrUpdate(TCHRDto tchr, Model data, HttpSession session, @RequestParam("imgFile") MultipartFile imgFile) throws IllegalStateException, IOException{
+		if(!imgFile.isEmpty()) {
+			uploadImg(tchr, session, imgFile);
+		}		
+		System.out.println("tchrUpdate Controller : " + tchr);
+		String url = "error";
+		String resultMsg = "";
+		try {
+			resultMsg = empMgService.tchrUpdate(tchr);
+			List list = empMgService.tchrSelectAll();
+			JSONArray jsonList = JSONArray.fromObject(list);
+			
+			data.addAttribute("list", list);
+			data.addAttribute("jsonList", jsonList);
+			
 			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
-			data.addAttribute("resultMsg", "강사 정보가 정상적으로 수정되었습니다.");
+			data.addAttribute("resultMsg", resultMsg);
 			
 			url ="tchr/mgTchr";  	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("tchrUpdate OK");
+		System.out.println(resultMsg);
 		return url;
-	}
-	
-	@RequestMapping(value="/empRetire")
-	public String empRetire(EMPDto emp, Model data) {
-		System.out.println("update"); // @@@
-		System.out.println("Controller : " + emp); // @@@
-		String url = "error";
-		if(emp.getRetiredDt() != null) {
-			emp.setRetiredDt(emp.getRetiredDt().replace("-", ""));
-		}
-		try {
-			empMgService.empRetire(emp);
-			data.addAttribute("list", empMgService.empSelectAll());
-			url ="emp/mgEmp";  	
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println("OK");
-		return url;
-	}
-	
-	
-	@RequestMapping(value="/assgnTchr", method=RequestMethod.POST, produces = "application/json; charset=utf8")
-	public @ResponseBody String assgnTchr(TCHRASSNDto tchrAssn) {
-		System.out.println("강사 배정 : controller : tchrAssn : " + tchrAssn);
-		System.out.println(empMgService.assnTchr(tchrAssn));
-		return empMgService.assnTchr(tchrAssn);
 	}
 	
 	@RequestMapping(value="/tchrInsert.do", method=RequestMethod.POST)
 		public String tchrInsert(TCHRDto tchr, Model data, HttpSession session, @RequestParam("imgFile") MultipartFile imgFile) throws IllegalStateException, IOException {
-		String url = "error";
 		
-// file upload 시작
 		if(!imgFile.isEmpty()) {
-			String path = session.getServletContext().getRealPath("/") + "imgs\\img\\";
-			
-			System.out.println("imgFile.getOriginalFilename() : " + imgFile.getOriginalFilename()); 
-			System.out.println("imgFile.getName() : " + imgFile.getName()); 
-			System.out.println("imgFile.getContentType() : " + imgFile.getContentType()); 
-			
-			String ext[] = imgFile.getOriginalFilename().split("\\.");
-			
-			System.out.println("tchr.getTchrNo().length() : " + tchr.getTchrNo().length()); 		// @@@
-			
-			/*파일명을 "강사번호.확장자"로 변경*/
-			System.out.println("ext[0] : " + ext[0]); 		// @@@
-			System.out.println("ext[1] : " + ext[1]); 		// @@@
-			
-			File file = new File(path + tchr.getTchrNo() + "." + ext[1]);
-			
-			imgFile.transferTo(file);
-			
-			System.out.println("file.getName() : " + file.getName()); 
-			System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
-			
-			tchr.setTchrPt(file.getName());
-			
-			System.out.println("■path:::" + path);
+			uploadImg(tchr, session, imgFile);
 		}
-// file upload 끝
 		
+		System.out.println("tchrInsert Controller : " + tchr);
+		String url = "error";
+		String resultMsg = "";		
 		try {
-			System.out.println("controller : " + tchr);
-			empMgService.tchrInsert(tchr);
+			resultMsg = empMgService.tchrInsert(tchr);
 			
 			List list =  empMgService.tchrSelectAll();
 			JSONArray jsonList = JSONArray.fromObject(list);
 			data.addAttribute("list", list);
 			data.addAttribute("jsonList", jsonList);
+			
 			data.addAttribute("sbjtList", crsMgService.sbjtSelectAll());
+			data.addAttribute("resultMsg", resultMsg);
+			
 			url ="tchr/mgTchr";  	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Controller : Insert OK");
-	
-		
 		return url;
+	}
+	
+	private void uploadImg(TCHRDto tchr, HttpSession session, MultipartFile imgFile) throws IllegalStateException, IOException {
+		// TODO Auto-generated method stub
+		String path = session.getServletContext().getRealPath("/") + "imgs\\img\\";
+		
+		System.out.println("imgFile.getOriginalFilename() : " + imgFile.getOriginalFilename()); 
+		System.out.println("imgFile.getName() : " + imgFile.getName()); 
+		System.out.println("imgFile.getContentType() : " + imgFile.getContentType()); 
+		
+		String ext[] = imgFile.getOriginalFilename().split("\\.");
+		
+		System.out.println("tchr.getTchrNo().length() : " + tchr.getTchrNo().length()); 		// @@@
+		
+		/*파일명을 "강사번호.확장자"로 변경*/
+		System.out.println("ext[0] : " + ext[0]); 		// @@@
+		System.out.println("ext[1] : " + ext[1]); 		// @@@
+		
+		File file = new File(path + tchr.getTchrNo() + "." + ext[1]);
+		
+		imgFile.transferTo(file);
+		
+		System.out.println("file.getName() : " + file.getName()); 
+		System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
+		
+		tchr.setTchrPt(file.getName());
+		
+		System.out.println("■path:::" + path);		
 	}
 
 } // end of class
