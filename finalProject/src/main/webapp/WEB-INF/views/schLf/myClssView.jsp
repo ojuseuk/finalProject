@@ -13,6 +13,12 @@
 <html>
 <head>
 <title>나의수강목록</title>
+<style type="text/css">
+#datatable{
+    background-color:#fff;
+    border: 1px;
+}
+</style>
 </head>
 
 <jsp:include page="../../../top.jsp"/>

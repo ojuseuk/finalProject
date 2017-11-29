@@ -14,7 +14,14 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
 <!-- *학생 중복 출력 수정, 업데이트 시 종합반만 변경 가능하게 수정, 중복코드 정리, 변수 정리, 스크롤 -->
-
+<head>
+<style type="text/css">
+table.dataTable tbody tr.selected {
+        color: white;
+        background-color: #eeeeee;  /* Not working */
+    }
+</style>
+</head>
 <title>학생정보</title>
 <jsp:include page="../../../top.jsp"/>
 <div style="width: 80%; margin: auto;">
