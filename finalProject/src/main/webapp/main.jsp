@@ -14,6 +14,7 @@
 <!-- banner style -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="${root}/styles/w3/w3.css">
+
 <style>
 .mySlides {display:none;}	
 

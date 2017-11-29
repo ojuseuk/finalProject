@@ -24,18 +24,20 @@
 <title>수강신청</title>
 <style type="text/css">
 td.details-control {
-	background: url('imgs/grid/detailBtn.jpg') no-repeat center center;
+	background: url('imgs/grid/datailBtn.png') no-repeat center center;
 	cursor: pointer;
 }
 
 tr.shown td.details-control {
-	background: url('imgs/grid/detailBtn.jpg') no-repeat center center;
+	background: url('imgs/grid/datailBtn.png') no-repeat center center;
 }
-
+#datatable{
+    background-color:#fff;
+}
 #events {
 	margin-bottom: 1em;
 	padding: 1em;
-	background-color: #f6f6f6;
+	background-color: #ffffff;
 	border: 1px solid #999;
 	border-radius: 3px;
 	height: 200px;
