@@ -83,7 +83,7 @@ var IMP = window.IMP;
 			<c:if test="${not empty requestScope.sbjt}">
 				<b>과목</b>
 				<select name="sbjt" id="sbjt" onchange="reqCrsList(this.value,'${root}')">
-					<option>선 택</option>
+					<option value="default">선 택</option>
 					<c:forEach items="${requestScope.sbjt}" var="data">
 						<option value="${data.sbjtNm}">${data.sbjtNm}</option>
 					</c:forEach>
@@ -96,7 +96,7 @@ var IMP = window.IMP;
 				<h2 align="center">강좌 목록</h2>
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">
-						<thead>
+						<thead style="background-color: #90909096">
 							<tr>
 								<th></th>
 								<th>과정명</th>
@@ -122,7 +122,7 @@ var IMP = window.IMP;
 			<b>총 결제 금액 : 0원</b>
 		</p>
 		<p align="center">
-			<input id="payment" type="button" value="결제">
+			<input class="w3-button w3-border" style="background-color: #90909096" id="payment" type="button" value="결제">
 		</p>
 	</div>
 </div>
@@ -184,7 +184,7 @@ var table = $('#dataTable').DataTable({
 	}, {
 		"data" : "strtDt",
 		"render" : function(data, type, row, meta) {
-			return data + "~" + row.endDt + " (" + row.prd + "일)";
+			return inputDateFormat(row.strtDt) + " ~ " + inputDateFormat(row.endDt) + " (" + row.prd + "일)";
 		}
 	}, {
 		"data" : "stdtclssttn",
@@ -302,6 +302,14 @@ table.on('select',	function(e, dt, type, indexes) {
 function inputNumberFormat(tMoney) {
     return String(tMoney).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 }
+
+function inputDateFormat(date) {
+	var year = date.substring(0, 4);
+	var month = date.substring(4, 6);
+	var day = date.substring(6, 8);
+
+	return year + '-' + month + '-' + day;
+}
 // 과목별 리스트 테이블
 function reqCrsList(sbjtNm, root) {
 $('#dataTable').dataTable().fnDestroy();
@@ -342,14 +350,14 @@ xhttp.onreadystatechange = function() {
 			}, {
 				"data" : "strtDt",
 				"render" : function(data, type,	row, meta) {
-					return data + "~" + row.endDt + "(" + row.prd + "일)";
+					return inputDateFormat(row.strtDt) + " ~ " + inputDateFormat(row.endDt) + " (" + row.prd + "일)";
 					}
 			}, {
-				"data" : "stdtclssttn"
-// 				"render" : function(data){
-// 					data = data.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + '원';	
-// 					return data;
-// 				}
+				"data" : "stdtclssttn",
+				"render" : function(data, type,	row, meta){
+					data = data.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + '원';	
+					return data;
+				}
 			}, {
 				"className" : 'details-control',
 				"width" : "10%",

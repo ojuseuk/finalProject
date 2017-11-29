@@ -30,7 +30,7 @@
 			<h2 align="center">나의 수강 정보</h2>
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable">
-					<thead>
+					<thead style="background-color: #90909096">
 						<tr>
 							<th>강좌명</th>
 							<th>강사명</th>
@@ -65,14 +65,25 @@ $('#dataTable').DataTable({
 	}, {
 		"data" : "strtDt",
 		"render" : function(data, type, row, meta){
-			return data + "~" + row.endDt;
+			return inputDateFormat(row.strtDt) + " ~ " + inputDateFormat(row.endDt) + " (" + row.prd + "일)";
 		}
 	}, {
-		"data" : "paidDt"
+		"data" : "paidDt",
+		"render" : function(data, type, row, meta){
+			return inputDateFormat(row.paidDt);
+		}
 	}, {
 		"data" : "clssroom"
 	} ]
 });
+
+function inputDateFormat(date) {
+	var year = date.substring(0, 4);
+	var month = date.substring(4, 6);
+	var day = date.substring(6, 8);
+
+	return year + '-' + month + '-' + day;
+}
 </script>
 <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
 <jsp:include page="../../../footer.jsp"/>

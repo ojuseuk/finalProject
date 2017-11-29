@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- select : true 사용하기 위한 css -->
 <link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
 <style type="text/css">
@@ -99,7 +100,7 @@ tr.shown td.details-control {
 				"data":null,
 				"render" : function(data, row, type, meta){
 					
-					return '<button onclick="location.href=\''+root+'/ntcUpdatePage?no='+data.no+'\'">수정하기</button>';
+					return '<button class="w3-button w3-border" style="background-color: #90909096" onclick="location.href=\''+root+'/ntcUpdatePage?no='+data.no+'\'">수정하기</button>';
 				}
 			}]
 		});

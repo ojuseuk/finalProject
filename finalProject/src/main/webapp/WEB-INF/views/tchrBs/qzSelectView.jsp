@@ -18,7 +18,7 @@
 	<select id="qzSbjtNm" name="sbjtNm">
 		<option value="선택">선택</option>
 	</select>
-	<button onclick="qzSelect('${root}')">조회</button>
+	<button class="w3-button w3-border" style="background-color: #90909096" onclick="qzSelect('${root}')">조회</button>
 	<div id="test">
 	
 	</div>

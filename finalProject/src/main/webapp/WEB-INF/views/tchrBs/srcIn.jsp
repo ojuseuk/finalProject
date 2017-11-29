@@ -48,7 +48,7 @@
 					</td>
 				</tr>
 			</table>
-			<input type="submit" value="성적 입력">
+			<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="성적 입력">
 		</form>
 	</div>
 	<input type="hidden" value='${requestScope.examTp}' id="examTp">

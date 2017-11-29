@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
 <html>
 <head>
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
@@ -11,12 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>강좌 관리</title>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
+<div style="margin-top: 20px"></div>
 <div style="width: 90%; margin: auto;">
 <div style="width: 45%; float: left">
  	<form action="clssInsert.do" id="frmClss">
@@ -39,7 +40,7 @@
 					
 						</select>
 					</td>
-					<td align="right"><input type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${root}', document.getElementById('crsId').value)">
+					<td align="right"><input class="w3-button w3-border" style="background-color: #90909096" type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${root}', document.getElementById('crsId').value)">
 					</td>
 					
 				</tr>
@@ -76,11 +77,11 @@
 				</tr>
 			</table>
 		</fieldset><br>
-		<input type="reset" value="화면 초기화"> 
- 		<input type="submit" value="강좌 개설"> 
-		<input type="button" value="수정 내용 저장" onclick="clssUpdate()">
-		<input type="button" value="강사 배정" onclick="tchrShow()">
-		<input type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
+		<input class="w3-button w3-border" style="background-color: #90909096" type="reset" value="화면 초기화"> 
+ 		<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="강좌 개설"> 
+		<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="수정 내용 저장" onclick="clssUpdate()">
+		<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="강사 배정" onclick="tchrShow()">
+		<input class="w3-button w3-border" style="background-color: #90909096" type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
 		<br>
 		<div>
 		<fieldset style="width: 80%" id="fsTchr" hidden>				
@@ -111,9 +112,9 @@
 				<tr>
 					<td colspan="3">
 					
-						<input type="button" value="화면초기화" id="btnClear">
-						<input type="button" value="저장" onclick="assgnTchr('${pageContext.request.contextPath}')">
-						<input type="button" value="닫기" onclick="tchrClose()">
+						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="화면초기화" id="btnClear">
+						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="저장" onclick="assgnTchr('${pageContext.request.contextPath}')">
+						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="닫기" onclick="tchrClose()">
 					</td>
 				</tr>
 			</table>
@@ -143,8 +144,8 @@
 	</form>
 	</div>
 	<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
-	<input type = "hidden" id="jsonList" value='${requestScope.jsonList}'>
-	<input type = "hidden" id="root" value='${root}'>
+	<input type="hidden" id="jsonList" value='${requestScope.jsonList}'>
+	<input type="hidden" id="root" value='${root}'>
 
 		<!-- 강좌 리스트 DataTable -->
 		<div id="demo" class="card mb-3" style="width:50%; height:200px; display:inline-block;">
@@ -170,11 +171,9 @@
 			</div>
 		</div>
 	</div>	<!-- 과정 리스트 DataTable -->
-
-
 		
 	<script src="${root}/js/course/clss.js"></script>
 	
-<jsp:include page="../../../footer.jsp"/>	
+<%-- <jsp:include page="../../../footer.jsp"/>	 --%>
 </body>
 </html>

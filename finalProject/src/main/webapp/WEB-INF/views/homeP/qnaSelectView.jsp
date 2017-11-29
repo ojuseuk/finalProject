@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>Insert title here</title>
 <style type="text/css">
 td.details-control {
@@ -49,7 +50,7 @@ tr.shown td.details-control {
 			</div>
 		</div>
 		<div style="float: right;">
-			<button onclick="location.href='${root}/homeP/qnaInsertView?no=0'">게시글 생성</button>
+			<button class="w3-button w3-border" style="background-color: #90909096" onclick="location.href='${root}/homeP/qnaInsertView?no=0'">게시글 생성</button>
 		</div>
 	</div>
 </div>
@@ -68,7 +69,8 @@ tr.shown td.details-control {
 
 		function format(d) {
 			return '게시글 내용 : ' + d.content + '<br>'
-					+ '<button onclick="location.href=\'' + root
+					+ '<button class="w3-button w3-border" style="background-color: #90909096" onclick="location.href=\''
+					+ root
 					+ '/homeP/qnaInsertView?no=' + d.no + '&gpNum=' + d.gpNum
 					+ '&seqNum=' + d.seqNum + '&seqLv=' + d.seqLv
 					+ '\'">댓글 달기</button>';
@@ -121,7 +123,7 @@ tr.shown td.details-control {
 				"data" : null,
 				"render" : function(data, row, type, meta){
 					
-					return '<button onclick="location.href=\''+root+'/homeP/qnaUpdateView?no='+data.no+'\'">수정 하기</button>';
+					return '<button class="w3-button w3-border" style="background-color: #90909096" onclick="location.href=\''+root+'/homeP/qnaUpdateView?no='+data.no+'\'">수정 하기</button>';
 				}
 			} ]
 		});

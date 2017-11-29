@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${root}/styles/kendo.default.min.css" />
 <link rel="stylesheet" href="${root}/styles/kendo.default.mobile.min.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/kendo.all.js"></script>
 <!-- <style type="text/css">
@@ -28,13 +29,13 @@ footer {
 	<select id="year" onchange="yearSale()" name="month">
 		<option value="선택">선택</option>
 	</select>
-	<input type="button" onclick="saleYear('${root}', 'y')" value="년 매출">
+	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'y')" value="년 매출">
 	<select id="month" name="month" onchange="monthSale()">
 		<option value="선택" id="default">선택</option>
 	</select>
-	<input type="button" onclick="saleYear('${root}', 'm')" value="월 매출">
+	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'm')" value="월 매출">
 	<input type="date" id="day" name="day">
-	<input type="button" onclick="saleYear('${root}', 'd')" value="일 매출">
+	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'd')" value="일 매출">
 	
 	<div style="width: 100%;">
 		<div id="demo" class="card mb-3" align="left"

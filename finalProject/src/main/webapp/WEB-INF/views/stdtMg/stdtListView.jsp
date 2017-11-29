@@ -7,19 +7,20 @@
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
-<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
 <!-- *학생 중복 출력 수정, 업데이트 시 종합반만 변경 가능하게 수정, 중복코드 정리, 변수 정리, 스크롤 -->
 <head>
 <style type="text/css">
-table.dataTable tbody tr.selected {
-        color: white;
-        background-color: #eeeeee;  /* Not working */
-    }
+#datatable{
+    background-color:#fff;
+}
 </style>
 </head>
 <title>학생정보</title>
@@ -48,8 +49,8 @@ table.dataTable tbody tr.selected {
 		<div class="card-body">
 			<h2 align="center">수강생 목록</h2>
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable">
-					<thead>
+				<table class="table table-bordered" class="hover" id="dataTable">
+					<thead style="background-color: #90909096">
 						<tr>
 							<th>번 호</th>
 							<th>이 름</th>
@@ -72,7 +73,7 @@ table.dataTable tbody tr.selected {
 		<tr>
 			<td>아이디</td>
 			<td><input id="stdtId" type="text" name="id" placeholder="ID검색">
-			<input id="selectId" type="button" value="조회"><div id="selectResult"></div></td>
+			<input class="w3-button w3-border w3-tiny" id="selectId" style="background-color: #90909096" type="button" value="조회"><div id="selectResult"></div></td>
 		</tr>
 		<tr>
 			<td>수강생번호</td>
@@ -114,8 +115,8 @@ table.dataTable tbody tr.selected {
 				</tr>
 				<tr>
 					<td colspan="2"><p align="center">
-						<input type="submit" value="저장">
-						<input type="reset" value="리셋">
+						<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="저장">
+						<input class="w3-button w3-border" style="background-color: #90909096" type="reset" value="리셋">
 					</p></td>
 				</tr>
 			</table>

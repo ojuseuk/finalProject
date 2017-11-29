@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>과정 관리</title>
 <style>
 p {
@@ -14,11 +16,11 @@ p {
 	margin-bottom: 0px;
 }
 </style>
-<link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
+<div style="margin-top: 20px"></div>
 <div style="width: 80%; margin: auto;">
 	<div style="width: 50%; float: left;">
 	 	<form id="frmCrs" action="courseInsert">
@@ -70,10 +72,10 @@ p {
 					</tr>
 				</table>
 			</fieldset><br><br>
-			<input type="reset" value="화면 초기화"> 
-	 		<input type="submit" value="과정 등록"> 
-			<input type="button" value="수정 내용 저장" onclick="courseUpdate()">
-			<input type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
+			<input class="w3-button w3-border" style="background-color: #90909096" type="reset" value="화면 초기화"> 
+	 		<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="과정 등록"> 
+			<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="수정 내용 저장" onclick="courseUpdate()">
+			<input class="w3-button w3-border" style="background-color: #90909096" type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
 		</form>
 	</div>
 	<input type="hidden" id="resultMsg" value="${resultMsg}">
@@ -109,6 +111,6 @@ p {
 	
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
-<jsp:include page="../../../footer.jsp"/>
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>
