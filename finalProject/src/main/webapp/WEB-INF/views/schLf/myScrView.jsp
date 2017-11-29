@@ -14,17 +14,18 @@
 </head>
 <jsp:include page="../../../top.jsp"/>
 <body>
-	<div id="chart" style="width:100%;"></div>
-	<div id="examTp">
-		<select id="examTpList" onchange="scrBySbjt(this.value,'${root}')"></select>
+<div style="width: 80%; margin: auto;">
+	<div id="examTp" style="margin:20">
+		<p align="right"><select id="examTpList" onchange="scrBySbjt(this.value,'${root}')"></select></p>
 	</div>
+	<div id="chart" style="width:100%;"></div>
+</div>
 	<input type="hidden" id="scrList" value="${requestScope.scrList.size()}">
 	<input type="hidden" id="json" value='${requestScope.json}'>
 	
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/kendo.all.min.js"></script>
 <script type="text/javascript">
-
 	var json = $("#json").val();
 	var listSize = $("#scrList").val();
 	json = JSON.parse(json);
@@ -37,6 +38,7 @@
 	var avg = new Array();
 	var sum = 0;
 	var cnt = 1;
+	
 	for(var i = 0; i < listSize; i++){
 		examTitle.push(json[i].examTitle);
 		examId.push(json[i].examId);
@@ -79,7 +81,7 @@
 	var series = [ {
 		name : "시험 평균",
 		data : avg,
-
+	
 		// Line chart marker type
 		markers : {
 			type : "square"
@@ -89,7 +91,8 @@
 	function createChart() {
 		$("#chart").kendoChart({
 			title : {
-				text : "나의 시험 성적"
+				text : "나의 시험 성적",
+				font : "30px"
 			},
 			legend : {
 				position : "bottom"
@@ -117,7 +120,7 @@
 			}
 		});
 	}
-
+	
 	$(document).ready(function() {
 		createChart();
 		$(document).bind("kendo:skinChange", createChart);
@@ -128,19 +131,21 @@
 		var chart = $("#chart").data("kendoChart"), type = $(
 				"line").val(), stack = $(
 				"#stack").prop("checked");
-
+	
 		for (var i = 0, length = series.length; i < length; i++) {
 			series[i].stack = stack;
 			series[i].type = type;
 		}
 		;
-
+	
 		chart.setOptions({
 			series : avg
 		});
 	}
-//  시험별 국영수사과 점수
+	//시험별 국영수사과 점수
 	function scrBySbjt(exam, root){
+		console.log(exam);
+		
 		if(exam == "default"){
 			location.reload();
 		}
@@ -153,18 +158,21 @@
 				detailscr.push(json[i].score);
 			}
 		}
-				
+		console.log(sbjtNm);
+		console.log(detailscr);
 		var series = [ {
 			name : "과목별 점수",
 			data : detailscr,
-
+	
 			// Line chart marker type
 			markers : {
 				type : "square"
 			}
 		} ];
+		console.log(0);
 		
 		function createChart() {
+			console.log(1);
 			$("#chart").kendoChart({
 				title : {
 					text : ""
@@ -195,31 +203,33 @@
 				}
 			});
 		}
-
-		$(document).ready(function() {
+	
+// 		$(document).ready(function() {
+			console.log(2);
 			createChart();
 			$(document).bind("kendo:skinChange", createChart);
 			$(".options").bind("change", refresh);
-		});
+// 		});
 		
 		function refresh() {
+			console.log(3);
 			var chart = $("#chart").data("kendoChart"), 
 				type = $("column").val(), 
 				stack = $("#stack").prop("checked");
-
+	
 			for (var i = 0, length = series.length; i < length; i++) {
 				series[i].stack = stack;
 				series[i].type = type;
 			}
 			;
-
+	
 			chart.setOptions({
 				series : detailscr
 			});
 		}
 	}
 </script>
-<!-- <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br> -->
-<%-- <jsp:include page="../../../footer.jsp"/> --%>
+<Br><Br><Br><Br><Br>
+<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

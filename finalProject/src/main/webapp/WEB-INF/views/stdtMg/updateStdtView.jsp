@@ -19,7 +19,7 @@
 <jsp:include page="../../../top.jsp"/>
 
 <body>
-<div style="width: 100%;">
+<div style="width: 80%; margin: auto;">
 	<div id="demo" class="card mb-3" align="left"
 		style="float: left; width: 100%; height: 310px">
 		<div class="card-body">
@@ -30,12 +30,12 @@
 					<thead>
 						<tr>
 							<th>아이디</th>
-							<th>수강생번호</th>
+							<th>번   호</th>
 							<th>이   름</th>
 							<th>주   소</th>
 							<th>이메일</th>
 							<th>부모님번호</th>
-							<th>수강과정</th>
+							<th>수강강좌</th>
 							<th>대입응시횟수</th>
 							<th>등록일</th>
 						</tr>
@@ -55,74 +55,7 @@
 <input type="hidden" id="json" value='${requestScope.json}'>
 <input type="hidden" id="root" value='${root}'>
 
-<script type="text/javascript">
-	var stdtInfo = $("#json").val();
-	var root = $("#root").val();
-	stdtInfo = JSON.parse(stdtInfo);
-
-	$('#dataTable').DataTable({
-		"scrollY" : 250,
-		"scrollCollapse" : true,
-		data : stdtInfo,
-		columns : [ {
-			"data" : "id"
-		}, {
-			"data" : "stdtNo",
-		}, {
-			"data" : "nm",
-		}, {
-			"data" : "addr",
-		}, {
-			"data" : "email",
-		}, {
-			"data" : "prntPhone",
-		}, {
-			"data" : "clssNm",
-		}, {
-			"data" : "retryCnt",
-		}, {
-			"data" : "paidDt",
-		} ]
-	});
-	
-	$("#updateBtn").click(function(){
-		$('#dataTable').dataTable().fnDestroy();
-		$('#dataTable').DataTable({
-			"scrollY" : 250,
-			"scrollCollapse" : true,
-			data : stdtInfo,
-			columns : [ {
-				"data" : "id",
-			}, {
-				"data" : "stdtNo",
-				"render" : function(data, type, row, meta){
-					 return "<input id='stdtNo' type='hidden' name='stdtNo' value='" + row.stdtNo + "'>" + data;
-					}
-			}, {
-				"data" : "nm",
-			}, {
-				"data" : "addr",
-			}, {
-				"data" : "email",
-			}, {
-				"data" : "prntPhone",
-				"render" : function(data, type, row, meta){
-				 return "<input id='prntPhone' type='text' name='prntPhone' value='" + row.prntPhone + "'>" + data;
-				}
-			}, {
-				"data" : "clssNm",
-				"render" : function(data, type, row, meta){
-				 return "<input id='clssNm' type='text' name='clssId' value='" + row.clssId + "'>" + data;
-				}
-			}, {
-				"data" : "retryCnt",
-			}, {
-				"data" : "paidDt",
-			} ]
-		});
-		document.getElementById("updateForm").innerHTML = '<input id="saveBtn" type="submit" value="저장">';
-	});
-</script>
+<script src="${root}/js/stdtMg/updateStdt.js"></script>
 <%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>

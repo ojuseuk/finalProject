@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,25 +14,25 @@ import com.project.dto.TTLQZDto;
 
 public interface TchrBsDao {
 
-	List<TPCDto> tchrBsTcp();
-	List<TCHRDto> tchrBsTchr();
-	int ttlqzInsert(TTLQZDto ttlqzDto);
-	String attndTchrNo(String id);
-	List<Map<String, String>> attnd(Map<String, String>map);
-	List<Map<String, String>> attndClss(String clssId);
-	List<Map<String, String>> srcExamTp();
-	List<Map<String, String>> srcSbjt();
-	List<Map<String, String>> srcStdt();
-	void srcInsert(SCRDto scrDto);
-	List<String> stSearch(String tchrNo);
-	List<Map<String, Object>> stClssSearch(String clssId);
-	List<SBJTDto> qzSelectView();
-	List<Map<String, Object>> qzSelect(String sbjtNm);
-	List<TTLQZDto> qzUpdateView();
-	TTLQZDto qzUpdateSearch(int id);
-	List<Map<String, String>> qzExamSelect();
-	void qzInsert(List<QZDto> list);
-	int examTpInsert(EXAMTPDto examtpDto);
-	String examTpSelect();
+	List<TPCDto> tchrBsTcp() throws SQLException;
+	List<TCHRDto> tchrBsTchr() throws SQLException;
+	int ttlqzInsert(TTLQZDto ttlqzDto) throws SQLException;
+	String attndTchrNo(String id) throws SQLException;
+	List<Map<String, String>> attnd(Map<String, String>map) throws SQLException;
+	List<Map<String, String>> attndClss(String clssId) throws SQLException;
+	List<Map<String, String>> srcExamTp() throws SQLException;
+	List<Map<String, String>> srcSbjt() throws SQLException;
+	List<Map<String, String>> srcStdt() throws SQLException;
+	void srcInsert(SCRDto scrDto) throws SQLException;
+	List<String> stSearch(String tchrNo) throws SQLException;
+	List<Map<String, Object>> stClssSearch(String clssId) throws SQLException;
+	List<SBJTDto> qzSelectView() throws SQLException;
+	List<Map<String, Object>> qzSelect(String sbjtNm) throws SQLException;
+	List<TTLQZDto> qzUpdateView() throws SQLException;
+	TTLQZDto qzUpdateSearch(int id) throws SQLException;
+	List<Map<String, String>> qzExamSelect() throws SQLException;
+	void qzInsert(List<QZDto> list) throws SQLException;
+	int examTpInsert(EXAMTPDto examtpDto) throws SQLException;
+	String examTpSelect() throws SQLException;
 
 }

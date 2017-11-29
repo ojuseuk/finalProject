@@ -2,6 +2,7 @@ package com.project.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,8 +10,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -66,8 +70,10 @@ public class HomePController {
 	 * return type  : void
 	 */
 	@RequestMapping("/homeP/qnaInsert")
-	public void qnaInsert(QNADto qnaDto) {
+	public String qnaInsert(QNADto qnaDto, Authentication auth) {
 		
+		USRDto usrDto = (USRDto) auth.getPrincipal();
+		qnaDto.setId(usrDto.getId());
 		System.out.println("controller QNAInsert");
 		System.out.println(qnaDto);
 		try {
@@ -76,6 +82,8 @@ public class HomePController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return "forward:/homeP/qnaSelectView";
 		
 	}
 	
@@ -366,10 +374,11 @@ public class HomePController {
 	}
 	
 	@RequestMapping(value="/ntcUpdate", method=RequestMethod.POST, headers = ("content-type=multipart/*"))
-	public void ntcUpdate(Authentication auth, @ModelAttribute NTCDto ntcDto, HttpSession session, @RequestParam("ntcFile") MultipartFile attchFile) throws IllegalStateException, IOException {
+	public String ntcUpdate(Authentication auth, @ModelAttribute NTCDto ntcDto, HttpSession session, @RequestParam("ntcFile") MultipartFile attchFile) throws IllegalStateException, IOException {
 		
 		System.out.println("controller ntcUpdate");
 		System.out.println(attchFile);
+		System.out.println(ntcDto);
 		if(!attchFile.isEmpty()) {
 			String path = session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\";
 			System.out.println(path);
@@ -410,6 +419,25 @@ public class HomePController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(result);
+		
+		return "forward:/ntcList";
 		
 	}
+	
+//	@RequestMapping("/downloadFile")
+//	public ModelAndView downloadFile(@RequestParam("attch") String attch, HttpSession session) {
+//		
+//		
+//		System.out.println("controller downloadFile");
+//		System.out.println(attch);
+//		File file = new File(session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\" + attch); 
+//
+//		if(!file.canRead()) {
+//			System.out.println("파일을 찾을수 없다");
+//		}
+//		System.out.println(session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\" + attch);
+//		return new ModelAndView("fileDownloadView", "downloadFile", file);
+//		
+//	}
 } // end of class

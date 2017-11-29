@@ -50,15 +50,19 @@ public class SchLfController {
 	public ModelAndView selectByCrs(Authentication auth){
 		USRDto usr = (USRDto) auth.getPrincipal();
 		ModelAndView mav = new ModelAndView();
-		List<ClssInfoDto> list = schLfService.selectByCrs();
-		JSONArray json = JSONArray.fromObject(list);
-		mav.addObject("jsonCrs", json);
-		mav.addObject("sbjt", schLfService.selectBySbjt());
-		mav.addObject("usrId", usr.getId());
-		mav.addObject("usrNm", usr.getNm());
-		mav.addObject("usrPhone", usr.getPhone());
-		mav.addObject("usrEmail", usr.getEmail());
-		mav.setViewName("schLf/registClssView");
+		try {
+			List<ClssInfoDto> list = schLfService.selectByCrs();
+			JSONArray json = JSONArray.fromObject(list);
+			mav.addObject("jsonCrs", json);
+			mav.addObject("sbjt", schLfService.selectBySbjt());
+			mav.addObject("usrId", usr.getId());
+			mav.addObject("usrNm", usr.getNm());
+			mav.addObject("usrPhone", usr.getPhone());
+			mav.addObject("usrEmail", usr.getEmail());
+			mav.setViewName("schLf/registClssView");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	
@@ -74,10 +78,16 @@ public class SchLfController {
 	@RequestMapping("selectCrsPerSbjt")
 	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
 	public @ResponseBody List<ClssInfoDto> selectCrsPerSbjt(@RequestParam("sbjtNm") String sbjtNm){
-		if(sbjtNm.equals("선 택")){
-			return schLfService.selectByCrs();
+		List<ClssInfoDto> list = new ArrayList<>();
+		try {
+			if(sbjtNm.equals("선 택")){
+				list = schLfService.selectByCrs();
+			}
+			list = schLfService.selectCrsPerSbjt(sbjtNm);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return schLfService.selectCrsPerSbjt(sbjtNm);
+		return list;
 	}
 	
 	/**
@@ -107,12 +117,13 @@ public class SchLfController {
 	 */
 	@RequestMapping("applyClss")
 	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
-	public ModelAndView applyClss(@RequestBody List<String> clssList) throws Exception{
+	public ModelAndView applyClss(@RequestBody List<String> clssList){
 		int fee = 0;
 		ModelAndView mav = new ModelAndView();
 		List<ClssInfoDto> list = new ArrayList<>();
 		JSONParser parser = new JSONParser();
 		JSONObject jo = null;
+		try {
 			if(!clssList.equals(null)){
 				for (int i = 0; i < clssList.size(); i++) {
 					jo = (JSONObject) parser.parse(clssList.get(i));
@@ -127,11 +138,14 @@ public class SchLfController {
 			} else {
 				mav.addObject("json", "강좌를 선택하세요");
 			}
-		JSONArray json = JSONArray.fromObject(list);
-		System.out.println(json);
-		mav.addObject("json", json);
-		mav.addObject("fee", fee);
-		mav.setViewName("schLf/registListView");
+			JSONArray json = JSONArray.fromObject(list);
+			System.out.println(json);
+			mav.addObject("json", json);
+			mav.addObject("fee", fee);
+			mav.setViewName("schLf/registListView");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	
@@ -150,12 +164,16 @@ public class SchLfController {
 	public ModelAndView selectMyClss(Authentication auth){
 		USRDto usr = (USRDto) auth.getPrincipal();
 		ModelAndView mav = new ModelAndView();
-		List<ClssInfoDto> list = schLfService.selectMyClss(usr.getId());
-		System.out.println(usr.getId());
-		JSONArray json = JSONArray.fromObject(list);
-		System.out.println(json);
-		mav.addObject("json", json);
-		mav.setViewName("schLf/myClssView");
+		try {
+			List<ClssInfoDto> list = schLfService.selectMyClss(usr.getId());
+			System.out.println(usr.getId());
+			JSONArray json = JSONArray.fromObject(list);
+			System.out.println(json);
+			mav.addObject("json", json);
+			mav.setViewName("schLf/myClssView");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	
@@ -209,14 +227,17 @@ public class SchLfController {
 		} else {
 			System.out.println("Error");
 		}
-		
-		DateDto dto = new DateDto(usr.getId(), statDt, endDt);
 		ModelAndView mav = new ModelAndView();
-		List<Map<String, String>> list = schLfService.selectMyAttnd(dto);
-		JSONArray json = JSONArray.fromObject(list);
-		mav.addObject("list", list);
-		mav.addObject("json", json);
-		mav.setViewName("schLf/myAttndView");
+		try {
+			DateDto dto = new DateDto(usr.getId(), statDt, endDt);
+			List<Map<String, String>> list = schLfService.selectMyAttnd(dto);
+			JSONArray json = JSONArray.fromObject(list);
+			mav.addObject("list", list);
+			mav.addObject("json", json);
+			mav.setViewName("schLf/myAttndView");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	
@@ -235,11 +256,15 @@ public class SchLfController {
 	public ModelAndView selectMyScr(Authentication auth){
 		USRDto usr = (USRDto) auth.getPrincipal();
 		ModelAndView mav = new ModelAndView();
-		List<SCRDto> list = schLfService.selectMyScr(usr.getId());
-		JSONArray json = JSONArray.fromObject(list);
-		mav.addObject("scrList", list);
-		mav.addObject("json", json);
-		mav.setViewName("schLf/myScrView");
+		try {
+			List<SCRDto> list = schLfService.selectMyScr(usr.getId());
+			JSONArray json = JSONArray.fromObject(list);
+			mav.addObject("scrList", list);
+			mav.addObject("json", json);
+			mav.setViewName("schLf/myScrView");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	
@@ -256,51 +281,56 @@ public class SchLfController {
 	@RequestMapping("/payments/complete")
 	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
 	@Transactional
-	public String registClss(@RequestBody List<String> clssList) throws Exception{
+	public String registClss(@RequestBody List<String> clssList){
 		System.out.println("registClss");
 		JSONParser parser = new JSONParser();
 		JSONObject jo = null;
 		String id = "";
 		ArrayList<String> list = new ArrayList<>();
-		// clssList json으로 변환
-		if(!clssList.equals(null)){
-			for (int i = 0; i < clssList.size(); i++) {
-				jo = (JSONObject) parser.parse(clssList.get(i));
-				list.add(jo.get("clssId").toString());
+		try {
+			if(!clssList.equals(null)){
+				for (int i = 0; i < clssList.size(); i++) {
+					jo = (JSONObject) parser.parse(clssList.get(i));
+					list.add(jo.get("clssId").toString());
+				}
+				id = jo.get("id").toString();
 			}
-			id = jo.get("id").toString();
+			// 나의 수강생 번호 조회
+			String stdtNo = schLfService.selectMyStdtNo(id);
+			System.out.println("나의 수강생 번호 : " + stdtNo);
+			// 수강생 번호 없을 시 번호 생성
+			if(stdtNo.equals("")){
+				stdtNo = schLfService.selectStdtNo();
+				String no = stdtNo.substring(1);
+				int num = Integer.parseInt(no);
+				no = Integer.toString(++num);
+				stdtNo = stdtNo.substring(0, 1) + no;
+				STDTDto stdt = new STDTDto(stdtNo, id);
+				System.out.println("새로운 수강생 : " + stdt);
+				// 새로운 수강생 Insert
+				schLfService.insertNewStdt(stdt);
+			} 
+			
+			// 오늘 날짜 구하기
+			SimpleDateFormat formatter = new SimpleDateFormat ("yyyyMMdd");
+			Date currentTime = new Date ();
+			String date = formatter.format(currentTime);
+			
+			STDTCLSSDto stdtClss;
+			for (int i = 0; i < list.size(); i++) {
+				stdtClss = new STDTCLSSDto(list.get(i), stdtNo, date);
+				// 새로운 수강생 수강테이블에 Insert
+				System.out.println("수강 : " + stdtClss);
+				schLfService.insertStdtToStdtClss(stdtClss);
+			}
+			
+			System.out.println(list);
+			System.out.println(id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		// 나의 수강생 번호 조회
-		String stdtNo = schLfService.selectMyStdtNo(id);
-		System.out.println("나의 수강생 번호 : " + stdtNo);
-		// 수강생 번호 없을 시 번호 생성
-		if(stdtNo.equals("")){
-			stdtNo = schLfService.selectStdtNo();
-			String no = stdtNo.substring(1);
-			int num = Integer.parseInt(no);
-			no = Integer.toString(++num);
-			stdtNo = stdtNo.substring(0, 1) + no;
-			STDTDto stdt = new STDTDto(stdtNo, id);
-			System.out.println("새로운 수강생 : " + stdt);
-			// 새로운 수강생 Insert
-			schLfService.insertNewStdt(stdt);
-		} 
-		
-		// 오늘 날짜 구하기
-		SimpleDateFormat formatter = new SimpleDateFormat ("yyyyMMdd");
-		Date currentTime = new Date ();
-		String date = formatter.format(currentTime);
-		
-		STDTCLSSDto stdtClss;
-		for (int i = 0; i < list.size(); i++) {
-			stdtClss = new STDTCLSSDto(list.get(i), stdtNo, date);
-			// 새로운 수강생 수강테이블에 Insert
-			System.out.println("수강 : " + stdtClss);
-			schLfService.insertStdtToStdtClss(stdtClss);
-		}
-		
-		System.out.println(list);
-		System.out.println(id);
+		// clssList json으로 변환
 		return "schLf/paymentSucView";
 	}
 	

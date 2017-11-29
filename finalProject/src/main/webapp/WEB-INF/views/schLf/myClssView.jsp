@@ -17,7 +17,7 @@
 
 <jsp:include page="../../../top.jsp"/>
 <body>
-<div style="width: 100%;">
+<div style="width: 80%; margin:auto;">
 	<div id="demo" class="card mb-3" align="left"
 		style="float: left; width: 100%; height: 310px">
 		<div class="card-body">
@@ -42,32 +42,33 @@
 </div>
 <input type="hidden" id="json" value='${requestScope.json}'>
 <input type="hidden" id="root" value='${root}'>
+<%-- <script src="${root}/js/schLf/myClss.js"></script> --%>
 <script type="text/javascript">
-	var clssInfo = $("#json").val();
-	var root = $("#root").val();
-	clssInfo = JSON.parse(clssInfo);
+var clssInfo = $("#json").val();
+var root = $("#root").val();
+clssInfo = JSON.parse(clssInfo);
 
-	$('#dataTable').DataTable({
-		"scrollY" : 250,
-		"scrollCollapse" : true,
-		data : clssInfo,
-		columns : [ {
-			"data" : "clssNm"
-		}, {
-			"data" : "nm"
-		}, {
-			"data" : "strtDt",
-			"render" : function(data, type, row, meta){
-				return data + "~" + row.endDt;
-			}
-		}, {
-			"data" : "paidDt"
-		}, {
-			"data" : "clssroom"
-		} ]
-	});
+$('#dataTable').DataTable({
+	"scrollY" : 250,
+	"scrollCollapse" : true,
+	data : clssInfo,
+	columns : [ {
+		"data" : "clssNm"
+	}, {
+		"data" : "nm"
+	}, {
+		"data" : "strtDt",
+		"render" : function(data, type, row, meta){
+			return data + "~" + row.endDt;
+		}
+	}, {
+		"data" : "paidDt"
+	}, {
+		"data" : "clssroom"
+	} ]
+});
 </script>
-<!-- <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br> -->
-<%-- <jsp:include page="../../../footer.jsp"/> --%>
+<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
+<jsp:include page="../../../footer.jsp"/>
 </body>
 </html>

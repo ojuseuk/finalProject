@@ -9,30 +9,26 @@
 <title>Insert title here</title>
 <style type="text/css">
 td.details-control {
-	background: url('../imgs/grid/plus.JPG') no-repeat center center;
+	background: url('../imgs/grid/detailBtn.jpg') no-repeat center center;
 	cursor: pointer;
 }
 
 tr.shown td.details-control {
-	background: url('../imgs/grid/minus.JPG') no-repeat center center;
+	background: url('../imgs/grid/detailBtn.jpg') no-repeat center center;
 }
 </style>
-</head>
 <!-- dataTable 기본 css -->
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
-<!-- select : true 사용하기 위한 css -->
-<link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
-<link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
-<!-- datatable select 사용을 위한 js -->
-<script src="${root}/js/vendor/datatables/select.min.js"></script>
+<script type="text/javascript" src="${root}/js/jquery.min.js"></script> 
+</head>
 <body>
 <input type="hidden" value='${requestScope.json}' id="json">
 <input type="hidden" value='${root}' id="root">
 <input type="hidden" value="${requestScope.result }" id="result">
-<h2>게시판 목록</h2>
-	
 <jsp:include page="../../../top.jsp"/>
-<div class="container-fluid">
+<br/>
+<h2 align="center">게시판 목록</h2>
+<div class="container-fluid" style="width: 80%; margin: auto;">
 	<div id="demo" class="card mb-3">
 		<div class="card-body">
 			<div class="table-responsive">
@@ -52,7 +48,7 @@ tr.shown td.details-control {
 				</table>
 			</div>
 		</div>
-		<div>
+		<div style="float: right;">
 			<button onclick="location.href='${root}/homeP/qnaInsertView?no=0'">게시글 생성</button>
 		</div>
 	</div>
@@ -70,7 +66,7 @@ tr.shown td.details-control {
 		alert(result);
 
 		function format(d) {
-			return '게시글 내용 : ' + d.nm + '<br>'
+			return '게시글 내용 : ' + d.content + '<br>'
 					+ '<button onclick="location.href=\'' + root
 					+ '/homeP/qnaInsertView?no=' + d.no + '&gpNum=' + d.gpNum
 					+ '&seqNum=' + d.seqNum + '&seqLv=' + d.seqLv
@@ -126,27 +122,7 @@ tr.shown td.details-control {
 			} ]
 		});
 
-		$('#dataTable tbody').on( 'click', 'tr', function () {
-			var tr = $(this).closest('tr');
-			var row = table.row(tr);
-			
-	        if ( $(this).hasClass('selected') ) {
-	            $(this).removeClass('selected');
-				row.child.hide();
-				tr.removeClass('shown');
-	        }
-	        else {
-	            table.$('tr.selected').removeClass('selected');
-	            $(this).addClass('selected');
-				row.child(format(row.data())).show();
-				tr.addClass('shown');
-	        }
-	    } );
-	 
-	    $('#button').click( function () {
-	        table.row('.selected').remove().draw( false );
-	    } );
-/* 		$('#dataTable tbody').on('click', 'td.details-control', function() {
+ 		$('#dataTable tbody').on('click', 'td.details-control', function() {
 			var tr = $(this).closest('tr');
 			var row = table.row(tr);
 			
@@ -160,7 +136,7 @@ tr.shown td.details-control {
 				tr.addClass('shown');
 			}
 
-		}); */
+		});
 	</script>
 </body>
 </html>

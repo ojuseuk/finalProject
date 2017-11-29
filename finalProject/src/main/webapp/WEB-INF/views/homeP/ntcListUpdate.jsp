@@ -17,7 +17,8 @@
 <input type="hidden" value='${requestScope.json}' id="json">
 <input type="hidden" value='${root}' id="root">
 <jsp:include page="../../../top.jsp"/>
-<div id="demo" class="card mb-3" >
+<h2 align="center"> 공지사항 </h2>
+<div id="demo" class="card mb-3" style="width: 80%; margin: auto;">
 	<div class="card-body">
 		<div class="table-responsive">
 			<table class="table table-bordered" id="dataTable">
@@ -60,7 +61,7 @@
 	let root = $('#root').val();
 	
 	function format(d) {
-		return '게시글 내용 : ' + d.content;
+		return '게시글 내용 : ' + d.content.replace(/(?:\r\n|\r\n)/g, '<br />');
 	}
 	
 	$(document).ready(function(){
@@ -69,7 +70,7 @@
 				    search: "검색 : " 
 			},
 			"destroy": true,
-			"scrollY" : 250,
+			"scrollY" : 350,
 			"scrollCollapse" : true,
 			data : json,
 			columns : [ {

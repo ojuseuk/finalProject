@@ -131,7 +131,7 @@ public class StdtMgController {
 	public @ResponseBody List<STDTInfoDto> selectStdtByCrs(@RequestParam("crsId") String crsId){
 		List<STDTInfoDto> list = new ArrayList<>();
 		try {
-			if(crsId.equals("선 택")){
+			if(crsId.equals("default")){
 				list = stdtMgService.selectAllByStdt();
 			} else {
 				list = stdtMgService.selectStdtByCrs(crsId);
@@ -154,12 +154,13 @@ public class StdtMgController {
 	@RequestMapping("stdtList")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody List<STDTInfoDto> selectStdtByClss(STDTInfoDto stdtInfo){
+		System.out.println(stdtInfo);
 		List<STDTInfoDto> list = new ArrayList<>();
 		try {
-			if(stdtInfo.getClssNm().equals("선 택")){
+			if(stdtInfo.getClssId().equals("default")){
 				list = stdtMgService.selectStdtByCrs(stdtInfo.getCrsId());
 			}
-			list = stdtMgService.selectByStdtList(stdtInfo.getClssNm());
+			list = stdtMgService.selectByStdtList(stdtInfo.getClssId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

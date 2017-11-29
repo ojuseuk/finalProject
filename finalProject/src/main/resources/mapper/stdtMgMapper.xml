@@ -74,7 +74,7 @@
 		FROM  TB_USR JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID 
 		JOIN  TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
 		JOIN  TB_CLSS ON TB_STDTCLSS.CLSS_ID = TB_CLSS.CLSS_ID 
-		WHERE TB_CLSS.CLSS_NM = #{clssNm}
+		WHERE TB_CLSS.CLSS_ID = #{clssId}
 	</select>
 	
 	<select id="selectStdtNo" resultType="String">

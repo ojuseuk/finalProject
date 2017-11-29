@@ -3,19 +3,20 @@
  */
 	
 function sendIt() {
-	let email = $('#email1').val();
+	let email = $('.email').val();
 	let regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 	let regPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-	let id = $('#id1');
+	let id = $('.id1');
 	let idVal = id.val();
-	let pw = $('#pw1');
+	let pw = $('.pw');
 	let pwVal = pw.val();
-	let nm = $('#nm1');
+	let nm = $('.nm');
 	let nmVal = nm.val();
-	let phone = $('#phone1');
+	let phone = $('.phone');
 	let phoneVal = phone.val();
 
-	alert(nmVal);
+	alert(idVal);
+	alert(pwVal);
 	// 아이디 입력여부 검사
 	if (idVal == "") {
 		alert("아이디를 입력하지 않았습니다.")
@@ -75,10 +76,10 @@ function sendIt() {
 	}
 
 	// 비밀번호와 비밀번호 확인 일치여부 체크
-	if (pwVal != $('#pw2').val()) {
+	if (pwVal != $('.pw2').val()) {
 		alert("비밀번호가 일치하지 않습니다");
-		$('#pw2').val("");
-		$('#pw2').focus();
+		$('.pw2').val("");
+		$('.pw2').focus();
 		return false;
 	}
 
@@ -90,8 +91,8 @@ function sendIt() {
 
 	if (regex.test(email) === false) {
 		alert("잘못된 이메일 형식입니다.");
-		$('#email').val("");
-		$('#email').focus();
+		$('.email').val("");
+		$('.email').focus();
 		return false;
 	}
 	if (nmVal == "") {
@@ -126,12 +127,11 @@ function sendIt() {
 	$('#f').submit();
 }
 
-
 /* 유효성 체크 */
 $(function(){
 	  var check_error=0;
    
-   $("#id1").focusout(function(){
+   $(".id1").focusout(function(){
       var id=$(this).val();
       var id_valid=/^[a-z0-9_-]{6,14}$/;
       var msg="";
@@ -143,7 +143,7 @@ $(function(){
          $(this).next().next().removeClass("check_error").addClass("check_ok");
       }
    });
-   $("#pw1").focusout(function(){
+   $(".pw").focusout(function(){
       var pw=$(this).val();
       var pwd_valid=/^[a-zA-Z0-9_-]{6,14}$/;
       var msg="";
@@ -155,7 +155,18 @@ $(function(){
      	 $(this).next().removeClass("check_error").addClass("check_ok");
       }
    });
-   $("#nm1").focusout(function(){
+   $(".pw2").focusout(function(){
+	   var pw2=$(this).val();
+	   var pw= $('.pw').val();
+      if(pw != pw2){
+       	$(this).next().html("비밀번호가 일치하지 않습니다.");
+       	$(this).next().addClass("check_error");
+        }else{
+         $(this).next().html("비밀번호가 일치합니다.");
+       	 $(this).next().removeClass("check_error").addClass("check_ok");
+        }	  
+   });
+   $(".nm").focusout(function(){
        var msg="";
        if($(this).val().length<2){
           $(this).next().html("이름을 올바르게 입력해 주세요.");
@@ -165,7 +176,7 @@ $(function(){
      	 $(this).next().removeClass("check_error").addClass("check_ok");
        }
    });
-   $("#phone1").focusout(function(){
+   $(".phone").focusout(function(){
       var phone_valid=/[-]/;
       var phone=$(this).val();
       var msg="";
@@ -180,7 +191,7 @@ $(function(){
       	$(this).next().removeClass("check_error").addClass("check_ok");
       }
    });
-   $("#email1").focusout(function(){
+   $(".email").focusout(function(){
       var email_validA=/[@]/;
       var email_validDot=/[.]/;
       var email=$(this).val();

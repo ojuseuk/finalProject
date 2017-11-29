@@ -7,59 +7,62 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원정보변경</title>
 <script type="text/javascript" src="${root}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
 <div id="" class="container">
   <form action="${root}/changeUsr" method="post" id="f">
-  	<table>
-  		<tr>
-  			<td>아이디</td>
-  			<td>${requestScope.usr.id}<input type="hidden" name="id" id = "id1" value="${requestScope.usr.id}"></td>
-  			<td><span class="check_error"></span></td>
-  		</tr>
-  		<tr>
-  			<td>비밀번호</td>
-  			<td><input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" name="pw" id="pw1" value="${requestScope.usr.pw}" required></td>
-  			<td><span class="check_error"></span></td>
-	  	</tr>
-	 	<tr>
-  			<td>비밀번호</td>
-  			<td><input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" name="pw" id="pw2" value="${requestScope.usr.pw}" required></td>
-  			<td><span class="check_error"></span></td>
-	  	</tr>
-	  	<tr>
-	  		<td>이름</td>
-	  		<td><input type="text" placeholder="이름" name="nm" id="nm1" value="${requestScope.usr.nm}" required></td>
-	  		<td><span class="check_error"></span></td>
-	  	</tr>
-	  	<tr>
-	  		<td>전화</td>
-	  		<td><input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" name="phone" id="phone1" value="${requestScope.usr.phone}" required></td>
-	  		<td><span class="check_error"></span></td>
-	  	</tr>
-	  	<tr>
-	  		<td>주소</td>
-	  		<td> <input type="text" placeholder="주소" name="addr" id="addr1" value="${requestScope.usr.addr}" required></td>
-	  		<td><span class="check_error"></span></td>
-	  	</tr>
-	  	<tr>
-	  		<td>이메일</td>
-	  		<td><input type="text" placeholder="이메일" name="email" id="email1" value="${requestScope.usr.email}" required></td>
-	  		<td><span class="check_error"></span></td>
-	  	</tr>
-	    <tr>
-	        <td><button type="button" class="signupbtn" style="width: 50%;" onclick="sendIt()">저장</button>
-	        <button type="reset" class="signupbtn" style="width: 50%;">취소</button></td>
-	    </tr>
-	    <tr>
-	    	<td> <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /></td>
-	    </tr>
-      </table>
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+    <div class="container">
+      <label><b>아이디</b></label>
+	  <input type="text" id="id1" name="id" value="${requestScope.usr.id}" disabled="disabled">
+      <input type="text" placeholder="아이디 ※ 영문+숫자 조합 6~14자 이내" class="id1" name="id" id="id1" value="${requestScope.usr.id}" required >
+      <br>
+      <span class="check_error"></span>
+      <br>
+      <!-- <input type="button" id="btn_idcheck" name="btn_idcheck" value="중복확인"> -->
+	 
+
+      <label><b>비밀번호</b></label>     
+      <input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" class="pw" name="pw" id="pw1" value="${requestScope.usr.pw }" required>
+      <span class="check_error"></span>
+      <br>
+      
+	  <label><b>비밀번호 확인</b></label>     
+      <input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" class="pw2" id="pw2" required>
+      <span class="check_error"></span>
+      <br>
+
+      <label><b>이름</b></label>
+      <input type="text" placeholder="이름" class="nm" name="nm" id="nm1"  value="${requestScope.usr.nm}" required>
+      <span class="check_error"></span>
+      <br>
+      
+      <label><b>전화</b></label>
+      <input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" class="phone" name="phone" id="phone1"  value="${requestScope.usr.phone}" required>
+      <span class="check_error"></span>
+      <br>
+       	
+      <label><b>주소</b></label>
+      <input type="text" placeholder="주소" class="addr" name="addr" id="addr1" value="${requestScope.usr.addr}" required>
+      <span class="check_error"></span>
+      <br>
+      
+      <label><b>이메일</b></label>
+      <input type="text" placeholder="이메일" class="email" name="email" id="email1"  value="${requestScope.usr.email}" required><br>
+      <span class="check_error"></span>
+      <br>
+      
+	  <div class="clearfix">
+<!--         <button type="submit" class="signupbtn" style="width: 50%;"  onclick="sendit()">회원가입</button><br> -->
+        <input type="button" value="회원가입" onclick="sendIt()"> 
+        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn" style="width: 19%;">취소</button>
+      </div>
+    </div>
   </form>
 </div>
 <input type="hidden" id="fail" value="${requestScope.fail}">
-<script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
 <script>
 if($("#fail").val == 'f'){
 	alert("업데이트 실패");
@@ -70,14 +73,14 @@ if($("#fail").val == 'f'){
 // 	alert($('#name').val());
 // }
    /* 유효성 체크 */
-/*   $(function(){
-	  var check_error=0;	
-      $("#pw").focusout(function(){
-    	  alert(3);
+ /*   $(function(){
+	  var check_error=0;
+      $("#pwInput").focusout(function(){
          var pw=$(this).val();
          var pwd_valid=/^[a-zA-Z0-9_-]{6,14}$/;
          var msg="";
          if(!pwd_valid.test(pw)){
+        	 alert(1);
         	$(this).next().html("(6~14자 영문(대,소), 숫자)입니다.");
         	$(this).next().addClass("check_error");
          }else{
@@ -85,7 +88,7 @@ if($("#fail").val == 'f'){
         	 $(this).next().removeClass("check_error").addClass("check_ok");
          }
       });
-      $("#nm").focusout(function(){
+      $("#nmInput1").focusout(function(){
           var msg="";
           if($(this).val().length<2){
              $(this).next().html("이름을 올바르게 입력해 주세요.");
@@ -95,7 +98,7 @@ if($("#fail").val == 'f'){
         	 $(this).next().removeClass("check_error").addClass("check_ok");
           }
       });
-      $("#phone").focusout(function(){
+      $("#phoneInput1").focusout(function(){
          var phone_valid=/[-]/;
          var phone=$(this).val();
          var msg="";
@@ -110,7 +113,7 @@ if($("#fail").val == 'f'){
          	$(this).next().removeClass("check_error").addClass("check_ok");
          }
       });
-      $("#email").focusout(function(){
+      $("#emailInput1").focusout(function(){
          var email_validA=/[@]/;
          var email_validDot=/[.]/;
          var email=$(this).val();
@@ -137,6 +140,94 @@ if($("#fail").val == 'f'){
           }
        });
    });  */
+   
+   function sendIt2() {
+	   
+	   alert(111);
+		let email = $('input[name=email]').val();
+		let regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+		let regPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+		let pw = $('.pw');
+		let pwVal = pw.val();
+		let nm = $('input[name=nm]');
+		let nmVal = nm.val();
+		let phone = $('input[name=phone]');
+		let phoneVal = phone.val();
+
+		// 비밀번호 입력여부 체크
+		if (pwVal == "") {
+			alert("비밀번호를 입력하지 않았습니다.")
+			pw.focus()
+			return false;
+		}
+		// 비밀번호 길이 체크(4~8자 까지 허용)
+		if (pwVal.length < 6 || pwVal.length > 14) {
+			alert("비밀번호를 6~14자까지 입력해주세요.")
+			pw.focus();
+			pw.select();
+			return false;
+		}
+		for (i = 0; i < pwVal.length; i++) {
+			ch = pwVal.charAt(i)
+			if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')) {
+				alert("비밀번호는 소문자, 숫자만 입력가능합니다.")
+				pw.focus();
+				pw.select();
+				return false;
+			}
+		}
+
+		// 비밀번호와 비밀번호 확인 일치여부 체크
+		if (pwVal != $('#input[name=pw2]').val()) {
+			alert("비밀번호가 일치하지 않습니다");
+			$('#input[name=pw2]').val("");
+			$('#input[name=pw2]').focus();
+			return false;
+		}
+
+		if (email == "") {
+			alert("이메일을 입력하지 않았습니다.");
+			document.f.my_add.focus();
+			return false;
+		}
+
+		if (regex.test(email) === false) {
+			alert("잘못된 이메일 형식입니다.");
+			$('input[name=email]').val("");
+			$('input[name=email]').focus();
+			return false;
+		}
+		if (nmVal == "") {
+			alert("이름을 입력하지 않았습니다.");
+			nm.focus();
+			return false;
+		}
+		if (nmVal.length < 2) {
+			alert("이름을 2자 이상 입력해주십시오.");
+			nm.focus();
+			return false;
+		}
+
+		if (phoneVal == "") {
+			alert("전화번호를 입력하지 않았습니다.");
+			phone.focus();
+			return false;
+		}
+
+		if (phoneVal.length < 11) {
+			alert("전화번호 10자 이상 입력하지않았습니다.");
+			phone.focus();
+			return false;
+		}
+
+		if (!regPhone.test(phoneVal)) {
+			alert("잘못된 휴대폰 번호입니다. 숫자, - 를 포함한 숫자만 입력하세요.");
+			phone.focus();
+			return false
+		}
+
+		$('#f').submit();
+	}
 </script>
 </body>
 </html>

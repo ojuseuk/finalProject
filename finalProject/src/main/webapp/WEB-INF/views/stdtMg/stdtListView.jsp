@@ -17,29 +17,27 @@
 
 <title>학생정보</title>
 <jsp:include page="../../../top.jsp"/>
-<div class="table-responsive">
-	<c:if test="${not empty crsList}">
-	<b>과정</b>
-		<select name="crs" id="crs"
-			onchange="reqCrsList(this.value,'${root}')">
-			<option value="선 택">선 택</option>
-			<c:forEach items="${crsList}" var="data">
-				<option value="${data.crsId}">${data.crsNm}</option>
-			</c:forEach>
-		</select>
-	</c:if>
-	<b>강좌</b>
-		<select id="clss" onchange="reqClssList(this.value, '${root}')">
-			<option>선 택</option>
-		</select> 
-</div>
+<div style="width: 80%; margin: auto;">
+	<div class="table-responsive" style="margin: 20">
+		<c:if test="${not empty crsList}">
+		<b>과정</b>
+			<select name="crs" id="crs"	onchange="reqCrsList(this.value,'${root}')">
+				<option value="default">선 택</option>
+				<c:forEach items="${crsList}" var="data">
+					<option value="${data.crsId}">${data.crsNm}</option>
+				</c:forEach>
+			</select>
+		</c:if>
+		<b>강좌</b>
+			<select id="clss" onchange="reqClssList(this.value, '${root}')">
+				<option>선 택</option>
+			</select> 
+	</div>
 
 	<input type="hidden" value='${requestScope.json}' id="json">
 	<input type="hidden" id="root" value='${root}'>
 	
-<div style="width: 100%;">
-	<div id="demo" class="card mb-3" align="left"
-		style="float: left; width: 50%; height: 558px">
+	<div id="demo" class="card mb-3" align="left" style="float: left; width: 50%; height: 558px">
 		<div class="card-body">
 			<h2 align="center">수강생 목록</h2>
 			<div class="table-responsive">
@@ -57,212 +55,213 @@
 			</div>
 		</div>
 	</div>
-</div>
-
-<div style="width:50%; height:400px; float:left;">
+	<span style="width:10%"></span>
+	<div style="width:50%; height:400px; float:left;">
 	<form action="${root}/insertStdt">
-		<table class="table table-bordered" id="inStdt" width="100%">
-			<tr>
-				<td colspan="2"><h2 align="center">수강생 등록</h2></td>
-			</tr>
-			<tr>
-				<td>아이디</td>
-				<td><input id="stdtId" type="text" name="id" placeholder="ID검색">
-				<input id="selectId" type="button" value="조회"><div id="selectResult"></div></td>
-			</tr>
-			<tr>
-				<td>수강생번호</td>
-				<td><input type="text" name="stdtNo" value="${stdtNo}"></td>
-			</tr>
-			<tr>
-				<td>학 과</td>
-				<td><select id="mjrTp" name="mjrTp">
-					<option value="문 과">문 과</option>
-					<option value="이 과">이 과</option>
-					<option value="예체능">예체능</option>
-				</select>
-				</td>
-			</tr>
-			<tr>
-				<td>강좌</td>
-				<td><select id="geClss" name="clssId">
-					<option value="CL004">종합반A</option>
-					<option value="CL005">종합반B</option>
-					<option value="CL006">종합반C</option>
-				</select>
-				</td>
-			</tr>
-			<tr>
-				<td>대입응시횟수</td>
-				<td><input type="number" name="retryCnt"></td>
-			</tr>
-			<tr>
-				<td>부모님 연락처</td>
-				<td><input type="text" name="prntPhone"></td>
-			</tr>
-			<tr>
-				<td>등록일</td>
-				<td><input type="date" name="paidDt" id="regDate"></td>
-			</tr>
-			<tr>
-				<td>환불일</td>
-				<td><input type="date" name="repaidDt" id="retDate"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><p align="center">
-					<input type="submit" value="저장">
-					<input type="reset" value="리셋">
-				</p></td>
-			</tr>
-		</table>
-	</form>
+	<table class="table table-bordered" id="inStdt" width="100%">
+		<tr>
+			<td colspan="2"><h2 align="center">수강생 등록</h2></td>
+		</tr>
+		<tr>
+			<td>아이디</td>
+			<td><input id="stdtId" type="text" name="id" placeholder="ID검색">
+			<input id="selectId" type="button" value="조회"><div id="selectResult"></div></td>
+		</tr>
+		<tr>
+			<td>수강생번호</td>
+			<td><input type="text" name="stdtNo" value="${stdtNo}"></td>
+				</tr>
+				<tr>
+					<td>학 과</td>
+					<td><select id="mjrTp" name="mjrTp">
+						<option value="문 과">문 과</option>
+						<option value="이 과">이 과</option>
+						<option value="예체능">예체능</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>강좌</td>
+					<td><select id="geClss" name="clssId">
+						<option value="CL004">종합반A</option>
+						<option value="CL005">종합반B</option>
+						<option value="CL006">종합반C</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>대입응시횟수</td>
+					<td><input type="number" name="retryCnt"></td>
+				</tr>
+				<tr>
+					<td>부모님 연락처</td>
+					<td><input type="text" name="prntPhone"></td>
+				</tr>
+				<tr>
+					<td>등록일</td>
+					<td><input type="date" name="paidDt" id="regDate"></td>
+				</tr>
+				<tr>
+					<td>환불일</td>
+					<td><input type="date" name="repaidDt" id="retDate"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><p align="center">
+						<input type="submit" value="저장">
+						<input type="reset" value="리셋">
+					</p></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </div>
-
+<%-- <script src="${root}/js/stdtMg/stdtList.js"></script> --%>
 <script type="text/javascript">
-	var data;
-	var clssData;
-	var clssTag;
-	var xhttp = new XMLHttpRequest();
-	
-// 전체 수강생
-	var allList = $("#json").val();
-	var root = $("#root").val();
-	allList = JSON.parse(allList);
-	console.log(allList);
-	$('#dataTable').DataTable({
-		"scrollY" : 500,
-		"scrollCollapse" : true,
-		data : allList,
-		columns : [ {
-			"data" : "stdtNo"
-		}, {
-			"data" : "nm",
-			//아래 링크 걸어서 사용 아니면 onclick
-			"render" : function(data, type, row, meta){
-				data = '<a href="'+ root +'/stdtInfo?stdtNo=' + row.stdtNo + '">' 
-					 + row.nm + '</a>';
-				return data;
-			}
-		}, {
-			"data" : "mjrTp"
-		} ]
-	});
-	
-// 	아이디조회
-	$(document).ready(function(){
-		$("#selectId").click(function(){
-			var id = $("#stdtId").val();
-			$.post({
-				url : root + "/selectStdtId",
-				data : $("#stdtId").serialize(),
-				beforeSend : function(xhr)
-                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                },
-				success : function(id){
-					if(id == ''){
-						document.getElementById("selectResult").innerHTML = "회원이 아닙니다";
-					} else {
-						document.getElementById("selectResult").innerHTML = "회원입니다";
-					}
-				},
-				error : function(){
-					document.getElementById("selectResult").innerHTML = "조회에 실패했습니다";
+var data;
+var clssData;
+var clssTag;
+var xhttp = new XMLHttpRequest();
+
+//전체 수강생
+var allList = $("#json").val();
+var root = $("#root").val();
+allList = JSON.parse(allList);
+console.log(allList);
+$('#dataTable').DataTable({
+	"scrollY" : 500,
+	"scrollCollapse" : true,
+	data : allList,
+	columns : [ {
+		"data" : "stdtNo"
+	}, {
+		"data" : "nm",
+		//아래 링크 걸어서 사용 아니면 onclick
+		"render" : function(data, type, row, meta){
+			data = '<a href="'+ root +'/stdtInfo?stdtNo=' + row.stdtNo + '">' 
+				 + row.nm + '</a>';
+			return data;
+		}
+	}, {
+		"data" : "mjrTp"
+	} ]
+});
+
+//	아이디조회
+$(document).ready(function(){
+	$("#selectId").click(function(){
+		var id = $("#stdtId").val();
+		console.log(id);
+		$.post({
+			url : root + "/selectStdtId",
+			data : $("#stdtId").serialize(),
+			beforeSend : function(xhr)
+            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            },
+			success : function(id){
+				if(id == ''){
+					document.getElementById("selectResult").innerHTML = "회원이 아닙니다";
+				} else {
+					document.getElementById("selectResult").innerHTML = "회원입니다";
 				}
-			});
+			},
+			error : function(){
+				document.getElementById("selectResult").innerHTML = "조회에 실패했습니다";
+			}
 		});
 	});
-	
-	
-// 	강좌목록
-	function reqCrsList(crsId, root) {
-		stdtListCrs(crsId, root);
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				clssTag = '<option>선 택</option>';
-				clssData = xhttp.responseText;
-				clssData = JSON.parse(clssData);
-				
-				for (i = 0; i < clssData.length; i++) {
-					clssTag += '<option value="' + clssData[i].clssNm + '">' + clssData[i].clssNm + '</option>';
-				}
-				document.getElementById("clss").innerHTML = clssTag;
-				document.getElementById("stdtInfo").innerHTML = "";
+});
+
+
+//	강좌목록
+function reqCrsList(crsId, root) {
+	stdtListCrs(crsId, root);
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			clssTag = '<option>선 택</option>';
+			clssData = xhttp.responseText;
+			clssData = JSON.parse(clssData);
+			console.log(clssData);
+			for (i = 0; i < clssData.length; i++) {
+				clssTag += '<option value="' + clssData[i].clssId + '">' + clssData[i].clssNm + '</option>';
 			}
+			document.getElementById("clss").innerHTML = clssTag;
+			document.getElementById("stdtInfo").innerHTML = "";
 		}
-		xhttp.open("POST", root + "/clssList", true);
-		xhttp.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("crsId=" + crsId);
 	}
-	
-// 	과정별 수강생목록
-	function stdtListCrs(crsId, root) {
+	xhttp.open("POST", root + "/clssList", true);
+	xhttp.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("crsId=" + crsId);
+}
+
+//	과정별 수강생목록
+function stdtListCrs(crsId, root) {
+$('#dataTable').dataTable().fnDestroy();
+	var xhttp2 = new XMLHttpRequest();
+	xhttp2.onreadystatechange = function() {
+		if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+			var stdtList = xhttp2.responseText;
+			stdtList = JSON.parse(stdtList);
+			$('#dataTable').DataTable({
+				"scrollCollapse" : true,
+				data : stdtList,
+				columns : [ {
+					"data" : "stdtNo"
+				}, {
+					"data" : "nm",
+					//아래 링크 걸어서 사용 아니면 onclick
+					"render" : function(data, type, row, meta){
+						data = '<a href="'+ root +'/stdtInfo?stdtNo=' + row.stdtNo + '">' 
+						 	 + row.nm + '</a>';
+						return data;
+					}
+				}, {
+					"data" : "mjrTp"
+				} ]
+			});
+		}
+	}
+	xhttp2.open("POST", root + "/stdtListCrs",	true);
+	xhttp2.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp2.send("crsId=" + crsId);
+}
+
+//	강좌별 수강생목록
+function reqClssList(clssId, root) {
 	$('#dataTable').dataTable().fnDestroy();
-		var xhttp2 = new XMLHttpRequest();
-		xhttp2.onreadystatechange = function() {
-			if (xhttp2.readyState == 4 && xhttp2.status == 200) {
-				var stdtList = xhttp2.responseText;
-				stdtList = JSON.parse(stdtList);
-				$('#dataTable').DataTable({
-					"scrollCollapse" : true,
-					data : stdtList,
-					columns : [ {
-						"data" : "stdtNo"
-					}, {
-						"data" : "nm",
-						//아래 링크 걸어서 사용 아니면 onclick
-						"render" : function(data, type, row, meta){
-							data = '<a href="'+ root +'/stdtInfo?stdtNo=' + row.stdtNo + '">' 
-							 	 + row.nm + '</a>';
-							return data;
-						}
-					}, {
-						"data" : "mjrTp"
-					} ]
-				});
-			}
+	var crsId = document.getElementById("crs").value;
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			var stdtList = xhttp.responseText;
+			stdtList = JSON.parse(stdtList);
+			$('#dataTable').DataTable({
+				"scrollY" : 500,
+				"scrollCollapse" : true,
+				data : stdtList,
+				columns : [ {
+					"data" : "stdtNo"
+				}, {
+					"data" : "nm",
+					//아래 링크 걸어서 사용 아니면 onclick
+					"render" : function(data, type, row, meta){
+						data = '<a href="'+ root +'/stdtInfo?stdtNo=' + row.stdtNo + '">' 
+							 + row.nm + '</a>';
+						return data;
+					}
+				}, {
+					"data" : "mjrTp"
+				} ]
+			});
 		}
-		xhttp2.open("POST", root + "/stdtListCrs",	true);
-		xhttp2.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-		xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp2.send("crsId=" + crsId);
 	}
-	
-// 	강좌별 수강생목록
-	function reqClssList(clssNm, root) {
-		$('#dataTable').dataTable().fnDestroy();
-		var crsId = document.getElementById("crs").value;
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				var stdtList = xhttp.responseText;
-				stdtList = JSON.parse(stdtList);
-				$('#dataTable').DataTable({
-					"scrollY" : 500,
-					"scrollCollapse" : true,
-					data : stdtList,
-					columns : [ {
-						"data" : "stdtNo"
-					}, {
-						"data" : "nm",
-						//아래 링크 걸어서 사용 아니면 onclick
-						"render" : function(data, type, row, meta){
-							data = '<a href="'+ root +'/stdtInfo?stdtNo=' + row.stdtNo + '">' 
-								 + row.nm + '</a>';
-							return data;
-						}
-					}, {
-						"data" : "mjrTp"
-					} ]
-				});
-			}
-		}
-		xhttp.open("POST", root + "/stdtList", true);
-		xhttp.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("clssNm=" + clssNm + "&crsId=" + crsId);
-	}
-	
+	xhttp.open("POST", root + "/stdtList", true);
+	xhttp.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("clssId=" + clssId + "&crsId=" + crsId);
+}
+
 </script>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
