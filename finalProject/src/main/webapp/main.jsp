@@ -188,6 +188,7 @@
 					</div>
 					<div class="panel-footer">수학강사</div>
 				</div>
+				
 			</div>
 
 		</div>
