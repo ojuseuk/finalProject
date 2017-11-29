@@ -13,4 +13,8 @@
 	<insert id="examTpInsert" parameterType="eXAMTPDto">
 		INSERT INTO TB_EXAM_TP VALUES(#{examId}, #{examTitle}, #{examDt}, #{examTp})
 	</insert>
+	
+	<select id="tchrBsTchr" resultType="tCHRDto">
+		SELECT TCHR_NO tchrNo, ID id, SBJT_CHRG sbjtChrg, TCHR_INTRO tchrIntro FROM TB_TCHR
+	</select>
 </mapper>

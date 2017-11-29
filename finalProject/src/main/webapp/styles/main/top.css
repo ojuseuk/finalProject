@@ -16,9 +16,8 @@
       padding: 15px;
     }
     
-    /*로그인 스타일*/
-/* Full-width input fields */
-input[type=text], input[type=password] {
+/*로그인 및 회원가입 input - text,password  스타일*/
+#nm1, #pw1, #pw2, #id1, #phone1, #addr1, #email1 {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -27,33 +26,56 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
-/* Set a style for all buttons */
-button[type="button"] {
-    background-color: #3333cc;
+/* 로그인 전송 버튼 */
+.submit{
+    background-color: #5b5e61b3;
     color: white;
     padding: 10px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 50%;
+    width: 100%;
 }
+
+/* 회원가입 버튼*/
+.divJoin{
+	vertical-align: middle;
+	align-content: center;
+}
+.join{
+	background-color: #5b5e61b3;
+    color: white;
+    padding: 10px 20px;
+    margin: auto 23px;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    align-content: center;
+/*     float: right; */
+}
+
+/* Set a style for all buttons */
+button[type="button"] {
+    background-color: #5b5e61b3;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
 
 button:hover {
     opacity: 0.8;
 }
 
-/* Extra styles for the cancel button */
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #5c8a8a;
-}
-
-/* Extra styles for the cancel button */
-.idpwbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #5c8a8a;
+.login_mbr {
+    margin-top: 10px;
+    margin-bottom : 10px;
+    text-align: center;
+    color: #ccc;
+    font-size: 20px;
 }
 
 
@@ -73,6 +95,14 @@ img.avatar {
     padding: 16px;
 }
 
+.containerInfo{
+	width: 100%;
+}
+
+.InfoContainer{
+	width: 70%;
+	margin: auto;
+}
 span.psw {
     float: right;
     padding-top: 16px;
@@ -85,12 +115,13 @@ span.psw {
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
+    width: 60%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
     padding-top: 10px;
+    margin: auto;
 }
 
 /* Modal Content/Box */
@@ -98,7 +129,21 @@ span.psw {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 100%; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
+    height: auto;
+}
+
+.modal-content2 {
+    background-color: #fefefe;
+    margin: 4px auto 7px auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    height: 96%;
+    overflow: auto;
+}
+
+.join{
+	
 }
 
 /* The Close Button (x) */

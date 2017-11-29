@@ -8,6 +8,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+td.details-control {
+	background: url('${root}/imgs/grid/datailBtn.png') no-repeat center center;
+	cursor: pointer;
+}
+
+tr.shown td.details-control {
+	background: url('${root}/imgs/grid/datailBtn.png') no-repeat center center;
+}
+</style>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <!-- select : true 사용하기 위한 css -->
 <link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
@@ -19,23 +29,16 @@
 	<div class="card-body">
 		<div class="table-responsive">
 			<table class="table table-bordered" id="dataTable">
-				<thead>
+				<thead style="background-color: #90909096;">
 					<tr>
 						<th>번호</th>
 						<th>게시글 제목</th>
 						<th>첨부 파일</th>
+						<th>상세 보기</th>
 						<th>날짜</th>
 					</tr>
 				</thead>
-				<tfoot>
-					<tr>
-						<th>번호</th>
-						<th>게시글 제목</th>
-						<th>첨부 파일</th>
-						<th>날짜</th>
-					</tr>
-				</tfoot>
-				<tbody>
+				<tbody style="background-color: white;">
 					<tr class="odd" id="dataDefault">
 						<td valign="top" colspan="6" class="dataTables_empty"
 							align="center">No data available in table</td>
@@ -81,33 +84,56 @@
 					
 				}
 			}, {
+				"className" : 'details-control',
+				"width" : "10%",
+				"orderable" : false,
+				"data" : null,
+				"defaultContent" : ''
+			}, {
 				"data" : "dt",
 				"searchable": false
 			}]
 		});
 		
-		$('#dataTable tbody').on( 'click', 'tr', function () {
-			var tr = $(this).closest('tr');
+ 		$('#dataTable tbody').on('click', 'td.details-control', function() {
+ 			var tr = $(this).closest('tr');
 			var row = table.row(tr);
 			
-	        if ( $(this).hasClass('selected') ) {
-	            $(this).removeClass('selected');
+			if (row.child.isShown()) {
+				// This row is already open - close it
 				row.child.hide();
 				tr.removeClass('shown');
-	        }
-	        else {
-	            table.$('tr.selected').removeClass('selected');
-	            $(this).addClass('selected');
+			} else {
+				// Open this row
 				row.child(format(row.data())).show();
+				tr.next().css('background', 'yellow');
 				tr.addClass('shown');
-	        }
-	    } );
+			}
+
+		});
+		
+// 		$('#dataTable tbody').on( 'click', 'tr', function () {
+// 			var tr = $(this).closest('tr');
+// 			var row = table.row(tr);
+			
+// 	        if ( $(this).hasClass('selected') ) {
+// 	            $(this).removeClass('selected');
+// 				row.child.hide();
+// 				tr.removeClass('shown');
+// 	        }
+// 	        else {
+// 	            table.$('tr.selected').removeClass('selected');
+// 	            $(this).addClass('selected');
+// 				row.child(format(row.data())).show();
+// 				tr.addClass('shown');
+// 	        }
+// 	    } );
 	 
-	    $('#button').click( function () {
-	        table.row('.selected').remove().draw( false );
-			row.child.hide();
-			tr.removeClass('shown');
-	    } );
+// 	    $('#button').click( function () {
+// 	        table.row('.selected').remove().draw( false );
+// 			row.child.hide();
+// 			tr.removeClass('shown');
+// 	    } );
 	    
 // 	    $("a[name='file']").on("click", function(e){
 // 	    	e.preventDefault();

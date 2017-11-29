@@ -6,7 +6,7 @@ function sendIt() {
 	let email = $('.email').val();
 	let regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 	let regPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-	let id = $('.id1');
+	let id = $('.id');
 	let idVal = id.val();
 	let pw = $('.pw');
 	let pwVal = pw.val();
@@ -15,8 +15,6 @@ function sendIt() {
 	let phone = $('.phone');
 	let phoneVal = phone.val();
 
-	alert(idVal);
-	alert(pwVal);
 	// 아이디 입력여부 검사
 	if (idVal == "") {
 		alert("아이디를 입력하지 않았습니다.")
@@ -131,13 +129,13 @@ function sendIt() {
 $(function(){
 	  var check_error=0;
    
-   $(".id1").focusout(function(){
+   $(".id").focusout(function(){
       var id=$(this).val();
       var id_valid=/^[a-z0-9_-]{6,14}$/;
       var msg="";
       if(!id_valid.test(id)){
          $(this).next().next().html("(6~14자 영문(소), 숫자)입니다.");
-         $(this).next().next().addClass("check_error");
+         $(this).next().next().removeClass("check_ok").addClass("check_error");
       }else{
          $(this).next().next().html("아이디 형식에 알맞습니다.");
          $(this).next().next().removeClass("check_error").addClass("check_ok");
@@ -149,7 +147,7 @@ $(function(){
       var msg="";
       if(!pwd_valid.test(pw)){
      	$(this).next().html("(6~14자 영문(소), 숫자)입니다.");
-     	$(this).next().addClass("check_error");
+     	$(this).next().removeClass("check_ok").addClass("check_error");
       }else{
      	 $(this).next().html("비밀번호 형식에 알맞습니다.");
      	 $(this).next().removeClass("check_error").addClass("check_ok");
@@ -160,7 +158,7 @@ $(function(){
 	   var pw= $('.pw').val();
       if(pw != pw2){
        	$(this).next().html("비밀번호가 일치하지 않습니다.");
-       	$(this).next().addClass("check_error");
+       	$(this).next().removeClass("check_ok").addClass("check_error");
         }else{
          $(this).next().html("비밀번호가 일치합니다.");
        	 $(this).next().removeClass("check_error").addClass("check_ok");
@@ -170,7 +168,7 @@ $(function(){
        var msg="";
        if($(this).val().length<2){
           $(this).next().html("이름을 올바르게 입력해 주세요.");
-          $(this).next().addClass("check_error");
+          $(this).next().removeClass("check_ok").addClass("check_error");
        }else{
      	 $(this).next().html("형식에 알맞습니다.");
      	 $(this).next().removeClass("check_error").addClass("check_ok");
@@ -182,10 +180,10 @@ $(function(){
       var msg="";
       if($(this).val().length<10 || $(this).val().length>11){
       	$(this).next().html("10~11자 이내의 핸드폰번호를 입력해주세요.");
-      	$(this).next().addClass("check_error");
+      	$(this).next().removeClass("check_ok").addClass("check_error");
       }else if(phone_valid.test(phone)){
      	$(this).next().html("-를 빼고 입력해주세요.");
-       	$(this).next().addClass("check_error");
+       	$(this).next().removeClass("check_ok").addClass("check_error");
       }else{
      	$(this).next().html("형식에 알맞습니다.");
       	$(this).next().removeClass("check_error").addClass("check_ok");
@@ -197,13 +195,13 @@ $(function(){
       var email=$(this).val();
       if($(this).val().length<10){
      	$(this).next().next().html("이메일의 길이가 짧습니다.");
-       	$(this).next().next().addClass("check_error");
+       	$(this).next().next().removeClass("check_ok").addClass("check_error");
       }else if(!email_validA.test(email)){
      	$(this).next().next().html("@를 함께 입력해주세요");
-     	$(this).next().next().addClass("check_error");
+     	$(this).next().next().removeClass("check_ok").addClass("check_error");
       }else if(!email_validDot.test(email)){
      	$(this).next().next().html(".를 함께 입력해주세요");
-     	$(this).next().next().addClass("check_error");
+     	$(this).next().next().removeClass("check_ok").addClass("check_error");
       }else{
      	$(this).next().next().html("형식에 알맞습니다.");
        	$(this).next().next().removeClass("check_error").addClass("check_ok");

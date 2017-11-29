@@ -9,12 +9,12 @@
 <title>Insert title here</title>
 <style type="text/css">
 td.details-control {
-	background: url('../imgs/grid/detailBtn.jpg') no-repeat center center;
+	background: url('${root}/imgs/grid/datailBtn.png') no-repeat center center;
 	cursor: pointer;
 }
 
 tr.shown td.details-control {
-	background: url('../imgs/grid/detailBtn.jpg') no-repeat center center;
+	background: url('${root}/imgs/grid/datailBtn.png') no-repeat center center;
 }
 </style>
 <!-- dataTable 기본 css -->
@@ -33,7 +33,7 @@ tr.shown td.details-control {
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable">
-					<thead>
+					<thead style="background-color: #90909096">
 						<tr>
 							<th>게시판 번호</th>
 							<th>게시판 제목</th>
@@ -43,7 +43,7 @@ tr.shown td.details-control {
 							<th>수정 하기</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody style="background-color: white;">
 					</tbody>
 				</table>
 			</div>
@@ -53,7 +53,8 @@ tr.shown td.details-control {
 		</div>
 	</div>
 </div>
-
+<Div st> 
+</Div>
 	<!-- dataTable 기본 js -->
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -123,7 +124,7 @@ tr.shown td.details-control {
 		});
 
  		$('#dataTable tbody').on('click', 'td.details-control', function() {
-			var tr = $(this).closest('tr');
+ 			var tr = $(this).closest('tr');
 			var row = table.row(tr);
 			
 			if (row.child.isShown()) {
@@ -133,6 +134,7 @@ tr.shown td.details-control {
 			} else {
 				// Open this row
 				row.child(format(row.data())).show();
+				tr.next().css('background', 'yellow');
 				tr.addClass('shown');
 			}
 

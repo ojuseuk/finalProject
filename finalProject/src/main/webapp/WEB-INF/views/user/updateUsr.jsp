@@ -15,50 +15,41 @@
   <form action="${root}/changeUsr" method="post" id="f">
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
     <div class="container">
-      <label><b>아이디</b></label>
-	  <input type="text" id="id1" name="id" value="${requestScope.usr.id}" disabled="disabled">
-      <input type="text" placeholder="아이디 ※ 영문+숫자 조합 6~14자 이내" class="id1" name="id" id="id1" value="${requestScope.usr.id}" required >
-      <br>
-      <span class="check_error"></span>
-      <br>
-      <!-- <input type="button" id="btn_idcheck" name="btn_idcheck" value="중복확인"> -->
-	 
-
-      <label><b>비밀번호</b></label>     
-      <input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" class="pw" name="pw" id="pw1" value="${requestScope.usr.pw }" required>
-      <span class="check_error"></span>
-      <br>
+		<label><b>아이디</b></label>
+		<input type="text" id="id1" name="id" value="${requestScope.usr.id}" disabled="disabled">
+		<input type="hidden" placeholder="아이디 ※ 영문+숫자 조합 6~14자 이내" class="id" name="id" id="id1" value="${requestScope.usr.id}" required ><br>
+		<span class="check_error"></span><br>
+		<!-- <input type="button" id="btn_idcheck" name="btn_idcheck" value="중복확인"> -->
+		
+		
+		<label><b>비밀번호</b></label>     
+		<input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" class="pw" name="pw" id="pw1" value="${requestScope.usr.pw }" required>
+		<span class="check_error"></span><br>
+		   
+		<label><b>비밀번호 확인</b></label>     
+		<input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" class="pw2" id="pw2" required>
+		<span class="check_error"></span><br>
+		
+		<label><b>이름</b></label>
+		<input type="text" placeholder="이름" class="nm" name="nm" id="nm1"  value="${requestScope.usr.nm}" required>
+		<span class="check_error"></span><br>
+		
+		<label><b>전화</b></label>
+		<input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" class="phone" name="phone" id="phone1"  value="${requestScope.usr.phone}" required>
+		<span class="check_error"></span>
+		 	
+		<label><b>주소</b></label>
+		<input type="text" placeholder="주소" class="addr" name="addr" id="addr1" value="${requestScope.usr.addr}" required>
+		<span class="check_error"></span><br>
       
-	  <label><b>비밀번호 확인</b></label>     
-      <input type="password" placeholder="비밀번호 ※ 영문+숫자 조합 6~14자 이내" class="pw2" id="pw2" required>
-      <span class="check_error"></span>
-      <br>
-
-      <label><b>이름</b></label>
-      <input type="text" placeholder="이름" class="nm" name="nm" id="nm1"  value="${requestScope.usr.nm}" required>
-      <span class="check_error"></span>
-      <br>
+		<label><b>이메일</b></label>
+		<input type="text" placeholder="이메일" class="email" name="email" id="email1"  value="${requestScope.usr.email}" required><br>
+		<span class="check_error"></span><br>
       
-      <label><b>전화</b></label>
-      <input type="text" placeholder="전화 ※ '-'없이 숫자(10~11자)만 입력" class="phone" name="phone" id="phone1"  value="${requestScope.usr.phone}" required>
-      <span class="check_error"></span>
-      <br>
-       	
-      <label><b>주소</b></label>
-      <input type="text" placeholder="주소" class="addr" name="addr" id="addr1" value="${requestScope.usr.addr}" required>
-      <span class="check_error"></span>
-      <br>
-      
-      <label><b>이메일</b></label>
-      <input type="text" placeholder="이메일" class="email" name="email" id="email1"  value="${requestScope.usr.email}" required><br>
-      <span class="check_error"></span>
-      <br>
-      
-	  <div class="clearfix">
-<!--         <button type="submit" class="signupbtn" style="width: 50%;"  onclick="sendit()">회원가입</button><br> -->
-        <input type="button" value="회원가입" onclick="sendIt()"> 
-        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn" style="width: 19%;">취소</button>
-      </div>
+		<div class="divJoin" style="margin-left: 85px">
+			<input type="button" class="join" value="회원가입" onclick="sendIt()">
+			<input type="button" class="join" onclick="location.href='main.jsp'" value="취소">
+		</div>
     </div>
   </form>
 </div>

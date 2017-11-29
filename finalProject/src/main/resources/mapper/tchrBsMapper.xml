@@ -7,10 +7,10 @@
 		SELECT TPC_NM tpcNm, SBJT_NM sbjtNm FROM TB_TPC
 	</select>
 	
-	<select id="tchrBsTchr" resultType="tCHRDto">
-		SELECT TCHR_NO tchrNo, ID id, SLR slr,  SBJT_CHRG sbjtChrg, TCHR_INTRO tchrIntro
+<!-- 	<select id="tchrBsTchr" resultType="tCHRDto">
+		SELECT TCHR_NO tchrNo, ID id, SBJT_CHRG sbjtChrg, TCHR_INTRO tchrIntro
 			FROM TB_TCHR
-	</select>
+	</select> -->
 	
 	<insert id="ttlqzInsert" parameterType="tTLQZDto">
 		INSERT INTO TB_TTLQZ(ID, SBJT_NM, TCHR_NO, TPC_NM, CONTENT, DEGREE, ANSWER, TITLE, SOLUTION) VALUES(seq_ttlqz.NEXTVAL, #{sbjtNm}, #{tchrNo}, #{tpcNm}, #{content}, #{degree}, #{answer}, #{title}, #{solution})

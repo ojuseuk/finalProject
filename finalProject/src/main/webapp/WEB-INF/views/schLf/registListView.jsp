@@ -26,7 +26,7 @@
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable">
-					<tr>
+					<tr align="center">
 						<td>강좌명</td>
 						<td>강사명</td>
 						<td>기   간</td>
@@ -34,14 +34,14 @@
 						<td>삭제</td>
 					</tr>
 					<c:forEach items="${requestScope.json}" var="data">
-							<tr>
+							<tr align="center">
 								<td>${data.clssNm}</td>
 								<td>${data.nm}</td>
 								<td>${data.strtDt} ~ ${data.endDt}</td>
 								<td>${data.stdtclssttn}원</td>
 								<td align="center">x</td>
 							</tr>
-						</c:forEach>
+					</c:forEach>
 				</table>
 			</div>
 		</div>

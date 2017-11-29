@@ -20,10 +20,11 @@
 	border-radius:10px;
 	border: 1px solid gray;
 	float: left;
-	margin-left: 20px;
-	margin-top: 40px;
-	padding-left: 20px;
-	padding-top: 10px;
+ 	margin-left: 20px;
+ 	margin-right: 20px;
+ 	margin-top: 40px;
+ 	padding-left: 20px;
+ 	padding-top: 10px; 
 	background-color: white;
 }
 
@@ -52,11 +53,11 @@
 <script src="${root}/js/jquery.min.js"></script>
 </head>
 <body>
+<jsp:include page="../../../top.jsp"/>
 <div id="wrap">
-
 	<div id="findId">
 		<h2>아이디 찾기</h2>
-		<hr style="width:100px;float:left;">
+		<hr style="width:100%;float:left;">
 		<br>
 		<br>
 		<br>
@@ -94,7 +95,7 @@
 			<span id="span_findPwd_result"></span>
 		</div>
 	</div>
-	
+<jsp:include page="../../../modal.jsp"/>
 </div>
 	<script type="text/javascript">
 	var root = $("#root").val();

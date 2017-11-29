@@ -163,31 +163,35 @@
 	var j = 0;
 	// 한달치 날짜를 테이블에 시작 요일부터 순서대로 표시
 	for(var i = day; i < day + d_length; i++){
-		if (date > today.getDate()){
-			attndTpIn[j] = "예정";
-			attndTpOut[j] = "예정";
-		}
-// 		console.log(attndDate[j]);
-// 		console.log(standard[j]);
+
 			let str = "";
 			str += date;
 		for (var k = 0; k < d_length; k++) {
-			if(attndDate[j] == standard[k]){
-				
-				if (attndTpIn[j] == "at001"){
+			if (date > today.getDate()){
+				attndTpIn[k] = "예정";
+				attndTpOut[k] = "예정";
+				console.log(attndTpOut);
+			}
+			if(attndDate[k] == standard[j]){
+				if (attndTpIn[k] == "at001"){
 // 					attndTpIn[j] = "<b>출석</b>";
 					str += "<br><b>출석</b>";
 					
-				} else if (attndTpIn[j] == "at002"){
+				} else if (attndTpIn[k] == "at002"){
 // 					attndTpIn[j] = "<font color='red'><b>지각</b></font>";
 					str += "<br><font color='red'><b>지각</b></font>";
+				}else{
+					str += "<br><b>예정</b>";
 				}
-				if (attndTpOut[j] == "at003"){
+				
+				if (attndTpOut[k] == "at003"){
 // 					attndTpOut[j] = "<b>퇴실</b>";
 					str += "<br><b>퇴실</b>";
-				} else if (attndTpOut[j] == "at004"){
+				} else if (attndTpOut[k] == "at004"){
 // 					attndTpOut[j] = "<font color='blue'><b>조퇴</b></font>";
 					str += "<br><font color='blue'><b>조퇴</b></font>";
+				} else{
+					str += "<br><b>예정</b>";
 				}
 				
 			}
