@@ -40,9 +40,7 @@
 						"searchable": false,
 						"render" : function(data, type, row, meta){
 
-							data  = '<div align="center"><input type="button" value="' + data + '" onclick="clssSelect(\''+ root + '\', \''+data+'\');'
-// 							                                                                    + 'tchrAssnSelectList(\'' + root + '\', \'' + data + '\');';
-							                                                                    + 'tchrAssnSelect(\'' + root + '\', \'' + data + '\')"></div>';
+							data  = '<div align="center"><input type="button" value="' + data + '" onclick="clssSelect(\''+ root + '\', \''+data+'\')"></div>'
 							return data;
 						}
 					}, {
@@ -90,10 +88,17 @@
 		 				"scrollCollapse" : true,
 		 				data : jsonListTchr,
 		 				columns : [ {
-		 						"data" : "sbjtChrg"
-		 					}, {
-		 						"data" : "nm"
-		 					}]
+	 						"data" : "tchrNo",
+	 						"searchable": false,
+							"render" : function(data, type, row, meta){
+								data  = '<div align="center"><input type="button" value="' + data + '" onclick="tchrSelect(\''+ root + '\', \''+data+'\')"></div>'
+								return data;
+							}
+	 					}, {
+	 						"data" : "nm"
+	 					}, {
+	 						"data" : "sbjtChrg"
+	 					}]
 		 			});		
 				}
 			}
@@ -129,6 +134,13 @@
 		
 		/* 강사번호로 TB_TCHR 검색 */
 		function tchrSelect(root, tchrNo){
+			
+			/*강사 배정 현황 초기화*/
+			tchrSelectBySbjtNm(root, sbjtNm);
+			document.getElementById("slr").value = "";
+			document.getElementById("tchrIntro").value = "";
+			$("#imgTchr").remove();
+			
 			xhttp.onreadystatechange = function(){
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					data = xhttp.responseText;
@@ -153,7 +165,7 @@
 		}
 		
 		/* 강좌ID로 강사 배정 조회. 리스트에서 특정 강좌 선택 시 */
-		function tchrAssnSelect(root, clssId){
+		function tchrAssnSelect(root, clssId, sbjtNm){
 			xhttp2.onreadystatechange = function(){
 				console.log(xhttp2.readyState);
 				console.log(xhttp2.status);
@@ -165,25 +177,27 @@
 					console.log("data2.length 파싱 후 : " + data2.length);
 					$('#dtTchr').dataTable().fnDestroy();
 					
-					if(data2.length == 0){ 			/* 강사가 배정되지 않은 경우 */
-						tchrSelectBySbjtNm(root, document.getElementById("sbjtNm").value);
-						document.getElementById("slr").value = "";
-						document.getElementById("tchrIntro").value = "";
- 						$("#imgTchr").remove();
-//  						$('#dtTchr').remove();
-					} else if(data2.length == 1){								/* 강사가 배정된 경우 */
-						console.log("parsing 후 data2 : " + data2[0]);
-						document.getElementById("slr").value = data2[0].slr;
-						document.getElementById("tchrIntro").value = data2[0].tchrIntro;
-						
-						tag = '<option value="' + data2[0].tchrNo + '">' + data2[0].nm + '</option>';
-						document.getElementById("tchrNo").innerHTML = tag;
-						tag = '<img id="imgTchr" src="' + root + '/imgs/img/';
-						tag += data2[0].tchrPt + '" style="width:150px;height:150px;">';
-						document.getElementById("tchrPhoto").innerHTML = tag;
-						
-						
-					}	
+					/*강사 배정 현황 초기화*/
+					tchrSelectBySbjtNm(root, sbjtNm);
+					document.getElementById("slr").value = "";
+					document.getElementById("tchrIntro").value = "";
+					$("#imgTchr").remove();
+					
+					if(data2.length == 1 ){								/* 강사가 배정된 경우 */
+						if(sbjtNm != '전과목'){							/*종합반의 경우*/
+							console.log("parsing 후 data2 : " + data2[0]);
+							document.getElementById("slr").value = data2[0].slr;
+							document.getElementById("tchrIntro").value = data2[0].tchrIntro;
+							
+							tag = '<option value="' + data2[0].tchrNo + '">' + data2[0].nm + '</option>';
+							document.getElementById("tchrNo").innerHTML = tag;
+							tag = '<img id="imgTchr" src="' + root + '/imgs/img/';
+							tag += data2[0].tchrPt + '" style="width:150px;height:150px;">';
+							document.getElementById("tchrPhoto").innerHTML = tag;
+						}
+					}
+
+
 					/* 강사 리스트 DataTable 채우기*/
 		 			$('#dtTchr').DataTable({
 		 				"language": {
@@ -194,9 +208,16 @@
 		 				"scrollCollapse" : true,
 		 				data : data2,
 		 				columns : [ {
-		 						"data" : "sbjtChrg"
+		 						"data" : "tchrNo",
+		 						"searchable": false,
+								"render" : function(data, type, row, meta){
+									data  = '<div align="center"><input type="button" value="' + data + '" onclick="tchrSelect(\''+ root + '\', \''+data+'\')"></div>'
+									return data;
+								}
 		 					}, {
 		 						"data" : "nm"
+		 					}, {
+		 						"data" : "sbjtChrg"
 		 					}]
 		 			});		
 				}
@@ -207,6 +228,8 @@
 		
 		/* 강좌ID로 강좌 조회 */
 		function clssSelect(root, clssId){
+
+			
 			xhttp.onreadystatechange = function(){
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					data = xhttp.responseText;
@@ -224,6 +247,8 @@
 					
 					tag = '<option value="' + data.crsId + '">' + data.crsNm + '</option>';
 					document.getElementById("crsId").innerHTML = tag;
+					
+					tchrAssnSelect(root, data.clssId, data.sbjtNm);			// clss List가 조회되고 난 후 강사배정 조회
 					
 				}
 			}

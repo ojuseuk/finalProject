@@ -135,14 +135,14 @@
 		 </if>
 	</update>
 		
-	<select id="tchrSelectBySbjtNm" resultMap="tchrResult" parameterType="String">
-		<if test="sbjtChrg == '전과목'">
+	<select id="tchrSelectBySbjtNm" resultMap="tchrResult" parameterType="tCHRASSNDto">
+		<if test='sbjtNm.equals("전과목")'>
 			SELECT  NM,
 					TCHR_NO
 			  FROM 	TB_TCHR TCHR 
 					INNER JOIN TB_USR USR ON TCHR.ID = USR.ID
 		</if>
-		<if test="sbjtChrg != '전과목'">
+		<if test='!sbjtNm.equals("전과목")'>
 			SELECT  NM,
 					TCHR_NO
 			  FROM 	TB_TCHR TCHR 

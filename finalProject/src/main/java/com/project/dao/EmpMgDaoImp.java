@@ -169,7 +169,11 @@ public class EmpMgDaoImp implements EmpMgDao {
 	@Override
 	public List tchrSelectBySbjtNm(String sbjtNm) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("empMgMapper.tchrSelectBySbjtNm", sbjtNm);
+		System.out.println(sbjtNm);
+		TCHRASSNDto tchrassnDto = new TCHRASSNDto();
+		tchrassnDto.setSbjtNm(sbjtNm);
+		System.out.println("tchrSelectBySbjtNm DAO : " + sqlSession.selectList("empMgMapper.tchrSelectBySbjtNm", tchrassnDto)); 
+		return sqlSession.selectList("empMgMapper.tchrSelectBySbjtNm", tchrassnDto);
 	}
 
 	@Override
@@ -191,6 +195,8 @@ public class EmpMgDaoImp implements EmpMgDao {
 	@Override
 	public List tchrAssnSelect(String clssId) {
 		// TODO Auto-generated method stub
+		
+		System.out.println("tchrAssnSelect DAO : " + sqlSession.selectList("empMgMapper.tchrAssnSelect", clssId));
 		return sqlSession.selectList("empMgMapper.tchrAssnSelect", clssId);
 //		return sqlSession.selectOne("empMgMapper.tchrAssnSelect", clssId);
 	}

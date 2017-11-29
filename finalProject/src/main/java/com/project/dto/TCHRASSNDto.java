@@ -11,6 +11,7 @@ public class TCHRASSNDto {
 	private String tchrIntro;
 	private String tchrPt;
 	private String sbjtChrg;
+	private String sbjtNm;
 	
 	public TCHRASSNDto() {
 		// TODO Auto-generated constructor stub
@@ -123,6 +124,14 @@ public class TCHRASSNDto {
 		this.sbjtChrg = sbjtChrg;
 	}
 
+	public String getSbjtNm() {
+		return sbjtNm;
+	}
+
+	public void setSbjtNm(String sbjtNm) {
+		this.sbjtNm = sbjtNm;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -144,9 +153,12 @@ public class TCHRASSNDto {
 		builder.append(tchrPt);
 		builder.append(", sbjtChrg=");
 		builder.append(sbjtChrg);
+		builder.append(", sbjtNm=");
+		builder.append(sbjtNm);
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 
 

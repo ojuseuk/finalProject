@@ -81,6 +81,7 @@
 		<input type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
 		<br>
 		<div>
+		<br><br>
 		<fieldset style="width: 75%" id="fsTchr" hidden>				
 			<legend>강사 정보</legend>
 			<table style="float:left">
@@ -123,8 +124,9 @@
 						<table class="table table-bordered" id="dtTchr">
 							<thead >
 								<tr>
-									<th>과목</th>
+									<th>강사번호</th>
 									<th>강사명</th>
+									<th>과목</th>
 								</tr>
 							</thead>
 							<tbody>
