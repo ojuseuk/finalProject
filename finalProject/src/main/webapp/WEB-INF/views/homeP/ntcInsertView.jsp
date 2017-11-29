@@ -14,13 +14,13 @@
 <body>
 <jsp:include page="../../../top.jsp"/>
 	<div class="w3-container" style="width: 70%; margin: auto;">
-		<h2>공지사항 등록</h2>
+		<h2 align="center">공지사항 등록</h2>
 		<form action="${root}/ntcInsert" method="POST"  enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
 			<table class="w3-table w3-bordered">
 				<tr>
 					<td>게시글 제목</td>
-					<td><input type="text" name="title"></td>
+					<td><input type="text" name="title" size="118"></td>
 				</tr>
 				<tr>
 					<td>게시글 내용</td>
@@ -31,7 +31,10 @@
 					<td><input type="file" name="ntcFile"></td>
 				</tr>
 			</table>
-			<input type="submit" value="공지사항 등록">
+			<br>
+			<div style="float: right;">
+				<input type="submit" value="공지사항 등록">
+			</div>
 		</form>
 	</div>
 </body>

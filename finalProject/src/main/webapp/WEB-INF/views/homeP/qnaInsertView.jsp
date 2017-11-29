@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="../../../top.jsp"/>
 	<div class="w3-container" style="width: 80%; margin: auto;">
-		<h2>댓글 게시판</h2>
+		<h2 align="center">댓글 게시판</h2>
 		<form action="${root}/homeP/qnaInsert">
 			<input type="hidden" value="${requestScope.qnaDto.no}" name="no">
 			<input type="hidden" value="${requestScope.qnaDto.gpNum}" name="gpNum">

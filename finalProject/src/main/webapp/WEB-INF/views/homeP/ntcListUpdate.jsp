@@ -11,7 +11,16 @@
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <!-- select : true 사용하기 위한 css -->
 <link rel="stylesheet" href="${root}/styles/vendor/css/select.min.css" />
-<!-- datatable select 사용을 위한 js -->
+<style type="text/css">
+td.details-control {
+	background: url('${root}/imgs/grid/datailBtn.png') no-repeat center center;
+	cursor: pointer;
+}
+
+tr.shown td.details-control {
+	background: url('${root}/imgs/grid/datailBtn.png') no-repeat center center;
+}
+</style>
 </head>
 <body>
 <input type="hidden" value='${requestScope.json}' id="json">
@@ -75,7 +84,17 @@
 				"searchable": false
 			}, {
 				"data" : "dt",
-				"searchable": false
+				"searchable": false,
+				"render" : function(data){
+					
+					return data.substring(0,4) + "-"+data.substring(4,6) + "-"+data.substring(6,8);
+				}
+			}, {
+				"className" : 'details-control',
+				"width" : "10%",
+				"orderable" : false,
+				"data" : null,
+				"defaultContent" : ''
 			},{
 				"data":null,
 				"render" : function(data, row, type, meta){
@@ -85,28 +104,22 @@
 			}]
 		});
 		
-		$('#dataTable tbody').on( 'click', 'tr', function () {
-			var tr = $(this).closest('tr');
+ 		$('#dataTable tbody').on('click', 'td.details-control', function() {
+ 			var tr = $(this).closest('tr');
 			var row = table.row(tr);
 			
-	        if ( $(this).hasClass('selected') ) {
-	            $(this).removeClass('selected');
+			if (row.child.isShown()) {
+				// This row is already open - close it
 				row.child.hide();
 				tr.removeClass('shown');
-	        }
-	        else {
-	            table.$('tr.selected').removeClass('selected');
-	            $(this).addClass('selected');
+			} else {
+				// Open this row
 				row.child(format(row.data())).show();
+				tr.next().css('background', 'yellow');
 				tr.addClass('shown');
-	        }
-	    } );
-	 
-	    $('#button').click( function () {
-	        table.row('.selected').remove().draw( false );
-			row.child.hide();
-			tr.removeClass('shown');
-	    } );
+			}
+
+		});
 	});
 </script>
 </body>

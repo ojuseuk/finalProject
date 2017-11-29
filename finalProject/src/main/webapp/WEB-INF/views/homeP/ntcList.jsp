@@ -91,7 +91,11 @@ tr.shown td.details-control {
 				"defaultContent" : ''
 			}, {
 				"data" : "dt",
-				"searchable": false
+				"searchable": false,
+				"render" : function(data){
+					
+					return data.substring(0,4) + "-"+data.substring(4,6) + "-"+data.substring(6,8);
+				}
 			}]
 		});
 		
