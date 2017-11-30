@@ -50,40 +50,40 @@
 <input type="hidden" id="root" value='${root}'>
 <%-- <script src="${root}/js/schLf/myClss.js"></script> --%>
 <script type="text/javascript">
-var clssInfo = $("#json").val();
-var root = $("#root").val();
-clssInfo = JSON.parse(clssInfo);
-
-$('#dataTable').DataTable({
-	"scrollY" : 250,
-	"scrollCollapse" : true,
-	data : clssInfo,
-	columns : [ {
-		"data" : "clssNm"
-	}, {
-		"data" : "nm"
-	}, {
-		"data" : "strtDt",
-		"render" : function(data, type, row, meta){
-			return inputDateFormat(row.strtDt) + " ~ " + inputDateFormat(row.endDt) + " (" + row.prd + "일)";
-		}
-	}, {
-		"data" : "paidDt",
-		"render" : function(data, type, row, meta){
-			return inputDateFormat(row.paidDt);
-		}
-	}, {
-		"data" : "clssroom"
-	} ]
-});
-
-function inputDateFormat(date) {
-	var year = date.substring(0, 4);
-	var month = date.substring(4, 6);
-	var day = date.substring(6, 8);
-
-	return year + '-' + month + '-' + day;
-}
+	var clssInfo = $("#json").val();
+	var root = $("#root").val();
+	clssInfo = JSON.parse(clssInfo);
+	
+	$('#dataTable').DataTable({
+		"scrollY" : 250,
+		"scrollCollapse" : true,
+		data : clssInfo,
+		columns : [ {
+			"data" : "clssNm"
+		}, {
+			"data" : "nm"
+		}, {
+			"data" : "strtDt",
+			"render" : function(data, type, row, meta){
+				return inputDateFormat(row.strtDt) + " ~ " + inputDateFormat(row.endDt) + " (" + row.prd + "일)";
+			}
+		}, {
+			"data" : "paidDt",
+			"render" : function(data, type, row, meta){
+				return inputDateFormat(row.paidDt);
+			}
+		}, {
+			"data" : "clssroom"
+		} ]
+	});
+	
+	function inputDateFormat(date) {
+		var year = date.substring(0, 4);
+		var month = date.substring(4, 6);
+		var day = date.substring(6, 8);
+	
+		return year + '-' + month + '-' + day;
+	}
 </script>
 <!-- <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br> -->
 <%-- <jsp:include page="../../../footer.jsp"/> --%>

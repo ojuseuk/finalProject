@@ -123,6 +123,7 @@ var IMP = window.IMP;
 		</p>
 		<p align="center">
 			<input class="w3-button w3-border" style="background-color: #90909096; width: 15%" id="payment" type="button" value="결제">
+			<input class="w3-button w3-border" style="background-color: #90909096; width: 15%" id="paymentT" type="button" value="결제테스트">
 		</p>
 	</div>
 </div>
@@ -379,47 +380,67 @@ $("#payment").click(function() {
 	reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss);
 });
 
-function reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss) {
-	console.log(tMoney, usrId, usrNm, usrPhone, usrEmail);
-	console.log(selectClss);
-	IMP.request_pay({
-	    pg : 'inicis',
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : tMoney,
-	    buyer_email : usrEmail,
-	    buyer_name : usrNm,
-	    buyer_tel : usrPhone,
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	    	$.ajax({
-	    		url: root + "/payments/complete", 
-	    		type: 'POST',
-	    		contentType : "application/json; charset=UTF-8",
-	    		data: JSON.stringify(selectClss),
-	    		beforeSend : function(xhr)
-                 {  
-                     xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                 }
-	    	}).done(function(data) {
-	    			var msg = '결제가 완료되었습니다.';
-	    			msg += '\n고유ID : ' + rsp.imp_uid;
-	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	    			msg += '\결제 금액 : ' + rsp.paid_amount;
-	    			msg += '카드 승인번호 : ' + rsp.apply_num;
-					document.getElementById("clssView").innerHTML = data;
-	    			alert(msg);
-	    	});
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	        alert(msg);
-	    }
+$("#paymentT").click(function() {
+	$.ajax({
+		url: root + "/payments/complete", 
+		type: 'POST',
+		contentType : "application/json; charset=UTF-8",
+		data: JSON.stringify(selectClss),
+		beforeSend : function(xhr)
+         {  
+             xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+         },
+		success : function(data){
+				alert("수강신청 성공");
+		},
+		error : function(){
+				alert("수강신청 실패");
+		}
 	});
-}
+});
+	
+	function reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss) {
+		console.log(tMoney, usrId, usrNm, usrPhone, usrEmail);
+		console.log(selectClss);
+		IMP.request_pay({
+		    pg : 'inicis',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:결제테스트',
+		    amount : tMoney,
+		    buyer_email : usrEmail,
+		    buyer_name : usrNm,
+		    buyer_tel : usrPhone,
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		    	$.ajax({
+		    		url: root + "/payments/complete", 
+		    		type: 'POST',
+		    		contentType : "application/json; charset=UTF-8",
+		    		data: JSON.stringify(selectClss),
+		    		beforeSend : function(xhr)
+	                 {  
+	                     xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	                 }
+		    	}).done(function(data) {
+		    			var msg = '결제가 완료되었습니다.';
+		    			msg += '\n고유ID : ' + rsp.imp_uid;
+		    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+		    			msg += '\결제 금액 : ' + rsp.paid_amount;
+		    			msg += '카드 승인번호 : ' + rsp.apply_num;
+						document.getElementById("clssView").innerHTML = data;
+		    			alert(msg);
+		    	});
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		        alert(msg);
+		    }
+		});
+	}
+
 </script>
 <Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>

@@ -31,8 +31,9 @@
 	</div>
 	<div id="chart" style="width:100%;"></div>
 </div>
-	<input type="hidden" id="scrList" value="${requestScope.scrList.size()}">
-	<input type="hidden" id="json" value='${requestScope.json}'>
+
+<input type="hidden" id="scrList" value="${requestScope.scrList.size()}">
+<input type="hidden" id="json" value='${requestScope.json}'>
 	
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/kendo.all.min.js"></script>
