@@ -115,7 +115,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/attnd")
-	@PreAuthorize("hasRole('ROLE_TCHR')")
+//	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView attnd(Authentication auth) {
 		
 		USRDto usrDto = (USRDto) auth.getPrincipal();
@@ -150,7 +150,7 @@ public class TchrBsController {
 	 * @return
 	 */
 	@RequestMapping("/attndClss")
-	@PreAuthorize("hasRole('ROLE_TCHR')")
+//	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public @ResponseBody List<Map<String, String>> attndClss(@RequestParam("clssId") String clssId) {
 		
 		System.out.println("controller attndClss");
