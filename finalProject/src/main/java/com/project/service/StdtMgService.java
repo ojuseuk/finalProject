@@ -10,7 +10,7 @@ import com.project.dto.STDTDto;
 import com.project.dto.STDTInfoDto;
 
 public interface StdtMgService {
-	public Map<String, STDTDto> selectByAttnd() throws Exception;
+	public Map<String, STDTDto> selectByAttnd(String today) throws Exception;
 	public List<String> selectBySTDT() throws Exception;
 	public List<CRSDto> selectByCrs() throws Exception;
 	public List<CLSSDto> selectByClss(String crsId) throws Exception;

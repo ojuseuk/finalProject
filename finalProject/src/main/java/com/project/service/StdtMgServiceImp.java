@@ -19,8 +19,8 @@ public class StdtMgServiceImp implements StdtMgService {
 	@Autowired
 	private StdtMgDao stdtMgDao;
 	@Override
-	public Map<String, STDTDto> selectByAttnd() throws Exception {
-		return stdtMgDao.selectByAttnd();
+	public Map<String, STDTDto> selectByAttnd(String today) throws Exception {
+		return stdtMgDao.selectByAttnd(today);
 	}
 
 	@Override
