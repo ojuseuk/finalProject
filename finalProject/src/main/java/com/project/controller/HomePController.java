@@ -76,7 +76,7 @@ public class HomePController {
 			homePService.qnaInsert(qnaDto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		
 		return "forward:/homeP/qnaSelectView";
@@ -106,7 +106,8 @@ public class HomePController {
 			mav.setViewName("homeP/qnaSelectView");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		
@@ -134,9 +135,9 @@ public class HomePController {
 			mav.setViewName("homeP/qnaUpdateView");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-
 		
 		return mav;
 	}
@@ -163,10 +164,10 @@ public class HomePController {
 			mav.setViewName("forward:/homeP/qnaSelectView");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
-		
 		return mav;
 	}
 	
@@ -280,7 +281,6 @@ public class HomePController {
 			result = homePService.ntcInsert(usrDto.getId(), ntcDto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 	}
@@ -315,10 +315,9 @@ public class HomePController {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-		
-
 		
 		return mav;
 	}
@@ -341,7 +340,8 @@ public class HomePController {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		return mav;
@@ -352,7 +352,6 @@ public class HomePController {
 
 		if(!attchFile.isEmpty()) {
 			String path = session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\";
-			System.out.println(path);
 			File targetDir = new File(path);
 			if(!targetDir.exists()) {
 				targetDir.mkdirs();
@@ -376,9 +375,8 @@ public class HomePController {
 			result = homePService.ntcUpdate(ntcDto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
-		System.out.println(result);
 		
 		return "forward:/ntcList";
 		

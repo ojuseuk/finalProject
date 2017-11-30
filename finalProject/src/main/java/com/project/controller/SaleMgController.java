@@ -68,7 +68,7 @@ public class SaleMgController {
 			saleMgService.insert(date, amount);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 
 		return "saleMg/accep";
@@ -105,7 +105,8 @@ public class SaleMgController {
 			mav.setViewName("/saleMg/ltfee");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		return mav;
@@ -187,7 +188,8 @@ public class SaleMgController {
 			mav.setViewName("saleMg/ltfeeConfirm");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		return mav;

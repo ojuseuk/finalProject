@@ -91,7 +91,8 @@ public class StdtMgController {
 			mav.addObject("stdtNo", stdtNo);
 			mav.setViewName("stdtMg/stdtListView");
 		} catch (Exception e) {
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		return mav;
 	}
@@ -188,7 +189,6 @@ public class StdtMgController {
 			mav.addObject("json", json);
 			mav.setViewName("stdtMg/updateStdtView");
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return mav;
 	}
@@ -225,7 +225,8 @@ public class StdtMgController {
 			mav.addObject("stdtNo", stdtNo);
 			mav.setViewName("stdtMg/stdtListView");
 		} catch (Exception e) {
-			// TODO: handle exception
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		return mav;
 	}
@@ -274,7 +275,8 @@ public class StdtMgController {
 			stdtMgService.insertStdtClss(stdtClssDto);
 			stdtMgService.updateUsrTp(stdtDto);
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
+			
 		}
 		return "redirect:/stdtAllList";
 	}

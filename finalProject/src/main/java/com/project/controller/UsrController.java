@@ -46,78 +46,9 @@ public class UsrController {
 			url = "redirect:/main.jsp";
 
 		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return url;
-	}
-
-	@RequestMapping(value = "/userLogin.do", method = RequestMethod.POST)
-	public String userLogin(String id, String pw, HttpSession session, Model model) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		map.put("pw", pw);
-
-		String url = "redirect:/main.jsp";
-		USRDto usrDto = null;
-		
-		try {
-			usrDto = usrService.userLogin(map);
-			
-			if (usrDto != null) {
-				
-				System.out.println("controller : " + usrDto);
-				if(usrDto.getUsrTp() == null) {
-					System.out.println("여기??");
-				}else
-				if (usrDto.getUsrTp().equals("staff")) {
-					System.out.println("직원");
-					session.setAttribute("id", id);
-					session.setAttribute("name", usrDto.getNm());
-					session.setAttribute("usrTp", usrDto.getUsrTp());
-					
-					url = "user/main_staff";
-				} else if (usrDto.getUsrTp().equals("st")) {
-					System.out.println("학생");
-					session.setAttribute("id", id);
-					session.setAttribute("name", usrDto.getNm());
-					session.setAttribute("usrTp", usrDto.getUsrTp());
-					
-				} else if (usrDto.getUsrTp().equals("tchr")) {
-					System.out.println("강사");
-					session.setAttribute("id", id);
-					session.setAttribute("name", usrDto.getNm());
-					session.setAttribute("usrTp", usrDto.getUsrTp());
-					
-					url = "user/main_tchr";
-				} else {
-					System.out.println("사용자");
-					session.setAttribute("id", id);
-					session.setAttribute("name", usrDto.getNm());
-//					session.setAttribute("usrTp", usrDto.getUsrTp());
-					
-				}
-				
-			} else {
-				// 나중에 수정
-				System.out.println("!1111111111111111111111111");
-				try {
-					String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
-					msg = msg.replaceAll("\\+", "%20");
-					
-					url += "?login_errMsg="+URLEncoder.encode(msg, "UTF-8");
-					
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 			
 		}
-		
 		return url;
 	}
 
@@ -129,8 +60,7 @@ public class UsrController {
 
 	// find id
 	@RequestMapping(value = "/findId")
-	public @ResponseBody String findId(@RequestParam("nm") String nm, @RequestParam("phone") String phone)
-			throws SQLException {
+	public @ResponseBody String findId(@RequestParam("nm") String nm, @RequestParam("phone") String phone) throws SQLException {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("nm", nm);
 		map.put("phone", phone);
@@ -197,7 +127,8 @@ public class UsrController {
 			usrService.changePwdNew(map);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "redirect:/error.jsp";
+			
 		}
 
 		return "redirect:/main.jsp";
@@ -279,7 +210,8 @@ public class UsrController {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		return mav;
@@ -305,7 +237,8 @@ public class UsrController {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		return mav;

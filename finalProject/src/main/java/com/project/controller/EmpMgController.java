@@ -43,7 +43,6 @@ public class EmpMgController {
 	private EmpMgDao empMgDao;
 	@Autowired
 	private CrsMgService crsMgService;
-	
 
 	@Secured("ROLE_STAFF")
 	@RequestMapping("/mgTchr")
@@ -66,7 +65,7 @@ public class EmpMgController {
 			url = "tchr/mgTchr";
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -197,7 +196,7 @@ public class EmpMgController {
 			url = "emp/mgEmp";
 			System.out.println("emp controller list.size() : " + list.size());
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -216,7 +215,7 @@ public class EmpMgController {
 			url = listEmp(emp, data, resultMsg, url);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -230,7 +229,7 @@ public class EmpMgController {
 			resultMsg = empMgService.empUpdate(emp);
 			url = listEmp(emp, data, resultMsg, url);
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -239,16 +238,17 @@ public class EmpMgController {
 		List list = null;
 		try {
 			list = empMgService.empSelectAll();
+			data.addAttribute("list", list);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			data.addAttribute("jsonList", jsonList);
+			data.addAttribute("resultMsg", resultMsg);
+			data.addAttribute("emp", emp); // @@@		20171120
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
-		data.addAttribute("list", list);
-		
-		JSONArray jsonList = JSONArray.fromObject(list);
-		data.addAttribute("jsonList", jsonList);
-		data.addAttribute("resultMsg", resultMsg);
-		data.addAttribute("emp", emp); // @@@		20171120
+
 		
 		return "emp/mgEmp";  	
 		
@@ -263,7 +263,7 @@ public class EmpMgController {
 			url = listEmp(emp, data, resultMsg, url);
 				
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -290,9 +290,8 @@ public class EmpMgController {
 			url ="tchr/mgTchr";  	
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
-		System.out.println(resultMsg);
 		return url;
 	}
 	
@@ -303,7 +302,6 @@ public class EmpMgController {
 			uploadImg(tchr, session, imgFile);
 		}
 		
-		System.out.println("tchrInsert Controller : " + tchr);
 		String url = "error";
 		String resultMsg = "";		
 		try {
@@ -320,7 +318,7 @@ public class EmpMgController {
 			url ="tchr/mgTchr";  	
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}

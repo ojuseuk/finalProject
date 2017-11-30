@@ -133,9 +133,9 @@ public class TchrBsController {
 			mav.setViewName("tchrBs/attnd");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-
 		
 		return mav;
 	}
@@ -196,7 +196,8 @@ public class TchrBsController {
 			mav.setViewName("tchrBs/srcIn");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		
 		return mav;
@@ -219,7 +220,8 @@ public class TchrBsController {
 			tchrBsService.srcInsert(scrDto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "redirect:/error.jsp";
+			
 		}
 	
 		return "forward:/tchrBs/srcIn";
@@ -253,7 +255,8 @@ public class TchrBsController {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		return mav;
@@ -277,7 +280,6 @@ public class TchrBsController {
 			list = tchrBsService.stClssSearch(clssId);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		return list;
@@ -315,7 +317,8 @@ public class TchrBsController {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		return mav;
@@ -369,7 +372,8 @@ public class TchrBsController {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 
 		return mav;
@@ -395,7 +399,8 @@ public class TchrBsController {
 			mav.setViewName("tchrBs/qzUpdateSearch");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		
 		return mav;
