@@ -13,8 +13,8 @@
 		<form action="${root}/tchrBs/qzInsert">
 			<table class="w3-table w3-bordered">
 				<tr>
-					<td>과목명</td>
-					<td><input type="text" value="${requestScope.ttlqzDto.sbjtNm}"
+					<td><span class="input-group-addon" style="width:200px">과목명</span></td>
+					<td><input class="form-control" style="width:200px; float: left;" type="text" value="${requestScope.ttlqzDto.sbjtNm}"
 						name="sbjtNm"></td>
 				</tr>
 				<tr>

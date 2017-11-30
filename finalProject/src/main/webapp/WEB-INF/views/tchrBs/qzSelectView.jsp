@@ -9,17 +9,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>Insert title here</title>
 <script src="${root}/js/jquery.min.js"></script>
-<style>
-.select {
-    width: 200px;
-    height: 30px;
-    padding-left: 10px;
-    font-size: 15px;
-    color: #424242;
-    border: 1px solid #90909096;
-    border-radius: 3px;
-}
-</style>
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -29,7 +18,7 @@
 	<h2 align="center">시험 출제</h2>
 		<input type="hidden" value='${requestScope.jsonTchr}' id="jsonTchr">
 		<input type="hidden" value='${requestScope.jsonExam}' id="jsonExam">
-	<select class="select" id="qzSbjtNm" name="sbjtNm">
+	<select class="form-control" style="width:200px; float: left;" id="qzSbjtNm" name="sbjtNm">
 		<option value="선택">선택</option>
 	</select>
 		<button class="w3-button w3-border" style="background-color: #90909096" onclick="qzSelect('${root}')">조회</button>

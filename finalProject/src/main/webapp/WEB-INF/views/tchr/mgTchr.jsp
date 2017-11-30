@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,6 +14,9 @@
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
 <style>
+#dataTable{
+    background-color:#fff;
+}
 .select {
     width: 179px;
     height: 25px;
@@ -37,17 +40,16 @@
 			<legend>사용자 정보</legend>
 			<table>
 				<tr>
-					<td>사용자 ID </td>
-					<td><input type="text" name="id" id="id2" />
-  						<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" value="조회"
+					<td><span class="input-group-addon" style="width:100px">사용자 ID</span></td>
+					<td><input class="form-control" type="text" name="id" id="id2" /></td>
+					<td><input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" value="조회"
 						onclick="searchUsr('${pageContext.request.contextPath}', $('#id2').val());
 								 searchEmpById('${pageContext.request.contextPath}', $('#id2').val());
-								 searchTchrById('${pageContext.request.contextPath}', $('#id2').val());">
-					</td>
+								 searchTchrById('${pageContext.request.contextPath}', $('#id2').val());"></td>
 				</tr>  
 				<tr>
-					<td>이름 </td>
-					<td><input type="text" name="nm" id="nm2" /></td>
+					<td><span class="input-group-addon" style="width:100px">이름</span></td>
+					<td><input class="form-control" type="text" name="nm" id="nm2" /></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -56,13 +58,13 @@
 			<legend>직원 정보</legend>
 			<table>
 				<tr>
-					<td>사원번호 </td>
-					<td><input type="text" name="empNo" id="empNo"/>
+					<td><span class="input-group-addon" style="width:100px">사원번호</span></td>
+					<td><input class="form-control" type="text" name="empNo" id="empNo"/>
 					</td>
 				</tr>  
 				<tr>
-					<td>급여 </td>
-					<td><input type="text" name="slr" id="slr"/></td>
+					<td><span class="input-group-addon" style="width:100px">급여</span></td>
+					<td><input class="form-control" type="text" name="slr" id="slr"/></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -71,14 +73,14 @@
 			<legend>강사 정보</legend>
 			<table>
 				<tr>
-					<td>강사번호 </td>
-					<td><input type="text" name="tchrNo" id="tchrNo"/>
+					<td><span class="input-group-addon" style="width:100px">강사번호</span> </td>
+					<td><input class="form-control" type="text" name="tchrNo" id="tchrNo"/>
 					</td>
 					
 				</tr>  
 				<tr>
-					<td>담당과목 </td>
-					<td><select class="select" name="sbjtChrg" id="sbjtChrg">
+					<td><span class="input-group-addon" style="width:100px">담당과목</span></td>
+					<td><select class="form-control" name="sbjtChrg" id="sbjtChrg">
 							<option value="">과목 선택</option>
 							<c:forEach items="${requestScope.sbjtList}" var="data">
 								<option value=${data.sbjtNm}>${data.sbjtNm}</option>
@@ -86,18 +88,16 @@
 						</select></td>
 				</tr>
 				<tr>
-					<td>강사 소개 </td>
-					<td><textarea name = "tchrIntro" id="tchrIntro" cols = "50" rows = "7" 
+					<td><span class="input-group-addon" style="width:100px">강사 소개</span></td>
+					<td><textarea class="form-control" name = "tchrIntro" id="tchrIntro" cols = "50" rows = "7" 
                               placeholder="200자 이내"></textarea></td>
-                    </td>
 					<td><div id="tchrPhoto"><%-- <img src="${pageContext.request.contextPath}/imgs/img/T0046.jpg" 
 						alt="강사사진" style="width:150px;height:150px;"> --%></div>
                     </td>
 				</tr>
 				<tr>
-					<td>사진 </td>
-                    <td><input type="file" name="imgFile"><br> 
-                    </td>
+					<td><span class="input-group-addon" style="width:100px">사진</span></td>
+                    <td><input class="form-control" type="file" name="imgFile"></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -121,7 +121,7 @@
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">
-						<thead>
+						<thead style="background-color: #90909096">
 							<tr>
 								<th>ID</th>
 								<th>사번</th>

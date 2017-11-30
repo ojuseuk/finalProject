@@ -17,6 +17,11 @@
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+#datatable{
+    background-color:#fff;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -28,8 +33,8 @@
 				<legend>사용자 정보</legend>
 				<table>
 					<tr>
-						<td>사용자 ID :</td>
-						<td><input type="text" name="id" id="id2" 
+						<td><span class="input-group-addon" style="width:100px">사용자 ID</span></td>
+						<td><input class="form-control" style="float: left;" type="text" name="id" id="id2" 
 							<c:if test="${not empty emp.id}">
 								value = ${emp.id}
 							</c:if>
@@ -40,8 +45,8 @@
 						
 					</tr>
 					<tr>
-						<td>이름 :</td>
-						<td><input type="text" name="nm" id="nm2" 
+						<td><span class="input-group-addon" style="width:100px">이름</span></td>
+						<td><input class="form-control" type="text" name="nm" id="nm2" 
 						<c:if test="${not empty emp.nm}">
 							value = ${emp.nm}
 						</c:if>
@@ -53,25 +58,25 @@
 				<legend>직원 정보</legend>
 				<table>
 					<tr>
-						<td>사원번호 :</td>
+						<td><span class="input-group-addon" style="width:100px">사원번호</span></td>
 						<td>
-						<input type="text" name="empNo" id="empNo"/>  					
+						<input class="form-control" type="text" name="empNo" id="empNo"/>  					
 							<c:if test="${not empty emp.empNo}">
 								value = ${emp.empNo}
 							</c:if>
 						</td>
 					</tr>
 					<tr>
-						<td>급여 :</td>
-						<td><input type="text" name="slr" id="slr" 
+						<td><span class="input-group-addon" style="width:100px">급여</span></td>
+						<td><input class="form-control" type="text" name="slr" id="slr" 
 						<c:if test="${not empty emp.slr}">
 							value = ${emp.slr}
 						</c:if>
 						/></td>
 					</tr>
 					<tr>
-						<td>퇴사 일자 :</td>
-						<td><input type="date" name="retiredDt" placeholder="퇴사일자"
+						<td><span class="input-group-addon" style="width:100px">퇴사 일자</span></td>
+						<td><input class="form-control" style="float: left;" type="date" name="retiredDt" placeholder="퇴사일자"
 							id="retiredDt" 
 							<c:if test="${not empty emp.retiredDt}">
 								value = ${emp.retiredDt}
@@ -107,7 +112,7 @@
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable">
-					<thead>
+					<thead style="background-color: #90909096">
 						<tr>
 							<th>ID</th>
 							<th>사번</th>

@@ -27,19 +27,19 @@ function qzSelect(root) {
 			
 			var $form = $('<form action="'+root+'/tchrBs/qzInsert"></form>');
 			var $tableInput = $('<table></table>');
-			var $select = $('<select class="select" id="examTp" name="examTp"></select>');
+			var $select = $('<select class="form-control" style="width:100px; float: left;" id="examTp" name="examTp"></select>');
 			var $option1 = $('<option value="선택">선택</option>');
-			var $input1 = $('<input type="text" name="examTitle">');
-			var $input2 = $('<input type="date" name="examDt">');
+			var $input1 = $('<input class="form-control" style="width:100px; float: left;" type="text" name="examTitle">');
+			var $input2 = $('<input class="form-control" style="width:100px; float: left;" type="date" name="examDt">');
 			var $trInput1 = $('<tr></tr>');
 			var $trInput2 = $('<tr></tr>');
 			var $trInput3 = $('<tr></tr>');
 			
-			var $tdInput1 = $('<td>시험 이름</td>');
+			var $tdInput1 = $('<td><span class="input-group-addon" style="width:200px">시험 이름</span></td>');
 			var $tdInput11 = $('<td></td>');
-			var $tdInput2 = $('<td>시험 날짜</td>');
+			var $tdInput2 = $('<td><span class="input-group-addon" style="width:200px">시험 날짜</span></td>');
 			var $tdInput22 = $('<td></td>');
-			var $tdInput3 = $('<td>시험 종류</td>');
+			var $tdInput3 = $('<td><span class="input-group-addon" style="width:200px">시험 종류</span></td>');
 			var $tdInput33 = $('<td></td>');
 			
 			$tdInput11.append($input1);

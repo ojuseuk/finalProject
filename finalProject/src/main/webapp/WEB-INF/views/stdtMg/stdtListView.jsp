@@ -37,18 +37,18 @@
 <title>학생정보</title>
 <jsp:include page="../../../top.jsp"/>
 <div style="width: 80%; margin: auto;">
-	<div class="table-responsive" style="margin: 20">
+	<div class="table-responsive" style="margin: 10px">
 		<c:if test="${not empty crsList}">
-		<font style="font-size: 17px"><b>과정</b></font>
-			<select class="select" name="crs" id="crs" onchange="reqCrsList(this.value,'${root}')">
+		<font style="font-size: 17px"><span class="input-group-addon" style="width:100px; height:34px; float: left"><b>과   정</b></span></font>
+			<select class="form-control" name="crs" id="crs" style="width:100px; float: left" onchange="reqCrsList(this.value,'${root}')">
 				<option value="default">선 택</option>
 				<c:forEach items="${crsList}" var="data">
 					<option value="${data.crsId}">${data.crsNm}</option>
 				</c:forEach>
 			</select>
 		</c:if>
-		<font style="font-size: 18px"><b>강좌</b></font>
-			<select class="select" id="clss" onchange="reqClssList(this.value, '${root}')">
+		<font style="font-size: 18px"><span class="input-group-addon" style="width:100px; height:34px; float: left"><b>강   좌</b></span></font>
+			<select class="form-control" id="clss" style="width:100px" onchange="reqClssList(this.value, '${root}')">
 				<option>선 택</option>
 			</select> 
 	</div>
@@ -81,18 +81,18 @@
 			<legend style="text-align: center;"><h2>수강생 등록</h2></legend>
 				<table class="table table-bordered" id="inStdt" style="width:100%;">
 					<tr>
-						<td align="center">아이디</td>
-						<td><input id="stdtId" type="text" name="id" placeholder="ID검색">
+						<td align="center"><span class="input-group-addon">아이디</span></td>
+						<td><input class="form-control" style="width:400px; float:left;" id="stdtId" type="text" name="id" placeholder="ID검색">
 						<input class="w3-button w3-border w3-tiny" id="selectId" style="background-color: #90909096" type="button" value="조회">
 						<div id="selectResult"></div></td>
 					</tr>
 					<tr>
-						<td align="center">수강생번호</td>
-						<td><input type="text" name="stdtNo" value="${stdtNo}"></td>
+						<td align="center"><span class="input-group-addon">수강생번호</span></td>
+						<td><input class="form-control" type="text" name="stdtNo" value="${stdtNo}"></td>
 					</tr>
 					<tr>
-						<td align="center">학 과</td>
-						<td><select select class="select" id="mjrTp" name="mjrTp">
+						<td align="center"><span class="input-group-addon">학 과</span></td>
+						<td><select class="form-control" id="mjrTp" name="mjrTp">
 							<option value="문 과">문 과</option>
 							<option value="이 과">이 과</option>
 							<option value="예체능">예체능</option>
@@ -100,8 +100,8 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="center">강좌</td>
-						<td><select select class="select" id="geClss" name="clssId">
+						<td align="center"><span class="input-group-addon">강 좌</span></td>
+						<td><select class="form-control" id="geClss" name="clssId">
 							<option value="CL004">종합반A</option>
 							<option value="CL005">종합반B</option>
 							<option value="CL006">종합반C</option>
@@ -109,20 +109,20 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="center">대입응시횟수</td>
-						<td><input type="number" name="retryCnt"></td>
+						<td align="center"><span class="input-group-addon">대입응시횟수</span></td>
+						<td><input class="form-control" type="number" name="retryCnt" required="required"></td>
 					</tr>
 					<tr>
-						<td align="center">부모님 연락처</td>
-						<td><input type="text" name="prntPhone"></td>
+						<td align="center"><span class="input-group-addon">부모님 연락처</span></td>
+						<td><input class="form-control" type="text" name="prntPhone"></td>
 					</tr>
 					<tr>
-						<td align="center">등록일</td>
-						<td><input type="date" name="paidDt" id="regDate"></td>
+						<td align="center"><span class="input-group-addon">등록일</span></td>
+						<td><input class="form-control" type="date" name="paidDt" id="regDate"></td>
 					</tr>
 					<tr>
-						<td align="center">환불일</td>
-						<td><input type="date" name="repaidDt" id="retDate"></td>
+						<td align="center"><span class="input-group-addon">환불일</span></td>
+						<td><input class="form-control" type="date" name="repaidDt" id="retDate"></td>
 					</tr>
 					<tr>
 						<td colspan="2"><p align="center">

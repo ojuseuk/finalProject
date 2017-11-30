@@ -28,10 +28,10 @@
 	   		</tr>
 	    	<tr>
 	      		<td width="150" height="20">
-	            	<p align="right">내  용</p>
+	            	<p align="right"><span class="input-group-addon" style="width:100px">내  용</span></p>
 	       		</td>
 	       		<td width="450" height="20">
-					<textarea name="content" cols="50" rows="10" maxlength="80"></textarea>
+					<textarea class="form-control" style="width:700px" name="content" cols="50" rows="10" maxlength="80"></textarea>
 				</td>
 	   	 	</tr>
 	    	<tr>
@@ -43,7 +43,7 @@
 	        &nbsp;
 	        <input class="w3-button w3-border" style="background-color: #90909096" type=reset value="다시쓰기">
 	   		&nbsp;
-	   		<input class="w3-button w3-border" style="background-color: #90909096" type="button" name="command" value="지각안내" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
+	   		<input class="w3-button w3-border" style="background-color: #90909096" type="button" name="command" value="지각통보" onClick="location.href='${pageContext.request.contextPath}/sendSms?command=late'"/>
 	   		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	   		</td>
 	    </tr>
