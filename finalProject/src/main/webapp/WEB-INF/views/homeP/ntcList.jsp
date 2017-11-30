@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -124,52 +124,8 @@ tr.shown td.details-control {
 
 		});
 		
-// 		$('#dataTable tbody').on( 'click', 'tr', function () {
-// 			var tr = $(this).closest('tr');
-// 			var row = table.row(tr);
-			
-// 	        if ( $(this).hasClass('selected') ) {
-// 	            $(this).removeClass('selected');
-// 				row.child.hide();
-// 				tr.removeClass('shown');
-// 	        }
-// 	        else {
-// 	            table.$('tr.selected').removeClass('selected');
-// 	            $(this).addClass('selected');
-// 				row.child(format(row.data())).show();
-// 				tr.addClass('shown');
-// 	        }
-// 	    } );
-	 
-// 	    $('#button').click( function () {
-// 	        table.row('.selected').remove().draw( false );
-// 			row.child.hide();
-// 			tr.removeClass('shown');
-// 	    } );
-	    
-// 	    $("a[name='file']").on("click", function(e){
-// 	    	e.preventDefault();
-// 	    	alert($('#aefqeqwewqe').val());
-//             download($('#aefqeqwewqe').val());
-// 	    });
-	    
 	});
 
-	function download(obj){
-		alert(obj);
-// 		var comSubmit = new ComSubmit();
-// 		comSubmit.setUrl("<c:url value='/downloadFile' />");
-// 		comSubmit.addParam("attch", obj);
-// 		comSubmit.submit();
-		$.ajax({
-			url : '${root}'+"/downloadFile",
-			data : {"attch" : obj},
-			dataType : 'json',
-			success:function(data){
-				alert(data);
-			}
-			
-		});
 		
 
 

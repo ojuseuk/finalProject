@@ -9,12 +9,16 @@
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>강좌 관리</title>
+
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>	
 <style type="text/css">
+#datatable{
+    background-color:#fff;
+}
 .select {
     width: 198px;
     height: 30px;
@@ -36,8 +40,8 @@
 			<legend>교육 과정</legend>
 			<table>
 				<tr>
-					<td width="18%">과목명 </td>
-					<td><select class="select" name="sbjtNm" id="sbjtNm" required onchange="crsSelect('${root}', this.value);
+					<td width="18%"><span class="input-group-addon" style="width:100px">과목명</span></td>
+					<td><select class="form-control" name="sbjtNm" id="sbjtNm" required onchange="crsSelect('${root}', this.value);
 																			 tchrSelectBySbjtNm('${root}', this.value)">
 							<option value="">과목 선택</option>
 							<c:forEach items="${requestScope.sbjtList}" var="data">
@@ -46,45 +50,45 @@
 						</select></td>
 				</tr>  
 				<tr>
-					<td width="18%">과정명 </td>
-					<td><select class="select" name="crsId" id="crsId">
+					<td width="18%"><span class="input-group-addon" style="width:100px">과정명</span></td>
+					<td><select class="form-control" name="crsId" id="crsId">
 							<option value="">과정 선택</option>
 						</select>
 					</td>
-					<td align="right"><input class="w3-button w3-border" style="background-color: #90909096" type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${root}', document.getElementById('crsId').value)">
+					<td><input class="w3-button w3-border" style="background-color: #90909096" type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${root}', document.getElementById('crsId').value)">
 					</td>
 					
 				</tr>
 			</table>
 		</fieldset>
-		<fieldset style="width: 100%">
+		<fieldset style="width: 100%;">
 			<legend>강좌 정보</legend>
-			<table >
+			<table>
 				<tr>
-					<td width="18%">강좌 ID </td>
-					<td><input type="text" name="clssId" id="clssId"/></td>
+					<td width="18%"><span class="input-group-addon" style="width:100px">강좌 ID</span></td>
+					<td><input class="form-control" type="text" name="clssId" id="clssId"/></td>
 				</tr>
 				<tr>
-					<td>강좌명 </td>
-					<td><input type="text" name="clssNm" id="clssNm" size="50"/></td>
+					<td><span class="input-group-addon" style="width:100px">강좌명</span></td>
+					<td><input class="form-control" type="text" name="clssNm" id="clssNm" size="50"/></td>
 				</tr>
 				<tr>
-					<td>강좌 기간 </td>
-					<td><input type="date" name="strtDt" placeholder="시작일자" id="strtDt"/>부터
-					    <input type="date" name="endDt" placeholder="종료일자" id="endDt"/>까지</td>
+					<td><span class="input-group-addon" style="width:100px">강좌 기간 </span></td>
+					<td><input class="form-control" style="width:200px; float: left;" type="date" name="strtDt" placeholder="시작일자" id="strtDt"/><span style="float: left;">부터</span>
+					    <input class="form-control" style="width:200px; float: left;" type="date" name="endDt" placeholder="종료일자" id="endDt"/>까지</td>
 				</tr>
 				<tr>
-					<td>수업시간 </td>
-					<td><input type="time" name="strtTm" placeholder="시작시각" id="strtTm"/>
-					    <input type="time" name="endTm" placeholder="종료시각" id="endTm"/></td>
+					<td><span class="input-group-addon" style="width:100px">수업시간</span> </td>
+					<td><input class="form-control" style="width:200px; float: left;" type="time" name="strtTm" placeholder="시작시각" id="strtTm"/><span style="float: left;">부터</span>
+					    <input class="form-control" style="width:200px; float: left;" type="time" name="endTm" placeholder="종료시각" id="endTm"/>까지</td>
 				</tr>
 				<tr>
-					<td>수강인원 </td>
-					<td><input type="number" name="capa" id="capa"/></td>
+					<td><span class="input-group-addon" style="width:100px">수강인원</span> </td>
+					<td><input class="form-control" style="width:200px" type="number" name="capa" id="capa"/></td>
 				</tr>
 				<tr>
-					<td>강의실 </td>
-					<td><input type="text" name="clssroom" id="clssroom"/></td>
+					<td><span class="input-group-addon" style="width:100px">강의실</span> </td>
+					<td><input class="form-control" style="width:200px" type="text" name="clssroom" id="clssroom"/></td>
 				</tr>
 			</table>
 		</fieldset><br>
@@ -99,20 +103,20 @@
 			<legend>강사 정보</legend>
 			<table style="float:left; height:250px">
 				<tr>
-					<td width="20%">강사명</td>
+					<td width="20%"><span class="input-group-addon" style="width:100px">강사명</span></td>
 					<td>
-						<select class="select" name="tchrNo" id="tchrNo" onchange="tchrSelect('${pageContext.request.contextPath}', this.value)">
+						<select class="form-control" style="width:200px" name="tchrNo" id="tchrNo" onchange="tchrSelect('${pageContext.request.contextPath}', this.value)">
 							<option value="">강사 선택</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td>강의료 </td>
-					<td><input type="number" name="slr" id="slr">  
+					<td><span class="input-group-addon" style="width:100px">강의료</span></td>
+					<td><input class="form-control" type="number" name="slr" id="slr">  
 				</tr>
 				<tr>
-					<td>강사 소개 </td>
-					<td><textarea name = "tchrIntro" id="tchrIntro" cols = "40" rows = "7" 
+					<td><span class="input-group-addon" style="width:100px">강사 소개</span></td>
+					<td><textarea class="form-control" name="tchrIntro" id="tchrIntro" cols="40" rows = "7" 
                               placeholder="200자 이내"></textarea></td>
 					<td><div id="tchrPhoto"></div> </td>
 				</tr>

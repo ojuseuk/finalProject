@@ -19,16 +19,16 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
 			<table class="w3-table w3-bordered">
 				<tr>
-					<td>게시글 제목</td>
-					<td><input type="text" name="title" size="118"></td>
+					<td><span class="input-group-addon" style="width:100px">게시글 제목</span></td>
+					<td><input class="form-control" type="text" name="title" size="118"></td>
 				</tr>
 				<tr>
-					<td>게시글 내용</td>
-					<td><textarea rows="10" cols="120" name="content"></textarea></td>
+					<td><span class="input-group-addon" style="width:100px">게시글 내용</span></td>
+					<td><textarea class="form-control" rows="10" cols="120" name="content"></textarea></td>
 				</tr>
 				<tr>
-					<td>첨부파일</td>
-					<td><input type="file" name="ntcFile"></td>
+					<td><span class="input-group-addon" style="width:100px">첨부파일</span></td>
+					<td><input class="form-control" type="file" name="ntcFile"></td>
 				</tr>
 			</table>
 			<br>

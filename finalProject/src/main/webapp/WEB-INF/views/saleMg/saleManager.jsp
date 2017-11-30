@@ -38,15 +38,15 @@ footer {
 <jsp:include page="../../../top.jsp"/>
 <div style="margin-top: 20px"></div>
 <div id="content" style="width: 80%; margin: auto;">
-	<select class="select" id="year" onchange="yearSale()" name="month">
-		<option value="선택">선택</option>
+	<select class="form-control" style="width:200px; float: left" id="year" onchange="yearSale()" name="month">
+		<option value="선택">연도 선택</option>
 	</select>
-	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'y')" value="년 매출">
-	<select class="select" id="month" name="month" onchange="monthSale()">
-		<option value="선택" id="default">선택</option>
+	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096; float: left" type="button" onclick="saleYear('${root}', 'y')" value="년 매출">
+	<select class="form-control" style="width:200px; float: left" id="month" name="month" onchange="monthSale()">
+		<option value="선택" id="default">월 선택</option>
 	</select>
-	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'm')" value="월 매출">
-	<input type="date" id="day" name="day">
+	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096; float: left" type="button" onclick="saleYear('${root}', 'm')" value="월 매출">
+	<input class="form-control" style="width:200px; float: left" type="date" id="day" name="day">
 	<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" onclick="saleYear('${root}', 'd')" value="일 매출">
 	
 	<div style="width: 100%; margin-top: 10px">

@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>과정 관리</title>
 <style>
+#datatable{
+    background-color:#fff;
+}
 p {
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -37,20 +40,20 @@ p {
 				<legend>교육 과정</legend>
 				<table>
 					<tr>
-						<td>구분</td>
+						<td><span class="input-group-addon" style="width:100px">구&nbsp;분</span></td>
 						<td>
 							<input type="radio" name="crsTp" id="crsTp_1" value="종합" onclick="crsTpRadio('종합')"/> 종합
 							<input type="radio" name="crsTp" id="crsTp_2" value="특강" onclick="crsTpRadio('특강')"/> 특강
 						</td>
 					</tr>
 					<tr>
-						<td>과정 ID</td>
-						<td><input type="text" name="crsId" id="crsId"/></td>
+						<td><span class="input-group-addon" style="width:100px">과정  ID</span></td>
+						<td><input class="form-control" type="text" name="crsId" id="crsId"/></td>
 					</tr>
 					<tr>
-						<td>과목</td>
+						<td><span class="input-group-addon" style="width:100px">과&nbsp;목</span></td>
 	  					<td>
-							<select class="select" name="sbjtNm" id="sbjtNm">
+							<select class="form-control" name="sbjtNm" id="sbjtNm">
 								<option value="">과목 선택</option>
 								<c:forEach items="${requestScope.sbjtList}" var="data">
 									<option value=${data.sbjtNm}>${data.sbjtNm}</option>
@@ -59,24 +62,25 @@ p {
 						</td>
 					</tr>  
 					<tr>
-						<td>과정명</td>
-						<td><input type="text" name="crsNm" id="crsNm"/></td>
+						<td><span class="input-group-addon" style="width:100px">과정명</span></td>
+						<td><input class="form-control" type="text" name="crsNm" id="crsNm"/></td>
 					</tr>
 					<tr>
-						<td>기간</td>
-						<td><input type="number" name="prd" id="prd"/></td>
+						<td><span class="input-group-addon" style="width:100px">기간</span></td>
+						<td><input class="form-control" type="number" name="prd" id="prd"/></td>
 					</tr>
 					<tr>
-						<td>일 수업시간</td>
-						<td><input type="number" name="dayClssTm" id="dayClssTm"/>시간/일</td>
+						<td><span class="input-group-addon" style="width:100px">일 수업시간</span></td>
+						<td><input class="form-control" style="width:350px; float: left;" type="number" name="dayClssTm" id="dayClssTm"/>
+						&nbsp;&nbsp;&nbsp;&nbsp;시간/일</td>
 					</tr>
 					<tr>
-						<td>수강료</td>
-						<td><input type="text" name="stdtclssttn" id="stdtclssttn" placeholder="원"/></td>
+						<td><span class="input-group-addon" style="width:100px">수강료</span></td>
+						<td><input class="form-control" type="text" name="stdtclssttn" id="stdtclssttn" placeholder="원"/></td>
 					</tr>
 					<tr>
-						<td>과정 소개</td>
-						<td><textarea name = "crsIntro" id="crsIntro" cols = "50" rows = "7" 
+						<td><span class="input-group-addon" style="width:100px">과정 소개</span></td>
+						<td><textarea class="form-control" name="crsIntro" id="crsIntro" cols=	"50" rows = "7" 
 	                              placeholder="200자 이내"></textarea></td>
 					</tr>
 				</table>

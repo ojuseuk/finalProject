@@ -8,17 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>Insert title here</title>
-<style>
-.select {
-    width: 200px;
-    height: 30px;
-    padding-left: 10px;
-    font-size: 15px;
-    color: #424242;
-    border: 1px solid #90909096;
-    border-radius: 3px;
-}
-</style>
 </head>
 <script src="${root}/js/jquery.min.js"></script>
 <body>
@@ -28,35 +17,35 @@
 		<h2 align="center">성적 입력</h2>
 
 		<form action="${root}/tchrBs/srcInsert" style="text-align:center">
-			<table class="w3-table w3-bordered" >
+			<table class="w3-table w3-bordered" style="text-align: center;">
 				<tr>
-					<td style="text-align:right">시험 명</td>
-					<td style="text-align:center">
-						<select class="select" name="examId" id="qzId">
+					<td><span class="input-group-addon" style="width:200px;">시험 명</span></td>
+					<td>
+						<select class="form-control" style="width:200px; float: left;" name="examId" id="qzId">
 							<option value="선택">선택</option>
 						</select>				
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align:right">수강생 번호</td>
-					<td style="text-align:center">
-						<select class="select" name="stdtNo" id="stdtNo">
+					<td><span class="input-group-addon" style="width:200px">수강생 번호</span></td>
+					<td>
+						<select class="form-control" style="width:200px; float: left;" name="stdtNo" id="stdtNo">
 							<option value="선택">선택</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align:right">과목명</td>
-					<td style="text-align:center">
-						<select class="select" name="sbjtNm" id="sbjtNm">
+					<td><span class="input-group-addon" style="width:200px">과목명</span></td>
+					<td>
+						<select class="form-control" style="width:200px; float: left;" name="sbjtNm" id="sbjtNm">
 							<option value="선택">선택</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td style="text-align:right">점수</td>
-					<td style="text-align:center">
-						<input type="number" name="score" max="100" min="0" style="width: 200px">
+					<td><span class="input-group-addon" style="width:200px">점수</span></td>
+					<td>
+						<input class="form-control" style="width:200px; float: left;" type="number" name="score" max="100" min="0" style="width: 200px">
 					</td>
 				</tr>
 			</table>
