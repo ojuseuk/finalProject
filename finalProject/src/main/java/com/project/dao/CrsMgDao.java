@@ -8,26 +8,27 @@ import com.project.dto.CRSDto;
 import com.project.dto.TCHRDto;
 
 public interface CrsMgDao {
-	void courseInsert(CRSDto crs) throws SQLException;
-
-	List courseSelectAll();
 	
-	List clssSelectAll();
+	void courseInsert(CRSDto crs) throws Exception;
 
-	void clssInsert(CLSSDto clss) throws SQLException;
+	List courseSelectAll() throws Exception;
 	
-	List sbjtSelectAll();
+	List clssSelectAll() throws Exception;
 
-	List crsSelectBySbjtNm(String sbjtNm);
+	void clssInsert(CLSSDto clss) throws Exception;
+	
+	List sbjtSelectAll() throws Exception;
 
-	CLSSDto clssSelect(String clssId);
+	List crsSelectBySbjtNm(String sbjtNm) throws Exception;
 
-	List clssSelectByCourse(String crsId);
+	CLSSDto clssSelect(String clssId) throws Exception;
 
-	CRSDto crsSelect(String crsId);
+	List clssSelectByCourse(String crsId) throws Exception;
 
-	String clssUpdate(CLSSDto clss);
+	CRSDto crsSelect(String crsId) throws Exception;
 
-	String courseUpdate(CRSDto course);
+	String clssUpdate(CLSSDto clss) throws Exception;
+
+	String courseUpdate(CRSDto course) throws Exception;
 
 }

@@ -24,7 +24,7 @@
 		<br>
 		<div id="abc">학생 출석 정보가 없습니다.</div>
 	</div>
-
+	<br><br>
 	<input type="hidden" value='${requestScope.json}' id="json">
 	<input type="hidden" value='${requestScope.list.size()}' id="listSize">
 	<script src="${root}/js/tchrBs/attnd.js"></script>

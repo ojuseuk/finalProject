@@ -1,6 +1,5 @@
 package com.project.service;
 
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,20 +28,15 @@ public class HomePServiceImp implements HomePService {
 	 */
 	@Override
 	@Transactional
-	public void qnaInsert(QNADto qnaDto) throws SQLException {
+	public void qnaInsert(QNADto qnaDto) throws Exception {
 		// TODO Auto-generated method stub
 		
-		System.out.println("dao qnaInsert");
-		System.out.println("no : " +qnaDto.getNo());
 		qnaDto.setGpNum(1);
 		
-		System.out.println(qnaDto);
 		int gpNum = 0;
 		if(qnaDto.getNo() == 0) {
 			
 			gpNum = homePDao.qnaCnt();
-			System.out.println(gpNum);
-			
 			qnaDto.setGpNum(gpNum);
 			
 		}else {
@@ -53,11 +47,9 @@ public class HomePServiceImp implements HomePService {
 			
 		}
 		
-		System.out.println(qnaDto);
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		qnaDto.setDt(dateFormat.format(date));
-		System.out.println(qnaDto.getDt());
 		
 		homePDao.qnaInsert(qnaDto);
 		
@@ -71,12 +63,8 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public List<QNADto> qnaSelectView() throws SQLException {
+	public List<QNADto> qnaSelectView() throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("service qnaSelectView");
-		
-		System.out.println(homePDao.qnaSelectView());
 		
 		return homePDao.qnaSelectView();
 		
@@ -90,10 +78,8 @@ public class HomePServiceImp implements HomePService {
 	 * @param no
 	 */
 	@Override
-	public QNADto qnaUpdateView(int no) throws SQLException {
+	public QNADto qnaUpdateView(int no) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("service qnaUpdateView");
 		return homePDao.qnaUpdateView(no);
 		
 		
@@ -108,9 +94,8 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public int qnaUpdate(QNADto qnaDto) throws SQLException {
+	public int qnaUpdate(QNADto qnaDto) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("service qnaUpdate");
 		
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -127,10 +112,8 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public String ntcTchr(String id) throws SQLException {
+	public String ntcTchr(String id) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("serivced ntcTchr");
-
 		return homePDao.ntcTchr(id);
 	}
 
@@ -143,16 +126,14 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public int ntcInsert(String id, NTCDto ntcDto) throws SQLException {
+	public int ntcInsert(String id, NTCDto ntcDto) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("service ntcInsert");
 		String empNo = homePDao.ntcTchr(id);
 		ntcDto.setEmpNo(empNo);
 		
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		ntcDto.setDt(dateFormat.format(date));
-		System.out.println(ntcDto);
 		return homePDao.ntcInsert(ntcDto);
 	}
 
@@ -164,32 +145,25 @@ public class HomePServiceImp implements HomePService {
 	 * @return
 	 */
 	@Override
-	public List<NTCDto> ntcList() throws SQLException {
+	public List<NTCDto> ntcList() throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("service ntcList");
-		
 		
 		return homePDao.ntcList();
 	}
 
 	@Override
-	public NTCDto ntcUpdatePage(int no) throws SQLException {
+	public NTCDto ntcUpdatePage(int no) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("service ntcUpdatePage");
-		
 		return homePDao.ntcUpdatePage(no);
 	}
 
 	@Override
-	public int ntcUpdate(NTCDto ntcDto) throws SQLException {
+	public int ntcUpdate(NTCDto ntcDto) throws Exception {
 		// TODO Auto-generated method stub
 		
 		Date date = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		ntcDto.setDt(dateFormat.format(date));
-		System.out.println("dao ntcUpdate");
-		System.out.println(ntcDto);
 		return homePDao.ntcUpdate(ntcDto);
 	}
 }

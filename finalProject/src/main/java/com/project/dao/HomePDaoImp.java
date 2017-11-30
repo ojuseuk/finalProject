@@ -1,6 +1,5 @@
 package com.project.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -40,17 +39,15 @@ public class HomePDaoImp implements HomePDao {
 	 * @throws SQLException
 	 */
 	@Override
-	public int qnaCnt() throws SQLException {
+	public int qnaCnt() throws Exception {
 		// TODO Auto-generated method stub
 		int max = 0;
 		Object object = sqlSession.selectOne("homePMapper.qnaCnt");
-		System.out.println("object: " + object);
 		if(object == null) {
 			max = 1;
 		}else {
 			max = Integer.parseInt(object.toString()) +1;
 		}
-		System.out.println("dao :" + max);
 		return max;
 	}
 
@@ -64,7 +61,7 @@ public class HomePDaoImp implements HomePDao {
 	 * @throws SQLException
 	 */
 	@Override
-	public int qnaSeqNum(QNADto qnaDto) throws SQLException {
+	public int qnaSeqNum(QNADto qnaDto) throws Exception {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.update("homePMapper.qnaSeqNum", qnaDto);
@@ -80,7 +77,7 @@ public class HomePDaoImp implements HomePDao {
 	 * @throws SQLException
 	 */
 	@Override
-	public List<QNADto> qnaSelectView() throws SQLException {
+	public List<QNADto> qnaSelectView() throws Exception {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.selectList("homePMapper.qnaSelectView");
@@ -97,7 +94,7 @@ public class HomePDaoImp implements HomePDao {
 	 * @throws SQLException
 	 */
 	@Override
-	public QNADto qnaUpdateView(int no) throws SQLException {
+	public QNADto qnaUpdateView(int no) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("homePMapper.qnaUpdateView", no);
 	}
@@ -112,9 +109,8 @@ public class HomePDaoImp implements HomePDao {
 	 * @throws SQLException
 	 */
 	@Override
-	public int qnaUpdate(QNADto qnaDto) throws SQLException {
+	public int qnaUpdate(QNADto qnaDto) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao qnaUpdate");
 		
 		return sqlSession.update("homePMapper.qnaUpdate", qnaDto);
 	}
@@ -128,10 +124,8 @@ public class HomePDaoImp implements HomePDao {
 	 * @return
 	 */
 	@Override
-	public String ntcTchr(String id) throws SQLException {
+	public String ntcTchr(String id) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao ntcTchr");
 		
 		return sqlSession.selectOne("homePMapper.ntcTchr", id);
 	}
@@ -145,9 +139,8 @@ public class HomePDaoImp implements HomePDao {
 	 * @return
 	 */
 	@Override
-	public int ntcInsert(NTCDto ntcDto) throws SQLException {
+	public int ntcInsert(NTCDto ntcDto) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao ntcInsert");
 		return sqlSession.insert("homePMapper.ntcInsert", ntcDto);
 	}
 
@@ -159,9 +152,8 @@ public class HomePDaoImp implements HomePDao {
 	 * @return
 	 */
 	@Override
-	public List<NTCDto> ntcList() throws SQLException {
+	public List<NTCDto> ntcList() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao ntcList()");
 		return sqlSession.selectList("homePMapper.ntcList");
 	}
 
@@ -174,9 +166,8 @@ public class HomePDaoImp implements HomePDao {
 	 * @return
 	 */
 	@Override
-	public NTCDto ntcUpdatePage(int no) throws SQLException {
+	public NTCDto ntcUpdatePage(int no) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao ntcUpdatePage");
 		return sqlSession.selectOne("homePMapper.ntcUpdatePage", no);
 	}
 
@@ -189,10 +180,8 @@ public class HomePDaoImp implements HomePDao {
 	 * @return
 	 */
 	@Override
-	public int ntcUpdate(NTCDto ntcDto) throws SQLException {
+	public int ntcUpdate(NTCDto ntcDto) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao ntcUpdate");
-		System.out.println(ntcDto);
 		return sqlSession.update("homePMapper.ntcUpdate", ntcDto);
 	}
 }

@@ -47,31 +47,33 @@ public class TchrBsController {
 	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView qzView() {
 		
-		System.out.println("controller qzView");
-		
 		ModelAndView mav= new ModelAndView();
 		Map<List<TPCDto>, List<TCHRDto>> map = null;
 		try {
 			map = tchrBsService.qzView();
-		} catch (SQLException e) {
+			
+			Set<List<TPCDto>> key = map.keySet();
+			List<TPCDto> listTpc = null;
+			List<TCHRDto> listTchr = null;
+			for (List<TPCDto> list : key) {
+				listTpc = list;
+				listTchr = map.get(list);
+			}
+			JSONArray json = JSONArray.fromObject(listTpc);
+			JSONArray jsonTchr = JSONArray.fromObject(listTchr);
+			System.out.println(listTpc.size());
+			mav.addObject("listTpc", listTpc);
+			mav.addObject("json", json);
+			mav.addObject("listTchr", listTchr);
+			mav.addObject("jsonTchr", jsonTchr);
+			mav.setViewName("tchrBs/ttlqzView");
+			
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-		Set<List<TPCDto>> key = map.keySet();
-		List<TPCDto> listTpc = null;
-		List<TCHRDto> listTchr = null;
-		for (List<TPCDto> list : key) {
-			listTpc = list;
-			listTchr = map.get(list);
-		}
-		JSONArray json = JSONArray.fromObject(listTpc);
-		JSONArray jsonTchr = JSONArray.fromObject(listTchr);
-		System.out.println(listTpc.size());
-		mav.addObject("listTpc", listTpc);
-		mav.addObject("json", json);
-		mav.addObject("listTchr", listTchr);
-		mav.addObject("jsonTchr", jsonTchr);
-		mav.setViewName("tchrBs/ttlqzView");
 		
 		return mav;
 		
@@ -88,22 +90,21 @@ public class TchrBsController {
 	 */
 	@RequestMapping("/ttlqzInsert")
 	@PreAuthorize("hasRole('ROLE_TCHR')")
-	public String ttlqzInsert(TTLQZDto ttlqzDto, HttpSession session) {
+	public ModelAndView ttlqzInsert(TTLQZDto ttlqzDto, HttpSession session) {
 		
 		
-		System.out.println("controller ttlqzInsert");
 		ModelAndView mav = new ModelAndView();
-		
-		System.out.println(ttlqzDto);
+		mav.setViewName("tchrBs/ttlqzView");
 		
 		try {
 			tchrBsService.ttlqzInsert(ttlqzDto);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		
-		return "tchrBs/ttlqzView";
+		return mav;
 	}
 	
 	/**
@@ -119,23 +120,22 @@ public class TchrBsController {
 	public ModelAndView attnd(Authentication auth) {
 		
 		USRDto usrDto = (USRDto) auth.getPrincipal();
-		System.out.println("controller attnd");
 		ModelAndView mav = new ModelAndView();
 
 		List<Map<String, String>> list = null;
 		
 		try {
 			list = tchrBsService.attnd(usrDto.getId());
-		} catch (SQLException e) {
+			JSONArray json = JSONArray.fromObject(list);
+			
+			mav.addObject("list", list);
+			mav.addObject("json", json);
+			mav.setViewName("tchrBs/attnd");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-		JSONArray json = JSONArray.fromObject(list);
-		
-		
-		mav.addObject("list", list);
-		mav.addObject("json", json);
-		mav.setViewName("tchrBs/attnd");
 		
 		return mav;
 	}
@@ -153,15 +153,12 @@ public class TchrBsController {
 //	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public @ResponseBody List<Map<String, String>> attndClss(@RequestParam("clssId") String clssId) {
 		
-		System.out.println("controller attndClss");
 		ModelAndView mav = new ModelAndView();
-		
-		System.out.println(clssId);
 		
 		List<Map<String, String>> list = null;
 		try {
 			list = tchrBsService.attndClss(clssId);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -181,29 +178,27 @@ public class TchrBsController {
 	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView srcIn() {
 	
-		System.out.println("controller srcIn");
-		
 		ModelAndView mav = new ModelAndView();
 		
 		Map<String, List<Map<String, String>>> map = null;
 		try {
 			map = tchrBsService.srcIn();
-		} catch (SQLException e) {
+			List<Map<String, String>> examTp = map.get("examTp");
+			List<Map<String, String>> sbjt = map.get("sbjt"); 
+			List<Map<String, String>> stdt = map.get("stdt");
+			
+			JSONArray jsonExamTp = JSONArray.fromObject(examTp);
+			JSONArray jsonSbjt = JSONArray.fromObject(sbjt);
+			JSONArray jsonStdt = JSONArray.fromObject(stdt);
+			mav.addObject("examTp", jsonExamTp);
+			mav.addObject("sbjt", jsonSbjt);
+			mav.addObject("stdt", jsonStdt);
+			mav.setViewName("tchrBs/srcIn");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-		
-		List<Map<String, String>> examTp = map.get("examTp");
-		List<Map<String, String>> sbjt = map.get("sbjt"); 
-		List<Map<String, String>> stdt = map.get("stdt");
-		
-		JSONArray jsonExamTp = JSONArray.fromObject(examTp);
-		JSONArray jsonSbjt = JSONArray.fromObject(sbjt);
-		JSONArray jsonStdt = JSONArray.fromObject(stdt);
-		mav.addObject("examTp", jsonExamTp);
-		mav.addObject("sbjt", jsonSbjt);
-		mav.addObject("stdt", jsonStdt);
-		mav.setViewName("tchrBs/srcIn");
 		
 		return mav;
 		
@@ -221,14 +216,12 @@ public class TchrBsController {
 	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public String srcInsert(SCRDto scrDto) {
 		
-		System.out.println("controller srcInsert");
-		System.out.println(scrDto);
-		
 		try {
 			tchrBsService.srcInsert(scrDto);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "redirect:/error.jsp";
+			
 		}
 	
 		return "forward:/tchrBs/srcIn";
@@ -250,21 +243,22 @@ public class TchrBsController {
 		
 		ModelAndView mav= new ModelAndView();
 		
-		System.out.println("controller stSearch");
 		List<String> list = null;
 		try {
 			list = tchrBsService.stSearch(usrDto.getId());
-		} catch (SQLException e) {
+			
+			JSONArray json = JSONArray.fromObject(list);
+			
+			mav.addObject("list", list);
+			mav.addObject("json", json);
+			mav.setViewName("tchrBs/stSearch");
+			
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-		
-		JSONArray json = JSONArray.fromObject(list);
-		
-		mav.addObject("list", list);
-		mav.addObject("json", json);
-		mav.setViewName("tchrBs/stSearch");
-		
+
 		return mav;
 		
 	}
@@ -281,15 +275,12 @@ public class TchrBsController {
 	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public @ResponseBody List<Map<String, Object>> stClssSearch(@RequestParam("clssId") String clssId) {
 		
-		System.out.println("controller stClssSearch");
 		List<Map<String, Object>> list = null;
 		try {
 			list = tchrBsService.stClssSearch(clssId);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		System.out.println(list);
 		
 		return list;
 	}
@@ -307,29 +298,29 @@ public class TchrBsController {
 	public ModelAndView qzSelectView() {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("controller qzSelectView");
 		Map<List<SBJTDto>, List<Map<String, String>>> map = null;
 		try {
 			map = tchrBsService.qzSelectView();
-		} catch (SQLException e) {
+			
+			Set<List<SBJTDto>> key = map.keySet();
+			List<SBJTDto> listTchr = null;
+			List<Map<String, String>> listExam = null;
+			for (List<SBJTDto> list : key) {
+				listTchr = list;
+				listExam = map.get(list);
+			}
+			JSONArray jsonTchr = JSONArray.fromObject(listTchr);
+			JSONArray jsonExam = JSONArray.fromObject(listExam);
+			mav.addObject("jsonTchr", jsonTchr);
+			mav.addObject("jsonExam", jsonExam);
+			mav.setViewName("tchrBs/qzSelectView");
+			
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-		
-		Set<List<SBJTDto>> key = map.keySet();
-		List<SBJTDto> listTchr = null;
-		List<Map<String, String>> listExam = null;
-		for (List<SBJTDto> list : key) {
-			listTchr = list;
-			listExam = map.get(list);
-		}
-		System.out.println(listExam);
-		JSONArray jsonTchr = JSONArray.fromObject(listTchr);
-		JSONArray jsonExam = JSONArray.fromObject(listExam);
-		mav.addObject("jsonTchr", jsonTchr);
-		mav.addObject("jsonExam", jsonExam);
-		mav.setViewName("tchrBs/qzSelectView");
-		
+
 		return mav;
 		
 	}
@@ -347,12 +338,10 @@ public class TchrBsController {
 	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public @ResponseBody List<Map<String, Object>> qzSelect(@RequestParam String sbjtNm) {
 		
-		System.out.println("controller qzSelect");
-		System.out.println(sbjtNm);
 		List<Map<String, Object>> list = null;
 		try {
 			list = tchrBsService.qzSelect(sbjtNm);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -372,20 +361,21 @@ public class TchrBsController {
 	@RequestMapping("/qzUpdateView")
 	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public ModelAndView qzUpdateView() {
-		System.out.println("controller qzUpdateView");
 		
 		ModelAndView mav = new ModelAndView();
 		List<TTLQZDto> list = null;
 		try {
 			list = tchrBsService.qzUpdateView();
-		} catch (SQLException e) {
+			
+			mav.addObject("list", list);
+			mav.setViewName("tchrBs/qzUpdateView");
+			
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-		
-		mav.addObject("list", list);
-		mav.setViewName("tchrBs/qzUpdateView");
-		
+
 		return mav;
 		
 	}
@@ -401,17 +391,17 @@ public class TchrBsController {
 	 */
 	@RequestMapping("qzUpdateSearch")
 	public ModelAndView qzUpdateSearch(@RequestParam int id) {
-		System.out.println(id);
 		ModelAndView mav = new ModelAndView();
 		TTLQZDto ttlqzDto = null;
 		try {
 			ttlqzDto = tchrBsService.qzUpdateSearch(id);
-		} catch (SQLException e) {
+			mav.addObject("ttlqzDto", ttlqzDto);
+			mav.setViewName("tchrBs/qzUpdateSearch");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
-		mav.addObject("ttlqzDto", ttlqzDto);
-		mav.setViewName("tchrBs/qzUpdateSearch");
 		
 		return mav;
 	}
@@ -428,13 +418,9 @@ public class TchrBsController {
 	@RequestMapping("/qzInsert")
 	public void qzInsert(@RequestParam(value="id", required=true) List<Integer> id, EXAMTPDto examtpDto) {
 		
-		System.out.println("controller qzInsert");
-		System.out.println(examtpDto);
-		System.out.println(id);
-		System.out.println(id.size());
 		try {
 			tchrBsService.qzInsert(examtpDto, id);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

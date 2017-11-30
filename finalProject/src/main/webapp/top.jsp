@@ -95,6 +95,7 @@ nav.menu{
         <li><a href="${root}/tchrBs/stSearch" id="fontBlack">학생 성적 확인</a></li>
         <li><a href="${root}/tchrBs/qzSelectView" id="fontBlack">시험 출제</a></li>
         <li><a href="${root}/homeP/qnaSelectView" id="fontBlack">댓글 게시판 목록</a></li>
+        <li><a href="${root}/ntcList" id="fontBlack">공지사항</a></li>
       </ul>
       </sec:authorize>
       

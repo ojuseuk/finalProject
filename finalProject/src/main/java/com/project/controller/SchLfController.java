@@ -62,7 +62,8 @@ public class SchLfController {
 			mav.addObject("usrEmail", usr.getEmail());
 			mav.setViewName("schLf/registClssView");
 		} catch (Exception e) {
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		return mav;
 	}
@@ -147,7 +148,8 @@ public class SchLfController {
 			mav.addObject("fee", fee);
 			mav.setViewName("schLf/registListView");
 		} catch (Exception e) {
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		return mav;
 	}
@@ -175,7 +177,8 @@ public class SchLfController {
 			mav.addObject("json", json);
 			mav.setViewName("schLf/myClssView");
 		} catch (Exception e) {
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		return mav;
 	}
@@ -228,7 +231,6 @@ public class SchLfController {
 		} else if(month.equals("12")){
 			endDt = date + "31";
 		} else {
-			System.out.println("Error");
 		}
 		ModelAndView mav = new ModelAndView();
 		try {
@@ -239,7 +241,8 @@ public class SchLfController {
 			mav.addObject("json", json);
 			mav.setViewName("schLf/myAttndView");
 		} catch (Exception e) {
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		return mav;
 	}
@@ -266,7 +269,8 @@ public class SchLfController {
 			mav.addObject("json", json);
 			mav.setViewName("schLf/myScrView");
 		} catch (Exception e) {
-			e.printStackTrace();
+			mav.setViewName("redirect:/error.jsp");
+			return mav;
 		}
 		return mav;
 	}
@@ -285,7 +289,6 @@ public class SchLfController {
 	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
 	@Transactional
 	public String registClss(@RequestBody List<String> clssList){
-		System.out.println("registClss");
 		JSONParser parser = new JSONParser();
 		JSONObject jo = null;
 		String id = "";
@@ -300,7 +303,6 @@ public class SchLfController {
 			}
 			// 나의 수강생 번호 조회
 			String stdtNo = schLfService.selectMyStdtNo(id);
-			System.out.println("나의 수강생 번호 : " + stdtNo);
 			// 수강생 번호 없을 시 번호 생성
 			if(stdtNo.equals("")){
 				stdtNo = schLfService.selectStdtNo();
@@ -309,7 +311,6 @@ public class SchLfController {
 				no = Integer.toString(++num);
 				stdtNo = stdtNo.substring(0, 1) + no;
 				STDTDto stdt = new STDTDto(stdtNo, id);
-				System.out.println("새로운 수강생 : " + stdt);
 				// 새로운 수강생 Insert
 				schLfService.insertNewStdt(stdt);
 			} 
@@ -331,7 +332,7 @@ public class SchLfController {
 			System.out.println(id);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		return "schLf/myClssView";
 	}

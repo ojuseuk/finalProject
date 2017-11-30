@@ -1,6 +1,5 @@
 package com.project.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.project.dto.CLSSDto;
@@ -10,27 +9,27 @@ import com.project.dto.TCHRDto;
 
 public interface CrsMgService {
 	
-	public void courseInsert(CRSDto crs) throws SQLException;
+	public void courseInsert(CRSDto crs) throws Exception;
 
-	public List selectAll() throws SQLException;
+	public List selectAll() throws Exception;
 	
-	public List clssSelectAll() throws SQLException;
+	public List clssSelectAll() throws Exception;
 
-	public void clssInsert(CLSSDto clss) throws SQLException;
+	public void clssInsert(CLSSDto clss) throws Exception;
 
-	public List sbjtSelectAll() throws SQLException;
+	public List sbjtSelectAll() throws Exception;
 
-	public List crsSelectBySbjtNm(String sbjtNm);
+	public List crsSelectBySbjtNm(String sbjtNm) throws Exception;
 
-	public CLSSDto clssSelect(String clssId);
+	public CLSSDto clssSelect(String clssId) throws Exception;
 
-	public List clssSelectByCourse(String crsId);
+	public List clssSelectByCourse(String crsId) throws Exception;
 
-	public CRSDto crsSelect(String crsId);
+	public CRSDto crsSelect(String crsId) throws Exception;
 
-	public String clssUpdate(CLSSDto clss);
+	public String clssUpdate(CLSSDto clss) throws Exception;
 
-	public String courseUpdate(CRSDto course);
+	public String courseUpdate(CRSDto course) throws Exception;
 	
 	
 

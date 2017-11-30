@@ -25,7 +25,7 @@
 				</div>
 				<div class="InfoContainer">
 					<h2>
-					<img src="${root}/imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="50" height="50" style="margin-bottom: 10px">
+					<img src="${root}/imgs/img/mark3.png" class="img-circle person" alt="Random Name" width="40" height="40" style="margin-bottom: 10px">
 					<strong>Royal Academy 로그인</strong>
 					</h2>
 					

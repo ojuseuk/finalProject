@@ -50,6 +50,7 @@ tr.shown td.details-control {
 	</div>
 </div>
 <%-- <jsp:include page="../../../footer.jsp"/> --%>
+<input type="hidden" id="root" value="${root}"> 
 <script type="text/javascript" src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
@@ -57,7 +58,7 @@ tr.shown td.details-control {
 	let json = $('#json').val();
 	json = JSON.parse(json);
 	let usrTp = $('#usrTp').val();
-	
+	let root = $('#root').val();
 	function format(d) {
 		return '게시글 내용 : ' + d.content.replace(/(?:\r\n|\r\n)/g, '<br />');
 	}
@@ -80,7 +81,13 @@ tr.shown td.details-control {
 				"data" : "attchFile",
 				"searchable": false,
 				"render" :function(data, row, type, meta){
-					let attch = '<div onclick="download(\''+data+'\')" >'+data+'</div>';
+					let attch = "";
+					if(data == ""){
+						attch = "첨부파일이 없습니다."
+					}else{
+						attch = '<a href="'+root+'/downloadFile?attch="'+data+'>'+data;
+					}
+					
 					return attch;
 					
 				}
@@ -117,52 +124,8 @@ tr.shown td.details-control {
 
 		});
 		
-// 		$('#dataTable tbody').on( 'click', 'tr', function () {
-// 			var tr = $(this).closest('tr');
-// 			var row = table.row(tr);
-			
-// 	        if ( $(this).hasClass('selected') ) {
-// 	            $(this).removeClass('selected');
-// 				row.child.hide();
-// 				tr.removeClass('shown');
-// 	        }
-// 	        else {
-// 	            table.$('tr.selected').removeClass('selected');
-// 	            $(this).addClass('selected');
-// 				row.child(format(row.data())).show();
-// 				tr.addClass('shown');
-// 	        }
-// 	    } );
-	 
-// 	    $('#button').click( function () {
-// 	        table.row('.selected').remove().draw( false );
-// 			row.child.hide();
-// 			tr.removeClass('shown');
-// 	    } );
-	    
-// 	    $("a[name='file']").on("click", function(e){
-// 	    	e.preventDefault();
-// 	    	alert($('#aefqeqwewqe').val());
-//             download($('#aefqeqwewqe').val());
-// 	    });
-	    
 	});
 
-	function download(obj){
-		alert(obj);
-// 		var comSubmit = new ComSubmit();
-// 		comSubmit.setUrl("<c:url value='/downloadFile' />");
-// 		comSubmit.addParam("attch", obj);
-// 		comSubmit.submit();
-		$.ajax({
-			url : '${root}'+"/downloadFile",
-			data : {"attch" : obj},
-			dataType : 'json',
-			success:function(data){
-				alert(data);
-			}
-			
-		});
 		
 
 

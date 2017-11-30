@@ -43,7 +43,6 @@ public class EmpMgController {
 	private EmpMgDao empMgDao;
 	@Autowired
 	private CrsMgService crsMgService;
-	
 
 	@Secured("ROLE_STAFF")
 	@RequestMapping("/mgTchr")
@@ -64,10 +63,9 @@ public class EmpMgController {
 			data.addAttribute("jsonSbjtList", jsonSbjtList);
 			
 			url = "tchr/mgTchr";
-			System.out.println("tchr controller : " + list.size());
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -75,49 +73,89 @@ public class EmpMgController {
 	@RequestMapping("/usrSearch")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody USRDto usrSelect(@RequestParam("id") String id) {
-		System.out.println(id);
-		return empMgDao.usrSelect(id);
+		USRDto usrDto = null;
+		try {
+			usrDto = empMgDao.usrSelect(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return usrDto;
 	}
 	
 	@RequestMapping("/empSearchById")
 	public @ResponseBody EMPDto empSelectById(@RequestParam("id") String id) {
-		System.out.println("여기서는 ???" + id);
-		System.out.println(empMgDao.empSelectById(id));
-		return empMgDao.empSelectById(id);
+		EMPDto mepDto = null;
+		try {
+			mepDto = empMgDao.empSelectById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return mepDto;
 	}
 	
 	@RequestMapping("/tchrSelectBySbjtNm")
 	public @ResponseBody List<TCHRDto> tchrSelectBySbjtNm(@RequestParam("sbjtNm") String sbjtNm) {
-		System.out.println("tchrSelectBySbjtNm : Controller : " + sbjtNm);
-		return empMgService.tchrSelectBySbjtNm(sbjtNm);
+		List<TCHRDto> list = null;
+		try {
+			list = empMgService.tchrSelectBySbjtNm(sbjtNm);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	@RequestMapping("/tchrSearchById")
 	public @ResponseBody TCHRDto tchrSelectById(@RequestParam("id") String id) {
-		return empMgDao.tchrSelectById(id);
+		TCHRDto tchrDto = null;
+		try {
+			tchrDto = empMgDao.tchrSelectById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return tchrDto;
 	}
 	
 	@RequestMapping("/empSelect")
 	public @ResponseBody EMPDto empSelect(@RequestParam("empNo") String empNo) {
-		System.out.println("emp controller empNo : " + empNo);
-		System.out.println("emp controller emp : " + empMgService.empSelect(empNo));
-		return empMgService.empSelect(empNo);
+		EMPDto empDto = null;
+		try {
+			empDto = empMgService.empSelect(empNo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return empDto;
 	}
 					 
 	@RequestMapping("/tchrSelect")
 	public @ResponseBody TCHRDto tchrSelect(@RequestParam("tchrNo") String tchrNo) {
-		System.out.println("tchr controller tchrNo : " + tchrNo);
-		TCHRDto tchr = empMgService.tchrSelect(tchrNo);
-		System.out.println("tchr controller tchr : " + tchr);
+		TCHRDto tchr = null;
+		try {
+			tchr = empMgService.tchrSelect(tchrNo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return tchr;
 	}
 	
 	@RequestMapping("/tchrAssnSelect")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public @ResponseBody List<TCHRASSNDto> tchrAssnSelect(@RequestParam("clssId") String clssId, Model data) {
-		System.out.println("강사 배정 조회 : Controller " + clssId);
-		List list = empMgService.tchrAssnSelect(clssId);
-		System.out.println("강사 배정 조회 : Controller : DB조회 후 : " + list); 
+		List list = null;
+		try {
+			list = empMgService.tchrAssnSelect(clssId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JSONArray jsonList = JSONArray.fromObject(list);
 		data.addAttribute("jsonListTchr", jsonList);
 		return list;
@@ -128,8 +166,14 @@ public class EmpMgController {
 	public @ResponseBody List<TCHRASSNDto> assgnTchr(TCHRASSNDto tchrAssn, Model data) {
 		System.out.println("강사 배정 : controller : tchrAssn : " + tchrAssn);
 		String resultMsg = "";
-		resultMsg = empMgService.assnTchr(tchrAssn);
-		List list = empMgService.tchrAssnSelect(tchrAssn.getClssId());
+		List list = null;
+		try {
+			resultMsg = empMgService.assnTchr(tchrAssn);
+			list = empMgService.tchrAssnSelect(tchrAssn.getClssId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JSONArray jsonList = JSONArray.fromObject(list);
 		data.addAttribute("jsonListTchr", jsonList);
 		return list;		
@@ -151,8 +195,8 @@ public class EmpMgController {
 			System.out.println(jsonList);
 			url = "emp/mgEmp";
 			System.out.println("emp controller list.size() : " + list.size());
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -170,37 +214,41 @@ public class EmpMgController {
 			resultMsg = empMgService.empInsert(emp);
 			url = listEmp(emp, data, resultMsg, url);
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
-		System.out.println(resultMsg);
 		return url;
 	}
 											   
 	@RequestMapping(value="/empUpdate")
 	public String empUpdate(EMPDto emp, Model data) {
-		System.out.println("/empUpdate update Controller : " + emp);
 		String url = "error";
 		String resultMsg = "";
 
 		try {
 			resultMsg = empMgService.empUpdate(emp);
 			url = listEmp(emp, data, resultMsg, url);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
-		System.out.println(resultMsg);
 		return url;
 	}
 	
 	private String listEmp(EMPDto emp, Model data, String resultMsg, String url) throws SQLException {
-		List list =  empMgService.empSelectAll();
-		data.addAttribute("list", list);
-		
-		JSONArray jsonList = JSONArray.fromObject(list);
-		data.addAttribute("jsonList", jsonList);
-		data.addAttribute("resultMsg", resultMsg);
-		data.addAttribute("emp", emp); // @@@		20171120
+		List list = null;
+		try {
+			list = empMgService.empSelectAll();
+			data.addAttribute("list", list);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			data.addAttribute("jsonList", jsonList);
+			data.addAttribute("resultMsg", resultMsg);
+			data.addAttribute("emp", emp); // @@@		20171120
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "redirect:/error.jsp";
+		}
+
 		
 		return "emp/mgEmp";  	
 		
@@ -208,17 +256,15 @@ public class EmpMgController {
 
 	@RequestMapping(value="/empRetire")
 	public String empRetire(EMPDto emp, Model data) {
-		System.out.println("empRetire Controller : " + emp); // @@@
 		String resultMsg = "";
 		String url = "error";
 		try {
 			resultMsg = empMgService.empRetire(emp);
 			url = listEmp(emp, data, resultMsg, url);
 				
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
-		System.out.println(resultMsg);
 		return url;
 	}
 	
@@ -228,7 +274,6 @@ public class EmpMgController {
 		if(!imgFile.isEmpty()) {
 			uploadImg(tchr, session, imgFile);
 		}		
-		System.out.println("tchrUpdate Controller : " + tchr);
 		String url = "error";
 		String resultMsg = "";
 		try {
@@ -244,10 +289,9 @@ public class EmpMgController {
 			
 			url ="tchr/mgTchr";  	
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
-		System.out.println(resultMsg);
 		return url;
 	}
 	
@@ -258,7 +302,6 @@ public class EmpMgController {
 			uploadImg(tchr, session, imgFile);
 		}
 		
-		System.out.println("tchrInsert Controller : " + tchr);
 		String url = "error";
 		String resultMsg = "";		
 		try {
@@ -274,8 +317,8 @@ public class EmpMgController {
 			
 			url ="tchr/mgTchr";  	
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -284,28 +327,28 @@ public class EmpMgController {
 		// TODO Auto-generated method stub
 		String path = session.getServletContext().getRealPath("/") + "imgs\\img\\";
 		
-		System.out.println("imgFile.getOriginalFilename() : " + imgFile.getOriginalFilename()); 
-		System.out.println("imgFile.getName() : " + imgFile.getName()); 
-		System.out.println("imgFile.getContentType() : " + imgFile.getContentType()); 
+//		System.out.println("imgFile.getOriginalFilename() : " + imgFile.getOriginalFilename()); 
+//		System.out.println("imgFile.getName() : " + imgFile.getName()); 
+//		System.out.println("imgFile.getContentType() : " + imgFile.getContentType()); 
 		
 		String ext[] = imgFile.getOriginalFilename().split("\\.");
 		
-		System.out.println("tchr.getTchrNo().length() : " + tchr.getTchrNo().length()); 		// @@@
+//		System.out.println("tchr.getTchrNo().length() : " + tchr.getTchrNo().length()); 		// @@@
 		
 		/*파일명을 "강사번호.확장자"로 변경*/
-		System.out.println("ext[0] : " + ext[0]); 		// @@@
-		System.out.println("ext[1] : " + ext[1]); 		// @@@
+//		System.out.println("ext[0] : " + ext[0]); 		// @@@
+//		System.out.println("ext[1] : " + ext[1]); 		// @@@
 		
 		File file = new File(path + tchr.getTchrNo() + "." + ext[1]);
 		
 		imgFile.transferTo(file);
 		
-		System.out.println("file.getName() : " + file.getName()); 
-		System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
+//		System.out.println("file.getName() : " + file.getName()); 
+//		System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
 		
 		tchr.setTchrPt(file.getName());
 		
-		System.out.println("■path:::" + path);		
+//		System.out.println("■path:::" + path);		
 	}
 
 } // end of class

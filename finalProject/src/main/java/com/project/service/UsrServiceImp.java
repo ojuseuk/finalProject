@@ -1,6 +1,5 @@
 package com.project.service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,7 @@ public class UsrServiceImp implements UsrService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public int userInsert(USRDto usr) throws SQLException {
-		System.out.println("service : " + usr); 		
+	public int userInsert(USRDto usr) throws Exception {
 
 		String encodePass = passwordEncoder.encode(usr.getPw());
 		usr.setPws(encodePass);
@@ -39,8 +37,7 @@ public class UsrServiceImp implements UsrService {
 	}
 	
 	@Override
-	public USRDto userLogin(HashMap<String, Object> map) throws SQLException{
-		System.out.println("service : " + map); 
+	public USRDto userLogin(HashMap<String, Object> map) throws Exception{
 		
 		USRDto usrDto = usrDao.userLogin(map);
 		
@@ -49,27 +46,23 @@ public class UsrServiceImp implements UsrService {
 	
 	//아이디, 비밀번호 찾기
 	@Override
-	public USRDto findId(HashMap<String, Object> map) throws SQLException {
-		System.out.println("servicefindId : " + map); 
+	public USRDto findId(HashMap<String, Object> map) throws Exception {
 		return usrDao.findId(map);
 	}
 	
 	@Override
-	public USRDto findPwd(HashMap<String, Object> map) throws SQLException {
-		System.out.println("servicefindPwd : " + map);
+	public USRDto findPwd(HashMap<String, Object> map) throws Exception {
 		return usrDao.findPwd(map);
 	}
 	//------------------------
 	
 	//idChect pwdCheck
 	@Override
-	public USRDto idCheck(String id) throws SQLException{
-		System.out.println("serviceidCheck : " + id);
+	public USRDto idCheck(String id) throws Exception{
 		return usrDao.idCheck(id);
 	}
 	@Override
-	public USRDto pwdCheck(HashMap<String, String> map) throws SQLException{
-		System.out.println("servicepwdCheck : " + map);
+	public USRDto pwdCheck(HashMap<String, String> map) throws Exception{
 		return usrDao.pwdCheck(map);
 	}
 	
@@ -78,26 +71,28 @@ public class UsrServiceImp implements UsrService {
 	
 	//after id check change pwd
 	@Override
-	public int changePwdNew(HashMap<String, Object> map) throws SQLException{
-		System.out.println("servicechangePwdNew : " + map);
+	public int changePwdNew(HashMap<String, String> map) throws Exception{
+		
+		String encodePass = passwordEncoder.encode(map.get("pw"));
+		map.put("pws", encodePass);
+		
 		return usrDao.changePwdNew(map);
 	}
 	
 	
 	//userOut
 	@Override
-	public int userOut(HashMap<String, Object> map) throws SQLException{
-		System.out.println("serviceuserOut : " + map);
+	public int userOut(HashMap<String, Object> map) throws Exception{
 		return usrDao.userOut(map);
 	}
 
 	@Override
-	public USRDto confirmUsr(USRDto usr) {
+	public USRDto confirmUsr(USRDto usr) throws Exception {
 		return usrDao.confirmUsr(usr);
 	}
 
 	@Override
-	public Boolean updateUsr(USRDto usr) {
+	public Boolean updateUsr(USRDto usr) throws Exception {
 		
 		String encodePass = passwordEncoder.encode(usr.getPw());
 		usr.setPws(encodePass);

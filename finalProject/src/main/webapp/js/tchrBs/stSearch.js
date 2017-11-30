@@ -25,32 +25,32 @@ function stSearch(root){
 			var json = this.responseText;
 			json = JSON.parse(json);
 			
-			var $table = $('<table class="w3-table w3-bordered"></tbale>');
-			var $tr;
-			var $td1, $td2, $td3, $td4, $td5;
-			for(var i=0;i<json.length;i++){
-				$tr = $('<tr></tr>');
-				$td1 = $('<td></td>');
-				$td2 = $('<td></td>');
-				$td3 = $('<td></td>');
-				$td4 = $('<td></td>');
-				$td5 = $('<td></td>');
+			var table = $('#dataTable').DataTable({
 				
-				$td1.append(json[i].STDTNO);
-				$td2.append(json[i].NM);
-				$td3.append(json[i].EXAMTITLE);
-				$td4.append(json[i].SBJTNM);
-				$td5.append(json[i].SCORE);
-				
-				$tr.append($td1);
-				$tr.append($td2);
-				$tr.append($td3);
-				$tr.append($td4);
-				$tr.append($td5);
-				$('#search tr:eq(0)').after($tr);
-// 						$table.append($tr);
-						
-			}
+				"processing" : true,
+				"ordering" : false,
+				"select" : {
+					style : 'os',
+					items:'cell'
+				},
+				"data" : json,
+				"columns" : [{
+					"data" : "STDTNO",
+
+				},{
+					"data" : "NM",
+
+				},{
+					"data" : "EXAMTITLE",
+
+				},{
+					"data" : "SBJTNM",
+
+				},{
+					"data" : "SCORE",
+
+				}]
+			});
 			
 		}
 		

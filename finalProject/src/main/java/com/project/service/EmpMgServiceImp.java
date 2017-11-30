@@ -20,12 +20,12 @@ public class EmpMgServiceImp implements EmpMgService {
 	private EmpMgDao empMgDao;
 
 	@Override
-	public List empSelectAll() throws SQLException {
+	public List empSelectAll() throws Exception {
 		return empMgDao.empSelectAll();
 	}
 
 	@Override
-	public String empInsert(EMPDto emp) throws SQLException {
+	public String empInsert(EMPDto emp) throws Exception {
 		String resultMsg = "";
 		resultMsg = empMgDao.empInsert(emp);
 		resultMsg = resultMsg + " " + empMgDao.usrUpdateToStaff(emp.getId());
@@ -33,15 +33,14 @@ public class EmpMgServiceImp implements EmpMgService {
 	}
 
 	@Override
-	public List tchrSelectAll() throws SQLException {
+	public List tchrSelectAll() throws Exception {
 		return empMgDao.tchrSelectAll();
 	}
 
 	@Override
-	public String tchrInsert(TCHRDto tchr) throws SQLException {
+	public String tchrInsert(TCHRDto tchr) throws Exception {
 		EMPDto emp = null;
 		String resultMsg = "";
-		System.out.println("service 강사의 사번 : " + tchr.getEmpNo());
 		emp = empSelect(tchr.getEmpNo());
 		if(emp == null) {					// DB에 emp가 존재하지 않는 경우
 			emp = new EMPDto(tchr.getEmpNo(), tchr.getId(), tchr.getSlr());
@@ -53,7 +52,7 @@ public class EmpMgServiceImp implements EmpMgService {
 	}
 
 	@Override
-	public EMPDto empSelect(String empNo) {
+	public EMPDto empSelect(String empNo) throws Exception {
 		EMPDto emp = empMgDao.empSelect(empNo);
 		if(emp != null) {
 			if(emp.getRetiredDt() != null) {
@@ -64,7 +63,7 @@ public class EmpMgServiceImp implements EmpMgService {
 	}
 
 	@Override
-	public String empUpdate(EMPDto emp) {
+	public String empUpdate(EMPDto emp) throws Exception {
 		String resultMsg = "";
 		if(emp.getRetiredDt() != null) {
 			emp.setRetiredDt(emp.getRetiredDt().replace("-", ""));
@@ -74,14 +73,14 @@ public class EmpMgServiceImp implements EmpMgService {
 		}
 		resultMsg = empMgDao.empUpdate(emp);
 		if(!emp.getRetiredDt().equals("") && emp.getRetiredDt() != null) { 			// 날짜처럼 보이기 위해 '-' 삽입
-			System.out.println("퇴직일자 있음");
+//			퇴직 일자 있음
 			emp.setRetiredDt(DateTimeUtil.dateForm(emp.getRetiredDt()));
 		}
 		return resultMsg;
 	}
 
 	@Override
-	public String empRetire(EMPDto emp) {
+	public String empRetire(EMPDto emp) throws Exception {
 		String resultMsg = "";
 		if(emp.getRetiredDt() != null) {
 			emp.setRetiredDt(emp.getRetiredDt().replace("-", ""));
@@ -97,28 +96,28 @@ public class EmpMgServiceImp implements EmpMgService {
 	}
 
 	@Override
-	public TCHRDto tchrSelect(String tchrNo) {
+	public TCHRDto tchrSelect(String tchrNo) throws Exception {
 		return empMgDao.tchrSelect(tchrNo);
 	}
 
 	@Override
-	public String tchrUpdate(TCHRDto tchr) {
+	public String tchrUpdate(TCHRDto tchr) throws Exception {
 		return empMgDao.tchrUpdate(tchr);
 	}
 
 	@Override
-	public List tchrSelectBySbjtNm(String sbjtNm) {
+	public List tchrSelectBySbjtNm(String sbjtNm) throws Exception {
 		return empMgDao.tchrSelectBySbjtNm(sbjtNm);
 	}
 
 	@Override
-	public String assnTchr(TCHRASSNDto tchrAssn) {
+	public String assnTchr(TCHRASSNDto tchrAssn) throws Exception {
 		return empMgDao.assnTchr(tchrAssn);
 		
 	}
 
 	@Override
-	public List tchrAssnSelect(String clssId) {
+	public List tchrAssnSelect(String clssId) throws Exception {
 		// TODO Auto-generated method stub
 		return empMgDao.tchrAssnSelect(clssId);
 	}

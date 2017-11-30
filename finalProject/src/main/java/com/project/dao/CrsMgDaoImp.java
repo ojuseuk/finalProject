@@ -18,72 +18,66 @@ public class CrsMgDaoImp implements CrsMgDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public void courseInsert(CRSDto crs) throws SQLException {
+	public void courseInsert(CRSDto crs) throws Exception {
 		int num = 0;
-		System.out.println("DAO : " + crs); 		// @@@
 		num = sqlSession.insert("crsMgMapper.courseInsert", crs);
 		
 	}
 
 	@Override
-	public List courseSelectAll() {
+	public List courseSelectAll() throws Exception {
 		List list = sqlSession.selectList("crsMgMapper.courseSelectAll");
-		
 		return list;
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public List clssSelectAll() {
+	public List clssSelectAll() throws Exception {
 		List list = sqlSession.selectList("crsMgMapper.clssSelectAll");
 		return list;
 	}
 
 	@Override
-	public void clssInsert(CLSSDto clss) throws SQLException {
+	public void clssInsert(CLSSDto clss) throws Exception {
 		// TODO Auto-generated method stub
 		int num = 0;
-		System.out.println("DAO : " + clss); 		// @@@
 		num = sqlSession.insert("crsMgMapper.clssInsert", clss);
 	}
 
 	@Override
-	public List sbjtSelectAll() {
+	public List sbjtSelectAll() throws Exception {
 		// TODO Auto-generated method stub
 		List list = sqlSession.selectList("crsMgMapper.sbjtSelectAll");
 		return list;
 	}
 
 	@Override
-	public List crsSelectBySbjtNm(String sbjtNm) {
+	public List crsSelectBySbjtNm(String sbjtNm) throws Exception {
 		// TODO Auto-generated method stub
 		List list = sqlSession.selectList("crsMgMapper.crsSelectBySbjtNm", sbjtNm);
-		return list;	}
+		return list;	
+	}
 
 	@Override
-	public CLSSDto clssSelect(String clssId) {
+	public CLSSDto clssSelect(String clssId) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("DAO : " + clssId);
 		CLSSDto clss = sqlSession.selectOne("crsMgMapper.clssSelect", clssId);
-		System.out.println("DAO : " + clss);
 		return clss;
 	}
 
 	@Override
-	public List clssSelectByCourse(String crsId) {
+	public List clssSelectByCourse(String crsId) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("crsMgMapper.clssSelectByCourse", crsId);
 	}
 
 	@Override
-	public CRSDto crsSelect(String crsId) {
+	public CRSDto crsSelect(String crsId) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("crsMgMapper.crsSelect", crsId);
 	}
 
 	@Override
-	public String clssUpdate(CLSSDto clss) {
+	public String clssUpdate(CLSSDto clss) throws Exception {
 		// TODO Auto-generated method stub
 		String resultMsg = "";
 		int result = sqlSession.update("crsMgMapper.clssUpdate", clss);
@@ -96,7 +90,7 @@ public class CrsMgDaoImp implements CrsMgDao {
 	}
 
 	@Override
-	public String courseUpdate(CRSDto course) {
+	public String courseUpdate(CRSDto course) throws Exception {
 		// TODO Auto-generated method stub
 		String resultMsg = "";
 		int result = sqlSession.update("crsMgMapper.courseUpdate", course);

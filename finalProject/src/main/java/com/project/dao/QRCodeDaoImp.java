@@ -26,10 +26,7 @@ public class QRCodeDaoImp implements QRCodeDao{
 	@Override
 	public HashMap<String, String> qrCodeSelect(Map<String, String> clssPhone) {
 		// TODO Auto-generated method stub
-		System.out.println("dao qrCodeSelect");
-		System.out.println(clssPhone);
 		HashMap<String, String> map = sqlSession.selectOne("qrCodeMapper.qrCodeSelect", clssPhone);
-		System.out.println(map);
 		
 		return map;
 		

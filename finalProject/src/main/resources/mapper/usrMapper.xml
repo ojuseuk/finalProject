@@ -46,7 +46,7 @@
 	
 	<!-- pwd update when after find pwd -->
 	<update id="changePwdNew" parameterType="hashmap">
-		update TB_USR set pw=#{pw} where id=#{id}
+		update TB_USR set pw=#{pw}, pws = #{pws} where id=#{id}
 	</update>
 	
 	<!-- update userOut -->
