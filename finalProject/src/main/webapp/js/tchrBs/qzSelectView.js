@@ -58,7 +58,7 @@ function qzSelect(root) {
 			$tableInput.append($trInput3);
 			var $div = $('<div></div>');
 			var $table = $('<table ></table>');
-			var $submit = $('<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="문제 생성"></input>');
+			var $submit = $('<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="submit" value="문제 생성"></input>');
 			var $hidden;
 			
 			var $tr1,$tr2,$tr3,$tr4;

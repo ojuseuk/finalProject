@@ -49,7 +49,7 @@
 					</td>
 				</tr>
 			</table>
-			<input class="w3-button w3-border" style="background-color: #90909096; width: 20%" type="submit" value="성적 입력">
+			<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096; width: 20%" type="submit" value="성적 입력">
 		</form>
 	</div>
 </div>

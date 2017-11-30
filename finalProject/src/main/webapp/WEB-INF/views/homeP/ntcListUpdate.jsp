@@ -111,7 +111,7 @@ tr.shown td.details-control {
 				"data":null,
 				"render" : function(data, row, type, meta){
 					
-					return '<button class="w3-button w3-border" style="background-color: #90909096" onclick="location.href=\''+root+'/ntcUpdatePage?no='+data.no+'\'">수정하기</button>';
+					return '<button class="w3-button w3-round w3-blue-grey" style="background-color: #90909096" onclick="location.href=\''+root+'/ntcUpdatePage?no='+data.no+'\'">수정하기</button>';
 				}
 			}]
 		});

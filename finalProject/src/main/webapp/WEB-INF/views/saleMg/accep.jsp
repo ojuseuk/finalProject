@@ -30,7 +30,7 @@
 			</table>
 		</div>
 		<div align="center">
-			<input type="submit" value="매출 입력">
+			<input class="w3-button w3-round-large w3-teal" type="submit" value="매출 입력">
 		</div>
 	</form>
 </body>

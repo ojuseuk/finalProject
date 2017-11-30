@@ -55,7 +55,7 @@
 							<option value="">과정 선택</option>
 						</select>
 					</td>
-					<td><input class="w3-button w3-border" style="background-color: #90909096" type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${root}', document.getElementById('crsId').value)">
+					<td><input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="button" value="해당 과정 강좌 리스트 " onclick="clssSelectByCourse('${root}', document.getElementById('crsId').value)">
 					</td>
 					
 				</tr>
@@ -92,11 +92,11 @@
 				</tr>
 			</table>
 		</fieldset><br>
-		<input class="w3-button w3-border" style="background-color: #90909096" type="reset" value="화면 초기화"> 
- 		<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="강좌 개설"> 
-		<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="수정 내용 저장" onclick="clssUpdate()">
-		<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="강사 배정" onclick="tchrShow()">
-		<input class="w3-button w3-border" style="background-color: #90909096" type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
+		<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="reset" value="화면 초기화"> 
+ 		<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="submit" value="강좌 개설"> 
+		<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="button" value="수정 내용 저장" onclick="clssUpdate()">
+		<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="button" value="강사 배정" onclick="tchrShow()">
+		<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
 		<br>
 		<div>
 		<fieldset style="width: 80%" id="fsTchr" hidden>				
@@ -122,9 +122,9 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="화면초기화" id="btnClear">
-						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="저장" onclick="assgnTchr('${pageContext.request.contextPath}')">
-						<input class="w3-button w3-border" style="background-color: #90909096" type="button" value="닫기" onclick="tchrClose()">
+						<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="button" value="화면초기화" id="btnClear">
+						<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="button" value="저장" onclick="assgnTchr('${pageContext.request.contextPath}')">
+						<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="button" value="닫기" onclick="tchrClose()">
 					</td>
 				</tr>
 			</table>

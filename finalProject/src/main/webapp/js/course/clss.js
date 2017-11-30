@@ -40,7 +40,7 @@
 						"searchable": false,
 						"render" : function(data, type, row, meta){
 
-							data  = '<div align="center"><input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" value="' + data + '" onclick="clssSelect(\''+ root + '\', \''+data+'\')"></div>'
+							data  = '<div align="center"><input class="w3-button w3-round-large w3-blue-grey w3-tiny" style="background-color: #90909096" type="button" value="' + data + '" onclick="clssSelect(\''+ root + '\', \''+data+'\')"></div>'
 							return data;
 						}
 					}, {
@@ -91,7 +91,7 @@
 	 						"data" : "tchrNo",
 	 						"searchable": false,
 							"render" : function(data, type, row, meta){
-								data  = '<div align="center"><input class="w3-button w3-border" style="background-color: #90909096" type="button" value="' + data + '" onclick="tchrSelect(\''+ root + '\', \''+data+'\')"></div>'
+								data  = '<div align="center"><input class="w3-button w3-round-large w3-blue-grey w3-tiny" style="background-color: #90909096" type="button" value="' + data + '" onclick="tchrSelect(\''+ root + '\', \''+data+'\')"></div>'
 								return data;
 							}
 	 					}, {
@@ -215,7 +215,7 @@
 		 						"data" : "tchrNo",
 		 						"searchable": false,
 								"render" : function(data, type, row, meta){
-									data  = '<div align="center"><input class="w3-button w3-border" style="background-color: #90909096" type="button" value="' + data + '" onclick="tchrSelect(\''+ root + '\', \''+data+'\')"></div>'
+									data  = '<div align="center"><input class="w3-button w3-round-large w3-blue-grey w3-tiny" style="background-color: #90909096" type="button" value="' + data + '" onclick="tchrSelect(\''+ root + '\', \''+data+'\')"></div>'
 									return data;
 								}
 		 					}, {

@@ -122,8 +122,8 @@ var IMP = window.IMP;
 			<b>총 결제 금액 : 0원</b>
 		</p>
 		<p align="center">
-			<input class="w3-button w3-border" style="background-color: #90909096; width: 15%" id="payment" type="button" value="결제">
-			<input class="w3-button w3-border" style="background-color: #90909096; width: 15%" id="paymentT" type="button" value="결제테스트">
+			<input class="w3-button w3-round w3-teal" style="background-color: #90909096; width: 15%" id="payment" type="button" value="결제">
+			<input class="w3-button w3-round w3-teal" style="background-color: #90909096; width: 15%" id="paymentT" type="button" value="결제테스트">
 		</p>
 	</div>
 </div>

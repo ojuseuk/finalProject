@@ -83,7 +83,7 @@
 					<tr>
 						<td align="center"><span class="input-group-addon">아이디</span></td>
 						<td><input class="form-control" style="width:400px; float:left;" id="stdtId" type="text" name="id" placeholder="ID검색">
-						<input class="w3-button w3-border w3-tiny" id="selectId" style="background-color: #90909096" type="button" value="조회">
+						<input class="w3-button w3-round w3-teal w3-tiny" id="selectId" style="background-color: #90909096" type="button" value="조회">
 						<div id="selectResult"></div></td>
 					</tr>
 					<tr>
@@ -126,8 +126,8 @@
 					</tr>
 					<tr>
 						<td colspan="2"><p align="center">
-							<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="저장">
-							<input class="w3-button w3-border" style="background-color: #90909096" type="reset" value="리셋">
+							<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="submit" value="저장">
+							<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="reset" value="리셋">
 						</p></td>
 					</tr>
 				</table>

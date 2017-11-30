@@ -33,7 +33,7 @@
 			</table>
 			<br>
 			<div style="text-align: center;">
-				<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="공지사항 등록">
+				<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="submit" value="공지사항 등록">
 			</div>
 		</form>
 	</div>
