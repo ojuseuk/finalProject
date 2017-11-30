@@ -46,7 +46,9 @@ public class EmpMgDaoImp implements EmpMgDao {
 	@Override
 	public EMPDto empSelectById(String id) {
 		// TODO Auto-generated method stub
+		System.out.println(id);
 		EMPDto emp =  sqlSession.selectOne("empMgMapper.empSelectById",id);
+		System.out.println(emp);
 		return emp;
 	}
 	

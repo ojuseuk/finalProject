@@ -41,8 +41,8 @@
 					<td><input type="text" name="id" id="id2" />
   						<input class="w3-button w3-border w3-tiny" style="background-color: #90909096" type="button" value="조회"
 						onclick="searchUsr('${pageContext.request.contextPath}', $('#id2').val());
-								 searchEmpById('${pageContext.request.contextPath}', document.getElementById('nm2').value);
-								 searchTchrById('${pageContext.request.contextPath}', document.getElementById('nm2').value)">
+								 searchEmpById('${pageContext.request.contextPath}', $('#id2').val());
+								 searchTchrById('${pageContext.request.contextPath}', $('#id2').val());">
 					</td>
 				</tr>  
 				<tr>

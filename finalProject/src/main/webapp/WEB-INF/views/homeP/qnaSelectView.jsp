@@ -17,7 +17,9 @@ td.details-control {
 tr.shown td.details-control {
 	background: url('${root}/imgs/grid/datailBtn.png') no-repeat center center;
 }
+
 </style>
+
 <!-- dataTable 기본 css -->
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script type="text/javascript" src="${root}/js/jquery.min.js"></script> 
@@ -77,6 +79,7 @@ tr.shown td.details-control {
 		}
 
 		var table = $('#dataTable').DataTable({
+			
 			"processing" : true,
 			"ordering" : false,
 			"select" : {
