@@ -223,6 +223,13 @@ public class UsrController {
 	public String delUser(HttpSession session) {
 		return "user/delUser";
 	}
+	
+	// error :  go main.jsp
+	@RequestMapping(value = "error")
+	public String error(HttpSession session) {
+		return "redirect:/main.jsp";
+	}
+	
 	//userOut
 	@RequestMapping(value ="/userOut")
 	public @ResponseBody String userOut(String id,String pw) throws SQLException {
