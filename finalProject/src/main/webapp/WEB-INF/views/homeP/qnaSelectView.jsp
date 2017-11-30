@@ -65,7 +65,14 @@ tr.shown td.details-control {
 		console.log(json);
 		var root = $('#root').val();
 		var result = $('#result').val();
-		alert(result);
+		console.log(result);
+		if(result != ""){
+			if(result == 1){
+				alert("게시글이 수정되었습니다.");
+			}else{
+				alert("게시글이 등록되었습니다.");
+			}
+		}
 
 		function format(d) {
 			return '게시글 내용 : ' + d.content + '<br>'
@@ -140,7 +147,7 @@ tr.shown td.details-control {
 			} else {
 				// Open this row
 				row.child(format(row.data())).show();
-				tr.next().css('background', 'yellow');
+// 				tr.next().css('background', 'yellow');
 				tr.addClass('shown');
 			}
 

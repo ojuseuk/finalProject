@@ -53,14 +53,14 @@ public class QRCodeServiceImp implements QRCodeService {
 		// A랑 B가 같으면 0
 		String attndTp=null;
 		if("입실".equals(attnd)) {
-			attndTp = "입실";
+			attndTp = "at001";
 			if(timeStr.compareTo(map.get("STRTTM")) > 0) {
-				attndTp = "지각";
+				attndTp = "at002";
 			}
 		}else {
-			attndTp = "퇴실";
+			attndTp = "at004";
 			if(timeStr.compareTo(map.get("ENDTM")) < 0) {
-				attndTp = "조퇴";
+				attndTp = "at003";
 			}
 		}
 		

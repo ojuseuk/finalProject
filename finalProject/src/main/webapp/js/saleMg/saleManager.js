@@ -32,8 +32,6 @@ function monthSale() {
 	month = pad(month, 2);
 	let max = year + "-" + month + "-" + day;
 	let min = year + "-" + month + "-" + "01";
-	alert(min);
-	alert(max);
 	$('#day').attr("min", min);
 	$('#day').attr("max", max);
 
@@ -44,7 +42,6 @@ function saleYear(root, button) {
 	let y = $('#year').val();		// 년도
 	let m = $('#month').val();		// 월
 	let d = $('#day').val();		// 일
-	alert(d);
 	let amount = new Array();
 	let month = new Array();
 	let amountD = 0;
@@ -62,8 +59,6 @@ function saleYear(root, button) {
 	}
 	
 	let param = "year="+y+"&month="+m+"&day="+d;
-	alert(param);
-	
 	
 	if (d == "y" && y == "선택") {
 		alert("년도를 선택해 주세요.");
@@ -84,9 +79,11 @@ function saleYear(root, button) {
 			success : function(data) {
 				console.log(data);
 				
+				
+				$.fn.DataTable.ext.pager.numbers_length = 4;
 				$('#dataTable').DataTable({
 					"language": {
-						    search: "검색 : " 
+						    search: "검색 : "
 					},
 					"destroy": true,
 					"scrollY" : 250,
@@ -120,18 +117,10 @@ function saleYear(root, button) {
 						}
 					} ]
 				});
-				
-				$('#column3_search').on( 'keyup', function () {
-				    table
-				        .columns( 3 )
-				        .search( this.value )
-				        .draw();
-				} );
-				
 				console.log("test : " + button);
-				
+				let hap = 0;
 				for (var i = 0; i < data.length; i++) {
-
+					hap += data[i].amount;
 					if(button == 'y'){
 						if ((i + 1) < data.length) {
 							if (data[i].month == data[i + 1].month) {
@@ -168,7 +157,10 @@ function saleYear(root, button) {
 					}
 					
 				}//end of for
-
+				console.log("hap : " + hap);
+				$('#hap').html('');
+				$('#hap').append(hap.toString().replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,') + "원");
+				
 				Array.prototype.unique = function() {
 					var a = {};
 					for (var i = 0; i < this.length; i++) {

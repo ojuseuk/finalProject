@@ -69,7 +69,7 @@ tr.shown td.details-control {
 				    search: "검색 : " 
 			},
 			"destroy": true,
-			"scrollY" : 250,
+			"scrollY" : 300,
 			"scrollCollapse" : true,
 			data : json,
 			columns : [ {
@@ -118,7 +118,7 @@ tr.shown td.details-control {
 			} else {
 				// Open this row
 				row.child(format(row.data())).show();
-				tr.next().css('background', 'yellow');
+// 				tr.next().css('background', 'yellow');
 				tr.addClass('shown');
 			}
 
@@ -126,12 +126,6 @@ tr.shown td.details-control {
 		
 	});
 
-		
-
-
-	}
-	
-	
 </script>
 </body>
 </html>

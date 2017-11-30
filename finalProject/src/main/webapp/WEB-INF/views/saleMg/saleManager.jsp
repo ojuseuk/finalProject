@@ -37,7 +37,7 @@ footer {
 <body>
 <jsp:include page="../../../top.jsp"/>
 <div style="margin-top: 20px"></div>
-<div id="content" style="width: 80%; margin: auto;">
+<div id="content" style="width: 90%; margin: auto;">
 	<select class="form-control" style="width:200px; float: left" id="year" onchange="yearSale()" name="month">
 		<option value="선택">연도 선택</option>
 	</select>
@@ -82,6 +82,9 @@ footer {
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div align="right">
+				<span>총 매출액 : </span><span id="hap"></span>
 				</div>
 			</div>
 		</div>

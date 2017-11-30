@@ -195,7 +195,6 @@ public class TchrBsController {
 			mav.addObject("stdt", jsonStdt);
 			mav.setViewName("tchrBs/srcIn");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			mav.setViewName("redirect:/error.jsp");
 			return mav;
 		}
@@ -221,7 +220,6 @@ public class TchrBsController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return "redirect:/error.jsp";
-			
 		}
 	
 		return "forward:/tchrBs/srcIn";

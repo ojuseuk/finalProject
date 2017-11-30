@@ -90,7 +90,7 @@
 	</select>
 	
 	<select id="qzExamSelect" resultType="map">
-		SELECT CD_ID cdId, CD_NM cdNm FROM TB_CD
+		SELECT CD_ID cdId, CD_NM cdNm FROM TB_CD WHERE CD_TP = 'Z01'
 	</select>
 	
 	<insert id="qzInsert" parameterType="list">

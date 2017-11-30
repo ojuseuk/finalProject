@@ -68,12 +68,13 @@ public class HomePController {
 	 * return type  : void
 	 */
 	@RequestMapping("/homeP/qnaInsert")
-	public String qnaInsert(QNADto qnaDto, Authentication auth) {
+	public String qnaInsert(QNADto qnaDto, Authentication auth, Model model) {
 		
 		USRDto usrDto = (USRDto) auth.getPrincipal();
 		qnaDto.setId(usrDto.getId());
 		try {
 			homePService.qnaInsert(qnaDto);
+			model.addAttribute("result", "2");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return "redirect:/error.jsp";
@@ -246,10 +247,10 @@ public class HomePController {
 	 * @throws IllegalStateException 
 	 */
 	@RequestMapping(value="/ntcInsert", method=RequestMethod.POST, headers = ("content-type=multipart/*"))
-	public void ntcInsert(Authentication auth, @ModelAttribute NTCDto ntcDto, HttpSession session, @RequestParam("ntcFile") MultipartFile attchFile) throws IllegalStateException, IOException {
+	public ModelAndView ntcInsert(Authentication auth, @ModelAttribute NTCDto ntcDto, HttpSession session, @RequestParam("ntcFile") MultipartFile attchFile) throws IllegalStateException, IOException {
 		
 		USRDto usrDto = (USRDto) auth.getPrincipal();
-		
+		ModelAndView mav = new ModelAndView();
 //		String empNo = empMgService.ntcTchr(usrDto.getId());
 //		System.out.println(empNo);
 		
@@ -279,10 +280,12 @@ public class HomePController {
 		int result =0;
 		try {
 			result = homePService.ntcInsert(usrDto.getId(), ntcDto);
+			mav.setViewName("forward:/ntcList");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}
 		
+		return mav;
 	}
 	
 	/**
