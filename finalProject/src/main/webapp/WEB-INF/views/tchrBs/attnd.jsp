@@ -18,8 +18,7 @@
 		<select class="form-control" style="width:200px; float: left;" name="clss" id="clss">
 			<option value="선택">선택</option>
 		</select>
-		<button class="w3-button w3-border w3-tiny" style="background-color: #90909096" onclick="clssSearch('${root}')">조회</button>
-		<button class="w3-button w3-border" style="background-color: #90909096" onclick="clssSearch('${root}')">조회</button>
+		<button class="w3-button w3-round w3-teal" style="background-color: #90909096" onclick="clssSearch('${root}')">조회</button>
 		<br>
 		<br>
 		<br>
