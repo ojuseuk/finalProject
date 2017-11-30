@@ -38,7 +38,6 @@ public class UsrController {
 	@RequestMapping(value = "/userInsert.do", method = RequestMethod.POST)
 	public String userInsert(USRDto usr, Model data) {
 		String url = "user/error";
-		System.out.println("controller : " + usr);
 		try {
 			int num = usrService.userInsert(usr);
 			System.out.println(num);
@@ -46,10 +45,9 @@ public class UsrController {
 			System.out.println(data);
 			url = "redirect:/main.jsp";
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("OK");
 		return url;
 	}
 
@@ -97,7 +95,6 @@ public class UsrController {
 					session.setAttribute("name", usrDto.getNm());
 //					session.setAttribute("usrTp", usrDto.getUsrTp());
 					
-					
 				}
 				
 			} else {
@@ -115,19 +112,13 @@ public class UsrController {
 				}
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 		
 		return url;
-	}
-
-	// go logoutPro.jsp
-	@RequestMapping(value = "logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "user/logoutPro";
 	}
 
 	// go idpwfind.jsp
@@ -140,21 +131,26 @@ public class UsrController {
 	@RequestMapping(value = "/findId")
 	public @ResponseBody String findId(@RequestParam("nm") String nm, @RequestParam("phone") String phone)
 			throws SQLException {
-		System.out.println("controller nm : " + nm);
-		System.out.println("controller phone : " + phone);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("nm", nm);
 		map.put("phone", phone);
 		JSONObject json = new JSONObject();
-		USRDto usrdto = usrService.findId(map);
+		USRDto usrdto = null;
+		
+		try {
+			usrdto = usrService.findId(map);
 
-		if (usrdto != null) {
-			json.put("idCheck", usrdto.getId());
-		} else {
-			json.put("idCheck", false);
+			if (usrdto != null) {
+				json.put("idCheck", usrdto.getId());
+			} else {
+				json.put("idCheck", false);
+			}
+			String data1 = json.toString();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		String data1 = json.toString();
-		System.out.println(data1);
 
 		return json.toString();
 	}// end findId
@@ -163,28 +159,30 @@ public class UsrController {
 	@RequestMapping("/findPwd")
 	@ResponseBody
 	public String findPwd(String id, String email) throws SQLException {
-		System.out.println("controller id : " + id);
-		System.out.println("controller email : " + email);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("email", email);
 		JSONObject json = new JSONObject();
-		USRDto usrdto = usrService.findPwd(map);
-
-		if (usrdto != null) {
-			json.put("pwdCheck", usrdto.getPw());
-		} else {
-			json.put("pwdCheck", false);
+		USRDto usrdto = null;
+		try {
+			usrdto = usrService.findPwd(map);
+			if (usrdto != null) {
+				json.put("pwdCheck", usrdto.getPw());
+			} else {
+				json.put("pwdCheck", false);
+			}
+			String data2 = json.toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		String data2 = json.toString();
-		System.out.println(data2);
+
 		return json.toString();
 	}
 
 	// goto the changePwdNew jsp
 	@RequestMapping("changePwdNew")
 	public String changePwdNew(String id, Model model) {
-		System.out.println("changePwdNewcontroller id : " + id);
 		model.addAttribute("id", id);
 		return "/user/changePwdNew";
 	}
@@ -192,13 +190,15 @@ public class UsrController {
 	// after id check change pwd : new-password->pw
 	@RequestMapping("afChangePwdNew")
 	public String changePwdNew(String id, String pw) throws SQLException {
-		System.out.println("afchangePwdNewcontroller id : " + id);
-		System.out.println("afchangePwdNewcontroller pw : " + pw);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		System.out.println("아이디,비밀번호:" + id + "," + pw);
+		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("pw", pw);// 수정
-		usrService.changePwdNew(map);
+		try {
+			usrService.changePwdNew(map);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return "redirect:/main.jsp";
 	}
@@ -208,13 +208,20 @@ public class UsrController {
 	@ResponseBody
 	public String idCheck(@PathVariable("id") String id) throws SQLException {
 		JSONObject json = new JSONObject();
-		USRDto usrdto = usrService.idCheck(id);
-
-		if (usrdto != null) {
-			json.put("idCheck", true);
-		} else {
-			json.put("idCheck", false);
+		USRDto usrdto = null;
+		try {
+			usrdto = usrService.idCheck(id);
+			
+			if (usrdto != null) {
+				json.put("idCheck", true);
+			} else {
+				json.put("idCheck", false);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 		return json.toString();
 	}// end idcheck
 
@@ -233,17 +240,18 @@ public class UsrController {
 	//userOut
 	@RequestMapping(value ="/userOut")
 	public @ResponseBody String userOut(String id,String pw) throws SQLException {
-		System.out.println("userOutcontroller id : " + id);
-		System.out.println("userOutcontroller pw : " + pw);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		System.out.println("아이디:" + id);
-		System.out.println("비밀번호:" + pw);
 		map.put("id", id);
 		map.put("pw", pw);
 		JSONObject json = new JSONObject();
-		usrService.userOut(map);
-		String data1 = json.toString();
-		System.out.println(data1);
+		try {
+			usrService.userOut(map);
+			
+			String data1 = json.toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return json.toString();
 
 	}
@@ -257,20 +265,23 @@ public class UsrController {
 	// id, pw 검증
 	@RequestMapping("/confirmUsr")
 	public ModelAndView confirmUsr(String id, String pw){
-		System.out.println("confirmUsr");
-		System.out.println(id);
-		System.out.println(pw);
 		ModelAndView mav = new ModelAndView();
 		USRDto usr = new USRDto(id, pw);
-		usr = usrService.confirmUsr(usr);
-		System.out.println(usr);
-		if(usr == null){
-			mav.addObject("usr", usr);
-			mav.setViewName("user/confirmUsr");
-		} else {
-			mav.addObject("usr", usr);
-			mav.setViewName("user/updateUsr");
+		try {
+			usr = usrService.confirmUsr(usr);
+			
+			if(usr == null){
+				mav.addObject("usr", usr);
+				mav.setViewName("user/confirmUsr");
+			} else {
+				mav.addObject("usr", usr);
+				mav.setViewName("user/updateUsr");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 		return mav;
 	}
 	
@@ -280,21 +291,24 @@ public class UsrController {
 		System.out.println(usr);
 		boolean flag = false;
 		
-		flag = usrService.updateUsr(usr);
-		if(flag){
-			// 업데이트 성공시
-			usr = usrService.confirmUsr(usr);
-			mav.addObject("usr", usr);
-			mav.setViewName("user/updateUsr");
-		} else {
-			// 업데이트 실패시
-			mav.addObject("fail", "f");
-			mav.setViewName("user/updateUsr");
+		try {
+			flag = usrService.updateUsr(usr);
+			if(flag){
+				// 업데이트 성공시
+				usr = usrService.confirmUsr(usr);
+				mav.addObject("usr", usr);
+				mav.setViewName("user/updateUsr");
+			} else {
+				// 업데이트 실패시
+				mav.addObject("fail", "f");
+				mav.setViewName("user/updateUsr");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 		return mav;
 	}
 	
-	
-	
-
 }// end controller

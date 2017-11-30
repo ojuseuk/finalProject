@@ -66,7 +66,7 @@ img:hover {
 		<a style="text-decoration: none;"  href="${root}/error"><button class="button" style="margin-left: auto; margin-right: auto; display: block;">Home</button></a>
 		</div>
 
-<jsp:include page="footer.jsp" />
+<%-- <jsp:include page="footer.jsp" /> --%>
 
 </body>
 </html>

@@ -56,8 +56,6 @@ tr.shown td.details-control {
 		</div>
 	</div>
 </div>
-<Div st> 
-</Div>
 	<!-- dataTable 기본 js -->
 <script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
 <script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>

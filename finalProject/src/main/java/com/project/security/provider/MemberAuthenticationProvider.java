@@ -41,8 +41,13 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 
 		// 1. 인수로 받는 user정보를 가지고 디비에 존재하는지 체크
 		String id = auth.getName();
-		USRDto usrDto = usrDao.userLoginId(id);
-		System.out.println(usrDto);
+		USRDto usrDto = null;
+		try {
+			usrDto = usrDao.userLoginId(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (usrDto == null) {// ID가 없는경우
 			throw new UsernameNotFoundException(id + "는 없는 회원입니다.");
@@ -50,7 +55,6 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 
 		// 2. 존재하면 비밀번호 비교
 		String password = (String) auth.getCredentials();  // 비밀번호
-		System.out.println(password);
 		if (!passwordEncoder.matches(password, usrDto.getPws())) {
 			throw new BadCredentialsException("패스워드 오류입니다.");
 		}
@@ -60,7 +64,6 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		List<SimpleGrantedAuthority> authList = new ArrayList<>();
 		authList.add(new SimpleGrantedAuthority(usrDto.getUsrTp()));
 		
-		System.out.println(authList);
 		
 		return new UsernamePasswordAuthenticationToken(usrDto, null, authList);
 	}

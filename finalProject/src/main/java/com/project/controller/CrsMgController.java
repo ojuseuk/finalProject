@@ -32,14 +32,16 @@ public class CrsMgController {
 	
 	@RequestMapping(value="/courseUpdate")
 	public String courseUpdate(CRSDto course, Model data) {
-		System.out.println("courseUpdate Controller : " + course);
 		String url = "error";
 		String resultMsg = "";
+		List list = null;
+		List sbjList = null;
+		
 		try {
 			resultMsg = crsMgService.courseUpdate(course);
 			
-			List list = crsMgService.selectAll();
-			List sbjList = crsMgService.sbjtSelectAll();
+			list = crsMgService.selectAll();
+			sbjList = crsMgService.sbjtSelectAll();
 			
 			data.addAttribute("list", list);
 			data.addAttribute("sbjtList", sbjList);
@@ -50,10 +52,11 @@ public class CrsMgController {
 			data.addAttribute("resultMsg", resultMsg);
 			url = "course/mgCourse";
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+
+			return "redirect:/error.jsp";
 		}
-		System.out.println("resultMsg : " + resultMsg);
+		
 		
 		return url;
 	}
@@ -66,26 +69,35 @@ public class CrsMgController {
 		try {
 			resultMsg = crsMgService.clssUpdate(clss);
 			url = listClss(clss, data, resultMsg, url);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			
+			return "redirect:/error.jsp";
 		}
-		System.out.println("resultMsg : " + resultMsg);
+
 		return url;
 	}
 	
 	private String listClss(CLSSDto clss, Model data, String resultMsg, String url) throws SQLException {
-		List list = crsMgService.clssSelectAll();
-		List sbjList = crsMgService.sbjtSelectAll();
-		
-		data.addAttribute("list", list);
-		data.addAttribute("sbjtList", sbjList);
-		
-		JSONArray jsonList = JSONArray.fromObject(list);
-		JSONArray jsonSbjtList = JSONArray.fromObject(sbjList);
-		
-		data.addAttribute("jsonList", jsonList);
-		data.addAttribute("clss", clss);
-		data.addAttribute("resultMsg", resultMsg);
+		List list=null;
+		List sbjList=null;
+		try {
+			list = crsMgService.clssSelectAll();
+			sbjList = crsMgService.sbjtSelectAll();
+			
+			data.addAttribute("list", list);
+			data.addAttribute("sbjtList", sbjList);
+			
+			JSONArray jsonList = JSONArray.fromObject(list);
+			JSONArray jsonSbjtList = JSONArray.fromObject(sbjList);
+			
+			data.addAttribute("jsonList", jsonList);
+			data.addAttribute("clss", clss);
+			data.addAttribute("resultMsg", resultMsg);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return "redirect:/error.jsp";
+		}
 		
 		return "course/mgClss";
 		
@@ -93,20 +105,39 @@ public class CrsMgController {
 
 	@RequestMapping("/crsSelect")
 	public @ResponseBody CRSDto crsSelect(@RequestParam("crsId") String crsId) {
-		System.out.println("crsSelect : Cotroller : " + crsId); // @@@
-		return crsMgService.crsSelect(crsId);
+		CRSDto crsDto = null;
+		try {
+			crsDto = crsMgService.crsSelect(crsId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+		return crsDto;
 	}
 	
 	@RequestMapping("/clssSelect")
 	public @ResponseBody CLSSDto clssSelect(@RequestParam("clssId") String clssId) {
-		System.out.println("clssSelect : Cotroller : " + clssId); // @@@
-		return crsMgService.clssSelect(clssId);
+		CLSSDto clssDto = null;
+		try {
+			clssDto = crsMgService.clssSelect(clssId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clssDto;
 	}
 	
 	@RequestMapping("/crsSelectBySbjtNm")
 	public @ResponseBody List<CRSDto> crsSelectBySbjtNm(@RequestParam("sbjtNm") String sbjtNm) {
-		System.out.println("Cotroller : " + sbjtNm); // @@@
-		return crsMgService.crsSelectBySbjtNm(sbjtNm);
+
+		List<CRSDto> list =null;
+		try {
+			list = crsMgService.crsSelectBySbjtNm(sbjtNm);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	@RequestMapping("/clssSelectByCourse")
@@ -125,8 +156,8 @@ public class CrsMgController {
 			
 			data.addAttribute("jsonList", jsonList);
 			url = "course/mgClss";
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -147,9 +178,8 @@ public class CrsMgController {
 			data.addAttribute("jsonList", jsonList);
 
 			url = "course/mgClss";
-			System.out.println("clss controller list size : " + list.size());
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -170,10 +200,9 @@ public class CrsMgController {
 			data.addAttribute("jsonList", jsonList);
 
 			url = "course/mgCourse";
-			System.out.println("course controller list size : " + list.size());
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}
@@ -197,17 +226,15 @@ public class CrsMgController {
 			
 			url ="course/mgCourse";  	
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
-		System.out.println("OK");
 		return url;
 	}
 		
 	@RequestMapping("/clssInsert")
 	public String clssInsert(CLSSDto clss, Model data) {
 		String url = "error";
-		System.out.println("controller : " + clss); 		// @@@
 
 		try {
 			crsMgService.clssInsert(clss);
@@ -224,10 +251,9 @@ public class CrsMgController {
 			
 			url ="course/mgClss";  	
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
-		System.out.println("OK");
 		return url;
 	}
 	
@@ -238,8 +264,8 @@ public class CrsMgController {
 		try {
 			data.addAttribute("list", crsMgService.selectAll());
 			url = "course/listCourse";
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
 		}
 		return url;
 	}

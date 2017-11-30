@@ -9,38 +9,38 @@ import com.project.dto.USRDto;
 
 public interface EmpMgDao {
 
-	List empSelectAll();
+	List empSelectAll() throws Exception;
 
-	String empInsert(EMPDto emp);
+	String empInsert(EMPDto emp) throws Exception;
 
-	EMPDto empSelect(String id);
+	EMPDto empSelect(String id) throws Exception;
 
-	USRDto usrSelect(String id);
+	USRDto usrSelect(String id) throws Exception;
 
-	List tchrSelectAll();
+	List tchrSelectAll() throws Exception;
 
-	String tchrInsert(TCHRDto tchr);
+	String tchrInsert(TCHRDto tchr) throws Exception;
 
-	String usrUpdateToTchr(String id);
+	String usrUpdateToTchr(String id) throws Exception;
 
-	String usrUpdateToStaff(String id);
+	String usrUpdateToStaff(String id) throws Exception;
 
-	String empUpdate(EMPDto emp);
+	String empUpdate(EMPDto emp) throws Exception;
 
-	String empRetire(EMPDto emp);
+	String empRetire(EMPDto emp) throws Exception;
 
-	EMPDto empSelectById(String id);
+	EMPDto empSelectById(String id) throws Exception;
 
-	TCHRDto tchrSelectById(String id);
+	TCHRDto tchrSelectById(String id) throws Exception;
 
-	TCHRDto tchrSelect(String tchrNo);
+	TCHRDto tchrSelect(String tchrNo) throws Exception;
 
-	String tchrUpdate(TCHRDto tchr);
+	String tchrUpdate(TCHRDto tchr) throws Exception;
 
-	List tchrSelectBySbjtNm(String sbjtNm);
+	List tchrSelectBySbjtNm(String sbjtNm) throws Exception;
 
-	String assnTchr(TCHRASSNDto tchrAssn);
+	String assnTchr(TCHRASSNDto tchrAssn) throws Exception;
 
-	List tchrAssnSelect(String clssId);
+	List tchrAssnSelect(String clssId) throws Exception;
 
 }

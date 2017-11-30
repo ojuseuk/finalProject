@@ -52,8 +52,6 @@ public class HomePController {
 	@RequestMapping("/homeP/qnaInsertView")
 	public ModelAndView qnaInsertView(QNADto qnaDto) {
 		
-		System.out.println(qnaDto);
-		System.out.println("controller QNAInsertView");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("qnaDto", qnaDto);
 		mav.setViewName("homeP/qnaInsertView");
@@ -74,11 +72,9 @@ public class HomePController {
 		
 		USRDto usrDto = (USRDto) auth.getPrincipal();
 		qnaDto.setId(usrDto.getId());
-		System.out.println("controller QNAInsert");
-		System.out.println(qnaDto);
 		try {
 			homePService.qnaInsert(qnaDto);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -99,20 +95,20 @@ public class HomePController {
 	public ModelAndView qnaSelectView() {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("controller qnaSelectView");
 		
 		List<QNADto> list=null;
 		try {
 			list = homePService.qnaSelectView();
-		} catch (SQLException e) {
+			JSONArray jsonArray = JSONArray.fromObject(list);
+			mav.addObject("list", list);
+			mav.addObject("json", jsonArray);
+			
+			mav.setViewName("homeP/qnaSelectView");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JSONArray jsonArray = JSONArray.fromObject(list);
-		mav.addObject("list", list);
-		mav.addObject("json", jsonArray);
-		
-		mav.setViewName("homeP/qnaSelectView");
+
 		
 		return mav;
 	}
@@ -129,20 +125,18 @@ public class HomePController {
 	@RequestMapping("/homeP/qnaUpdateView")
 	public ModelAndView qnaUpdateView(@RequestParam("no") int no) {
 		
-		System.out.println("controller qnaUpdateView");
-		System.out.println(no);
 		ModelAndView mav = new ModelAndView();
 		QNADto qnaDto =null;
 		try {
 			qnaDto = homePService.qnaUpdateView(no);
-		} catch (SQLException e) {
+			
+			mav.addObject("qnaDto", qnaDto);
+			mav.setViewName("homeP/qnaUpdateView");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(qnaDto);
-		
-		mav.addObject("qnaDto", qnaDto);
-		mav.setViewName("homeP/qnaUpdateView");
+
 		
 		return mav;
 	}
@@ -160,18 +154,18 @@ public class HomePController {
 	public ModelAndView qnaUpdate(QNADto qnaDto) {
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("controller qnaUpdate");
 		
 		int result = 0;
 		try {
 			result = homePService.qnaUpdate(qnaDto);
-		} catch (SQLException e) {
+			
+			mav.addObject("result", result);
+			mav.setViewName("forward:/homeP/qnaSelectView");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(result);
-		mav.addObject("result", result);
-		mav.setViewName("forward:/homeP/qnaSelectView");
+
 		
 		return mav;
 	}
@@ -180,7 +174,6 @@ public class HomePController {
 	@PreAuthorize("hasRole('ROLE_TCHR')")
 	public String tchr(Authentication auth, Model model) {
 		
-		System.out.println(auth);
 		model.addAttribute("auth", auth);
 		
 		return "user/main_tchr";
@@ -189,7 +182,6 @@ public class HomePController {
 	@RequestMapping("/staff/main")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String staff(Authentication auth, Model model) {
-		System.out.println("usr");
 		model.addAttribute("auth", auth);
 		
 		return "user/main_staff";
@@ -199,7 +191,6 @@ public class HomePController {
 	@RequestMapping("/usr/main")
 	@PreAuthorize("hasAnyRole('ROLE_ST', 'ROLE_USR')")
 	public String usr(Authentication auth, Model model, RedirectAttributes redirectAttributes) {
-		System.out.println("usr");
 		model.addAttribute("auth", auth);
 		
 		return "redirect:/main.jsp";
@@ -209,27 +200,20 @@ public class HomePController {
 	public String main(HttpSession session, Authentication auth, Locale locale, Model model) {
 		
 		USRDto usrDto = (USRDto) auth.getPrincipal();
-		System.out.println(usrDto);
 		String url = "forward:/usr/main";
 		
 		if (usrDto.getUsrTp().equals("staff")) {
-			System.out.println("직원");
 			model.addAttribute("auth", auth);
 			
 			url = "forward:/staff/main";
 		} else if (usrDto.getUsrTp().equals("st")) {
-			System.out.println("학생");
 			model.addAttribute("auth", auth);
-			
+			// 기본 url			
 		} else if (usrDto.getUsrTp().equals("tchr")) {
-			System.out.println("강사");
-
 			model.addAttribute("auth", auth);
 			url ="forward:/tchr/main";
-
 		} else {
-			System.out.println("사용자");
-			
+			// 기본 url
 		}
 		return url;
 	}
@@ -245,7 +229,6 @@ public class HomePController {
 	@RequestMapping("/ntcInsertView")
 	public String ntcInsertView(Authentication auth, Model data) {
 		
-		System.out.println("controller ntcInsertView");
 		data.addAttribute("auth", auth);
 		
 		return "homeP/ntcInsertView";
@@ -264,8 +247,6 @@ public class HomePController {
 	@RequestMapping(value="/ntcInsert", method=RequestMethod.POST, headers = ("content-type=multipart/*"))
 	public void ntcInsert(Authentication auth, @ModelAttribute NTCDto ntcDto, HttpSession session, @RequestParam("ntcFile") MultipartFile attchFile) throws IllegalStateException, IOException {
 		
-		System.out.println("controller ntcInsert");
-		
 		USRDto usrDto = (USRDto) auth.getPrincipal();
 		
 //		String empNo = empMgService.ntcTchr(usrDto.getId());
@@ -273,21 +254,16 @@ public class HomePController {
 		
 		if(!attchFile.isEmpty()) {
 			String path = session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\";
-			System.out.println(path);
 			File targetDir = new File(path);
+			// 없으면 생성
 			if(!targetDir.exists()) {
 				targetDir.mkdirs();
 			}
-			System.out.println("imgFile.getOriginalFilename() : " + attchFile.getOriginalFilename()); 
-			System.out.println("imgFile.getName() : " + attchFile.getName()); 
-			System.out.println("imgFile.getContentType() : " + attchFile.getContentType()); 
 			
 			String ext[] = attchFile.getOriginalFilename().split("\\.");
 			
 			
 //			파일명을 "강사번호.확장자"로 변경
-			System.out.println("ext[0] : " + ext[0]); 		// @@@
-			System.out.println("ext[1] : " + ext[1]); 		// @@@
 			
 			Date date = new Date();
 			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -295,18 +271,14 @@ public class HomePController {
 			
 			attchFile.transferTo(file);
 			
-			System.out.println("file.getName() : " + file.getName()); 
-			System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
-			
 			ntcDto.setAttchFile(file.getName());
-			System.out.println("■path:::" + path);
 
 		}
 		
 		int result =0;
 		try {
 			result = homePService.ntcInsert(usrDto.getId(), ntcDto);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -331,21 +303,22 @@ public class HomePController {
 		List<NTCDto> list=null;
 		try {
 			list = homePService.ntcList();
-		} catch (SQLException e) {
+			
+			JSONArray json = JSONArray.fromObject(list);
+			mav.addObject("json", json);
+			mav.addObject("list", list);
+			
+			if(usrDto.getUsrTp().equals("ROLE_STAFF")) {
+				mav.setViewName("homeP/ntcListUpdate");
+			}else {
+				mav.setViewName("homeP/ntcList");
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(list);
 		
-		JSONArray json = JSONArray.fromObject(list);
-		mav.addObject("json", json);
-		mav.addObject("list", list);
-		
-		if(usrDto.getUsrTp().equals("ROLE_STAFF")) {
-			mav.setViewName("homeP/ntcListUpdate");
-		}else {
-			mav.setViewName("homeP/ntcList");
-		}
+
 		
 		return mav;
 	}
@@ -361,24 +334,22 @@ public class HomePController {
 		NTCDto ntcDto = null;
 		try {
 			ntcDto = homePService.ntcUpdatePage(no);
-		} catch (SQLException e) {
+			
+			mav.addObject("path", path);
+			mav.addObject("ntcDto", ntcDto);
+			mav.setViewName("homeP/ntcUpdatePage");
+			
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		mav.addObject("path", path);
-		mav.addObject("ntcDto", ntcDto);
-		mav.setViewName("homeP/ntcUpdatePage");
-		
+
 		return mav;
 	}
 	
 	@RequestMapping(value="/ntcUpdate", method=RequestMethod.POST, headers = ("content-type=multipart/*"))
 	public String ntcUpdate(Authentication auth, @ModelAttribute NTCDto ntcDto, HttpSession session, @RequestParam("ntcFile") MultipartFile attchFile) throws IllegalStateException, IOException {
-		
-		System.out.println("controller ntcUpdate");
-		System.out.println(attchFile);
-		System.out.println(ntcDto);
+
 		if(!attchFile.isEmpty()) {
 			String path = session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\";
 			System.out.println(path);
@@ -386,16 +357,8 @@ public class HomePController {
 			if(!targetDir.exists()) {
 				targetDir.mkdirs();
 			}
-			System.out.println("imgFile.getOriginalFilename() : " + attchFile.getOriginalFilename()); 
-			System.out.println("imgFile.getName() : " + attchFile.getName()); 
-			System.out.println("imgFile.getContentType() : " + attchFile.getContentType()); 
-			
 			String ext[] = attchFile.getOriginalFilename().split("\\.");
 			
-			
-//			파일명을 "강사번호.확장자"로 변경
-			System.out.println("ext[0] : " + ext[0]); 		// @@@
-			System.out.println("ext[1] : " + ext[1]); 		// @@@
 			
 			Date date = new Date();
 			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -403,11 +366,7 @@ public class HomePController {
 			
 			attchFile.transferTo(file);
 			
-			System.out.println("file.getName() : " + file.getName()); 
-			System.out.println("file.getAbsoluteFile() : " + file.getAbsoluteFile()); 
-			
 			ntcDto.setAttchFile(file.getName());
-			System.out.println("■path:::" + path);
 
 		}		
 		
@@ -415,7 +374,7 @@ public class HomePController {
 		
 		try {
 			result = homePService.ntcUpdate(ntcDto);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -425,19 +384,4 @@ public class HomePController {
 		
 	}
 	
-//	@RequestMapping("/downloadFile")
-//	public ModelAndView downloadFile(@RequestParam("attch") String attch, HttpSession session) {
-//		
-//		
-//		System.out.println("controller downloadFile");
-//		System.out.println(attch);
-//		File file = new File(session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\" + attch); 
-//
-//		if(!file.canRead()) {
-//			System.out.println("파일을 찾을수 없다");
-//		}
-//		System.out.println(session.getServletContext().getRealPath("/") + "ntc\\ntcFile\\" + attch);
-//		return new ModelAndView("fileDownloadView", "downloadFile", file);
-//		
-//	}
 } // end of class

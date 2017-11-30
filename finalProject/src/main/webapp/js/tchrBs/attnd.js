@@ -60,7 +60,7 @@ function clssSearch(root) {
 				var json = this.responseText;
 				json = JSON.parse(json);
 				
-				var stdtNo = new Array();
+				var stdtNo = new Array();	//학생 번호
 				var dtE = new Array(); //입실
 				var dtD = new Array(); //퇴실
 				
@@ -76,13 +76,14 @@ function clssSearch(root) {
 
 				}
 				
-				console.log(stdtNo);
+//				console.log(stdtNo);
 				stdtNo = stdtNo.unique();
-				console.log(stdtNo);
+//				console.log(stdtNo);
 				var startDate = json[0].STDTDT;
 				var endDate = json[0].ENDDT;
 		
 				startDate = dateParse(startDate);
+//				console.log(startDate);
 				endDate = dateParse(endDate);
 
 				var time = (endDate - startDate)
@@ -92,8 +93,8 @@ function clssSearch(root) {
 
 				var $table = $('<table></table>');
 				$table.attr("class", "w3-table w3-bordered");
-				var $tr1 = $('<tr></tr>');
-				var $tr2 = $('<tr></tr>');
+				var $tr1 = $('<tr style="background-color: #90909096; align:center"></tr>');
+				var $tr2 = $('<tr style="background-color: #90909096; align:center"></tr>');
 				var $td1, $td2, $td11, $td22;
 				
 				$td11 = $('<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>');
@@ -144,35 +145,61 @@ function clssSearch(root) {
 				d = a.getDate();
 				d2 = pad(d, 2);
 				todayDate = y + '' + m2 + d2;
-				console.log(ymdDate);
-				console.log(dtE);
+//				console.log(ymdDate);
+//				console.log(dtE);
+				let holiday = "";
+				console.log(dtD);
+				console.log(stdtNo);
+				let stdtNoDtD;
+				let stdtNoTpD;
+				let stdtNoDtE;
+				let stdtNoTpE;
 				
 				for(var a=0; a<stdtNo.length; a++){
-					$tr3 = $('<tr></tr>');
-					$tr4 = $('<tr></tr>');
+					stdtNoDtD = new Array();
+					stdtNoTpD = new Array();
+					stdtNoDtE = new Array();
+					stdtNoTpE = new Array();
+					$tr3 = $('<tr style="background-color: white; align:center"></tr>');
+					$tr4 = $('<tr style="background-color: white; align:center; border-bottom : 2px solid"></tr>');
 					$td33 = $('<td>'+stdtNo[a]+'-입실확인</td>');
 					$td44 = $('<td>'+stdtNo[a]+'-퇴실확인</td>');
 					$tr3.append($td33);
 					$tr4.append($td44);
 					
-					for (var i = 0; i < time; i++) {
+					for(var b=0;b<dtE.length;b++){
 						
+						if(dtE[b].NM == stdtNo[a]){
+							stdtNoDtE.push(dtE[b].DT);
+							stdtNoTpE.push(dtE[b].ATTNDTP);
+						}
+						
+					}
+					for(var b=0;b<dtD.length;b++){
+						if(dtD[b].NM == stdtNo[a]){
+							stdtNoDtD.push(dtD[b].DT);
+							stdtNoTpD.push(dtD[b].ATTNDTP);
+						}
+					}
+					console.log(a +" -- "+stdtNoDtE);
+					console.log(a +" -- "+stdtNoTpE);
+					for (var i = 0; i < time; i++) {
+						holiday = dateParse(ymdDate[i]);
 						let attndTp;
 						for (var j = 0; j < dtE.length; j++) {
 							$td3 = $('<td></td>');	
 							if (todayDate < ymdDate[i]) {
 								$td3.append("예정");
+							}else if(holiday.getDay() == 6 || holiday.getDay() == 0){
+								$td3.append('<font color="blue">휴일</font');
 							}else{
-								if (ymdDate[i] == dtE[j].DT) {
-									console.log(ymdDate[i]);
-									console.log(dtE[j].DT);
+								if (ymdDate[i] == stdtNoDtE[j]) {
 									
-									attndTp = dtE[j].ATTNDTP;
-//	 									console.log(attndTp);
+									attndTp = stdtNoTpE[j];
 									if(attndTp == 'at001'){
 										$td3.append("출석");	
 									}else if(attndTp == 'at002'){
-										$td3.append("지각");
+										$td3.append('<font color="orange">지각</font>');
 									}
 									break;
 									
@@ -184,17 +211,21 @@ function clssSearch(root) {
 
 						$tr3.append($td3);
 					}// end of for - i
-
+					
 					for (var i = 0; i < time; i++) {
 						let attndTp;
+						holiday = dateParse(ymdDate[i]);
 						for (var j = 0; j < dtD.length; j++) {
 							$td4 = $('<td></td>');
 							
 							if (todayDate < ymdDate[i]) {
 								$td4.append("예정");
+							}else if(holiday.getDay() == 6 || holiday.getDay() == 0){
+								$td4.append('<font color="blue">휴일</font');
 							}else{
-								if (ymdDate[i] == dtD[j].DT) {
-									attndTp = dtD[j].ATTNDTP;
+								if (ymdDate[i] == stdtNoDtD[j]) {
+									
+									attndTp = stdtNoTpD[j];
 									if(attndTp == 'at003'){
 										$td4.append("조퇴");
 									}else if(attndTp == 'at004'){
@@ -202,7 +233,7 @@ function clssSearch(root) {
 									}
 									break;
 								} else {
-										$td4.append('<font color="red">결석</font>');
+									$td4.append('<font color="red">결석</font>');
 								}
 							}
 						}

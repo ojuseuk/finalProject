@@ -24,56 +24,52 @@ public class CrsMgServiceImp implements CrsMgService {
 	}
 
 	@Override
-	public void courseInsert(CRSDto crs) throws SQLException {
+	public void courseInsert(CRSDto crs) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("service : " + crs); 		// @@@
-
 		crsMgDao.courseInsert(crs);
 		
 	}
 
 	@Override
-	public List selectAll() throws SQLException {
+	public List selectAll() throws Exception {
 		// TODO Auto-generated method stub
 		return crsMgDao.courseSelectAll();
 		 
 	}
 
 	@Override
-	public List clssSelectAll() throws SQLException {
+	public List clssSelectAll() throws Exception {
 		// TODO Auto-generated method stub
 		return crsMgDao.clssSelectAll();
 	}
 
 	@Override
-	public void clssInsert(CLSSDto clss) throws SQLException {
+	public void clssInsert(CLSSDto clss) throws Exception {
 		// TODO Auto-generated method stub
 		// DB에 넣기 위해 날짜, 시각 형식을 순수 문자열로 변환
 		clss.setStrtDt(clss.getStrtDt().replace("-", "")); 
 		clss.setEndDt(clss.getEndDt().replace("-", "")); 
 		clss.setStrtTm(clss.getStrtTm().replace(":", "") + "00"); 
 		clss.setEndTm(clss.getEndTm().replace(":", "") + "00"); 
-		System.out.println("Service : " + clss); 								// @@@
 		crsMgDao.clssInsert(clss);
 		
 	}
 
 	@Override
-	public List sbjtSelectAll() throws SQLException {
+	public List sbjtSelectAll() throws Exception {
 		// TODO Auto-generated method stub
 		return crsMgDao.sbjtSelectAll();
 	}
 
 	@Override
-	public List crsSelectBySbjtNm(String sbjtNm) {
+	public List crsSelectBySbjtNm(String sbjtNm) throws Exception {
 		// TODO Auto-generated method stub
 		return crsMgDao.crsSelectBySbjtNm(sbjtNm);
 	}
 
 	@Override
-	public CLSSDto clssSelect(String clssId) {
+	public CLSSDto clssSelect(String clssId) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("Service : " + clssId);
 		CLSSDto clss = crsMgDao.clssSelect(clssId);
 		if(clss != null) {
 			if(!clss.getStrtDt().equals("")) {
@@ -90,25 +86,23 @@ public class CrsMgServiceImp implements CrsMgService {
 			}
 			
 		}
-		System.out.println("Service : " + clss);
-		
 		return clss;
 	}
 
 	@Override
-	public List clssSelectByCourse(String crsId) {
+	public List clssSelectByCourse(String crsId) throws Exception {
 		// TODO Auto-generated method stub
 		return crsMgDao.clssSelectByCourse(crsId);
 	}
 
 	@Override
-	public CRSDto crsSelect(String crsId) {
+	public CRSDto crsSelect(String crsId) throws Exception {
 		// TODO Auto-generated method stub
 		return crsMgDao.crsSelect(crsId);
 	}
 
 	@Override
-	public String clssUpdate(CLSSDto clss) {
+	public String clssUpdate(CLSSDto clss) throws Exception {
 		// TODO Auto-generated method stub
 		// DB에 넣기 위해 날짜, 시각 형식을 순수 문자열로 변환
 		clss.setStrtDt(clss.getStrtDt().replace("-", "")); 
@@ -119,7 +113,7 @@ public class CrsMgServiceImp implements CrsMgService {
 	}
 
 	@Override
-	public String courseUpdate(CRSDto course) {
+	public String courseUpdate(CRSDto course) throws Exception {
 		// TODO Auto-generated method stub
 		return crsMgDao.courseUpdate(course);
 	}

@@ -82,7 +82,18 @@ tr.shown td.details-control {
 				"data" : "title"
 			}, {
 				"data" : "attchFile",
-				"searchable": false
+				"searchable": false,
+				"render" :function(data, row, type, meta){
+					let attch = "";
+					if(data == ""){
+						attch = "첨부파일이 없습니다."
+					}else{
+						attch = '<a href="'+root+'/downloadFile?attch="'+data+'>'+data;
+					}
+					
+					return attch;
+					
+				}
 			}, {
 				"data" : "dt",
 				"searchable": false,
@@ -116,7 +127,7 @@ tr.shown td.details-control {
 			} else {
 				// Open this row
 				row.child(format(row.data())).show();
-				tr.next().css('background', 'yellow');
+// 				tr.next().css('background', 'yellow');
 				tr.addClass('shown');
 			}
 

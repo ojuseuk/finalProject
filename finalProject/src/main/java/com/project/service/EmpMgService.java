@@ -9,29 +9,17 @@ import com.project.dto.TCHRDto;
 
 public interface EmpMgService {
 
-	public List empSelectAll() throws SQLException;
-
-	public String empInsert(EMPDto emp) throws SQLException;
-
-	public List tchrSelectAll() throws SQLException;
-
-	public String tchrInsert(TCHRDto tchr) throws SQLException;
-
-	public EMPDto empSelect(String empNo);
-
-	public String empUpdate(EMPDto emp);
-
-	public String empRetire(EMPDto emp);
-
-	public TCHRDto tchrSelect(String tchrNo);
-
-	public String tchrUpdate(TCHRDto tchr);
-
-	public List tchrSelectBySbjtNm(String sbjtNm);
-
-	public String assnTchr(TCHRASSNDto tchrAssn);
-
-	public List tchrAssnSelect(String clssId);
-
+	public List empSelectAll() throws Exception;
+	public String empInsert(EMPDto emp) throws Exception;
+	public List tchrSelectAll() throws Exception;
+	public String tchrInsert(TCHRDto tchr) throws Exception;
+	public EMPDto empSelect(String empNo) throws Exception;
+	public String empUpdate(EMPDto emp) throws Exception;
+	public String empRetire(EMPDto emp) throws Exception;
+	public TCHRDto tchrSelect(String tchrNo) throws Exception;
+	public String tchrUpdate(TCHRDto tchr) throws Exception;
+	public List tchrSelectBySbjtNm(String sbjtNm) throws Exception;
+	public String assnTchr(TCHRASSNDto tchrAssn) throws Exception;
+	public List tchrAssnSelect(String clssId) throws Exception;
 
 }

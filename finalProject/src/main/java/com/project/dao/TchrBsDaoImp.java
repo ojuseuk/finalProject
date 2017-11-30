@@ -30,10 +30,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<TPCDto> tchrBsTcp() throws SQLException {
+	public List<TPCDto> tchrBsTcp() throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao tchrBsTcp");
 		
 		return sqlSession.selectList("tchrBsMapper.tchrBsTcp");
 	}
@@ -46,10 +44,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<TCHRDto> tchrBsTchr() throws SQLException {
+	public List<TCHRDto> tchrBsTchr() throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao tchrBsTchr");
 		
 		return sqlSession.selectList("tchrBsMapper.tchrBsTchr");
 	}
@@ -63,11 +59,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public int ttlqzInsert(TTLQZDto ttlqzDto) throws SQLException {
+	public int ttlqzInsert(TTLQZDto ttlqzDto) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao ttlqzInsert");
-		
 		return sqlSession.insert("tchrBsMapper.ttlqzInsert", ttlqzDto);
 		
 	}
@@ -81,11 +74,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> attnd(Map<String, String>map) throws SQLException {
+	public List<Map<String, String>> attnd(Map<String, String>map) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao attnd");
-		System.out.println(map);
 		return sqlSession.selectList("tchrBsMapper.attnd", map);
 		
 		
@@ -100,14 +90,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> attndClss(String clssId) throws SQLException {
+	public List<Map<String, String>> attndClss(String clssId) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao attndClss");
-		System.out.println(clssId);
-		List<Map<String, String>> list2 = sqlSession.selectList("test.attndClss", clssId);
-		System.out.println(list2);
-		System.out.println(sqlSession.selectList("test.attndClss", clssId));
 		return sqlSession.selectList("tchrBsMapper.attndClss", clssId);
 		
 	}
@@ -120,10 +104,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> srcExamTp() throws SQLException {
+	public List<Map<String, String>> srcExamTp() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao srcExmTp");
-		
 		return sqlSession.selectList("tchrBsMapper.srcExmTp");
 	}
 
@@ -135,11 +117,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> srcSbjt() throws SQLException {
+	public List<Map<String, String>> srcSbjt() throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao srcSbjt");
-		
 		return sqlSession.selectList("tchrBsMapper.srcSbjt");
 		
 	}
@@ -152,11 +131,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> srcStdt() throws SQLException {
+	public List<Map<String, String>> srcStdt() throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao srcStdt");
-
 		return sqlSession.selectList("tchrBsMapper.srcStdt");
 		
 	}
@@ -169,11 +145,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @param scrDto
 	 */
 	@Override
-	public void srcInsert(SCRDto scrDto) throws SQLException {
+	public void srcInsert(SCRDto scrDto) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao srcInsert");
-		
 		sqlSession.insert("tchrBsMapper.srcInsert", scrDto);
 		
 	}
@@ -187,10 +160,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<String> stSearch(String tchrNo) throws SQLException {
+	public List<String> stSearch(String tchrNo) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao stSearch");
 		return sqlSession.selectList("tchrBsMapper.stSearch", tchrNo);
 		
 	}
@@ -203,10 +174,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @param clssId
 	 */
 	@Override
-	public List<Map<String, Object>> stClssSearch(String clssId) throws SQLException {
+	public List<Map<String, Object>> stClssSearch(String clssId) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao stClssSearch");
-		
 		List<Map<String, Object>> list = sqlSession.selectList("tchrBsMapper.stClssSearch", clssId);
 		return list;
 	}
@@ -219,9 +188,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<SBJTDto> qzSelectView() throws SQLException {
+	public List<SBJTDto> qzSelectView() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao qzSelectView");
 		return sqlSession.selectList("tchrBsMapper.qzSelectView");
 	}
 
@@ -234,9 +202,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, Object>> qzSelect(String sbjtNm) throws SQLException {
+	public List<Map<String, Object>> qzSelect(String sbjtNm) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("dao qzSelect");
 		return sqlSession.selectList("tchrBsMapper.qzSelect", sbjtNm);
 	}
 
@@ -248,7 +215,7 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<TTLQZDto> qzUpdateView() throws SQLException {
+	public List<TTLQZDto> qzUpdateView() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("tchrBsMapper.qzUpdateView");
 	}
@@ -262,7 +229,7 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public TTLQZDto qzUpdateSearch(int id) throws SQLException {
+	public TTLQZDto qzUpdateSearch(int id) throws Exception {
 		return sqlSession.selectOne("tchrBsMapper.qzUpdateSearch", id);
 	}
 
@@ -274,7 +241,7 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> qzExamSelect() throws SQLException {
+	public List<Map<String, String>> qzExamSelect() throws Exception {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.selectList("tchrBsMapper.qzExamSelect");
@@ -289,7 +256,7 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @param list
 	 */
 	@Override
-	public void qzInsert(List<QZDto> list) throws SQLException {
+	public void qzInsert(List<QZDto> list) throws Exception {
 		// TODO Auto-generated method stub
 		
 		System.out.println("dao qzInsert");
@@ -306,7 +273,7 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @param id
 	 */
 	@Override
-	public String attndTchrNo(String id) throws SQLException {
+	public String attndTchrNo(String id) throws Exception {
 		// TODO Auto-generated method stub
 		
 		System.out.println("dao attndTchrNo");
@@ -322,10 +289,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public int examTpInsert(EXAMTPDto examtpDto) throws SQLException {
+	public int examTpInsert(EXAMTPDto examtpDto) throws Exception {
 		// TODO Auto-generated method stub
-		
-		System.out.println("dao examTpInsert");
 		return sqlSession.insert("test.examTpInsert", examtpDto);
 		
 	}
@@ -338,10 +303,8 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public String examTpSelect() throws SQLException {
-		System.out.println("dao examTpSelect");
+	public String examTpSelect() throws Exception {
 		String str = sqlSession.selectOne("test.examTpSelect", "abc");
-		System.out.println("-----------------------");
 		return str;
 	}
 	

@@ -1,6 +1,5 @@
 package com.project.service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,15 +31,13 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @param costItem
 	 */
 	@Override
-	public void insert(String date, int amount) throws SQLException {
+	public void insert(String date, int amount) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("Service insert");
 		String[] ymd = date.split("-");
 		
 		final String costItem="수강료 납부";
 		SALEDto saleDto = new SALEDto(Integer.valueOf(ymd[0]), Integer.valueOf(ymd[1]), Integer.valueOf(ymd[2]), costItem, amount);
 		saleDto.setNo(saleMgDao.saleNo(saleDto)+1);
-		System.out.println("------------------");
 		saleMgDao.insert(saleDto);
 	}
 
@@ -53,15 +50,11 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @return
 	 */
 	@Override
-	public Map<List<Map<String, String>>, List<Map<String, String>>> selectLtfee() throws SQLException {
+	public Map<List<Map<String, String>>, List<Map<String, String>>> selectLtfee() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("service selectLtfee");
 		List<Map<String, String>> listTchr = saleMgDao.selectTchr();
 		List<Map<String, String>> listSsn = saleMgDao.selectTchrassn();
 		
-		System.out.println(listTchr.toString());
-		System.out.println("-----------------------");
-		System.out.println(listSsn.toString());
 		Map<List<Map<String, String>>, List<Map<String, String>>> map =new HashMap<>();
 		map.put(listTchr, listSsn);
 
@@ -80,7 +73,7 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @return
 	 */
 	@Override
-	public List<SALEDto> mgSaleList(String date1, String date2) throws SQLException {
+	public List<SALEDto> mgSaleList(String date1, String date2) throws Exception {
 		// TODO Auto-generated method stub
 		String[] ymd1 = date1.split("-");
 		String[] ymd2 = date2.split("-");
@@ -94,8 +87,6 @@ public class SaleMgServiceImp implements SaleMgService {
 		map.put("day2", ymd2[2]);
 		
 		List<SALEDto> list = saleMgDao.mgSaleList(map);
-		
-		System.out.println(list.toString());
 		
 		return list;
 		
@@ -114,14 +105,11 @@ public class SaleMgServiceImp implements SaleMgService {
 	 * @param ssnSlr
 	 */
 	@Override
-	public List<TCHRDto> ltfeeInsert(List<String> tchrId, List<String> tchrSlr, List<String> ssnId, List<String> ssnSlr, List<String> tchrNm, List<String> ssnNm) throws SQLException {
+	public List<TCHRDto> ltfeeInsert(List<String> tchrId, List<String> tchrSlr, List<String> ssnId, List<String> ssnSlr, List<String> tchrNm, List<String> ssnNm) throws Exception {
 		// TODO Auto-generated method stub
 		
 		TCHRDto tchr = null;
 		List<TCHRDto> list=new ArrayList<>();
-		System.out.println("service ltfeeInsert");
-		System.out.println(tchrId.size());
-		System.out.println(ssnId.size());
 		
 		for(int i=0;i<tchrId.size();i++) {
 			tchr = new TCHRDto();
@@ -139,16 +127,13 @@ public class SaleMgServiceImp implements SaleMgService {
 			list.add(tchr);
 		}
 		
-		System.out.println(list);
 		int result = 0;
-		System.out.println(list.size());
 		for(int i=0; i<list.size(); i++) {
 			result = saleMgDao.ltfeeInsertTest(list.get(i));
 			tchr.setResult(result);
 			
 		}
 		
-		System.out.println("2:" + list);
 //		saleMgDao.ltfeeInsert(list);
 		
 		return list;
@@ -156,15 +141,12 @@ public class SaleMgServiceImp implements SaleMgService {
 
 
 	@Override
-	public List<SALEDto> mgSaleList2(int year, int month, int day) throws SQLException {
+	public List<SALEDto> mgSaleList2(int year, int month, int day) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("service mgSaleList2");
-		System.out.println(month);
 		SALEDto saleDto = new SALEDto();
 		saleDto.setYear(year);
 		saleDto.setMonth(month);
 		saleDto.setDay(day);
-		System.out.println(saleDto);
 		
 		return saleMgDao.mgSaleList2(saleDto);
 	}

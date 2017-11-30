@@ -41,8 +41,6 @@ public class StdtMgDaoImp implements StdtMgDao {
 
 	@Override
 	public List<STDTInfoDto> selectByStdtList(String clssId) throws Exception {
-		System.out.println(clssId);
-		System.out.println(sqlSession.selectList("stdtMgMapper.selectByStdtClss", clssId));
 		return sqlSession.selectList("stdtMgMapper.selectByStdtClss", clssId);
 	}
 

@@ -17,13 +17,13 @@ public class EmpMgDaoImp implements EmpMgDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List empSelectAll() {
+	public List empSelectAll() throws Exception {
 		List list = sqlSession.selectList("empMgMapper.empSelectAll");
 		return list;
 	}
 
 	@Override
-	public String empInsert(EMPDto emp) {
+	public String empInsert(EMPDto emp) throws Exception {
 		// TODO Auto-generated method stub
 		int result = 0;
 		String resultMsg = "";
@@ -37,36 +37,34 @@ public class EmpMgDaoImp implements EmpMgDao {
 	}
 
 	@Override
-	public EMPDto empSelect(String empNo) {
+	public EMPDto empSelect(String empNo) throws Exception {
 		// TODO Auto-generated method stub
 		EMPDto emp = sqlSession.selectOne("empMgMapper.empSelectOne", empNo);
 		return emp;
 	}
 
 	@Override
-	public EMPDto empSelectById(String id) {
+	public EMPDto empSelectById(String id) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(id);
 		EMPDto emp =  sqlSession.selectOne("empMgMapper.empSelectById",id);
-		System.out.println(emp);
 		return emp;
 	}
 	
 	@Override
-	public USRDto usrSelect(String id) {
+	public USRDto usrSelect(String id) throws Exception {
 		// TODO Auto-generated method stub
 		USRDto usr =  sqlSession.selectOne("empMgMapper.usrSelectOne",id);
 		return usr;
 	}
 
 	@Override
-	public List tchrSelectAll() {
+	public List tchrSelectAll() throws Exception {
 		List list = sqlSession.selectList("empMgMapper.tchrSelectAll");
 		return list;
 	}
 
 	@Override
-	public String tchrInsert(TCHRDto tchr) {
+	public String tchrInsert(TCHRDto tchr) throws Exception {
 		int result = 0;
 		String resultMsg = "";
 		result = sqlSession.insert("empMgMapper.tchrInsert", tchr);
@@ -79,7 +77,7 @@ public class EmpMgDaoImp implements EmpMgDao {
 	}
 
 	@Override
-	public String usrUpdateToTchr(String id) {
+	public String usrUpdateToTchr(String id) throws Exception {
 		// TODO Auto-generated method stub
 		int result = 0;
 		String resultMsg = "";
@@ -93,7 +91,7 @@ public class EmpMgDaoImp implements EmpMgDao {
 	}
 
 	@Override
-	public String usrUpdateToStaff(String id) {
+	public String usrUpdateToStaff(String id) throws Exception {
 		int result = 0;
 		String resultMsg = "";
 		result = sqlSession.update("empMgMapper.usrUpdateToStaff", id);
@@ -102,14 +100,12 @@ public class EmpMgDaoImp implements EmpMgDao {
 		} else {
 			resultMsg = "사용자 유형 변경에 실패하였습니다.";
 		}
-		System.out.println("EMP DAO DB 리턴값 : " + result);
 		return resultMsg;			
 	}
 
 	@Override
-	public String empUpdate(EMPDto emp) {
+	public String empUpdate(EMPDto emp) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("DAO Update : " + emp);
 		int result = 0;
 		String resultMsg = "";
 		result = sqlSession.update("empMgMapper.empUpdate", emp);
@@ -118,14 +114,12 @@ public class EmpMgDaoImp implements EmpMgDao {
 		} else {
 			resultMsg = "직원 정보의 변경에 실패하였습니다.";
 		}
-		System.out.println("EMP DAO DB 리턴값 : " + result);
 		return resultMsg;	
 	}
 
 	@Override
-	public String empRetire(EMPDto emp) {
+	public String empRetire(EMPDto emp) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("empRetire : " + emp);
 		int result = 0;
 		String resultMsg = "";
 		result = sqlSession.update("empMgMapper.empRetire", emp);
@@ -134,27 +128,25 @@ public class EmpMgDaoImp implements EmpMgDao {
 		} else {
 			resultMsg = "직원의 퇴직처리를 실패하였습니다.";
 		}
-		System.out.println("EMP DAO DB 리턴값 : " + result);
 		return resultMsg;	
 	}
 
 	@Override
-	public TCHRDto tchrSelectById(String id) {
+	public TCHRDto tchrSelectById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		TCHRDto tchr =  sqlSession.selectOne("empMgMapper.tchrSelectById",id);
 		return tchr;
 	}
 
 	@Override
-	public TCHRDto tchrSelect(String tchrNo) {
+	public TCHRDto tchrSelect(String tchrNo) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("empMgMapper.tchrSelect",tchrNo);
 	}
 
 	@Override
-	public String tchrUpdate(TCHRDto tchr) {
+	public String tchrUpdate(TCHRDto tchr) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("DAO update 전 : " + tchr);
 		int result = 0;
 		String resultMsg = "";
 		result =  sqlSession.update("empMgMapper.tchrUpdate", tchr);
@@ -164,43 +156,36 @@ public class EmpMgDaoImp implements EmpMgDao {
 		} else {
 			resultMsg = "강사 정보의 수정 작업에 실패하였습니다.";
 		}
-		System.out.println(resultMsg); // @@@ 
 		return resultMsg;
 	}
 
 	@Override
-	public List tchrSelectBySbjtNm(String sbjtNm) {
+	public List tchrSelectBySbjtNm(String sbjtNm) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(sbjtNm);
 		TCHRASSNDto tchrassnDto = new TCHRASSNDto();
 		tchrassnDto.setSbjtNm(sbjtNm);
-		System.out.println("tchrSelectBySbjtNm DAO : " + sqlSession.selectList("empMgMapper.tchrSelectBySbjtNm", tchrassnDto)); 
 		return sqlSession.selectList("empMgMapper.tchrSelectBySbjtNm", tchrassnDto);
 	}
 
 	@Override
-	public String assnTchr(TCHRASSNDto tchrAssn) {
+	public String assnTchr(TCHRASSNDto tchrAssn) throws Exception {
 		// TODO Auto-generated method stub
 		int result = 0;
 		String resultMsg = "";
 		result = sqlSession.insert("empMgMapper.assnTchr", tchrAssn);
-		System.out.println("assnTchr 실행결과 : " + result); 	// @@@  1 행 insert/update 시 1 리턴 
 		if(result > 0) {
 			resultMsg = "강사 배정 작업이 정상적으로 수행되었습니다.";
 		} else {
 			resultMsg = "강사 배정 작업에 실패하였습니다.";
 		}
-		System.out.println(resultMsg); // @@@ 
 		return resultMsg;
 	}
 
 	@Override
-	public List tchrAssnSelect(String clssId) {
+	public List tchrAssnSelect(String clssId) throws Exception {
 		// TODO Auto-generated method stub
 		
-		System.out.println("tchrAssnSelect DAO : " + sqlSession.selectList("empMgMapper.tchrAssnSelect", clssId));
 		return sqlSession.selectList("empMgMapper.tchrAssnSelect", clssId);
-//		return sqlSession.selectOne("empMgMapper.tchrAssnSelect", clssId);
 	}
 
 	
