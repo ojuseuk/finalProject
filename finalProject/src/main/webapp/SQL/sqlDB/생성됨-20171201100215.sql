@@ -1,0 +1,26 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 금요일-12월-01-2017   
+--------------------------------------------------------
+@C:\Users\kosta\Desktop\sqlDB\TABLES.sql
+--@C:\Users\kosta\Desktop\sqlDB\TB_ATTND_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_CD_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_CLSS_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_CRS_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_EMP_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_EXAM_TP_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_NTC_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_PAY_HIST_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_QNA_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_QZ_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_SALE_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_SBJT_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_SCR_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_STDT_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_STDTCLSS_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_TCHR_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_TCHRASSN_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_TPC_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_TTLQZ_DATA_TABLE.xls
+--@C:\Users\kosta\Desktop\sqlDB\TB_USR_DATA_TABLE.xls
+@C:\Users\kosta\Desktop\sqlDB\INDEXES.sql
+@C:\Users\kosta\Desktop\sqlDB\CONSTRAINTS.sql

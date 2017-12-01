@@ -1,0 +1,28 @@
+REM INSERTING into FINALPROJECT.TB_CD
+SET DEFINE OFF;
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z00','Z01','시험 종류');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z00','Z02','출결');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z00','Z03','학과 구분');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z00','Z04','문제 난이도');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z00','Z05','사용자 유형');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z00','Z06','과정 구분');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z01','ex001','전국모의고사');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z01','ex002','자체 모의고사');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z01','ex003','타학원 모의고사');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z01','ex004','반 배치고사');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z02','at001','출석');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z02','at002','지각');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z02','at003','퇴실');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z02','at004','조퇴');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z03','mj001','문과');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z03','mj002','이과');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z03','mj003','예체능');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z04','A','난이도 상');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z04','B','난이도 중');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z04','C','난이도 하');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z05','ROLE_USR','회원');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z05','ROLE_ST','수강생');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z05','ROLE_STAFF','직원');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z05','ROLE_TCHR','강사');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z06','종합','종합반 과정');
+Insert into FINALPROJECT.TB_CD (CD_TP,CD_ID,CD_NM) values ('Z06','단과','단과 과정');

@@ -34,7 +34,7 @@ p {
 						<td><span class="input-group-addon" style="width:100px">구&nbsp;분</span></td>
 						<td>
 							<input type="radio" name="crsTp" id="crsTp_1" value="종합" onclick="crsTpRadio('종합')"/> 종합
-							<input type="radio" name="crsTp" id="crsTp_2" value="특강" onclick="crsTpRadio('특강')"/> 특강
+							<input type="radio" name="crsTp" id="crsTp_2" value="특강" onclick="crsTpRadio('특강')"/> 단과
 						</td>
 					</tr>
 					<tr>
