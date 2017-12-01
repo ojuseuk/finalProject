@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <meta charset="UTF-8">
-<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <head>
 	<title>Calendar</title>
@@ -12,7 +11,6 @@
 <jsp:include page="../../../top.jsp"/>
 <div id="calendar_wrap" style="width: 80%; margin: auto;">
 	<table class="table table-bordered" id="calendar" style="background-color: #ffffff; text-align: center">
-<!-- 	border="1" cellpadding="5" cellspacing="2" width="100%" bordercolordark="white" bordercolorlight="black" -->
 	  <caption>
 	    <p align="center"><span class="year" style="font-size: 40px"></span>년 
 	    &nbsp;&nbsp;<span class="month" style="font-size: 40px"></span>월 </p>
@@ -82,8 +80,6 @@
 	  </tr>
 	</table>
 
-<!-- 	<p align="center"><a href="#" id="prev">이전 달</a> -->
-<!-- 	<a href="#" id="next">다음 달</a></p> -->
 </div> 
 
 <input type="hidden" value='${requestScope.json}' id="json">
@@ -174,21 +170,17 @@
 			}
 			if(attndDate[k] == standard[j]){
 				if (attndTpIn[k] == "at001"){
-// 					attndTpIn[j] = "<b>출석</b>";
 					str += "<br><b>출석</b>";
 					
 				} else if (attndTpIn[k] == "at002"){
-// 					attndTpIn[j] = "<font color='red'><b>지각</b></font>";
 					str += "<br><font color='red'><b>지각</b></font>";
 				}else{
 					str += "<br><b>예정</b>";
 				}
 				
 				if (attndTpOut[k] == "at003"){
-// 					attndTpOut[j] = "<b>퇴실</b>";
 					str += "<br><b>퇴실</b>";
 				} else if (attndTpOut[k] == "at004"){
-// 					attndTpOut[j] = "<font color='blue'><b>조퇴</b></font>";
 					str += "<br><font color='blue'><b>조퇴</b></font>";
 				} else{
 					str += "<br><b>예정</b>";
@@ -214,13 +206,6 @@
 		month = new Date().getMonth() + 1;
 	
 	calendar(year, month);
-	//	prev.onclick = function(){
-	//		calendar(year, --month);
-	//	};
-	//	next.onclick = function(){
-	//		calendar(year, ++month);
-	//	};		
-	
 	})();
 </script>
 <Br><Br><Br><Br>

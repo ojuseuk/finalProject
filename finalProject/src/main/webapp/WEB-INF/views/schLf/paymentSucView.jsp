@@ -6,7 +6,6 @@
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />

@@ -27,10 +27,10 @@ function qzSelect(root) {
 			
 			var $form = $('<form action="'+root+'/tchrBs/qzInsert"></form>');
 			var $tableInput = $('<table></table>');
-			var $select = $('<select class="form-control" style="width:100px; float: left;" id="examTp" name="examTp"></select>');
+			var $select = $('<select class="form-control" style="width:200px; float: left;" id="examTp" name="examTp"></select>');
 			var $option1 = $('<option value="선택">선택</option>');
-			var $input1 = $('<input class="form-control" style="width:100px; float: left;" type="text" name="examTitle">');
-			var $input2 = $('<input class="form-control" style="width:100px; float: left;" type="date" name="examDt">');
+			var $input1 = $('<input class="form-control" style="width:200px; float: left;" type="text" name="examTitle">');
+			var $input2 = $('<input class="form-control" style="width:200px; float: left;" type="date" name="examDt">');
 			var $trInput1 = $('<tr></tr>');
 			var $trInput2 = $('<tr></tr>');
 			var $trInput3 = $('<tr></tr>');
@@ -58,7 +58,7 @@ function qzSelect(root) {
 			$tableInput.append($trInput3);
 			var $div = $('<div></div>');
 			var $table = $('<table ></table>');
-			var $submit = $('<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="submit" value="문제 생성"></input>');
+			var $submit = $('<div align="center"><input class="w3-button w3-round-large w3-teal" style="width:30%; align:center" type="submit" value="문제 생성"></input></div>');
 			var $hidden;
 			
 			var $tr1,$tr2,$tr3,$tr4;

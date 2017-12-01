@@ -334,7 +334,7 @@ public class SchLfController {
 		} catch (Exception e) {
 			return "redirect:/error.jsp";
 		}
-		return "schLf/myClssView";
+		return "schLf/paymentSucView";
 	}
 	
 	

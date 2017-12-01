@@ -1,29 +1,23 @@
 package com.project.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dto.CLSSDto;
-import com.project.dto.SCRDto;
 import com.project.dto.STDTCLSSDto;
 import com.project.dto.STDTDto;
 import com.project.dto.STDTInfoDto;
 import com.project.dto.SmsContentDto;
-import com.project.dto.USRDto;
 import com.project.service.StdtMgService;
 
 import net.sf.json.JSONArray;
@@ -48,7 +42,11 @@ public class StdtMgController {
 	@RequestMapping("/testSMS")
 	@PreAuthorize("hasRole('ROLE_STAFF')")
 	public String testM(){
-		return "stdtMg/sendSMSView";
+		try {
+			return "stdtMg/sendSMSView";
+		} catch (Exception e) {
+			return "redirect:/error.jsp";
+		}
 	}
 	
 	@RequestMapping("/sendSms")
@@ -58,7 +56,7 @@ public class StdtMgController {
 		try {
 			str = SMS.sendMsg(command, msg , stdtMgService);
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/error.jsp";
 		}
 		return str;
 	}

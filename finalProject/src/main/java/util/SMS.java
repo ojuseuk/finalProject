@@ -45,7 +45,7 @@ public class SMS {
 				result = sms.send(set); // 보내기&전송결과받기
 			}
 			if ((Boolean) result.get("status") == true) {
-				return "test/testS";
+				return "stdtMg/sendSMSView";
 			}
 		} else if (command.equals("notice")) {
 			List<String> phoneList = stdtMgService.selectBySTDT();
@@ -60,9 +60,9 @@ public class SMS {
 				result = sms.send(set); // 보내기&전송결과받기
 			}
 			if ((Boolean) result.get("status") == true) {
-				return "test/testS";
+				return "stdtMg/sendSMSView";
 			}
 		}
-		return "test/testF";
+		return "error.jsp";
 	}
 }

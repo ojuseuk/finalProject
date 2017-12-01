@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css"> -->
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 
 <!-- *학생 중복 출력 수정, 업데이트 시 종합반만 변경 가능하게 수정, 중복코드 정리, 변수 정리, 스크롤 -->
@@ -22,16 +21,6 @@
 #datatable{
     background-color:#fff;
 }
-.select {
-    width: 150px;
-    height: 30px;
-    padding-left: 10px;
-    font-size: 15px;
-    color: #424242;
-    border: 1px solid #90909096;
-    border-radius: 3px;
-}
-
 </style>
 </head>
 <title>학생정보</title>
@@ -39,7 +28,7 @@
 <div style="width: 80%; margin: auto;">
 	<div class="table-responsive" style="margin: 10px">
 		<c:if test="${not empty crsList}">
-		<font style="font-size: 17px"><span class="input-group-addon" style="width:100px; height:34px; float: left"><b>과   정</b></span></font>
+		<font style="font-size: 17px"><span class="input-group-addon" style="width:100px; float: left"><b>과   정</b></span></font>
 			<select class="form-control" name="crs" id="crs" style="width:100px; float: left" onchange="reqCrsList(this.value,'${root}')">
 				<option value="default">선 택</option>
 				<c:forEach items="${crsList}" var="data">
@@ -47,7 +36,7 @@
 				</c:forEach>
 			</select>
 		</c:if>
-		<font style="font-size: 18px"><span class="input-group-addon" style="width:100px; height:34px; float: left"><b>강   좌</b></span></font>
+		<font style="font-size: 18px"><span class="input-group-addon" style="width:100px; float: left"><b>강   좌</b></span></font>
 			<select class="form-control" id="clss" style="width:100px" onchange="reqClssList(this.value, '${root}')">
 				<option>선 택</option>
 			</select> 
@@ -83,8 +72,8 @@
 					<tr>
 						<td align="center"><span class="input-group-addon">아이디</span></td>
 						<td><input class="form-control" style="width:400px; float:left;" id="stdtId" type="text" name="id" placeholder="ID검색">
-						<input class="w3-button w3-round w3-teal w3-tiny" id="selectId" style="background-color: #90909096" type="button" value="조회">
-						<div id="selectResult"></div></td>
+						<input class="w3-button w3-round w3-teal w3-tiny" id="selectId"  type="button" value="조회">
+						&nbsp;&nbsp;&nbsp;<div id="selectResult"></div></td>
 					</tr>
 					<tr>
 						<td align="center"><span class="input-group-addon">수강생번호</span></td>
@@ -126,8 +115,8 @@
 					</tr>
 					<tr>
 						<td colspan="2"><p align="center">
-							<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="submit" value="저장">
-							<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="reset" value="리셋">
+							<input class="w3-button w3-round w3-teal"  type="submit" value="저장">
+							<input class="w3-button w3-round w3-teal"  type="reset" value="리셋">
 						</p></td>
 					</tr>
 				</table>

@@ -19,7 +19,7 @@
 		<form action="${root}/tchrBs/srcInsert" style="text-align:center">
 			<table class="w3-table w3-bordered" style="text-align: center;">
 				<tr>
-					<td><span class="input-group-addon" style="width:200px;">시험 명</span></td>
+					<td><p align="right"><span class="input-group-addon" style="width:200px;">시험 명</span></p></td>
 					<td>
 						<select class="form-control" style="width:200px; float: left;" name="examId" id="qzId">
 							<option value="선택">선택</option>
@@ -27,7 +27,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span class="input-group-addon" style="width:200px">수강생 번호</span></td>
+					<td><p align="right"><span class="input-group-addon" style="width:200px">수강생 번호</span></p></td>
 					<td>
 						<select class="form-control" style="width:200px; float: left;" name="stdtNo" id="stdtNo">
 							<option value="선택">선택</option>
@@ -35,7 +35,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span class="input-group-addon" style="width:200px">과목명</span></td>
+					<td><p align="right"><span class="input-group-addon" style="width:200px">과목명</span></p></td>
 					<td>
 						<select class="form-control" style="width:200px; float: left;" name="sbjtNm" id="sbjtNm">
 							<option value="선택">선택</option>
@@ -43,13 +43,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span class="input-group-addon" style="width:200px">점수</span></td>
+					<td><p align="right"><span class="input-group-addon" style="width:200px">점수</span></p></td>
 					<td>
 						<input class="form-control" style="width:200px; float: left;" type="number" name="score" max="100" min="0" style="width: 200px">
 					</td>
 				</tr>
 			</table>
-			<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096; width: 20%" type="submit" value="성적 입력">
+			<input class="w3-button w3-round-large w3-teal" style="width: 20%" type="submit" value="성적 입력">
 		</form>
 	</div>
 </div>
