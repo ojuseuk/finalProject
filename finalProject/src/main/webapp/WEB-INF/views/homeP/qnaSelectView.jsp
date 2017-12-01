@@ -52,7 +52,7 @@ tr.shown td.details-control {
 			</div>
 		</div>
 		<div style="text-align:center">
-			<button class="w3-button w3-round-large w3-teal" style="background-color: #90909096" onclick="location.href='${root}/homeP/qnaInsertView?no=0'">게시글 생성</button>
+			<button class="w3-button w3-round-large w3-teal" onclick="location.href='${root}/homeP/qnaInsertView?no=0'">게시글 생성</button>
 		</div>
 	</div>
 </div>
@@ -76,7 +76,7 @@ tr.shown td.details-control {
 
 		function format(d) {
 			return '게시글 내용 : ' + d.content + '<br>'
-					+ '<button class="w3-button w3-round w3-blue-grey" style="background-color: #90909096" onclick="location.href=\''
+					+ '<button class="w3-button w3-round w3-blue-grey" onclick="location.href=\''
 					+ root
 					+ '/homeP/qnaInsertView?no=' + d.no + '&gpNum=' + d.gpNum
 					+ '&seqNum=' + d.seqNum + '&seqLv=' + d.seqLv
@@ -131,7 +131,7 @@ tr.shown td.details-control {
 				"data" : null,
 				"render" : function(data, row, type, meta){
 					
-					return '<button class="w3-button w3-round w3-blue-grey" style="background-color: #90909096" onclick="location.href=\''+root+'/homeP/qnaUpdateView?no='+data.no+'\'">수정 하기</button>';
+					return '<button class="w3-button w3-round w3-blue-grey" onclick="location.href=\''+root+'/homeP/qnaUpdateView?no='+data.no+'\'">수정 하기</button>';
 				}
 			} ]
 		});

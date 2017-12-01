@@ -226,7 +226,5 @@
 		}
 	}
 </script>
-<!-- <Br><Br><Br><Br><Br> -->
-<%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>

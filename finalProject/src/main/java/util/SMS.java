@@ -1,5 +1,7 @@
 package util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -23,9 +25,12 @@ public class SMS {
 		JSONObject obj = new JSONObject();
 		JSONArray list = new JSONArray();
 		JSONObject result = null;
+		SimpleDateFormat formatter = new SimpleDateFormat ("yyyyMMdd");
+		Date currentTime = new Date ();
+		String today = formatter.format(currentTime);
 		
 		if (command.equals("late")) {
-			Map<String, STDTDto> map = stdtMgService.selectByAttnd();
+			Map<String, STDTDto> map = stdtMgService.selectByAttnd(today);
 			Set<String> keySet = map.keySet();
 			Iterator<String> keyIterator = keySet.iterator();
 
@@ -40,7 +45,7 @@ public class SMS {
 				result = sms.send(set); // 보내기&전송결과받기
 			}
 			if ((Boolean) result.get("status") == true) {
-				return "test/testS";
+				return "stdtMg/sendSMSView";
 			}
 		} else if (command.equals("notice")) {
 			List<String> phoneList = stdtMgService.selectBySTDT();
@@ -55,9 +60,9 @@ public class SMS {
 				result = sms.send(set); // 보내기&전송결과받기
 			}
 			if ((Boolean) result.get("status") == true) {
-				return "test/testS";
+				return "stdtMg/sendSMSView";
 			}
 		}
-		return "test/testF";
+		return "error.jsp";
 	}
 }

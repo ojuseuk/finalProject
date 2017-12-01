@@ -21,7 +21,7 @@
 	<select class="form-control" style="width:200px; float: left;" id="qzSbjtNm" name="sbjtNm">
 		<option value="선택">선택</option>
 	</select>
-		<button class="w3-button w3-round-large w3-teal" style="background-color: #90909096" onclick="qzSelect('${root}')">조회</button>
+		<button class="w3-button w3-round-large w3-teal" onclick="qzSelect('${root}')">조회</button>
 	<div id="test"></div>
 </div>
 <script src="${root}/js/tchrBs/qzSelectView.js"></script>

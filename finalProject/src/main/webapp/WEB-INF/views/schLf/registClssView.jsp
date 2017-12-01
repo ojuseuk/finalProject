@@ -2,12 +2,10 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> --%>
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="root" value="${pageContext.request.contextPath}" />
-<%-- <link rel="stylesheet" href="${root}/styles/vendor/bootstrap/bootstrap.min.css" /> --%>
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css" />
 <link rel="stylesheet" href="${root}/styles/vendor/css/dataTables.min.css" />
@@ -42,15 +40,6 @@ tr.shown td.details-control {
 	border-radius: 3px;
 	height: 200px;
 	overflow: auto;
-}
-.select {
-    width: 100px;
-    height: 30px;
-    padding-left: 10px;
-    font-size: 15px;
-    color: #424242;
-    border: 1px solid #90909096;
-    border-radius: 3px;
 }
 </style>
 </head>
@@ -122,8 +111,8 @@ var IMP = window.IMP;
 			<b>총 결제 금액 : 0원</b>
 		</p>
 		<p align="center">
-			<input class="w3-button w3-round w3-teal" style="background-color: #90909096; width: 15%" id="payment" type="button" value="결제">
-			<input class="w3-button w3-round w3-teal" style="background-color: #90909096; width: 15%" id="paymentT" type="button" value="결제테스트">
+			<input class="w3-button w3-round w3-teal" style="width: 15%" id="payment" type="button" value="결제">
+			<input class="w3-button w3-round w3-teal" style="width: 15%" id="paymentT" type="button" value="결제테스트">
 		</p>
 	</div>
 </div>

@@ -20,8 +20,9 @@ public class StdtMgDaoImp implements StdtMgDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public Map<String, STDTDto> selectByAttnd() throws Exception {
-		return sqlSession.selectMap("stdtMgMapper.phoneByAttnd", "prntPhone");
+	public Map<String, STDTDto> selectByAttnd(String today) throws Exception {
+		System.out.println(sqlSession.selectMap("stdtMgMapper.phoneByAttnd", "prntPhone", today));
+		return null;
 	}
 
 	@Override

@@ -76,7 +76,7 @@
 					<td><input class="form-control" type="file" value="파일 첨부" name="imgFile"></td>
 				</tr>
 			</table>
-			<p align="center"><input class="w3-button w3-round-large w3-teal" style="background-color: #90909096; width:30%; align:center" type="submit" value="문제 생성"></p>
+			<p align="center"><input class="w3-button w3-round-large w3-teal" style="width:30%; align:center" type="submit" value="문제 생성"></p>
 		</form>
 	</div>
 	<br><br><br>

@@ -44,7 +44,8 @@
 					</tbody>
 				</table>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<p id="updateForm" align="center"><input id="updateBtn" type="button" value="수정">
+				<p id="updateForm" align="center">
+				<input class="w3-button w3-round w3-teal " id="updateBtn" type="button" value="수정">
 				</p>
 				</form>
 			</div>

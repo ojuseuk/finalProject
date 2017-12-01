@@ -18,15 +18,6 @@ p {
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
-.select {
-    width: 198px;
-    height: 30px;
-    padding-left: 10px;
-    font-size: 15px;
-    color: #424242;
-    border: 1px solid #90909096;
-    border-radius: 3px;
-}
 </style>
 <script src="${root}/js/jquery.min.js"></script>
 </head>
@@ -85,10 +76,10 @@ p {
 					</tr>
 				</table>
 			</fieldset><br><br>
-			<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="reset" value="화면 초기화"> 
-	 		<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="submit" value="과정 등록"> 
-			<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="button" value="수정 내용 저장" onclick="courseUpdate()">
-			<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
+			<input class="w3-button w3-round w3-teal" type="reset" value="화면 초기화"> 
+	 		<input class="w3-button w3-round w3-teal" type="submit" value="과정 등록"> 
+			<input class="w3-button w3-round w3-teal" type="button" value="수정 내용 저장" onclick="courseUpdate()">
+			<input class="w3-button w3-round w3-teal" type="button" onclick="javascript:history.back()" value="이전 화면으로"><br>
 		</form>
 	</div>
 	<input type="hidden" id="resultMsg" value="${resultMsg}">

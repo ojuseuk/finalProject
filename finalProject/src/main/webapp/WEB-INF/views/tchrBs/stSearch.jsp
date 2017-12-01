@@ -20,7 +20,7 @@
 	<select class="form-control" style="width:200px; float: left;" name="clss" id="clss">
 		<option value="선택">선택</option>
 	</select>
-	<button class="w3-button w3-round-large w3-teal" style="background-color: #90909096" onclick="stSearch('${root}')">조회</button>
+	<button class="w3-button w3-round-large w3-teal" onclick="stSearch('${root}')">조회</button>
 	<table class="w3-table w3-bordered" id="search">
 		<tr id="default">
 			<td>학생 번호</td>

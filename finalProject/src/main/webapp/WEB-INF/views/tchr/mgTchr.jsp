@@ -17,15 +17,6 @@
 #dataTable{
     background-color:#fff;
 }
-.select {
-    width: 179px;
-    height: 25px;
-    padding-left: 10px;
-    font-size: 15px;
-    color: #424242;
-    border: 1px solid #90909096;
-    border-radius: 0px;
-}
 </style>
 </head>
 <body>
@@ -42,7 +33,7 @@
 				<tr>
 					<td><span class="input-group-addon" style="width:100px">사용자 ID</span></td>
 					<td><input class="form-control" type="text" name="id" id="id2" /></td>
-					<td><input class="w3-button w3-round w3-teal w3-tiny" style="background-color: #90909096" type="button" value="조회"
+					<td><input class="w3-button w3-round w3-teal w3-tiny" type="button" value="조회"
 						onclick="searchUsr('${pageContext.request.contextPath}', $('#id2').val());
 								 searchEmpById('${pageContext.request.contextPath}', $('#id2').val());
 								 searchTchrById('${pageContext.request.contextPath}', $('#id2').val());"></td>
@@ -103,10 +94,10 @@
 		</fieldset>
 		<br><br>
 
-		<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="reset" value="화면 초기화"> 
-		<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="submit" value="강사 등록"> 
-		<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="button" value="수정 내용 저장" onclick="tchrUpdate()">
-		<input class="w3-button w3-round w3-teal" style="background-color: #90909096" type="button" onclick="javascript:history.back()" value="이전 화면으로">
+		<input class="w3-button w3-round w3-teal" type="reset" value="화면 초기화"> 
+		<input class="w3-button w3-round w3-teal" type="submit" value="강사 등록"> 
+		<input class="w3-button w3-round w3-teal" type="button" value="수정 내용 저장" onclick="tchrUpdate()">
+		<input class="w3-button w3-round w3-teal" type="button" onclick="javascript:history.back()" value="이전 화면으로">
  		<input type="hidden" id="resultMsg" value="${requestScope.resultMsg}">
 	</form>
 	</div>

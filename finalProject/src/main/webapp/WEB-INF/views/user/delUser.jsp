@@ -37,20 +37,24 @@
 
 </head>
 <body>
+<jsp:include page="../../../top.jsp"/>
 <script type="text/javascript" src="${root}/js/jquery.min.js"></script>
-<div id="wrap">
-
+<div id="wrap" align="center">
 	<div id="out">
 		<h2>회원탈퇴</h2>
 		<hr style="width:100px;float:left;">
 		<br>
 		<br>
 		<br>
-		<span style="font-size:12px;font-weight:bold; color: #353535;">회원탈퇴를 원하시면 아이디와 비밀번호를 입력해 주세요.</span><br>
-		<div id="userout" style="margin-left:100px;">
-		    <input type="text" id="id" class="form-control" placeholder="아이디를 입력해주세요." style="height:34px;width:200px;"><br>
-			<input type="password" id="pw" class="form-control" placeholder="비밀번호를 입력해주세요." style="height:34px;width:200px;"><br>
-			<input type="button" id="btn_ok" class="btn btn-primary" value="확인" style="width:200px;">
+		<span>
+			<p style="font-size:15px;font-weight:bold; color: #353535; align:center;">
+			회원탈퇴를 원하시면 아이디와 비밀번호를 입력해 주세요.
+			</p>
+		</span><br>
+		<div id="userout">
+		    ID<input type="text" id="id" class="form-control" placeholder="아이디를 입력해주세요." style="height:34px;width:200px;"><br>
+			PW<input type="password" id="pw" class="form-control" placeholder="비밀번호를 입력해주세요." style="height:34px;width:200px;"><br>
+			<input type="button" id="btn_ok" class="btn btn-primary" value="확인" style="background-color:#5b5e61b3; width:200px;">
 			<input type="hidden" value="${root}" id="root"><br>
 			<br>
 			<br>
@@ -60,7 +64,6 @@
 </div>
 <script type="text/javascript">
 	var root = $("#root").val();
-	alert(root);//'/project'
 	var urlRoot = root+"/userOut";
 	$(document).ready(function(){
 		$('#btn_ok').on("click", function(){

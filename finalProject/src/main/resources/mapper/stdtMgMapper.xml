@@ -7,11 +7,14 @@
 		<result property="nm" column="NM"/>
 	</resultMap>
 	
-	<select id="phoneByAttnd" resultMap="ResultOfAttnd">
-		SELECT NM, PRNT_PHONE 
-		FROM TB_STDT JOIN TB_USR ON TB_STDT.ID = TB_USR.ID 
-		LEFT OUTER JOIN TB_ATTND ON TB_STDT.STDT_NO = TB_ATTND.STDT_NO
-		WHERE TB_ATTND.ATTND_TP IS NULL
+	<select id="phoneByAttnd" resultMap="ResultOfAttnd" parameterType="String">
+		SELECT TB_USR.NM, TB_STDT.PRNT_PHONE 
+		FROM TB_USR 
+		JOIN TB_STDT ON TB_USR.ID = TB_STDT.ID
+		JOIN TB_STDTCLSS ON TB_STDT.STDT_NO = TB_STDTCLSS.STDT_NO
+		JOIN TB_ATTND ON TB_STDTCLSS.CLSS_ID = TB_ATTND.CLSS_ID
+		WHERE TB_ATTND.DT = #{dt}
+		AND TB_ATTND.ATTND_TP IS NULL
 	</select>
 	
 	<select id="phoneBySTDT" resultType="String">

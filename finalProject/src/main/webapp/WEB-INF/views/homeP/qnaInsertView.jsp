@@ -30,7 +30,7 @@
 				</tr>
 			</table>
 			<div style="float: right;">
-				<input class="w3-button w3-round-large w3-teal" style="background-color: #90909096" type="submit" value="작성">
+				<input class="w3-button w3-round-large w3-teal" type="submit" value="작성">
 			</div>	
 		</form>
 	</div>
