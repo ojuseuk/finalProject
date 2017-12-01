@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -213,10 +214,12 @@ public class TchrBsController {
 	 */
 	@RequestMapping("/srcInsert")
 	@PreAuthorize("hasRole('ROLE_TCHR')")
-	public String srcInsert(SCRDto scrDto) {
+	public String srcInsert(SCRDto scrDto, Model data) {
 		
 		try {
 			tchrBsService.srcInsert(scrDto);
+			data.addAttribute("result", "1");
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			return "redirect:/error.jsp";

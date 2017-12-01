@@ -109,7 +109,7 @@ tr.shown td.details-control {
 						}
 						str+="└>";
 					}
-					return str + data + '(' + row.seqLv + ')';
+					return '<div style="text-align:left">'+str + data+'</div>';
 
 				}
 			}, {

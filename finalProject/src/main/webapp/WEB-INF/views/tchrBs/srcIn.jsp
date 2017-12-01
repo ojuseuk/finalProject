@@ -56,8 +56,13 @@
 	<input type="hidden" value='${requestScope.examTp}' id="examTp">
 	<input type="hidden" value='${requestScope.sbjt}' id="sbjt">
 	<input type="hidden" value='${requestScope.stdt}' id="stdt">
-	
+	<input type="hidden" value='${requestScope.result}' id="result">
 	<script type="text/javascript">
+		var result = $('#result').val();
+		
+		if(result != ''){
+			alert("성적이 정상적으로 등록 되었습니다.");
+		}
 		var stdt = $('#stdt').val();
 		var sbjt = $('#sbjt').val();
 		var examTp = $('#examTp').val();
