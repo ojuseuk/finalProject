@@ -15,32 +15,32 @@
 
 	<insert id="userInsert" parameterType="USRDto">
 		INSERT INTO TB_USR
-		VALUES(#{id}, #{pw}, #{nm}, #{phone}, #{addr}, #{email},0,0)
+		VALUES(#{id}, #{pw}, #{nm}, #{phone}, #{addr}, #{email}, 0 , 0)
 	</insert>
 	
-	<select id="userLogin" parameterType="hashmap" resultType="hashmap">
+	<select id="userLogin" parameterType="hashmap" resultMap="UserResult">
 		SELECT * FROM TB_USR WHERE id=#{id} and pw=#{pw}
 	</select>
 	
 	<!-- find id -->
-	<select id="findId" parameterType="hashmap" resultType="USRDto">
+	<select id="findId" parameterType="hashmap" resultMap="UserResult">
 		select * from TB_USR
 		where nm=#{nm} and phone=#{phone}
 	</select>
 	
 	<!-- find pwd -->
-	<select id="findPwd" parameterType="hashmap" resultType="USRDto">
+	<select id="findPwd" parameterType="hashmap" resultMap="UserResult">
 		select * from TB_USR
 		where id=#{id} and email=#{email}
 	</select>
 	
 	<!-- id pw check -->
 	
-	<select id="idCheck" parameterType="String" resultType="USRDto">
+	<select id="idCheck" parameterType="String" resultMap="UserResult">
 		select * from TB_USR where id=#{value}
 	</select>
 	
-	<select id="pwdCheck" parameterType="map" resultType="USRDto">
+	<select id="pwdCheck" parameterType="map" resultMap="UserResult">
 		select * from TB_USR where id=#{id} and email=#{email}
 	</select>
 	

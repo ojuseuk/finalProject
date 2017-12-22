@@ -89,10 +89,11 @@ tr.shown td.details-control {
 			"processing" : true,
 			"ordering" : false,
 			"select" : {
-				style : 'single'
+				style : 'os',
+				items:'cell'
 			},
 			"data" : json,
-			"columns" : [ {
+			"columns" : [{
 				"data" : "no",
 				"render" :function(data, type, row, meta){
 // 					console.log(row.title);

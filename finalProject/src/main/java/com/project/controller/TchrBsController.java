@@ -35,14 +35,14 @@ public class TchrBsController {
 	 * @Method Name : qzView
 	 * @작성일	    : 2017. 11. 14. 
 	 * @작성자	    : 오주석
-	 * @Method 설명	:
+	 * @Method 설명	: 문제를 생성 하기위한 페이지로 이동하는 함수
 	 * return type  : ModelAndView
 	 * @return
 	 */
 	@RequestMapping("/qzView")
 	public ModelAndView qzView() {
 		
-		System.out.println("controller qzInsert");
+		System.out.println("controller qzView");
 		
 		ModelAndView mav= new ModelAndView();
 		Map<List<TPCDto>, List<TCHRDto>> map = tchrBsService.qzView();
@@ -58,7 +58,7 @@ public class TchrBsController {
 		mav.addObject("listTpc", listTpc);
 		mav.addObject("json", json);
 		mav.addObject("listTchr", listTchr);
-		mav.setViewName("tchrBs/qzView");
+		mav.setViewName("tchrBs/ttlqzView");
 		
 		return mav;
 		
@@ -67,8 +67,8 @@ public class TchrBsController {
 	/**
 	 * @Method Name : ttlqzInsert
 	 * @작성일	    : 2017. 11. 15. 
-	 * @작성자	    : 
-	 * @Method 설명	:
+	 * @작성자	    : 오주석
+	 * @Method 설명	: 문제를 생성해 주기 위한 함수
 	 * return type  : ModelAndView
 	 * @param ttlqzDto
 	 * @return
@@ -90,19 +90,21 @@ public class TchrBsController {
 	/**
 	 * @Method Name : attnd
 	 * @작성일	    : 2017. 11. 14. 
-	 * @작성자	    : 
-	 * @Method 설명	:
+	 * @작성자	    : 오주석
+	 * @Method 설명	: 강사가 자기반 학생 출석을 확인하는 페이지로 이동하는 함수
 	 * return type  : ModelAndView
 	 * @return
 	 */
 	@RequestMapping("/attnd")
-	public ModelAndView attnd() {
+	public ModelAndView attnd(HttpSession session) {
 		
 		System.out.println("controller attnd");
 		ModelAndView mav = new ModelAndView();
-		
-		List<Map<String, String>> list = tchrBsService.attnd("t1");
+		System.out.println(session.getAttribute("id"));
+		String id = (String) session.getAttribute("id");
+		List<Map<String, String>> list = tchrBsService.attnd(id);
 		JSONArray json = JSONArray.fromObject(list);
+		
 		
 		mav.addObject("list", list);
 		mav.addObject("json", json);
@@ -241,16 +243,16 @@ public class TchrBsController {
 		
 		ModelAndView mav = new ModelAndView();
 		System.out.println("controller qzSelectView");
-		Map<List<SBJTDto>, List<EXAMTPDto>> map = tchrBsService.qzSelectView();
+		Map<List<SBJTDto>, List<Map<String, String>>> map = tchrBsService.qzSelectView();
 		
 		Set<List<SBJTDto>> key = map.keySet();
 		List<SBJTDto> listTchr = null;
-		List<EXAMTPDto> listExam = null;
+		List<Map<String, String>> listExam = null;
 		for (List<SBJTDto> list : key) {
 			listTchr = list;
 			listExam = map.get(list);
 		}
-		
+		System.out.println(listExam);
 		JSONArray jsonTchr = JSONArray.fromObject(listTchr);
 		JSONArray jsonExam = JSONArray.fromObject(listExam);
 		mav.addObject("jsonTchr", jsonTchr);
@@ -274,6 +276,7 @@ public class TchrBsController {
 	public @ResponseBody List<Map<String, Object>> qzSelect(@RequestParam String sbjtNm) {
 		
 		System.out.println("controller qzSelect");
+		System.out.println(sbjtNm);
 		List<Map<String, Object>> list = tchrBsService.qzSelect(sbjtNm);
 //		System.out.println(list);
 		
@@ -325,20 +328,20 @@ public class TchrBsController {
 	/**
 	 * @Method Name : qzInsert
 	 * @작성일	    : 2017. 11. 21. 
-	 * @작성자	    : 
+	 * @작성자	    : 오주석
 	 * @Method 설명	:
 	 * return type  : void
 	 * @param id
 	 * @param examId
 	 */
 	@RequestMapping("/qzInsert")
-	public void qzInsert(@RequestParam(value="id", required=true) List<Integer> id, @RequestParam("examId") String examId) {
+	public void qzInsert(@RequestParam(value="id", required=true) List<Integer> id, EXAMTPDto examtpDto) {
 		
 		System.out.println("controller qzInsert");
-		System.out.println(examId);
+		System.out.println(examtpDto);
 		System.out.println(id);
 		System.out.println(id.size());
-		tchrBsService.qzInsert(examId, id);
+		tchrBsService.qzInsert(examtpDto, id);
 		
 	}
 	

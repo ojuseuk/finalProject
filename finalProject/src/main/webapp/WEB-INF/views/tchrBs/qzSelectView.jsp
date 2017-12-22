@@ -8,16 +8,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="${root}/js/jquery.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
+<jsp:include page="../../../top.jsp"/>
+	<h2>문제 생성</h2>
 	<input type="hidden" value='${requestScope.jsonTchr}' id="jsonTchr">
 	<input type="hidden" value='${requestScope.jsonExam}' id="jsonExam">
 	<select id="qzSbjtNm" name="sbjtNm">
 		<option value="선택">선택</option>
 	</select>
 	<button onclick="qzSelect('${root}')">조회</button>
-	
-	
 	<div id="test">
 	
 	</div>
@@ -48,9 +49,38 @@
 					console.log(json);
 					
 					var $form = $('<form action="'+root+'/tchrBs/qzInsert"></form>');
-					var $select = $('<select id="qzExamId" name="examId"></select>');
+					var $tableInput = $('<table></table>');
+					var $select = $('<select id="examTp" name="examTp"></select>');
 					var $option1 = $('<option value="선택">선택</option>');
-					var $table = $('<table border="1"></table>');
+					var $input1 = $('<input type="text" name="examTitle">');
+					var $input2 = $('<input type="date" name="examDt">');
+					var $trInput1 = $('<tr></tr>');
+					var $trInput2 = $('<tr></tr>');
+					var $trInput3 = $('<tr></tr>');
+					
+					var $tdInput1 = $('<td>시험 이름</td>');
+					var $tdInput11 = $('<td></td>');
+					var $tdInput2 = $('<td>시험 날짜</td>');
+					var $tdInput22 = $('<td></td>');
+					var $tdInput3 = $('<td>시험 종류</td>');
+					var $tdInput33 = $('<td></td>');
+					
+					$tdInput11.append($input1);
+					$tdInput22.append($input2);
+					$tdInput33.append($select);
+					
+					$trInput1.append($tdInput1);
+					$trInput1.append($tdInput11);
+					$trInput2.append($tdInput2);
+					$trInput2.append($tdInput22);
+					$trInput3.append($tdInput3);
+					$trInput3.append($tdInput33);
+					
+					$tableInput.append($trInput1);
+					$tableInput.append($trInput2);
+					$tableInput.append($trInput3);
+					var $div = $('<div></div>');
+					var $table = $('<table ></table>');
 					var $submit = $('<input type="submit" value="문제 생성"></input>');
 					var $hidden;
 					
@@ -89,9 +119,9 @@
 					
 					console.log(jsonExam);
 					$select.append($option1);
-					$form.append($select);
+					
 					for(var i=0;i<jsonExam.length;i++){
-						$option1.after("<option value='"+jsonExam[i].examId+"'>"+jsonExam[i].examTitle+"("+jsonExam[i].examId+")</option>");
+						$option1.after("<option value='"+jsonExam[i].CDID+"'>"+jsonExam[i].CDNM+"("+jsonExam[i].CDID+")</option>");
 						
 					}
 					
@@ -100,10 +130,11 @@
 						$form.append($hidden);
 					}
 					
-					$form.append($table);
+					$form.append($tableInput);
+					$div.append($table);
+					$form.append($div);
 					$form.append($submit);
 					$('#test').append($form);
-					
 					
 				}
 

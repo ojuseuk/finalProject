@@ -18,16 +18,19 @@ public class UsrDaoImp implements UsrDao {
 	
 	
 	@Override
-	public void userInsert(USRDto usr) throws SQLException {
-		int num = 0;
+	public int userInsert(USRDto usr) throws SQLException {
 		System.out.println("DAO:" + usr);
-		num = sqlSession.insert("usrMapper.userInsert",usr);
+		return sqlSession.insert("usrMapper.userInsert",usr);
 	}
 	
 	@Override
-	public HashMap<String,Object> userLogin(HashMap<String,Object> map){
+	public USRDto userLogin(HashMap<String,Object> map){
 		System.out.println("DAO:" + map);
-		return sqlSession.selectOne("usrMapper.userLogin",map);
+		USRDto usrDto = sqlSession.selectOne("usrMapper.userLogin", map);
+		if(usrDto == null) {
+			System.out.println("?????");
+		}
+		return usrDto;
 	}
 	
 	//아이디, 비밀번호 찾기 

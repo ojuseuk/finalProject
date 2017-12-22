@@ -20,17 +20,20 @@ public class UsrServiceImp implements UsrService {
 	}
 
 	@Override
-	public void userInsert(USRDto usr) throws SQLException {
+	public int userInsert(USRDto usr) throws SQLException {
 		System.out.println("service : " + usr); 		
 
-		usrDao.userInsert(usr);
+		return usrDao.userInsert(usr);
 		
 	}
 	
 	@Override
-	public HashMap<String, Object> userLogin(HashMap<String, Object> map) throws SQLException{
+	public USRDto userLogin(HashMap<String, Object> map) throws SQLException{
 		System.out.println("service : " + map); 
-		return usrDao.userLogin(map);
+		
+		USRDto usrDto = usrDao.userLogin(map);
+		
+		return usrDto;
 	}
 	
 	//아이디, 비밀번호 찾기

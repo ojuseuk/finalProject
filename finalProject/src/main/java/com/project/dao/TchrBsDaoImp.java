@@ -80,12 +80,12 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> attnd(String id) {
+	public List<Map<String, String>> attnd(Map<String, String>map) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("dao attnd");
 		
-		return sqlSession.selectList("tchrBsMapper.attnd", id);
+		return sqlSession.selectList("tchrBsMapper.attnd", map);
 		
 		
 	}
@@ -259,7 +259,6 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 */
 	@Override
 	public TTLQZDto qzUpdateSearch(int id) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("tchrBsMapper.qzUpdateSearch", id);
 	}
 
@@ -271,7 +270,7 @@ public class TchrBsDaoImp implements TchrBsDao {
 	 * @return
 	 */
 	@Override
-	public List<EXAMTPDto> qzExamSelect() {
+	public List<Map<String, String>> qzExamSelect() {
 		// TODO Auto-generated method stub
 		
 		return sqlSession.selectList("tchrBsMapper.qzExamSelect");
@@ -294,5 +293,39 @@ public class TchrBsDaoImp implements TchrBsDao {
 		int a = sqlSession.insert("tchrBsMapper.qzInsert", list);
 		System.out.println(a);
 	}
+
+	/**
+	 * @Method Name  : attndTchrNo
+	 * @작성일	     : 2017. 11. 23. 
+	 * @작성자 		 : 오주석
+	 * @Method 설명  : 아이디를 가지고 강사 번호를 가져오기 위한 함수
+	 * @param id
+	 */
+	@Override
+	public String attndTchrNo(String id) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("dao attndTchrNo");
+		return sqlSession.selectOne("tchrBsMapper.attndTchrNo", id);
+	}
+
+	@Override
+	public int examTpInsert(EXAMTPDto examtpDto) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("dao examTpInsert");
+		return sqlSession.insert("test.examTpInsert", examtpDto);
+		
+	}
+
+	@Override
+	public String examTpSelect() {
+		System.out.println("dao examTpSelect");
+		String str = sqlSession.selectOne("test.examTpSelect", "abc");
+		System.out.println("-----------------------");
+		return str;
+	}
+	
+	
 	
 }

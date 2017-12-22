@@ -16,7 +16,8 @@ public interface TchrBsDao {
 	List<TPCDto> tchrBsTcp();
 	List<TCHRDto> tchrBsTchr();
 	int ttlqzInsert(TTLQZDto ttlqzDto);
-	List<Map<String, String>> attnd(String id);
+	String attndTchrNo(String id);
+	List<Map<String, String>> attnd(Map<String, String>map);
 	List<Map<String, String>> attndClss(String clssId);
 	List<Map<String, String>> srcExamTp();
 	List<Map<String, String>> srcSbjt();
@@ -28,7 +29,9 @@ public interface TchrBsDao {
 	List<Map<String, Object>> qzSelect(String sbjtNm);
 	List<TTLQZDto> qzUpdateView();
 	TTLQZDto qzUpdateSearch(int id);
-	List<EXAMTPDto> qzExamSelect();
+	List<Map<String, String>> qzExamSelect();
 	void qzInsert(List<QZDto> list);
+	int examTpInsert(EXAMTPDto examtpDto);
+	String examTpSelect();
 
 }

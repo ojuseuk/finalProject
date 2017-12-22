@@ -1,6 +1,9 @@
 package com.project.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +28,10 @@ public class TchrBsServiceImp implements TchrBsService {
 	private TchrBsDao tchrBsDao;
 
 	/**
-	 * @Method Name : qzView
-	 * @작성일	    : 2017. 11. 16. 
-	 * @작성자 		 : 
-	 * @Method 설명  :
+	 * @Method Name  : qzView
+	 * @작성일	     : 2017. 11. 16. 
+	 * @작성자 		 : 오주석
+	 * @Method 설명  : 문제를 생성 하기위한 페이지로 이동하는 함수 
 	 * @return
 	 */
 	@Override
@@ -51,10 +54,10 @@ public class TchrBsServiceImp implements TchrBsService {
 	}
 
 	/**
-	 * @Method Name : qzInsert
-	 * @작성일	    : 2017. 11. 16. 
-	 * @작성자 		 : 
-	 * @Method 설명  :
+	 * @Method Name  : qzInsert
+	 * @작성일	     : 2017. 11. 16. 
+	 * @작성자 		 : 오주석
+	 * @Method 설명  : 문제를 생성해 주기 위한 함수
 	 * @param ttlqzDto
 	 * @return
 	 */
@@ -72,10 +75,10 @@ public class TchrBsServiceImp implements TchrBsService {
 	}
 
 	/**
-	 * @Method Name : attnd
-	 * @작성일	    : 2017. 11. 16. 
-	 * @작성자 		 : 
-	 * @Method 설명  :
+	 * @Method Name  : attnd
+	 * @작성일	     : 2017. 11. 16. 
+	 * @작성자 		 : 오주석
+	 * @Method 설명  : 강사가 자기반 학생 출석을 확인하는 페이지로 이동하는 함수
 	 * @param id
 	 * @return
 	 */
@@ -85,7 +88,16 @@ public class TchrBsServiceImp implements TchrBsService {
 		
 		System.out.println("service attnd");
 		
-		List<Map<String, String>> list = tchrBsDao.attnd(id);
+		String tchrNo = tchrBsDao.attndTchrNo(id);
+		
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		String today = dateFormat.format(date);
+		Map<String, String> map = new HashMap<>();
+		map.put("tchrNo", tchrNo);
+		map.put("today", today);
+		
+		List<Map<String, String>> list = tchrBsDao.attnd(map);
 		System.out.println(list);
 		
 		return list;
@@ -187,14 +199,14 @@ public class TchrBsServiceImp implements TchrBsService {
 	}
 
 	@Override
-	public Map<List<SBJTDto>, List<EXAMTPDto>> qzSelectView() {
+	public Map<List<SBJTDto>, List<Map<String, String>>> qzSelectView() {
 		// TODO Auto-generated method stub
 		
 		System.out.println("service qzSelectView");
 		List<SBJTDto> listTchr = tchrBsDao.qzSelectView();
-		List<EXAMTPDto> listExam = tchrBsDao.qzExamSelect();
+		List<Map<String, String>> listExam = tchrBsDao.qzExamSelect();
 		
-		Map<List<SBJTDto>, List<EXAMTPDto>> map = new HashMap<>();
+		Map<List<SBJTDto>, List<Map<String, String>>> map = new HashMap<>();
 		map.put(listTchr, listExam);
 		
 		return map;
@@ -224,16 +236,29 @@ public class TchrBsServiceImp implements TchrBsService {
 	}
 
 	@Override
-	public void qzInsert(String examId, List<Integer> id) {
+	@Transactional
+	public void qzInsert(EXAMTPDto examtpDto, List<Integer> id) {
 		// TODO Auto-generated method stub
 		
 		System.out.println(id.size());
-		List<QZDto> list = new ArrayList<>();
-		for(int i=0;i<id.size();i++) {
-			list.add(new QZDto(examId, id.get(i), (i+1), 10));
-		}
 		
-		tchrBsDao.qzInsert(list);
+		String examId = tchrBsDao.examTpSelect();
+		System.out.println(examId);
+		String a = examId.substring(0, 1);
+		String b = examId.substring(1, 5);
+		int bb = Integer.parseInt(b);
+		System.out.println(a + "   " + b);
+		String str = (a+(bb+1));
+		System.out.println(str);
+		examtpDto.setExamId(str);
+//		tchrBsDao.examTpInsert(examtpDto);
+//		
+//		List<QZDto> list = new ArrayList<>();
+//		for(int i=0;i<id.size();i++) {
+//			list.add(new QZDto(examtpDto.getExamId(), id.get(i), (i+1), 10));
+//		}
+//		
+//		tchrBsDao.qzInsert(list);
 		
 	}
 	

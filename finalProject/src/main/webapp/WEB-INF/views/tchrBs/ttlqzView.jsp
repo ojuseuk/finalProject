@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${root}/js/jquery.min.js"></script>
 <body>
+<jsp:include page="../../../top.jsp"/>
 	<div class="w3-container">
 		<h2>문제 생성</h2>
 

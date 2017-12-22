@@ -20,10 +20,10 @@ public interface TchrBsService {
 	void srcInsert(SCRDto scrDto);
 	List<String> stSearch(String id);
 	List<Map<String, Object>> stClssSearch(String clssId);
-	Map<List<SBJTDto>, List<EXAMTPDto>> qzSelectView();
+	Map<List<SBJTDto>, List<Map<String, String>>> qzSelectView();
 	List<Map<String, Object>> qzSelect(String sbjtNm);
 	List<TTLQZDto> qzUpdateView();
 	TTLQZDto qzUpdateSearch(int id);
-	void qzInsert(String examId, List<Integer> id);
+	void qzInsert(EXAMTPDto examtpDto, List<Integer> id);
 
 }

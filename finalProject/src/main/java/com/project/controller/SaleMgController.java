@@ -124,8 +124,8 @@ public class SaleMgController {
 	 * @작성자 : 오주석
 	 * @Method 설명 : 매출 리스트를 가져오기 위한 메소드 return type : void
 	 */
-/*	
-	@RequestMapping("/mgSale")
+
+/*	@RequestMapping("/mgSale")
 	public @ResponseBody List<SALEDto> saleMgmgSale(@RequestParam("date1") String date1, @RequestParam("date2") String date2) {
 
 		System.out.println("controller saleMgMgSale");
@@ -140,13 +140,14 @@ public class SaleMgController {
 */
 	
 	@RequestMapping("/mgSale")
-	public @ResponseBody List<SALEDto> saleMgmgSale(@RequestParam("year") int year, @RequestParam("month") int month) {
+	public @ResponseBody List<SALEDto> saleMgmgSale(@RequestParam("year") int year, @RequestParam("month") int month, @RequestParam("day") int day) {
 
 		System.out.println("controller saleMgMgSale");
 		System.out.println(year);
+		System.out.println(month);
 
 //		List<SALEDto> list = saleMgService.mgSaleList(date1, date2);
-		List<SALEDto> list = saleMgService.mgSaleList2(year, month);
+		List<SALEDto> list = saleMgService.mgSaleList2(year, month, day);
 		JSONArray json = JSONArray.fromObject(list);
 		System.out.println(list);
 

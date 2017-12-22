@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="${root}/styles/vendor/datatables/dataTables.bootstrap4.css" />
 <script src="${root}/js/jquery.min.js"></script>
 <script src="${root}/js/kendo.all.min.js"></script>
+	<script src="${root}/js/vendor/jquery.dataTables.js"></script>
+	<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
 </head>
 <body>
 	<div>
@@ -99,15 +101,19 @@
 		function date1Max() {
 			$('#date1').attr("max", $('#date2').val());
 		}
-
+		var table="";
 		function saleMg(root) {
 			var date1 = $('#date1').val();
 			var date2 = $('#date2').val();
 			
 			$('#abc').css("display", "block");
-			$('#dataDefault').remove();
-			$('#dataTable').dataTable().fnDestroy();
-
+// 			$('#dataDefault').remove();
+// 			$('#dataTable').dataTable().clear();
+// 			$('#dataTable').dataTable().fnDestroy();
+// 			$("#dataTable").empty();
+// 			table.clear();
+// 			$('#dataTable tobody:child').empty();
+			
 			if (date1 == "" || date2 == "") {
 				alert("날짜를 선택해 주세요");
 			} else {
@@ -120,7 +126,8 @@
 						saleList = JSON.parse(saleList);
 
 						console.log(saleList);
-						$('#dataTable').DataTable({
+						table = $('#dataTable').DataTable({
+							"destroy": true,
 							"scrollY" : 250,
 							"scrollCollapse" : true,
 							data : saleList,
@@ -151,7 +158,6 @@
 						var month = new Array();
 						var amountD = 0;
 						var e = 0;
-
 						for (var d = 0; d < saleList.length; d++) {
 							console.log(d);
 
@@ -282,8 +288,7 @@
 	<%-- <script src="${root}/js/vendor/bootstrap/bootstrap.bundle.min.js"></script> --%>
 	<%-- <script src="${root}/js/vendor/jquery-easing/jquery.easing.min.js"></script> --%>
 	<!-- table(grid) -->
-	<script src="${root}/js/vendor/datatables/jquery.dataTables.js"></script>
-	<script src="${root}/js/vendor/datatables/dataTables.bootstrap4.js"></script>
+
 
 </body>
 </html>
