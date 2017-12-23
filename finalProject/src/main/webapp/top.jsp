@@ -12,10 +12,10 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
-<body>
+
 <div style="background-color: #eee">
   <div class="container text-center">
-    <h1>HAKWON</h1>      
+   
     <p>대학 입시, 주요 과목 특강</p>
   </div>
 </div>
@@ -23,12 +23,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="${root}/main.jsp">Logo</a>
+    
       <a class="navbar-brand" href="${root}/main.jsp">Home</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">

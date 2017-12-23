@@ -10,12 +10,12 @@
 <style type="text/css">
 #wrap {
 	width: 1000px;
-	height: 600px;
+	height: 1000px;
 	margin: auto;
 }
 
 #wrap #findId {
-	width: 440px;
+	width: 400px;
 	height: 500px;
 	border-radius:10px;
 	border: 1px solid gray;
@@ -28,7 +28,7 @@
 }
 
 #wrap #findPwd {
-	width: 440px;
+	width: 400px;
 	height: 500px;
 	border-radius:10px;
 	border: 1px solid gray;
@@ -75,7 +75,7 @@
 			</span>
 		</div>
 	</div>
-
+	
 	<div id="findPwd">
 		<h2>비밀번호 찾기</h2>
 		<hr style="width:100px;float:left;">

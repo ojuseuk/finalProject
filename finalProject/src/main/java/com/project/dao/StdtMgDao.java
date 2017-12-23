@@ -19,6 +19,7 @@ public interface StdtMgDao {
 	public List<STDTInfoDto> selectAllByStdt();
 	public List<STDTInfoDto> selectStdtInfo(String stdtNo);
 	public void updateStdtClss(STDTCLSSDto stdtInfo);
+	public void updateStdtPrnt(STDTDto stdt);
 	public List<STDTInfoDto> selectByStdtNm(STDTInfoDto stdtInfo);
 	public List<STDTInfoDto> selectByClssStdtNm(STDTInfoDto stdtInfo);
 	public List<STDTInfoDto> selectStdtByCrs(String crsId);

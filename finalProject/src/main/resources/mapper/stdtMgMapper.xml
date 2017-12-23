@@ -132,19 +132,24 @@
 		JOIN TB_CRS ON TB_CLSS.CRS_ID = TB_CRS.CRS_ID
 		WHERE TB_CRS.CRS_ID = #{crsId}
 	</select>
+	
 	<update id="updateStdtClss">
 		UPDATE TB_STDTCLSS SET CLSS_ID = #{clssId} WHERE STDT_NO = #{stdtNo}
+	</update>
+	
+	<update id="updateStdtPrnt">
+		UPDATE TB_STDT SET PRNT_PHONE = #{prntPhone} WHERE STDT_NO = #{stdtNo}
 	</update>
 	
 	<select id="selectStdtId" parameterType="String" resultType="String">
 		SELECT ID FROM TB_USR WHERE ID = #{id}
 	</select>
 	
-	<insert id="insertStdt">
+	<insert id="insertStdt" parameterType="STDTDto">
 		INSERT INTO TB_STDT VALUES (#{stdtNo}, #{id}, #{retryCnt}, #{mjrTp}, #{prntPhone})
 	</insert>
 	
-	<insert id="insertStdtClss">
+	<insert id="insertStdtClss" parameterType="STDTCLSSDto">
 		INSERT INTO TB_STDTCLSS VALUES (#{clssId}, #{stdtNo}, #{repaidDt}, #{paidDt})
 	</insert>
 	

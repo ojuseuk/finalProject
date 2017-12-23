@@ -6245,26 +6245,26 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus,
 }
 
 .panel-primary {
-	border-color: #337ab7
+	border-color: #d1d1e0
 }
 
 .panel-primary>.panel-heading {
 	color: #fff;
-	background-color: #337ab7;
-	border-color: #337ab7
+	background-color: #d1d1e0;
+	border-color:#d1d1e0
 }
 
 .panel-primary>.panel-heading+.panel-collapse>.panel-body {
-	border-top-color: #337ab7
+	border-top-color: #d1d1e0
 }
 
 .panel-primary>.panel-heading .badge {
-	color: #337ab7;
+	color: #d1d1e0;
 	background-color: #fff
 }
 
 .panel-primary>.panel-footer+.panel-collapse>.panel-body {
-	border-bottom-color: #337ab7
+	border-bottom-color: #d1d1e0
 }
 
 .panel-success {
