@@ -26,6 +26,7 @@
     
       <a class="navbar-brand" href="${root}/main.jsp">Home</a>
     </div>
+    
     <div class="collapse navbar-collapse" id="myNavbar">
       <c:if test="${id != null && (usrTp == 'st' || usrTp == null)}">
       <ul class="nav navbar-nav">
@@ -35,6 +36,7 @@
         <li><a href="${root}/myClssList">수강과정확인</a></li>
       </ul>
       </c:if>
+      
       <c:if test="${id != null && usrTp == 'staff'}">
        <ul class="nav navbar-nav">
         <li><a href="${root}/mgTchr">강사 관리</a></li>
@@ -47,6 +49,7 @@
         </ul>
       </c:if>
       <c:if test="${id != null && usrTp == 'tchr'}">
+      
       <ul class="nav navbar-nav">
         <li><a href="${root}/tchrBs/qzView">문제 생성</a></li>
         <li><a href="${root}/tchrBs/attnd">출석 확인</a></li>
