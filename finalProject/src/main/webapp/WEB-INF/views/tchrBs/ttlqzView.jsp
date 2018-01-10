@@ -5,10 +5,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+.select {
+    width: 200px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
+.select1 {
+    width: 100px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
+</style>
 </head>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="${root}/js/jquery.min.js"></script>
 <body>
 <jsp:include page="../../../top.jsp"/>
@@ -20,7 +40,7 @@
 				<tr>
 					<td>과목명</td>
 					<td>
-						<select name="sbjtNm" onchange="sbjtNmClick()" id="sbjtNm">
+						<select class="select" name="sbjtNm" onchange="sbjtNmClick()" id="sbjtNm">
 							<option value="선택" id="sbjtDefault">선택</option>
 						</select>
 					</td>
@@ -28,7 +48,7 @@
 				<tr>
 					<td>강사 번호</td>
 					<td>
-						<select name="tchrNo" id="tchrNo">
+						<select class="select" name="tchrNo" id="tchrNo">
 							<option value="선택" id="tchrDefault">선택</option>
 							<%-- <c:forEach items="${requestScope.listTchr}" var="tchr">
 								<option value="${tchr.tchrNo}">${tchr.tchrNo}</option>
@@ -39,7 +59,7 @@
 				<tr>
 					<td>토픽명</td>
 					<td>
-						<select name="tpcNm" id="tpcNm" onclick="tpcNmClick()">
+						<select class="select" name="tpcNm" id="tpcNm" onclick="tpcNmClick()">
 							<option value="선택" id="sbjtDefault">선택</option>
 						</select>
 					</td>
@@ -59,7 +79,7 @@
 				<tr>
 					<td>문제 난이도</td>
 					<td>
-						<select name="degree">
+						<select class="select1" name="degree">
 							<option value="상">상</option>
 							<option value="중">중</option>
 							<option value="하">하</option>
@@ -75,7 +95,7 @@
 					<td><input type="file" value="파일 첨부" name="imgFile"></td>
 				</tr>
 			</table>
-			<p align="center"><input class="w3-bar w3-border" style="background-color: #90909096; width:50%; align:center" type="submit" value="문제 생성"></p>
+			<p align="center"><input class="w3-button w3-border" style="background-color: #90909096; width:30%; align:center" type="submit" value="문제 생성"></p>
 		</form>
 	</div>
 	<br><br><br>

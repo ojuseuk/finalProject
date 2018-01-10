@@ -6,51 +6,64 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<title>Insert title here</title>
+<style>
+.select {
+    width: 200px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
+</style>
+</head>
 <script src="${root}/js/jquery.min.js"></script>
 <body>
 <jsp:include page="../../../top.jsp"/>
+<div style="width: 80%; margin: auto;">
 	<div class="w3-container">
-		<h2>성적 입력</h2>
+		<h2 align="center">성적 입력</h2>
 
-		<form action="${root}/tchrBs/srcInsert">
-			<table class="w3-table w3-bordered">
+		<form action="${root}/tchrBs/srcInsert" style="text-align:center">
+			<table class="w3-table w3-bordered" >
 				<tr>
-					<td>시험 명</td>
-					<td>
-						<select name="examId" id="qzId">
+					<td style="text-align:right">시험 명</td>
+					<td style="text-align:center">
+						<select class="select" name="examId" id="qzId">
 							<option value="선택">선택</option>
 						</select>				
 					</td>
 				</tr>
 				<tr>
-					<td>수강생 번호</td>
-					<td>
-						<select name="stdtNo" id="stdtNo">
+					<td style="text-align:right">수강생 번호</td>
+					<td style="text-align:center">
+						<select class="select" name="stdtNo" id="stdtNo">
 							<option value="선택">선택</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td>과목명</td>
-					<td>
-						<select name="sbjtNm" id="sbjtNm">
+					<td style="text-align:right">과목명</td>
+					<td style="text-align:center">
+						<select class="select" name="sbjtNm" id="sbjtNm">
 							<option value="선택">선택</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td>점수</td>
-					<td>
-						<input type="number" name="score" max="100" min="0" >
+					<td style="text-align:right">점수</td>
+					<td style="text-align:center">
+						<input type="number" name="score" max="100" min="0" style="width: 200px">
 					</td>
 				</tr>
 			</table>
-			<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="성적 입력">
+			<input class="w3-button w3-border" style="background-color: #90909096; width: 20%" type="submit" value="성적 입력">
 		</form>
 	</div>
+</div>
 	<input type="hidden" value='${requestScope.examTp}' id="examTp">
 	<input type="hidden" value='${requestScope.sbjt}' id="sbjt">
 	<input type="hidden" value='${requestScope.stdt}' id="stdt">

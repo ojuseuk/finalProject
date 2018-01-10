@@ -32,7 +32,7 @@
 				</tr>
 			</table>
 			<br>
-			<div style="float: right;">
+			<div style="text-align: center;">
 				<input class="w3-button w3-border" style="background-color: #90909096" type="submit" value="공지사항 등록">
 			</div>
 		</form>

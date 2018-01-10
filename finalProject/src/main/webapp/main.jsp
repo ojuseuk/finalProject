@@ -14,6 +14,7 @@
 <!-- banner style -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="${root}/styles/w3/w3.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanskr.css">
 
 <style>
 .mySlides {display:none;}	
@@ -83,7 +84,7 @@
 		}
 	</script>
 <!-- 	banner end -->
-
+<!-- 	<div style="width:80%; margin-top: auto;"><img src="imgs/imgTchr/캡처.PNG"></div> -->
 	<div class="container">
 		<div class="row">
 
@@ -188,9 +189,7 @@
 					</div>
 					<div class="panel-footer">수학강사</div>
 				</div>
-				
 			</div>
-
 		</div>
 	</div>
 	<jsp:include page="modal.jsp"/>
@@ -198,8 +197,8 @@
 		<h3>Royal Academy</h3>
 		<p>
 			저희 학원은 학생들 개개인의 사고와 응용력을 파악하고 이에 맞는 개인별 학습을 할 수 있도록 합니다.<br>
-			학생들의 수준에 맞는 학습 설계와 콘텐츠 제공을 통해 효율적인 성적상승의 결과물을 볼 수 있습니다.<br> 다양한
-			응용과 심화된 학습콘텐츠로 목표하는 바를 이룰 수 있도록 하겠습니다.
+			학생들의 수준에 맞는 학습 설계와 콘텐츠 제공을 통해 효율적인 성적상승의 결과물을 볼 수 있습니다.<br> 
+			다양한 응용과 심화된 학습콘텐츠로 목표하는 바를 이룰 수 있도록 하겠습니다.
 		</p>
 		<br>
 		<div class="row">
@@ -233,7 +232,7 @@
 
 
 	<!-- Add Google Maps -->
-	<h1>학원위치</h1>
+	<h3>학원위치</h3>
 	<div id="map" style="width: 100%; height: 400px;"></div>
 
 
@@ -265,7 +264,7 @@
 		
 	</script>
 <script type="text/javascript" src="${root}/js/usr/usrInsert.js"></script>
-<jsp:include page="footer.jsp" />
+<%-- <jsp:include page="footer.jsp" /> --%>
 
 </body>
 </html>

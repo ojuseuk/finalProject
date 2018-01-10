@@ -37,13 +37,14 @@ nav.menu{
 #fontBlack{
 	color : black;
 }
+
 </style>
 <body>
 <div class="backgroundTop">
   <div class="container text-center">
   	<div class="brain"></div>
-    <p class="title" style="margin-top: 23px">Royal Academy<img src="${root}/imgs/img/brain2.png" style="max-width: 80px; margin-bottom: 20px"></p>      
-    <p class="subtitle">대학 입시, 주요 과목 단과</p>
+    <p class="title" style="margin-top: 23px">Royal Academy<img src="./imgs/img/brain2.png" style="max-width: 80px; margin-bottom: 20px"></p>      
+<!--     <p class="subtitle">대학 입시, 주요 과목 단과</p> -->
   </div>
 </div>
 <nav class="menu" style="border: 1px solid #ccc">

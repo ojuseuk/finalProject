@@ -15,6 +15,15 @@ p {
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
+.select {
+    width: 198px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
 </style>
 <script src="${root}/js/jquery.min.js"></script>
 </head>
@@ -41,7 +50,7 @@ p {
 					<tr>
 						<td>과목</td>
 	  					<td>
-							<select name="sbjtNm" id="sbjtNm">
+							<select class="select" name="sbjtNm" id="sbjtNm">
 								<option value="">과목 선택</option>
 								<c:forEach items="${requestScope.sbjtList}" var="data">
 									<option value=${data.sbjtNm}>${data.sbjtNm}</option>
@@ -87,7 +96,7 @@ p {
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable">
-					<thead >
+					<thead style="background-color: #90909096">
 						<tr>
 							<th>과정 ID</th>
 							<th>과목</th>

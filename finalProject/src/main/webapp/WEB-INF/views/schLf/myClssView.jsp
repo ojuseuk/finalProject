@@ -29,7 +29,7 @@
 		<div class="card-body">
 			<h2 align="center">나의 수강 정보</h2>
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable">
+				<table class="table table-bordered" id="dataTable" style="text-align: center;">
 					<thead style="background-color: #90909096">
 						<tr>
 							<th>강좌명</th>
@@ -50,42 +50,42 @@
 <input type="hidden" id="root" value='${root}'>
 <%-- <script src="${root}/js/schLf/myClss.js"></script> --%>
 <script type="text/javascript">
-var clssInfo = $("#json").val();
-var root = $("#root").val();
-clssInfo = JSON.parse(clssInfo);
-
-$('#dataTable').DataTable({
-	"scrollY" : 250,
-	"scrollCollapse" : true,
-	data : clssInfo,
-	columns : [ {
-		"data" : "clssNm"
-	}, {
-		"data" : "nm"
-	}, {
-		"data" : "strtDt",
-		"render" : function(data, type, row, meta){
-			return inputDateFormat(row.strtDt) + " ~ " + inputDateFormat(row.endDt) + " (" + row.prd + "일)";
-		}
-	}, {
-		"data" : "paidDt",
-		"render" : function(data, type, row, meta){
-			return inputDateFormat(row.paidDt);
-		}
-	}, {
-		"data" : "clssroom"
-	} ]
-});
-
-function inputDateFormat(date) {
-	var year = date.substring(0, 4);
-	var month = date.substring(4, 6);
-	var day = date.substring(6, 8);
-
-	return year + '-' + month + '-' + day;
-}
+	var clssInfo = $("#json").val();
+	var root = $("#root").val();
+	clssInfo = JSON.parse(clssInfo);
+	
+	$('#dataTable').DataTable({
+		"scrollY" : 250,
+		"scrollCollapse" : true,
+		data : clssInfo,
+		columns : [ {
+			"data" : "clssNm"
+		}, {
+			"data" : "nm"
+		}, {
+			"data" : "strtDt",
+			"render" : function(data, type, row, meta){
+				return inputDateFormat(row.strtDt) + " ~ " + inputDateFormat(row.endDt) + " (" + row.prd + "일)";
+			}
+		}, {
+			"data" : "paidDt",
+			"render" : function(data, type, row, meta){
+				return inputDateFormat(row.paidDt);
+			}
+		}, {
+			"data" : "clssroom"
+		} ]
+	});
+	
+	function inputDateFormat(date) {
+		var year = date.substring(0, 4);
+		var month = date.substring(4, 6);
+		var day = date.substring(6, 8);
+	
+		return year + '-' + month + '-' + day;
+	}
 </script>
-<Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+<!-- <Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br><Br> -->
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>

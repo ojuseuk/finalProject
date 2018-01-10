@@ -43,9 +43,15 @@ tr.shown td.details-control {
 	height: 200px;
 	overflow: auto;
 }
-#cAsideR .sky_bnr .sky_bnrline > div{border:0;margin:0}
-#cAsideR .sky_bnr .sky_bnrline .lineno{border:1px solid #cecece;margin-top:5px;}
-#cAsideR .sky_bnr .sky_bnrline .sky_bnrtline{border:1px solid #cecece;border-top:0;}
+.select {
+    width: 100px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: #424242;
+    border: 1px solid #90909096;
+    border-radius: 3px;
+}
 </style>
 </head>
 <script type="text/javascript">
@@ -55,13 +61,6 @@ var IMP = window.IMP;
 <jsp:include page="../../../top.jsp" />
 
 <body>
-<!-- Sidebar left   -->
-<!-- <div class="sidebar" style="width:6%; background-color: #ffffff; margin-left: 90px;"> -->
-<!--   <div><img class="w3-padding" src="./imgs/banner/sky_bnr2.png"  ></div> -->
-<!--   <div><img class="w3-padding" src="./imgs/banner/ss_bn_go12.gif"  ></div> -->
-<!--   <div><img class="w3-padding" src="./imgs/banner/flo_crup.gif"  ></div> -->
-<!--   <div><img class="w3-padding" src="./imgs/banner/main_ss.gif"  ></div>   -->
-<!-- </div> -->
 <!-- Sidebar right -->
 <div class="sidebar" style="width:6%;right:0; background-color: #ffffff;">
   <div><img class="w3-padding" src="./imgs/banner/90x135.gif"  ></div>
@@ -70,19 +69,20 @@ var IMP = window.IMP;
   <div><img class="w3-padding" src="./imgs/banner/main_ss.jpg"  ></div>
 </div>
 
-	<input type="hidden" id="jsonCrs" value='${requestScope.jsonCrs}'>
-	<input type="hidden" id="usrId" value='${requestScope.usrId}'>
-	<input type="hidden" id="usrNm" value='${requestScope.usrNm}'>
-	<input type="hidden" id="usrPhone" value='${requestScope.usrPhone}'>
-	<input type="hidden" id="usrEmail" value='${requestScope.usrEmail}'>
-	<input type="hidden" id="usrAddr" value='${requestScope.usrAddr}'>
-	<input type="hidden" id="root" value='${root}'>
+<input type="hidden" id="jsonCrs" value='${requestScope.jsonCrs}'>
+<input type="hidden" id="usrId" value='${requestScope.usrId}'>
+<input type="hidden" id="usrNm" value='${requestScope.usrNm}'>
+<input type="hidden" id="usrPhone" value='${requestScope.usrPhone}'>
+<input type="hidden" id="usrEmail" value='${requestScope.usrEmail}'>
+<input type="hidden" id="usrAddr" value='${requestScope.usrAddr}'>
+<input type="hidden" id="root" value='${root}'>
+
 <div id="clssView" style="width: 80%; margin: auto;">
 	<div style="width: 100%; overflow: auto;">
 		<div class="dataTable_length" style="margin:20px">
 			<c:if test="${not empty requestScope.sbjt}">
-				<b>과목</b>
-				<select name="sbjt" id="sbjt" onchange="reqCrsList(this.value,'${root}')">
+				<font style="font-size: 17px"><b>과목</b></font>
+				<select class="select" name="sbjt" id="sbjt" onchange="reqCrsList(this.value,'${root}')">
 					<option value="default">선 택</option>
 					<c:forEach items="${requestScope.sbjt}" var="data">
 						<option value="${data.sbjtNm}">${data.sbjtNm}</option>
@@ -93,7 +93,7 @@ var IMP = window.IMP;
 		
 		<div id="crs" class="card mb-3" align="left" style="width: 100%; height: 475px">
 			<div class="card-body">
-				<h2 align="center">강좌 목록</h2>
+				<h2 class="h2" align="center">강좌 목록</h2>
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">
 						<thead style="background-color: #90909096">
@@ -122,7 +122,8 @@ var IMP = window.IMP;
 			<b>총 결제 금액 : 0원</b>
 		</p>
 		<p align="center">
-			<input class="w3-button w3-border" style="background-color: #90909096" id="payment" type="button" value="결제">
+			<input class="w3-button w3-border" style="background-color: #90909096; width: 15%" id="payment" type="button" value="결제">
+			<input class="w3-button w3-border" style="background-color: #90909096; width: 15%" id="paymentT" type="button" value="결제테스트">
 		</p>
 	</div>
 </div>
@@ -379,47 +380,67 @@ $("#payment").click(function() {
 	reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss);
 });
 
-function reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss) {
-	console.log(tMoney, usrId, usrNm, usrPhone, usrEmail);
-	console.log(selectClss);
-	IMP.request_pay({
-	    pg : 'inicis',
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : tMoney,
-	    buyer_email : usrEmail,
-	    buyer_name : usrNm,
-	    buyer_tel : usrPhone,
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	    	$.ajax({
-	    		url: root + "/payments/complete", 
-	    		type: 'POST',
-	    		contentType : "application/json; charset=UTF-8",
-	    		data: JSON.stringify(selectClss),
-	    		beforeSend : function(xhr)
-                 {  
-                     xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                 }
-	    	}).done(function(data) {
-	    			var msg = '결제가 완료되었습니다.';
-	    			msg += '\n고유ID : ' + rsp.imp_uid;
-	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	    			msg += '\결제 금액 : ' + rsp.paid_amount;
-	    			msg += '카드 승인번호 : ' + rsp.apply_num;
-					document.getElementById("clssView").innerHTML = data;
-	    			alert(msg);
-	    	});
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	        alert(msg);
-	    }
+$("#paymentT").click(function() {
+	$.ajax({
+		url: root + "/payments/complete", 
+		type: 'POST',
+		contentType : "application/json; charset=UTF-8",
+		data: JSON.stringify(selectClss),
+		beforeSend : function(xhr)
+         {  
+             xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+         },
+		success : function(data){
+				alert("수강신청 성공");
+		},
+		error : function(){
+				alert("수강신청 실패");
+		}
 	});
-}
+});
+	
+	function reqPayment(tMoney, usrId, usrNm, usrPhone, usrEmail, selectClss) {
+		console.log(tMoney, usrId, usrNm, usrPhone, usrEmail);
+		console.log(selectClss);
+		IMP.request_pay({
+		    pg : 'inicis',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:결제테스트',
+		    amount : tMoney,
+		    buyer_email : usrEmail,
+		    buyer_name : usrNm,
+		    buyer_tel : usrPhone,
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		    	$.ajax({
+		    		url: root + "/payments/complete", 
+		    		type: 'POST',
+		    		contentType : "application/json; charset=UTF-8",
+		    		data: JSON.stringify(selectClss),
+		    		beforeSend : function(xhr)
+	                 {  
+	                     xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	                 }
+		    	}).done(function(data) {
+		    			var msg = '결제가 완료되었습니다.';
+		    			msg += '\n고유ID : ' + rsp.imp_uid;
+		    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+		    			msg += '\결제 금액 : ' + rsp.paid_amount;
+		    			msg += '카드 승인번호 : ' + rsp.apply_num;
+						document.getElementById("clssView").innerHTML = data;
+		    			alert(msg);
+		    	});
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		        alert(msg);
+		    }
+		});
+	}
+
 </script>
 <Br><Br>
-<jsp:include page="../../../footer.jsp"/>
+<%-- <jsp:include page="../../../footer.jsp"/> --%>
 </body>
 </html>

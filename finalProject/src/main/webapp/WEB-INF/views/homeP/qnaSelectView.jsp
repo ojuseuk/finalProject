@@ -35,8 +35,8 @@ tr.shown td.details-control {
 	<div id="demo" class="card mb-3">
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable">
-					<thead style="background-color: #90909096">
+				<table class="table table-bordered" id="dataTable" style="text-align: center;">
+					<thead style="background-color: #90909096; align:center">
 						<tr>
 							<th>게시판 번호</th>
 							<th>게시판 제목</th>
@@ -51,7 +51,7 @@ tr.shown td.details-control {
 				</table>
 			</div>
 		</div>
-		<div style="float: right;">
+		<div style="text-align:center">
 			<button class="w3-button w3-border" style="background-color: #90909096" onclick="location.href='${root}/homeP/qnaInsertView?no=0'">게시글 생성</button>
 		</div>
 	</div>
@@ -91,7 +91,7 @@ tr.shown td.details-control {
 				"data" : "no",
 				"render" :function(data, type, row, meta){
 // 					console.log(row.title);
-					return '<div align="right">'+data+'</div>';
+					return '<div align="center">'+data+'</div>';
 				}
 			}, {
 				"data" : "title",
