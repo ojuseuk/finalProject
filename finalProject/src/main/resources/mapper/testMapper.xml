@@ -17,4 +17,9 @@
 <!-- 	<select id="tchrBsTchr" resultType="tCHRDto"> -->
 <!-- 		SELECT TCHR_NO tchrNo, ID id, SBJT_CHRG sbjtChrg, TCHR_INTRO tchrIntro FROM TB_TCHR -->
 <!-- 	</select> -->
+
+	<select id="attndClss" parameterType="string" resultType="hashmap">
+		SELECT NM, CLSSID, DT, ATTNDTP, STDTDT, ENDDT, STDTNO
+			FROM ATTND_CLSS WHERE CLSSID = #{clssId}
+	</select>
 </mapper>

@@ -109,10 +109,11 @@ function clssSearch(root) {
 				for (var i = 0; i < time; i++) {
 					y = startDate.getFullYear();
 					m = startDate.getMonth() + 1;
+					m2 = pad(m, 2);
 					d = startDate.getDate();
 					dN = week[startDate.getDay()];
 					d2 = pad(d, 2);
-					ymdDate.push(y + '' + m + d2);
+					ymdDate.push(y + '' + m2 + d2);
 					startDate.setDate(d + 1);
 
 					$td1 = $('<td></td>');
@@ -139,10 +140,13 @@ function clssSearch(root) {
 				var a = new Date();
 				y = a.getFullYear();
 				m = a.getMonth() + 1;
+				m2 = pad(m, 2);
 				d = a.getDate();
 				d2 = pad(d, 2);
-				todayDate = y + '' + m + d2;
-				console.log(stdtNo.length);
+				todayDate = y + '' + m2 + d2;
+				console.log(ymdDate);
+				console.log(dtE);
+				
 				for(var a=0; a<stdtNo.length; a++){
 					$tr3 = $('<tr></tr>');
 					$tr4 = $('<tr></tr>');
@@ -156,23 +160,24 @@ function clssSearch(root) {
 						let attndTp;
 						for (var j = 0; j < dtE.length; j++) {
 							$td3 = $('<td></td>');	
-							
-							if (ymdDate[i] == dtE[j].DT) {
-								
-								attndTp = dtE[j].ATTNDTP;
-// 									console.log(attndTp);
-								if(attndTp == 'at001'){
-									$td3.append("출석");	
-								}else if(attndTp == 'at002'){
-									$td3.append("지각");
-								}
-								break;
-								
-							} else {
-								if (todayDate < ymdDate[i]) {
-									$td3.append("  ");
+							if (todayDate < ymdDate[i]) {
+								$td3.append("예정");
+							}else{
+								if (ymdDate[i] == dtE[j].DT) {
+									console.log(ymdDate[i]);
+									console.log(dtE[j].DT);
+									
+									attndTp = dtE[j].ATTNDTP;
+//	 									console.log(attndTp);
+									if(attndTp == 'at001'){
+										$td3.append("출석");	
+									}else if(attndTp == 'at002'){
+										$td3.append("지각");
+									}
+									break;
+									
 								} else {
-									$td3.append('<font color="red">결석</font>');
+										$td3.append('<font color="red">결석</font>');
 								}
 							}
 						}// end of for - j
@@ -185,23 +190,19 @@ function clssSearch(root) {
 						for (var j = 0; j < dtD.length; j++) {
 							$td4 = $('<td></td>');
 							
-							if (ymdDate[i] == dtD[j].DT) {
-								
-								attndTp = dtD[j].ATTNDTP;
-// 									console.log(attndTp);
-								if(attndTp == 'at003'){
-									$td4.append("조퇴");
-								}else if(attndTp == 'at004'){
-									$td4.append("퇴실");
-								}
-									
-								break;
-								
-							} else {
-								if (todayDate < ymdDate[i]) {
-									$td4.append("  ");
+							if (todayDate < ymdDate[i]) {
+								$td4.append("예정");
+							}else{
+								if (ymdDate[i] == dtD[j].DT) {
+									attndTp = dtD[j].ATTNDTP;
+									if(attndTp == 'at003'){
+										$td4.append("조퇴");
+									}else if(attndTp == 'at004'){
+										$td4.append("퇴실");
+									}
+									break;
 								} else {
-									$td4.append('<font color="red">결석</font>');
+										$td4.append('<font color="red">결석</font>');
 								}
 							}
 						}

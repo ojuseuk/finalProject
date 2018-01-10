@@ -85,7 +85,7 @@ public class TchrBsDaoImp implements TchrBsDao {
 		// TODO Auto-generated method stub
 		
 		System.out.println("dao attnd");
-		
+		System.out.println(map);
 		return sqlSession.selectList("tchrBsMapper.attnd", map);
 		
 		
@@ -104,7 +104,10 @@ public class TchrBsDaoImp implements TchrBsDao {
 		// TODO Auto-generated method stub
 		
 		System.out.println("dao attndClss");
-		
+		System.out.println(clssId);
+		List<Map<String, String>> list2 = sqlSession.selectList("test.attndClss", clssId);
+		System.out.println(list2);
+		System.out.println(sqlSession.selectList("test.attndClss", clssId));
 		return sqlSession.selectList("tchrBsMapper.attndClss", clssId);
 		
 	}

@@ -24,7 +24,7 @@
 		]]>
 	</select>
 	
-	<select id="attndClss" parameterType="string" resultType="map">
+	<select id="attndClss" parameterType="string" resultType="Map">
 		SELECT NM, CLSSID, DT, ATTNDTP, STDTDT, ENDDT, STDTNO
 			FROM ATTND_CLSS WHERE CLSSID = #{clssId}
 	</select>
